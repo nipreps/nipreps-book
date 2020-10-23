@@ -1,0 +1,31 @@
+# Book settings
+# Learn more at https://jupyterbook.org/customize/config.html
+
+title: "Contributing to an Open Source Project: An Example with dMRIPrep"
+author: Michael Joseph
+copywright: 2020
+logo: ../images/logo.png
+
+# Force re-execution of notebooks on each build.
+# See https://jupyterbook.org/content/execute.html
+execute:
+  execute_notebooks: auto
+
+# Define the name of the latex output file for PDF builds
+latex:
+  latex_documents:
+    targetname: book.tex
+
+# Information about where the book exists on the web
+repository:
+  url: https://github.com/nipreps/nipreps-book  # Online location of your book
+  path_to_book: content  # Optional path to your book, relative to the repository root
+  branch: master  # Which branch of the repository should be used when creating links (optional)
+
+# Add GitHub buttons to your book
+# See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
+html:
+  use_edit_page_button: false
+  use_issues_button: false
+  use_repository_button: false
+  home_page_in_navbar: true
