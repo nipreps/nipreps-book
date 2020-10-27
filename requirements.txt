@@ -1,3 +1,3 @@
-jupyter-book
+dipy==1.2.0
+jupyter-book==0.8.3
 matplotlib
-numpy
