@@ -20,6 +20,6 @@ launch_buttons:
   notebook_interface: jupyterlab
 
 repository:
-  url: https://github.com/josephmje/nipreps-book
+  url: https://github.com/nipreps/nipreps-book
   path_to_book: docs
   branch: main
