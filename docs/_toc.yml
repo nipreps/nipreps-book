@@ -1,7 +1,7 @@
 # Table of content
 # Learn more at https://jupyterbook.org/customize/toc.html
 #
-- file: 01-dmriprep
-- file: 02-intro_dmri
-- file: 03-collaborating_on_github
-- file: 04-issue_solution
+- file: welcome
+- file: dwi/01-dmriprep
+- file: dwi/02-intro_dmri
+- file: dwi/03-issue_solution
