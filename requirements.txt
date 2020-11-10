@@ -1,3 +1,4 @@
-dipy==1.2.0
+dmriprep==0.3.0
+ghp-import
 jupyter-book==0.8.3
-matplotlib
+nbdime-jupyterlab

@@ -5,12 +5,8 @@ on:
   push:
     branches:
     - main
-    # If your git repository has the Jupyter Book within some-subfolder next to
-    # unrelated files, you can make this run only if a file within that specific
-    # folder has been modified.
-    #
-    # paths:
-    # - content/**
+    paths:
+    - docs/
 
 # This job installs dependencies, build the book, and pushes it to `gh-pages`
 jobs:
@@ -31,10 +27,10 @@ jobs:
     # Build the page
     - name: Build the book
       run: |
-        jupyter-book build content/
+        jupyter-book build docs/
     # Push the book's HTML to github-pages
     - name: GitHub Pages action
       uses: peaceiris/actions-gh-pages@v3.6.1
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./content/_build/html
+        publish_dir: ./docs/_build/html
