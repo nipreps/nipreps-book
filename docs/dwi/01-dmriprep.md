@@ -1,8 +1,23 @@
 About dMRIPRep
 ==============
 
-Introduce dMRIPrep based on OSR talk
+In his 2019 ISMRM talk on the state of consensus in diffusion MRI preprocessing, Jelle Veraart polled the polled the developers of some major software packages.
 
+![preprocessing_consensus](../images/veraart-2019.png)
+[Image Processing: Possible Guidelines for the Standardization & Clinical Applications](https://www.ismrm.org/19/program_files/MIS15.htm)
+
+This led us to create a roadmap for *dMRIPrep*'s development
+![dmriprep_workflow](../images/figure1.svg)
+
+*dMRIPrep* is part of the NiPreps organization
+- robust
+- easy to use
+- reproducible
+- "glass box" architecture
+- regular maintenance and upgrading of methods
+![nipreps_chart](../images/nipreps-chart.svg)
+
+![contributors](../images/contributors.png)
 
 Project Structure
 -----------------
@@ -20,41 +35,12 @@ dmriprep
 │   ├── __init__.py
 │   ├── _version.py
 │   ├── cli/
-│   │   └── tests/
 │   ├── config
 │   │   ├── __init__.py
 │   │   ├── reports-spec.yml
 │   │   └── testing.py
 │   ├── conftest.py
-│   ├── data
-│   │   ├── __init__.py
-│   │   ├── boilerplate.bib
-│   │   ├── flirtsch
-│   │   │   ├── b02b0.cnf
-│   │   │   ├── b02b0_1.cnf
-│   │   │   ├── b02b0_2.cnf
-│   │   │   ├── b02b0_4.cnf
-│   │   │   └── b02b0_quick.cnf
-│   │   └── tests
-│   │       ├── THP
-│   │       │   ├── CHANGES
-│   │       │   ├── README
-│   │       │   ├── dataset_description.json
-│   │       │   └── sub-THP0005
-│   │       │       ├── anat
-│   │       │       │   ├── sub-THP0005_T1w.json
-│   │       │       │   └── sub-THP0005_T1w.nii.gz
-│   │       │       └── dwi
-│   │       │           ├── sub-THP0005_dwi.bval
-│   │       │           ├── sub-THP0005_dwi.bvec
-│   │       │           ├── sub-THP0005_dwi.json
-│   │       │           └── sub-THP0005_dwi.nii.gz
-│   │       ├── bval
-│   │       ├── bvec
-│   │       ├── config.toml
-│   │       ├── dwi.nii.gz
-│   │       ├── dwi.tsv
-│   │       └── dwi_mask.nii.gz
+│   ├── data/
 │   ├── interfaces
 │   │   ├── __init__.py
 │   │   ├── images.py
