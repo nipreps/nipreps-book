@@ -2,5 +2,5 @@ dmriprep==0.3.0
 flake8
 ghp-import
 jupyter-book==0.8.3
-nbdime-jupyterlab
+jupytext
 pytest
