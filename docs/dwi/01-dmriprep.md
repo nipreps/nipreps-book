@@ -30,30 +30,30 @@ dmriprep
 ├── MANIFEST.in
 ├── Makefile
 ├── README.rst
-├── dmriprep
+├── dmriprep                    # contains all code
 │   ├── __about__.py
 │   ├── __init__.py
 │   ├── _version.py
-│   ├── cli/
+│   ├── cli/                    # contains code for adjusting the command line arguments
 │   ├── config
 │   │   ├── __init__.py
 │   │   ├── reports-spec.yml
 │   │   └── testing.py
 │   ├── conftest.py
-│   ├── data/
-│   ├── interfaces
+│   ├── data/                   # contains sample data that can be used to create function tests
+│   ├── interfaces              # contains Nipype interfaces that act as building blocks for individual tasks
 │   │   ├── __init__.py
 │   │   ├── images.py
 │   │   ├── reports.py
 │   │   └── vectors.py
-│   ├── utils
+│   ├── utils                   # contains functions called by interfaces
 │   │   ├── __init__.py
 │   │   ├── bids.py
 │   │   ├── images.py
 │   │   ├── misc.py
 │   │   ├── tests/
 │   │   └── vectors.py
-│   └── workflows
+│   └── workflows               # contains workflows that are created by combining interfaces
 │       ├── __init__.py
 │       ├── base.py
 │       ├── dwi
@@ -64,10 +64,15 @@ dmriprep
 │       └── fmap
 │           ├── __init__.py
 │           └── base.py
-├── docs/
+├── docs/                       # contains code for building documentation
 ├── get_version.py
 ├── pyproject.toml
 ├── setup.cfg
 ├── setup.py
 └── versioneer.py
 ```
+
+Resources
+---------
+- [Contemporary Python Packaging by Chris Markiewicz](https://gist.github.com/effigies/9bbb424535d6a1d838d6325191c0a736)
+- [Nipype Tutorials by Michael Notter](https://miykael.github.io/nipype_tutorial/)
