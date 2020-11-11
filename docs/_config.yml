@@ -6,7 +6,7 @@ logo: images/logo.png
 
 # Execution settings
 execute:
-  execute_notebooks: auto
+  execute_notebooks: off
 
 # HTML-specific settings
 html:
