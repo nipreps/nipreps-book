@@ -22,7 +22,7 @@ gtab.count_shells
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mAttributeError[0m                            Traceback (most recent call last)
-[0;32m<ipython-input-8-c5b905af54b9>[0m in [0;36m<module>[0;34m[0m
+[0;32m<ipython-input-9-c5b905af54b9>[0m in [0;36m<module>[0;34m[0m
 [0;32m----> 1[0;31m [0mgtab[0m[0;34m.[0m[0mcount_shells[0m[0;34m[0m[0;34m[0m[0m
 [0m
 [0;31mAttributeError[0m: 'DiffusionGradientTable' object has no attribute 'count_shells'
