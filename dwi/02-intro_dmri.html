@@ -1,0 +1,773 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Introduction to Diffusion MRI &#8212; NiPreps</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Issue Solution: Determining the number of shells" href="03-issue_solution.html" />
+    <link rel="prev" title="About dMRIPRep" href="01-dmriprep.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">NiPreps</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../welcome.html">
+   Contributing to an Open Source Project: An Example with dMRIPrep
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01-dmriprep.html">
+   About dMRIPRep
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Introduction to Diffusion MRI
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03-issue_solution.html">
+   Issue Solution: Determining the number of shells
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/dwi/02-intro_dmri.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/nipreps/nipreps-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/nipreps/nipreps-book/main?urlpath=lab/tree/docs/dwi/02-intro_dmri.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#diffusion-weighted-imaging-dwi">
+   Diffusion Weighted Imaging (DWI)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#diffusion-gradient-scheme">
+   Diffusion Gradient Scheme
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fsl-format">
+     FSL format
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rasb-format">
+     RASB+ format
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#diffusion-spectrum-mri-dsi">
+     Diffusion Spectrum MRI (DSI)
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="introduction-to-diffusion-mri">
+<h1>Introduction to Diffusion MRI<a class="headerlink" href="#introduction-to-diffusion-mri" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="diffusion-weighted-imaging-dwi">
+<h2>Diffusion Weighted Imaging (DWI)<a class="headerlink" href="#diffusion-weighted-imaging-dwi" title="Permalink to this headline">¶</a></h2>
+<p>Diffusion imaging probes the random, microscopic motion of water protons by employing MRI sequences which are sensitive to the geometry and environmental organization surrounding the water protons. This is a popular technique for studying the white matter of the brain. The diffusion within biological structures, such as the brain, are often restricted due to barriers (eg. cell membranes), resulting in a preferred direction of diffusion (anisotropy). A typical diffusion MRI scan will acquire multiple volumes that are sensitive to a particular diffusion direction and result in diffusion-weighted images (DWI). Diffusion that exhibits directionality in the same direction result in an attenuated signal. With further processing, the acquired images can provide measurements which are related to the microscopic changes and estimate white matter trajectories. Images with no diffusion weighting are also acquired as part of the acquisition protocol.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dwi</span> <span class="o">=</span> <span class="s2">&quot;../../data/sub-01_dwi.nii.gz&quot;</span>
+<span class="n">bvec</span> <span class="o">=</span> <span class="s2">&quot;../../data/sub-01_dwi.bvec&quot;</span>
+<span class="n">bval</span> <span class="o">=</span> <span class="s2">&quot;../../data/sub-01_dwi.bval&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="kn">from</span> <span class="nn">nilearn</span> <span class="kn">import</span> <span class="n">image</span>
+<span class="kn">from</span> <span class="nn">nilearn.plotting</span> <span class="kn">import</span> <span class="n">plot_epi</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Matplotlib is building the font cache; this may take a moment.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">selected_volumes</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">index_img</span><span class="p">(</span><span class="n">dwi</span><span class="p">,</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">img</span> <span class="ow">in</span> <span class="n">image</span><span class="o">.</span><span class="n">iter_img</span><span class="p">(</span><span class="n">selected_volumes</span><span class="p">):</span>
+    <span class="n">plot_epi</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">display_mode</span><span class="o">=</span><span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="n">cut_coords</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">75</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02-intro_dmri_4_0.png" src="../_images/02-intro_dmri_4_0.png" />
+<img alt="../_images/02-intro_dmri_4_1.png" src="../_images/02-intro_dmri_4_1.png" />
+<img alt="../_images/02-intro_dmri_4_2.png" src="../_images/02-intro_dmri_4_2.png" />
+<img alt="../_images/02-intro_dmri_4_3.png" src="../_images/02-intro_dmri_4_3.png" />
+<img alt="../_images/02-intro_dmri_4_4.png" src="../_images/02-intro_dmri_4_4.png" />
+<img alt="../_images/02-intro_dmri_4_5.png" src="../_images/02-intro_dmri_4_5.png" />
+<img alt="../_images/02-intro_dmri_4_6.png" src="../_images/02-intro_dmri_4_6.png" />
+<img alt="../_images/02-intro_dmri_4_7.png" src="../_images/02-intro_dmri_4_7.png" />
+<img alt="../_images/02-intro_dmri_4_8.png" src="../_images/02-intro_dmri_4_8.png" />
+<img alt="../_images/02-intro_dmri_4_9.png" src="../_images/02-intro_dmri_4_9.png" />
+</div>
+</div>
+</div>
+<div class="section" id="diffusion-gradient-scheme">
+<h2>Diffusion Gradient Scheme<a class="headerlink" href="#diffusion-gradient-scheme" title="Permalink to this headline">¶</a></h2>
+<p>The diffusion-weighted gradient scheme is essential for pre-processing DWI data.</p>
+<p>In addition to the acquired diffusion images, two files are collected as part of the diffusion dataset. These files correspond to the gradient amplitude (b-values) and directions (b-vectors) of the diffusion measurement and are named with the extensions <code class="docutils literal notranslate"><span class="pre">.bval</span></code> and <code class="docutils literal notranslate"><span class="pre">.bvec</span></code> respectively. The b-value is the diffusion-sensitizing factor, and reflects the timing &amp; strength of the gradients used to acquire the diffusion-weighted images. The b-vector corresponds to the direction of the diffusion sensitivity. Together these two files define the diffusion MRI measurement as a set of gradient directions and corresponding amplitudes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dipy.io.gradients</span> <span class="kn">import</span> <span class="n">read_bvals_bvecs</span>
+<span class="kn">from</span> <span class="nn">dipy.core.gradients</span> <span class="kn">import</span> <span class="n">gradient_table</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="fsl-format">
+<h3>FSL format<a class="headerlink" href="#fsl-format" title="Permalink to this headline">¶</a></h3>
+<p>This format consists of a pair of ASCII text files, typically named <code class="docutils literal notranslate"><span class="pre">.bvec</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">.bval</span></code>. The bvals file consists of a single row of space-separated floating-point values, all in one row, with one value per volume in the DWI dataset. The bvecs file consists of 3 rows of space-separated floating-point values, with the first row corresponding to the x-component of the DW gradient vectors, one value per volume in the dataset; the second row corresponding to the y-component, and the third row to the z-component. A typical pair of FSL format DW gradient files might look like:</p>
+<p>In the example data below, we see that 2 b-values were chosen for this scanning sequence. The first few images were acquired with a b-value of 0 and are typically referred to as b=0 images. In these images, no DW gradient vector is applied either. These images don’t hold any diffusion information and are used as a reference since they aren’t subject to the same types of scanner artefacts that affect diffusion-weighted images.</p>
+<p>All of the remaining images have a b-value of 1000 and have a DW gradient vector associated with them. In these images, you can assess the diffusion of water in different directions based on the gradient vector that is applied.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat ../../data/sub-01_dwi.bval
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 0 0 0 0 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat ../../data/sub-01_dwi.bvec
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 0 0 0 0 -1 -0.361 0.255 -0.861 0.307 0.736 -0.532 -0.177 -0.771 -0.079 -0.109 -0.302 0.464 0.464 0.529 0.825 -0.697 -0.479 0.213 0.648 -0.58 0.729 -0.963 -0.229 0.016 -0.359 -0.806 0.045 0.177 -0.946 0.318 0.312 0.284 0.421 0.963 0.881 -0.758 0.684 -0.932 0.648 -0.773 -0.276 0.555 -0.007 -0.919 0.223 0.544 -0.867 -0.534 0.001 0.611 -0.691 -0.731 -0.024 -0.453 -0.432 0.87 -0.283 -0.088 0.016
+0 0 0 0 0 0 0.933 0.565 -0.464 -0.766 0.013 0.343 0.965 0.163 -0.996 -0.92 -0.779 -0.46 0.839 0.014 -0.54 -0.287 -0.338 -0.851 0.736 0.745 0.197 -0.264 0.507 0.171 -0.932 -0.422 0.087 0.841 0.315 0.257 0.165 -0.2 -0.093 -0.02 0.161 -0.45 0.72 0.229 -0.252 0.61 -0.533 0.591 0.715 -0.07 -0.589 -0.73 -0.477 -0.554 0.726 -0.791 0.503 0.475 -0.38 0.646 -0.82 -0.289 0.912 0.393 -0.964
+0 0 0 0 0 0 0 0.785 0.21 0.564 0.677 0.774 0.195 0.615 -0.036 -0.376 -0.549 0.757 0.284 -0.849 -0.167 -0.657 -0.81 -0.48 -0.195 0.33 -0.656 0.054 0.831 -0.985 0.051 -0.415 0.995 -0.511 -0.068 -0.912 0.936 -0.938 0.902 0.271 0.444 0.471 0.121 0.281 0.719 -0.174 0.8 0.586 0.699 0.388 0.777 0.414 -0.145 0.639 -0.688 -0.027 -0.519 0.489 -0.925 0.615 0.376 0.399 -0.298 -0.915 0.265
+</pre></div>
+</div>
+</div>
+</div>
+<p>After reading the <code class="docutils literal notranslate"><span class="pre">.bval</span></code> and <code class="docutils literal notranslate"><span class="pre">.bvec</span></code> files with the <code class="docutils literal notranslate"><span class="pre">read_bvals_bvecs()</span></code> function, we get both in a numpy array. Notice that the <code class="docutils literal notranslate"><span class="pre">.bvec</span></code> file has been transposed so that the x, y, and z-components are in column format.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gt_bvals</span><span class="p">,</span> <span class="n">gt_bvecs</span> <span class="o">=</span> <span class="n">read_bvals_bvecs</span><span class="p">(</span><span class="n">bval</span><span class="p">,</span> <span class="n">bvec</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;bvals:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">gt_bvals</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">bvecs:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">gt_bvecs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bvals:
+ [   0.    0.    0.    0.    0. 1000. 1000. 1000. 1000. 1000. 1000. 1000.
+ 1000. 1000. 1000. 1000. 1000. 1000. 1000. 1000. 1000. 1000. 1000. 1000.
+ 1000. 1000. 1000. 1000. 1000. 1000. 1000. 1000. 1000. 1000. 1000. 1000.
+ 1000. 1000. 1000. 1000. 1000. 1000. 1000. 1000. 1000. 1000. 1000. 1000.
+ 1000. 1000. 1000. 1000. 1000. 1000. 1000. 1000. 1000. 1000. 1000. 1000.
+ 1000. 1000. 1000. 1000. 1000.] 
+
+bvecs:
+ [[ 0.     0.     0.   ]
+ [ 0.     0.     0.   ]
+ [ 0.     0.     0.   ]
+ [ 0.     0.     0.   ]
+ [ 0.     0.     0.   ]
+ [-1.     0.     0.   ]
+ [-0.361  0.933  0.   ]
+ [ 0.255  0.565  0.785]
+ [-0.861 -0.464  0.21 ]
+ [ 0.307 -0.766  0.564]
+ [ 0.736  0.013  0.677]
+ [-0.532  0.343  0.774]
+ [-0.177  0.965  0.195]
+ [-0.771  0.163  0.615]
+ [-0.079 -0.996 -0.036]
+ [-0.109 -0.92  -0.376]
+ [-0.302 -0.779 -0.549]
+ [ 0.464 -0.46   0.757]
+ [ 0.464  0.839  0.284]
+ [ 0.529  0.014 -0.849]
+ [ 0.825 -0.54  -0.167]
+ [-0.697 -0.287 -0.657]
+ [-0.479 -0.338 -0.81 ]
+ [ 0.213 -0.851 -0.48 ]
+ [ 0.648  0.736 -0.195]
+ [-0.58   0.745  0.33 ]
+ [ 0.729  0.197 -0.656]
+ [-0.963 -0.264  0.054]
+ [-0.229  0.507  0.831]
+ [ 0.016  0.171 -0.985]
+ [-0.359 -0.932  0.051]
+ [-0.806 -0.422 -0.415]
+ [ 0.045  0.087  0.995]
+ [ 0.177  0.841 -0.511]
+ [-0.946  0.315 -0.068]
+ [ 0.318  0.257 -0.912]
+ [ 0.312  0.165  0.936]
+ [ 0.284 -0.2   -0.938]
+ [ 0.421 -0.093  0.902]
+ [ 0.963 -0.02   0.271]
+ [ 0.881  0.161  0.444]
+ [-0.758 -0.45   0.471]
+ [ 0.684  0.72   0.121]
+ [-0.932  0.229  0.281]
+ [ 0.648 -0.252  0.719]
+ [-0.773  0.61  -0.174]
+ [-0.276 -0.533  0.8  ]
+ [ 0.555  0.591  0.586]
+ [-0.007  0.715  0.699]
+ [-0.919 -0.07   0.388]
+ [ 0.223 -0.589  0.777]
+ [ 0.544 -0.73   0.414]
+ [-0.867 -0.477 -0.145]
+ [-0.534 -0.554  0.639]
+ [ 0.001  0.726 -0.688]
+ [ 0.611 -0.791 -0.027]
+ [-0.691  0.503 -0.519]
+ [-0.731  0.475  0.489]
+ [-0.024 -0.38  -0.925]
+ [-0.453  0.646  0.615]
+ [-0.432 -0.82   0.376]
+ [ 0.87  -0.289  0.399]
+ [-0.283  0.912 -0.298]
+ [-0.088  0.393 -0.915]
+ [ 0.016 -0.964  0.265]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s2">&quot;3d&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">gt_bvecs</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">gt_bvals</span><span class="p">,</span> <span class="n">gt_bvecs</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">gt_bvals</span><span class="p">,</span> <span class="n">gt_bvecs</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">gt_bvals</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02-intro_dmri_14_0.png" src="../_images/02-intro_dmri_14_0.png" />
+</div>
+</div>
+<p>It is important to note that in this format, the gradient vectors are provided with respect to the image axes, not in real or scanner coordinates. Simply reformatting the image from sagittal to axial will effectively rotate the b-vectors, since this operation changes the image axes. Thus, a particular bvals/bvecs pair is only valid for the particular image that it corresponds to.</p>
+</div>
+<div class="section" id="rasb-format">
+<h3>RASB+ format<a class="headerlink" href="#rasb-format" title="Permalink to this headline">¶</a></h3>
+<p>Inspired by MRtrix3 and the <a class="reference external" href="https://github.com/bids-standard/bids-specification/issues/349">BIDS spec</a>.</p>
+<p>One row per DWI volume, with each row consisting of 4 space-separated floating-point values; these correspond to [x y z b], where [x y z] are the components of the gradient vector, and b is the b-value in units of s/mm2.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dmriprep.utils.vectors</span> <span class="kn">import</span> <span class="n">DiffusionGradientTable</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.7.9/x64/lib/python3.7/site-packages/bids/layout/validation.py:46: UserWarning: The ability to pass arguments to BIDSLayout that control indexing is likely to be removed in future; possibly as early as PyBIDS 0.14. This includes the `config_filename`, `ignore`, `force_index`, and `index_metadata` arguments. The recommended usage pattern is to initialize a new BIDSLayoutIndexer with these arguments, and pass it to the BIDSLayout via the `indexer` argument.
+  warnings.warn(&quot;The ability to pass arguments to BIDSLayout that control &quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">?</span>DiffusionGradientTable
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gtab</span> <span class="o">=</span> <span class="n">DiffusionGradientTable</span><span class="p">(</span><span class="n">dwi_file</span><span class="o">=</span><span class="n">dwi</span><span class="p">,</span> <span class="n">bvecs</span><span class="o">=</span><span class="n">bvec</span><span class="p">,</span> <span class="n">bvals</span><span class="o">=</span><span class="n">bval</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gtab</span><span class="o">.</span><span class="n">gradients</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00,
+         0.00000000e+00],
+       [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00,
+         0.00000000e+00],
+       [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00,
+         0.00000000e+00],
+       [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00,
+         0.00000000e+00],
+       [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00,
+         0.00000000e+00],
+       [ 1.00000000e+00,  0.00000000e+00,  0.00000000e+00,
+         1.00000000e+03],
+       [ 3.60853878e-01,  9.32622367e-01,  0.00000000e+00,
+         1.00000000e+03],
+       [-2.54939460e-01,  5.64865871e-01,  7.84813621e-01,
+         1.00000000e+03],
+       [ 8.60691508e-01, -4.63833730e-01,  2.09924747e-01,
+         1.00000000e+03],
+       [-3.07138103e-01, -7.66344517e-01,  5.64253725e-01,
+         1.00000000e+03],
+       [-7.35928625e-01,  1.29987397e-02,  6.76934334e-01,
+         1.00000000e+03],
+       [ 5.32066813e-01,  3.43043053e-01,  7.74097132e-01,
+         1.00000000e+03],
+       [ 1.76948791e-01,  9.64720753e-01,  1.94943568e-01,
+         1.00000000e+03],
+       [ 7.71295067e-01,  1.63062378e-01,  6.15235386e-01,
+         1.00000000e+03],
+       [ 7.90176694e-02, -9.96222680e-01, -3.60080453e-02,
+         1.00000000e+03],
+       [ 1.09018695e-01, -9.20157824e-01, -3.76064493e-01,
+         1.00000000e+03],
+       [ 3.02083673e-01, -7.79215877e-01, -5.49152139e-01,
+         1.00000000e+03],
+       [-4.64012743e-01, -4.60012645e-01,  7.57020832e-01,
+         1.00000000e+03],
+       [-4.64029461e-01,  8.39053273e-01,  2.84018070e-01,
+         1.00000000e+03],
+       [-5.28778491e-01,  1.39941386e-02, -8.48644491e-01,
+         1.00000000e+03],
+       [-8.24952955e-01, -5.39969262e-01, -1.66990473e-01,
+         1.00000000e+03],
+       [ 6.97060307e-01, -2.87024834e-01, -6.57056827e-01,
+         1.00000000e+03],
+       [ 4.79051499e-01, -3.38036358e-01, -8.10087083e-01,
+         1.00000000e+03],
+       [-2.13003203e-01, -8.51012764e-01, -4.80007200e-01,
+         1.00000000e+03],
+       [-6.48121533e-01,  7.36138043e-01, -1.95036560e-01,
+         1.00000000e+03],
+       [ 5.79905763e-01,  7.44878966e-01,  3.29946407e-01,
+         1.00000000e+03],
+       [-7.28786470e-01,  1.96942301e-01, -6.55807907e-01,
+         1.00000000e+03],
+       [ 9.63009152e-01, -2.64002495e-01,  5.40005140e-02,
+         1.00000000e+03],
+       [ 2.28994169e-01,  5.06987114e-01,  8.30978782e-01,
+         1.00000000e+03],
+       [-1.60022250e-02,  1.71023774e-01, -9.85136944e-01,
+         1.00000000e+03],
+       [ 3.58980975e-01, -9.31950608e-01,  5.09972971e-02,
+         1.00000000e+03],
+       [ 8.06022166e-01, -4.22011613e-01, -4.15011405e-01,
+         1.00000000e+03],
+       [-4.50085772e-02,  8.70165746e-02,  9.95189602e-01,
+         1.00000000e+03],
+       [-1.77023815e-01,  8.41113159e-01, -5.11068707e-01,
+         1.00000000e+03],
+       [ 9.46584695e-01,  3.15194694e-01, -6.80420394e-02,
+         1.00000000e+03],
+       [-3.18172312e-01,  2.57139271e-01, -9.12494260e-01,
+         1.00000000e+03],
+       [-3.11896302e-01,  1.64945174e-01,  9.35688937e-01,
+         1.00000000e+03],
+       [-2.83929018e-01, -1.99950023e-01, -9.37765590e-01,
+         1.00000000e+03],
+       [-4.21106547e-01, -9.30235386e-02,  9.02228296e-01,
+         1.00000000e+03],
+       [-9.62417914e-01, -1.99879100e-02,  2.70836191e-01,
+         1.00000000e+03],
+       [-8.81344665e-01,  1.61062999e-01,  4.44173718e-01,
+         1.00000000e+03],
+       [ 7.58415350e-01, -4.50246577e-01,  4.71258079e-01,
+         1.00000000e+03],
+       [-6.83693434e-01,  7.19677296e-01,  1.20945764e-01,
+         1.00000000e+03],
+       [ 9.31987891e-01,  2.28997024e-01,  2.80996325e-01,
+         1.00000000e+03],
+       [-6.47880465e-01, -2.51953531e-01,  7.18867388e-01,
+         1.00000000e+03],
+       [ 7.73036717e-01,  6.10028981e-01, -1.74008265e-01,
+         1.00000000e+03],
+       [ 2.75963434e-01, -5.32929378e-01,  7.99894031e-01,
+         1.00000000e+03],
+       [-5.54805280e-01,  5.90792657e-01,  5.85794450e-01,
+         1.00000000e+03],
+       [ 7.00043801e-03,  7.15044685e-01,  6.99043699e-01,
+         1.00000000e+03],
+       [ 9.18997704e-01, -6.99998214e-02,  3.87999027e-01,
+         1.00000000e+03],
+       [-2.22957759e-01, -5.88888425e-01,  7.76852792e-01,
+         1.00000000e+03],
+       [-5.43936888e-01, -7.29915353e-01,  4.13951977e-01,
+         1.00000000e+03],
+       [ 8.66894672e-01, -4.76942068e-01, -1.44982384e-01,
+         1.00000000e+03],
+       [ 5.33895080e-01, -5.53891187e-01,  6.38874477e-01,
+         1.00000000e+03],
+       [-9.99789624e-04,  7.25847225e-01, -6.87855222e-01,
+         1.00000000e+03],
+       [-6.11082200e-01, -7.91106408e-01, -2.70036312e-02,
+         1.00000000e+03],
+       [ 6.91051469e-01,  5.03037502e-01, -5.19038667e-01,
+         1.00000000e+03],
+       [ 7.31326622e-01,  4.75212235e-01,  4.89218462e-01,
+         1.00000000e+03],
+       [ 2.39927909e-02, -3.79885838e-01, -9.24722172e-01,
+         1.00000000e+03],
+       [ 4.52830212e-01,  6.45757895e-01,  6.14769501e-01,
+         1.00000000e+03],
+       [ 4.31913653e-01, -8.19836041e-01,  3.75924808e-01,
+         1.00000000e+03],
+       [-8.70164477e-01, -2.89054640e-01,  3.99075429e-01,
+         1.00000000e+03],
+       [ 2.82909890e-01,  9.11709670e-01, -2.97905138e-01,
+         1.00000000e+03],
+       [ 8.80256208e-02,  3.93114412e-01, -9.15266381e-01,
+         1.00000000e+03],
+       [-1.60017850e-02, -9.64107505e-01,  2.65029547e-01,
+         1.00000000e+03]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dwi</span> <span class="o">=</span> <span class="s2">&quot;../../data/sub-02_dwi.nii.gz&quot;</span>
+<span class="n">bvec</span> <span class="o">=</span> <span class="s2">&quot;../../data/sub-02_dwi.bvec&quot;</span>
+<span class="n">bval</span> <span class="o">=</span> <span class="s2">&quot;../../data/sub-02_dwi.bval&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gt_bvals</span><span class="p">,</span> <span class="n">gt_bvecs</span> <span class="o">=</span> <span class="n">read_bvals_bvecs</span><span class="p">(</span><span class="n">bval</span><span class="p">,</span> <span class="n">bvec</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s2">&quot;3d&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">gt_bvecs</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">gt_bvals</span><span class="p">,</span> <span class="n">gt_bvecs</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">gt_bvals</span><span class="p">,</span> <span class="n">gt_bvecs</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">gt_bvals</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02-intro_dmri_23_0.png" src="../_images/02-intro_dmri_23_0.png" />
+</div>
+</div>
+<p>The figure below shows an axial view of the brain under different b-values: 0, 1000, and 3000</p>
+<p><img alt="bvalue" src="../_images/bvalue.jpg" /><br />
+http://mriquestions.com/what-is-the-b-value.html</p>
+</div>
+<div class="section" id="diffusion-spectrum-mri-dsi">
+<h3>Diffusion Spectrum MRI (DSI)<a class="headerlink" href="#diffusion-spectrum-mri-dsi" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dipy.data</span> <span class="kn">import</span> <span class="n">get_fnames</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fraw</span><span class="p">,</span> <span class="n">fbval</span><span class="p">,</span> <span class="n">fbvec</span> <span class="o">=</span> <span class="n">get_fnames</span><span class="p">(</span><span class="s2">&quot;taiwan_ntu_dsi&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "43b306fecf6d4e8e8b8a6cb9862c2afd"}
+</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "f0a7c10443824e7ebc79fcb826f70713"}
+</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "c71a2a15fb86480499439c9974bfe31e"}
+</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "7fb34ba48ac84f5cb64778fb5e1a4c44"}
+</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gt_bvals</span><span class="p">,</span> <span class="n">gt_bvecs</span> <span class="o">=</span> <span class="n">read_bvals_bvecs</span><span class="p">(</span><span class="n">fbval</span><span class="p">,</span> <span class="n">fbvec</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s2">&quot;3d&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">gt_bvecs</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">gt_bvals</span><span class="p">,</span> <span class="n">gt_bvecs</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">gt_bvals</span><span class="p">,</span> <span class="n">gt_bvecs</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">gt_bvals</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./dwi"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="01-dmriprep.html" title="previous page">About dMRIPRep</a>
+    <a class='right-next' id="next-link" href="03-issue_solution.html" title="next page">Issue Solution: Determining the number of shells</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael Joseph<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>
