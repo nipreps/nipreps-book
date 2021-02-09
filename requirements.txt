@@ -1,6 +1,6 @@
-dmriprep==0.3.0
+dmriprep
 flake8
 ghp-import
-jupyter-book==0.8.3
+jupyter-book
 jupytext
 pytest
