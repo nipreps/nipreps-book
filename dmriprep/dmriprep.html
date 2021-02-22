@@ -1,0 +1,452 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About dMRIPrep &#8212; dMRIPrep</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction to dMRI Data" href="gradient_table.html" />
+    <link rel="prev" title="dMRIPrep: a robust pre-processing pipeline for diffusion MRI" href="../welcome.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">dMRIPrep</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../welcome.html">
+   dMRIPrep: a robust pre-processing pipeline for diffusion MRI
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   About dMRIPrep
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="gradient_table.html">
+   Introduction to dMRI Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="sdc.html">
+   Susceptibility Distortion Correction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hmc.html">
+   Head Motion Correction
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/dmriprep/dmriprep.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/nipreps/nipreps-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#development">
+   Development
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#key-features">
+   Key Features
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#part-of-the-nipreps-organization">
+     1. Part of the NiPreps organization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#automated-workflows-based-on-bids-configuration">
+     2. Automated workflows based on BIDS configuration
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quality-control-reportlets">
+     3. Quality control reportlets
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#continuous-integration-and-deployment">
+     4. Continuous integration and deployment
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="about-dmriprep">
+<h1>About dMRIPrep<a class="headerlink" href="#about-dmriprep" title="Permalink to this headline">¶</a></h1>
+<p>The pre-processing of dMRI involves numerous steps to reduce noise, remove artifacts, and standardize the data before fitting a particular model or carrying out tractography.</p>
+<p>Generally, researchers create ad-hoc pre-processing workflows for each dataset, building upon a large inventory of available tools.
+The complexity of these workflows has snowballed with rapid advances in acquisition parameters and processing steps.</p>
+<p>dMRIPrep is an analysis-agnostic tool that addresses the challenge of robust and reproducible pre-processing for whole-brain dMRI data.</p>
+<div class="section" id="motivation">
+<h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h2>
+<p>The development and fast adoption of fMRIPrep <a class="footnote-reference brackets" href="#esteban2019" id="id1">1</a> have revealed that neuroscientists need tools that simplify their research workflow, provide visual reports and checkpoints, and engender trust in the tool itself.</p>
+<p>In Botvinik et al., 2020 <a class="footnote-reference brackets" href="#botvinik2020" id="id2">2</a>, 70 independent teams were tasked with analyzing the same fMRI dataset and testing 9 hypothesis.
+The study demonstrated the huge amount of variability in analytic approaches as <em>no two teams</em> chose identical workflows.
+One encouraging finding was that 48% of teams chose to pre-process the data using fMRIPrep.</p>
+<p>A similar predicament exists in the field of dMRI analysis.
+There has been a lot of effort in recent years to compare the influence of various pre-processing steps on tractography and structural connectivity <a class="footnote-reference brackets" href="#oldham2020" id="id3">3</a> <a class="footnote-reference brackets" href="#schilling2019" id="id4">4</a> and harmonize different datasets <a class="footnote-reference brackets" href="#tax2019" id="id5">5</a>.
+All of this points to a need for creating a standardized pipeline for pre-processing dMRI data that will reduce methodological variability and enable comparisons between different datasets and downstream analysis decisions.</p>
+</div>
+<div class="section" id="development">
+<h2>Development<a class="headerlink" href="#development" title="Permalink to this headline">¶</a></h2>
+<p>In his 2019 ISMRM talk <a class="footnote-reference brackets" href="#veraart2019" id="id6">6</a>, Jelle Veraart polled the developers of some of the major dMRI analysis software packages.
+The goal was to understand how much consensus there was in the field on whether to proceed with certain pre-processing steps.
+The poll showed that consensus is within reach.
+However, different pre-processing steps have varying levels of support.
+Head motion and eddy current correction, detecting outliers and denoising <em>must</em> be done.
+Susceptibility distortion correction and removing Gibbs-ringing are also good to do but depend on the acquisition parameters.
+Finally, for some steps such as correcting for B1 inhomogeneities or signal drift, their importance has not yet been demonstrated.</p>
+<div class="figure align-default" id="pre-processing-consensus">
+<img alt="../_images/veraart-2019.png" src="../_images/veraart-2019.png" />
+<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Varying levels of support for different dMRI pre-processing steps</span><a class="headerlink" href="#pre-processing-consensus" title="Permalink to this image">¶</a></p>
+</div>
+<p>This information served as a starting point for the development of dMRIPrep.
+It also introduced some new questions.
+What are the minimal pre-processing steps for dMRI data?
+How does the ordering in which the steps are conducted affect the final results?
+How do different algorithms for the same method compare?</p>
+<p>Below is a figure of the proposed dMRI pre-processing steps dMRIPrep is working towards implementing.
+The progress and more detailed discussion can be tracked at this <a class="reference external" href="https://nipreps.org/dmriprep/roadmap.html">roadmap</a>.</p>
+<div class="figure align-default" id="dmriprep-workflow">
+<img alt="../_images/figure1.svg" src="../_images/figure1.svg" /><p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Proposed dMRI pre-processing workflow</span><a class="headerlink" href="#dmriprep-workflow" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="contributors">
+<a class="reference internal image-reference" href="../_images/contributors.png"><img alt="../_images/contributors.png" src="../_images/contributors.png" style="width: 200px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Current list of contributors to dMRIPrep</span><a class="headerlink" href="#contributors" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="key-features">
+<h2>Key Features<a class="headerlink" href="#key-features" title="Permalink to this headline">¶</a></h2>
+<p>There are several other dMRI pre-processing pipelines being developed.
+Below are some of dMRIPrep’s key features.</p>
+<div class="section" id="part-of-the-nipreps-organization">
+<h3>1. Part of the NiPreps organization<a class="headerlink" href="#part-of-the-nipreps-organization" title="Permalink to this headline">¶</a></h3>
+<a class="reference internal image-reference" href="../_images/sashimi.jpg" id="sashimi"><img alt="../_images/sashimi.jpg" class="align-right" id="sashimi" src="../_images/sashimi.jpg" style="width: 200px;" /></a>
+<p>NiPreps are a collection of tools that work as an extension of the scanner in that they minimally pre-process the data and make them “safe to consume” for analysis - kinda like <em>sashimi</em>!</p>
+<p>NiPreps pipelines are also:</p>
+<ul class="simple">
+<li><p>robust to different datasets</p></li>
+<li><p>easy to use (containerized software environment that can be run with single command)</p></li>
+<li><p>reproducible</p></li>
+<li><p>“glass box” architecture (all code/decisions visible on GitHub)</p></li>
+<li><p>regularly maintained</p></li>
+</ul>
+<div class="figure align-default" id="nipreps-chart">
+<img alt="../_images/nipreps-chart.svg" src="../_images/nipreps-chart.svg" /><p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">Pipelines maintained by the NiPreps community</span><a class="headerlink" href="#nipreps-chart" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="automated-workflows-based-on-bids-configuration">
+<h3>2. Automated workflows based on BIDS configuration<a class="headerlink" href="#automated-workflows-based-on-bids-configuration" title="Permalink to this headline">¶</a></h3>
+<p>dMRIPrep only imposes a single constraint on the input dataset - being compliant with BIDS (Brain Imaging Data Structure).
+BIDS enables consistency in how neuroimaging data is structured and ensures that the necessary metadata is complete.
+This also minimizes human intervention in running the pipeline as it is able to adapt to the unique features of the input data and make decisions about whether a particular processing step is appropriate or not.</p>
+<ul class="simple">
+<li><p>head motion correction algorithm based on shell sampling</p>
+<ul>
+<li><p>FSL eddy or Sparse Fascicle Model (SFM) for single-shell</p></li>
+<li><p>3D-SHORE for multi-shell/Cartesian grid</p></li>
+</ul>
+</li>
+<li><p>distortion correction strategy based on input fieldmap</p></li>
+<li><p>parsing phase encoding direction and total readout time for applying distortion correction</p></li>
+<li><p>shell distribution - algorithms that require information redundancy cannot be applied to sparse sampling schemes</p></li>
+</ul>
+</div>
+<div class="section" id="quality-control-reportlets">
+<h3>3. Quality control reportlets<a class="headerlink" href="#quality-control-reportlets" title="Permalink to this headline">¶</a></h3>
+<div class="figure align-default" id="reportlet">
+<img alt="../_images/dwi_reportlet.gif" src="../_images/dwi_reportlet.gif" />
+</div>
+</div>
+<div class="section" id="continuous-integration-and-deployment">
+<h3>4. Continuous integration and deployment<a class="headerlink" href="#continuous-integration-and-deployment" title="Permalink to this headline">¶</a></h3>
+<div class="tabbed-set docutils">
+<input checked="checked" id="74b54741-db3e-4c0a-ad90-e5b4cc484da7" name="230de835-da0b-4662-b195-8c8e70778247" type="radio">
+</input><label class="tabbed-label" for="74b54741-db3e-4c0a-ad90-e5b4cc484da7">
+unittest</label><div class="tabbed-content docutils">
+<p>Checks whether a function or class method behaves as expected.</p>
+<p><img alt="unittest" src="../_images/unittest.png" /></p>
+</div>
+<input id="7ae1aa3b-dbd6-4548-8f2d-7b10c48d1450" name="230de835-da0b-4662-b195-8c8e70778247" type="radio">
+</input><label class="tabbed-label" for="7ae1aa3b-dbd6-4548-8f2d-7b10c48d1450">
+doctest</label><div class="tabbed-content docutils">
+<p>Also checks whether code behaves as expected and serves as an example for how to use the code.</p>
+<p><img alt="doctest1" src="../_images/doctest1.png" /></p>
+<p><img alt="doctest2" src="../_images/doctest2.png" /></p>
+</div>
+<input id="d982cdb9-d9c4-4e84-92ef-c02134306dd5" name="230de835-da0b-4662-b195-8c8e70778247" type="radio">
+</input><label class="tabbed-label" for="d982cdb9-d9c4-4e84-92ef-c02134306dd5">
+integration test</label><div class="tabbed-content docutils">
+<p>Checks the behaviour of a system (multiple pieces of code).
+Can also be used to determine whether the system is behaving suboptimally.</p>
+<p><img alt="integration_test" src="../_images/integration_test.png" /></p>
+</div>
+<input id="e0336b9a-6cbd-43b0-b68a-7dc644905d97" name="230de835-da0b-4662-b195-8c8e70778247" type="radio">
+</input><label class="tabbed-label" for="e0336b9a-6cbd-43b0-b68a-7dc644905d97">
+build test</label><div class="tabbed-content docutils">
+<p>Checks that code or software environment can be compiled and deployed.</p>
+<p><img alt="build_test" src="../_images/build_test.png" /></p>
+</div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="esteban2019"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Esteban, O., Markiewicz, C.J., Blair, R.W. et al. fMRIPrep: a robust preprocessing pipeline for functional MRI. Nat Methods 16, 111–116 (2019). <a class="reference external" href="https://doi.org/10.1038/s41592-018-0235-4">https://doi.org/10.1038/s41592-018-0235-4</a></p>
+</dd>
+<dt class="label" id="botvinik2020"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>Botvinik-Nezer, R., Holzmeister, F., Camerer, C.F. et al. Variability in the analysis of a single neuroimaging dataset by many teams. Nature 582, 84–88 (2020). <a class="reference external" href="https://doi.org/10.1038/s41586-020-2314-9">https://doi.org/10.1038/s41586-020-2314-9</a></p>
+</dd>
+<dt class="label" id="oldham2020"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
+<dd><p>Oldham, S., Arnatkevic̆iūtė, A., Smith, R.W., et al. The efficacy of different preprocessing steps in reducing motion-related confounds in diffusion MRI connectomics. NeuroImage 222 117252 (2020). <a class="reference external" href="https://doi.org/10.1016/j.neuroimage.2020.117252">https://doi.org/10.1016/j.neuroimage.2020.117252</a></p>
+</dd>
+<dt class="label" id="schilling2019"><span class="brackets"><a class="fn-backref" href="#id4">4</a></span></dt>
+<dd><p>Schilling, K. G., Daducci, A., Maier-Hein, K., Poupon, C., Houde, J. C., Nath, V., Anderson, A. W., Landman, B. A., &amp; Descoteaux, M. (2019). Challenges in diffusion MRI tractography - Lessons learned from international benchmark competitions. Magnetic resonance imaging, 57, 194–209. <a class="reference external" href="https://doi.org/10.1016/j.mri.2018.11.014">https://doi.org/10.1016/j.mri.2018.11.014</a></p>
+</dd>
+<dt class="label" id="tax2019"><span class="brackets"><a class="fn-backref" href="#id5">5</a></span></dt>
+<dd><p>Tax, C. M., Grussu, F., Kaden, E., Ning, L., Rudrapatna, U., John Evans, C., St-Jean, S., Leemans, A., Koppers, S., Merhof, D., Ghosh, A., Tanno, R., Alexander, D. C., Zappalà, S., Charron, C., Kusmia, S., Linden, D. E., Jones, D. K., &amp; Veraart, J. (2019). Cross-scanner and cross-protocol diffusion MRI data harmonisation: A benchmark database and evaluation of algorithms. NeuroImage, 195, 285–299. <a class="reference external" href="https://doi.org/10.1016/j.neuroimage.2019.01.077">https://doi.org/10.1016/j.neuroimage.2019.01.077</a></p>
+</dd>
+<dt class="label" id="veraart2019"><span class="brackets"><a class="fn-backref" href="#id6">6</a></span></dt>
+<dd><p>Image Processing: Possible Guidelines for Standardization &amp; Clinical Applications. <a class="reference external" href="https://www.ismrm.org/19/program_files/MIS15.htm">https://www.ismrm.org/19/program_files/MIS15.htm</a></p>
+</dd>
+</dl>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./dmriprep"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="../welcome.html" title="previous page">dMRIPrep: a robust pre-processing pipeline for diffusion MRI</a>
+    <a class='right-next' id="next-link" href="gradient_table.html" title="next page">Introduction to dMRI Data</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By The dMRIPrep developers<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

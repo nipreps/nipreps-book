@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contributing to an Open Source Project: An Example with dMRIPrep &#8212; NiPreps</title>
+    <title>dMRIPrep: a robust pre-processing pipeline for diffusion MRI &#8212; dMRIPrep</title>
     
-  <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
     
   <link rel="stylesheet"
@@ -34,13 +34,12 @@
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.3da636dd464baa7582d2.js">
+  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
 
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
     <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
@@ -55,7 +54,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="About dMRIPRep" href="dwi/01-dmriprep.html" />
+    <link rel="next" title="About dMRIPrep" href="dmriprep/dmriprep.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -74,10 +73,10 @@
         <div class="navbar-brand-box">
 <a class="navbar-brand text-wrap" href="index.html">
   
-  <img src="_static/logo.png" class="logo" alt="logo">
+  <img src="_static/logo.svg" class="logo" alt="logo">
   
   
-  <h1 class="site-logo" id="site-title">NiPreps</h1>
+  <h1 class="site-logo" id="site-title">dMRIPrep</h1>
   
 </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -88,24 +87,29 @@
     <ul class="nav sidenav_l1">
  <li class="toctree-l1 current active">
   <a class="reference internal" href="#">
-   Contributing to an Open Source Project: An Example with dMRIPrep
+   dMRIPrep: a robust pre-processing pipeline for diffusion MRI
   </a>
  </li>
 </ul>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="dwi/01-dmriprep.html">
-   About dMRIPRep
+  <a class="reference internal" href="dmriprep/dmriprep.html">
+   About dMRIPrep
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="dwi/02-intro_dmri.html">
-   Introduction to Diffusion MRI
+  <a class="reference internal" href="dmriprep/gradient_table.html">
+   Introduction to dMRI Data
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="dwi/03-issue_solution.html">
-   Issue Solution: Determining the number of shells
+  <a class="reference internal" href="dmriprep/sdc.html">
+   Susceptibility Distortion Correction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dmriprep/hmc.html">
+   Head Motion Correction
   </a>
  </li>
 </ul>
@@ -192,16 +196,6 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#overview">
-   Overview
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#workshop-contents">
-   Workshop Contents
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#setup">
    Setup
   </a>
@@ -217,62 +211,18 @@
         
               <div>
                 
-  <div class="section" id="contributing-to-an-open-source-project-an-example-with-dmriprep">
-<h1>Contributing to an Open Source Project: An Example with dMRIPrep<a class="headerlink" href="#contributing-to-an-open-source-project-an-example-with-dmriprep" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
-<p>dMRIPrep is an analysis-agnostic tool that addresses the challenge of robust and reproducible preprocessing for whole-brain dMRI data.</p>
-<p>In this tutorial we will demonstrate how to engage as a new contributor to dMRIPrep with the implementation of a longstanding request for a <a class="reference external" href="https://github.com/nipreps/dmriprep/issues/64">new feature in the software</a>.
-We will describe the overall process of contributing to an open-source project step-by-step, particularizing steps to the neuroimaging field whenever possible.</p>
-</div>
-<div class="section" id="workshop-contents">
-<h2>Workshop Contents<a class="headerlink" href="#workshop-contents" title="Permalink to this headline">¶</a></h2>
-<table class="colwidths-auto table">
-<thead>
-<tr class="row-odd"><th class="text-align:right head"><p>#</p></th>
-<th class="text-align:left head"><p>Episode</p></th>
-<th class="text-align:left head"><p>Time</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td class="text-align:right"><p>1</p></td>
-<td class="text-align:left"><p>About dMRIPrep</p></td>
-<td class="text-align:left"><p>5</p></td>
-</tr>
-<tr class="row-odd"><td class="text-align:right"><p>2</p></td>
-<td class="text-align:left"><p>Intro to dMRI</p></td>
-<td class="text-align:left"><p>10</p></td>
-</tr>
-<tr class="row-even"><td class="text-align:right"><p>3</p></td>
-<td class="text-align:left"><p>Contributing to an Open Source Project</p></td>
-<td class="text-align:left"><p>10</p></td>
-</tr>
-<tr class="row-odd"><td class="text-align:right"><p>4</p></td>
-<td class="text-align:left"><p>Review GitHub Issue</p></td>
-<td class="text-align:left"><p>5</p></td>
-</tr>
-<tr class="row-even"><td class="text-align:right"><p>5</p></td>
-<td class="text-align:left"><p>Coding Solution</p></td>
-<td class="text-align:left"><p>20</p></td>
-</tr>
-<tr class="row-odd"><td class="text-align:right"><p>6</p></td>
-<td class="text-align:left"><p>Pushing changes to GitHub</p></td>
-<td class="text-align:left"><p>10</p></td>
-</tr>
-<tr class="row-even"><td class="text-align:right"><p>7</p></td>
-<td class="text-align:left"><p>Open Issues</p></td>
-<td class="text-align:left"><p>5</p></td>
-</tr>
-</tbody>
-</table>
-</div>
+  <div class="section" id="dmriprep-a-robust-pre-processing-pipeline-for-diffusion-mri">
+<h1>dMRIPrep: a robust pre-processing pipeline for diffusion MRI<a class="headerlink" href="#dmriprep-a-robust-pre-processing-pipeline-for-diffusion-mri" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
 <p>This tutorial contains a mix of lecture-based and interactive components.
 You are welcome to follow along however you like, whether you just want to listen or code along with us.</p>
 <p>Each of the chapters involving code are actually IPython notebooks!
-Clicking the Binder icon in the top right corner will launch an interactive Jupyter Lab environment with all of the necessary software packages pre-installed.
-<img alt="binder_link" src="_images/binder_link.png" /></p>
+Clicking the Binder icon in the top right corner will launch an interactive computing environment with all of the necessary software packages pre-installed.</p>
+<div class="figure align-default" id="binder-link">
+<img alt="_images/binder_link.png" src="_images/binder_link.png" />
+<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">Binder Link</span><a class="headerlink" href="#binder-link" title="Permalink to this image">¶</a></p>
+</div>
 <p>If you would like to follow along using your own setup, you can:</p>
 <ol class="simple">
 <li><p>clone this repository<br />
@@ -315,14 +265,14 @@ Clicking the Binder icon in the top right corner will launch an interactive Jupy
     
     <div class='prev-next-bottom'>
         
-    <a class='right-next' id="next-link" href="dwi/01-dmriprep.html" title="next page">About dMRIPRep</a>
+    <a class='right-next' id="next-link" href="dmriprep/dmriprep.html" title="next page">About dMRIPrep</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
     <div class="container">
       <p>
         
-          By Michael Joseph<br/>
+          By The dMRIPrep developers<br/>
         
             &copy; Copyright 2020.<br/>
       </p>
@@ -335,7 +285,7 @@ Clicking the Binder icon in the top right corner will launch an interactive Jupy
     </div>
 
     
-  <script src="_static/js/index.3da636dd464baa7582d2.js"></script>
+  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
 
 
     
