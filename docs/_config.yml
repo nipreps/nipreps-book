@@ -1,8 +1,8 @@
 # Book settings
-title: "NiPreps"
-author: Michael Joseph
+title: "dMRIPrep"
+author: The dMRIPrep developers
 copywright: 2020
-logo: images/logo.png
+logo: images/logo.svg
 
 # Execution settings
 execute:

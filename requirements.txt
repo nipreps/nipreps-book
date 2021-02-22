@@ -1,4 +1,5 @@
-dmriprep==0.3.0
+dmriprep
+flake8
 ghp-import
 jupyter-book
 jupytext
