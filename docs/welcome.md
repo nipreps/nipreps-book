@@ -1,8 +1,6 @@
-dMRIPrep: a robust pre-processing pipeline for diffusion MRI
-============================================================
+# dMRIPrep: a robust pre-processing pipeline for diffusion MRI
 
-Setup
------
+## Setup
 
 This tutorial contains a mix of lecture-based and interactive components.
 You are welcome to follow along however you like, whether you just want to listen or code along with us.

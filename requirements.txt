@@ -3,4 +3,4 @@ flake8
 ghp-import
 jupyter-book
 jupytext
-pytest
+nbdime
