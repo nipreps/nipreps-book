@@ -94,5 +94,39 @@ After the two previous units of this tutorial, we should have a good picture of 
 Let's sketch out our new data object:
 
 ```{code-cell} python
+"""Representing data in hard-disk and memory."""
+import attr
+import numpy as np
+
+
+@attr.s(slots=True)
+class DWI:
+    """Data representation structure for dMRI data."""
+
+    dataobj = attr.ib(default=None)
+    """A numpy ndarray object for the data array, without *b=0* volumes."""
+    bzero = attr.ib(default=None)
+    """
+    A *b=0* reference map, preferably obtained by some smart averaging.
+    If the :math:`B_0` fieldmap is set, this *b=0* reference map should also
+    be unwarped.
+    """
+    gradients = attr.ib(default=None)
+    """A 2D numpy array of the gradient table in RAS+B format."""
+    sampling = attr.ib(default=None)
+    """Sampling of q-space: single-, multi-shell or cartesian."""
+    affines = attr.ib(default=None)
+    """List of linear matrices that bring DWIs (i.e., no b=0) into alignment."""
+    fieldmap = attr.ib(default=None)
+    """A 3D displacements field to unwarp susceptibility distortions."""
+
+    def to_filename(filename):
+        """Write an HDF5 file to disk."""
+        raise NotImplementedError
+
+    @classmethod
+    def from_filename(cls, filename):
+        """Reads an HDF5 file from disk."""
+        raise NotImplementedError
 
 ```
