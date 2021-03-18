@@ -47,6 +47,8 @@ Inputs
   * Orientation matrix in "RAS+B" format. This means that b-vectors are given in "scanner" coordinates (as opposed to "voxel" coordinates) and must have unit-norm. An additional column provides the sensitization intensity value (*b* value) in *s/mm*.
   * *high-b* DWI data (4D file) - in other words, the original DWI dataset after extracting the *b=0* volumes out.
   * A boolean indicating whether this is single-shell, multi-shell or non-shelled (e.g., cartesian sampling such as DSI) dataset.
+  * DWI prediction model specification (model name + parameters)
+  * Image registration framework specification (including parameters)
 
 Outputs
 
@@ -62,5 +64,35 @@ What this idea doesn't cover:
   * Generation of average *b=0* reference.
   * Calculation of Framewise-Displacement or any other data quality estimation.
 
-**Sketch out an API (application programmer interface)**:
+**Nonfunctional requirements**: briefly anticipate further requirements that are important, but do not alter the goal of the project.
 
+  * Memory fingerprint: DWIs can be large, and storing them in memory (and subsequent derivatives thereof) can be prohibitive
+  * Parallelism: simulation and registration are CPU-intensive processes - for the runtime to be in a manageable scale, we'll need to leverage parallelism.
+
+**Sketch out an API (application programmer interface)**: Plan how the new software will expose the implementation downstream.
+Assuming our DWI data is encapsulated in an object (holding not just the data array, but also metadata such as the gradient table)
+pointed at by the variable `data`, and assuming we have a list of rigid-body transform matrices to initialize the algorithm (`mats`),
+a potential API would have a `.fit()` and `.predict()` members which run the algorithm (the former) and generate an EM-corrected
+DWI (the latter):
+
+```{code-cell} python
+from newmodule import EddyMotionEstimation
+
+estimator = EddyMotionEstimation()
+estimator.fit(data, init=mats)
+
+corrected = estimator.predict(data)
+```
+
+## Step 3: data structures
+How you feed in data into your algorithm will impose constraints that might completely hinder the implementation of nonfunctional requirements down the line.
+Therefore, a careful plan must also be thought out for the data structures we are going to handle.
+
+In this case, we want to create a Python data structure that encapsulates our DWI information (in other words, most of the *Inputs* identified in the previous step).
+DWI data are usually large in size, so we will use HDF5 internally to store data into hard-disk while enjoying an easy interface with random access to memory.
+After the two previous units of this tutorial, we should have a good picture of the problem by now.
+Let's sketch out our new data object:
+
+```{code-cell} python
+
+```
