@@ -1,4 +1,22 @@
+---
+jupytext:
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
+kernelspec:
+  display_name: Python 3
+  language: python
+  name: python3
+---
+
 # Contributing to *dMRIPrep* - the case of head-motion and eddy-currents estimation
+
+```{code-cell} python
+:tags: [hide-cell]
+
+import warnings
+warnings.filterwarnings("ignore")
 
 All *NiPreps* are open to the community feedback and contribution.
 Contributing to seemingly big projects (*dMRIPrep* is, in reality, pretty small) can feel scary at first.
