@@ -1,13 +1,13 @@
 # About dMRIPrep
 
-The pre-processing of dMRI involves numerous steps to reduce noise, remove artifacts, and standardize the data before fitting a particular model or carrying out tractography.
+The pre-processing of dMRI data involves numerous steps to reduce noise, remove artifacts, and standardize the data before fitting a particular model or carrying out tractography.
 
 Generally, researchers create ad-hoc pre-processing workflows for each dataset, building upon a large inventory of available tools.
 The complexity of these workflows has snowballed with rapid advances in acquisition parameters and processing steps.
 
 dMRIPrep is an analysis-agnostic tool that addresses the challenge of robust and reproducible pre-processing for whole-brain dMRI data.
 
-## Motivation
+## The problem of methodological variability and the need for standardized pre-processing
 
 The development and fast adoption of fMRIPrep [^esteban2019] have revealed that neuroscientists need tools that simplify their research workflow, provide visual reports and checkpoints, and engender trust in the tool itself.
 
