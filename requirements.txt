@@ -1,6 +1,6 @@
+dipy
 dmriprep
-flake8
 ghp-import
 jupyter-book
 jupytext
-nbdime
+sphinx-exercise
