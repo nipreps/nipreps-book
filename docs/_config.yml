@@ -1,8 +1,12 @@
 # Book settings
-title: "dMRIPrep"
-author: The dMRIPrep developers
+title: "NiPreps"
+author: The NiPreps developers
 copywright: 2020
-logo: images/logo.svg
+
+# Sphinx customizations
+sphinx:
+  extra_extensions:
+    - sphinx_exercise
 
 # Execution settings
 execute:

@@ -1,8 +1,13 @@
 # Table of content
 # Learn more at https://jupyterbook.org/customize/toc.html
-#
+
 - file: welcome
-- file: dmriprep/dmriprep
-- file: dmriprep/gradient_table
-- file: dmriprep/sdc
-- file: dmriprep/hmc
+- part: nipreps
+  chapters:
+  - file: nipreps/nipreps
+  - file: nipreps/community_development
+- part: dmriprep
+  chapters:
+  - file: dmriprep/dmriprep
+  - file: dmriprep/gradient_table
+  - file: dmriprep/hmc
