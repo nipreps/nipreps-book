@@ -1,4 +1,4 @@
-# dMRIPrep: a robust pre-processing pipeline for diffusion MRI
+# NiPreps
 
 ## Setup
 
