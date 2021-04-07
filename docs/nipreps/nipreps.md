@@ -139,28 +139,26 @@ The success of these tools has largely been driven by their strong uptake in the
 This has allowed them to be exercised on diverse datasets and has brought the interest of a variety of domain experts to contribute their knowledge towards improving the tools.
 The tools are "open source" and all of the code and ideas are visible on GitHub.
 
----
+[^botvinik2020]: Botvinik-Nezer, R., Holzmeister, F., Camerer, C.F. et al. Variability in the analysis of a single neuroimaging dataset by many teams. Nature 582, 84–88 (2020). doi: 10.1038/s41586-020-2314-9
 
-[^botvinik2020]: Botvinik-Nezer, R., Holzmeister, F., Camerer, C.F. et al. Variability in the analysis of a single neuroimaging dataset by many teams. Nature 582, 84–88 (2020). https://doi.org/10.1038/s41586-020-2314-9
+[^esteban2019]: Esteban, O., Markiewicz, C.J., Blair, R.W. et al. fMRIPrep: a robust preprocessing pipeline for functional MRI. Nat Methods 16, 111–116 (2019). doi: 10.1038/s41592-018-0235-4
 
-[^esteban2019]: Esteban, O., Markiewicz, C.J., Blair, R.W. et al. fMRIPrep: a robust preprocessing pipeline for functional MRI. Nat Methods 16, 111–116 (2019). https://doi.org/10.1038/s41592-018-0235-4
+[^oldham2020]: Oldham, S., Arnatkevic̆iūtė, A., Smith, R.W., et al. The efficacy of different preprocessing steps in reducing motion-related confounds in diffusion MRI connectomics. NeuroImage 222 117252 (2020). doi: 10.1016/j.neuroimage.2020.117252
 
-[^oldham2020]: Oldham, S., Arnatkevic̆iūtė, A., Smith, R.W., et al. The efficacy of different preprocessing steps in reducing motion-related confounds in diffusion MRI connectomics. NeuroImage 222 117252 (2020). https://doi.org/10.1016/j.neuroimage.2020.117252
+[^schilling2019]: Schilling, K. G., Daducci, A., Maier-Hein, K., Poupon, C., Houde, J. C., Nath, V., Anderson, A. W., Landman, B. A., & Descoteaux, M. (2019). Challenges in diffusion MRI tractography - Lessons learned from international benchmark competitions. Magnetic resonance imaging, 57, 194–209. doi: 10.1016/j.mri.2018.11.014
 
-[^schilling2019]: Schilling, K. G., Daducci, A., Maier-Hein, K., Poupon, C., Houde, J. C., Nath, V., Anderson, A. W., Landman, B. A., & Descoteaux, M. (2019). Challenges in diffusion MRI tractography - Lessons learned from international benchmark competitions. Magnetic resonance imaging, 57, 194–209. https://doi.org/10.1016/j.mri.2018.11.014
+[^tax2019]: Tax, C. M., Grussu, F., Kaden, E., Ning, L., Rudrapatna, U., John Evans, C., St-Jean, S., Leemans, A., Koppers, S., Merhof, D., Ghosh, A., Tanno, R., Alexander, D. C., Zappalà, S., Charron, C., Kusmia, S., Linden, D. E., Jones, D. K., & Veraart, J. (2019). Cross-scanner and cross-protocol diffusion MRI data harmonisation: A benchmark database and evaluation of algorithms. NeuroImage, 195, 285–299. doi: 10.1016/j.neuroimage.2019.01.077
 
-[^tax2019]: Tax, C. M., Grussu, F., Kaden, E., Ning, L., Rudrapatna, U., John Evans, C., St-Jean, S., Leemans, A., Koppers, S., Merhof, D., Ghosh, A., Tanno, R., Alexander, D. C., Zappalà, S., Charron, C., Kusmia, S., Linden, D. E., Jones, D. K., & Veraart, J. (2019). Cross-scanner and cross-protocol diffusion MRI data harmonisation: A benchmark database and evaluation of algorithms. NeuroImage, 195, 285–299. https://doi.org/10.1016/j.neuroimage.2019.01.077
+[^carp2012]: Carp J. On the plurality of (methodological) worlds: estimating the analytic flexibility of FMRI experiments. Front Neurosci. 2012 Oct 11;6:149. doi: 10.3389/fnins.2012.00149
 
-[^carp2012]: Carp J. On the plurality of (methodological) worlds: estimating the analytic flexibility of FMRI experiments. Front Neurosci. 2012 Oct 11;6:149. doi: 10.3389/fnins.2012.00149.
+[^bowring2019]: Bowring, A, Maumet, C, Nichols, TE. Exploring the impact of analysis software on task fMRI results. Hum Brain Mapp. 2019; 40: 3362– 3384. doi: 10.1002/hbm.24603
 
-[^bowring2019]: Bowring, A, Maumet, C, Nichols, TE. Exploring the impact of analysis software on task fMRI results. Hum Brain Mapp. 2019; 40: 3362– 3384. https://doi.org/10.1002/hbm.24603
-
-[^edickie2017]: Dickie E, Hodge S, Craddock R, Poline J, Kennedy D (2017) Tools Matter: Comparison of Two Surface Analysis Tools Applied to the ABIDE Dataset. Research Ideas and Outcomes 3: e13726. https://doi.org/10.3897/rio.3.e13726
+[^dickie2017]: Dickie E, Hodge S, Craddock R, Poline J, Kennedy D (2017) Tools Matter: Comparison of Two Surface Analysis Tools Applied to the ABIDE Dataset. Research Ideas and Outcomes 3: e13726. doi: 10.3897/rio.3.e13726
 
 [^gronenschild2012]: Gronenschild EH, Habets P, Jacobs HI, Mengelers R, Rozendaal N, van Os J, Marcelis M. The effects of FreeSurfer version, workstation type, and Macintosh operating system version on anatomical volume and cortical thickness measurements. PLoS One. 2012;7(6):e38234. doi: 10.1371/journal.pone.0038234
 
 [^glatard2015]: Glatard T, Lewis LB, Ferreira da Silva R, Adalat R, Beck N, Lepage C, Rioux P, Rousseau M-E, Sherif T, Deelman E, Khalili-Mahani N and Evans AC (2015) Reproducibility of neuroimaging analyses across operating systems. Front. Neuroinform. 9:12. doi: 10.3389/fninf.2015.00012
 
-[^gorgolewski2016]: Gorgolewski, K., Auer, T., Calhoun, V. et al. The brain imaging data structure, a format for organizing and describing outputs of neuroimaging experiments. Sci Data 3, 160044 (2016). https://doi.org/10.1038/sdata.2016.44
+[^gorgolewski2016]: Gorgolewski, K., Auer, T., Calhoun, V. et al. The brain imaging data structure, a format for organizing and describing outputs of neuroimaging experiments. Sci Data 3, 160044 (2016). doi: 10.1038/sdata.2016.44
 
 [^gorgolewski2017]: Gorgolewski KJ, Alfaro-Almagro F, Auer T, Bellec P, Capotă M, Chakravarty MM, Churchill NW, Cohen AL, Craddock RC, Devenyi GA, Eklund A, Esteban O, Flandin G, Ghosh SS, Guntupalli JS, Jenkinson M, Keshavan A, Kiar G, Liem F, Raamana PR, Raffelt D, Steele CJ, Quirion PO, Smith RE, Strother SC, Varoquaux G, Wang Y, Yarkoni T, Poldrack RA. BIDS apps: Improving ease of use, accessibility, and reproducibility of neuroimaging data analysis methods. PLoS Comput Biol. 2017 Mar 9;13(3):e1005209. doi: 10.1371/journal.pcbi.1005209

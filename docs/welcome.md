@@ -1,5 +1,12 @@
 # NiPreps
 
+```{admonition} Objectives
+- Learn how to contribute to "open source" software
+- Get a tour of the *NiPreps* framework
+- Understand the basics of dMRI data and pre-processing
+- Discover how to integrate some of the tools in the *NiPreps* framework
+```
+
 ## Setup
 
 This tutorial contains a mix of lecture-based and interactive components.
@@ -15,9 +22,16 @@ Binder Link
 ```
 
 If you would like to follow along using your own setup, you can:
-1. clone this repository  
-        `git clone https://github.com/nipreps/nipreps-book`
-2. install the necessary python packages in your Python environment  
-        `cd nipreps-book && pip install -r requirements.txt`
-3. launch a Jupyter lab instance  
-        `jupyter lab`
+
+```bash
+
+# 1. clone this repository
+git clone https://github.com/nipreps/nipreps-book
+
+# 2. install the necessary python packages in your Python environment
+cd nipreps-book && pip install -r requirements.txt
+
+# 3. launch a Jupyter lab instance
+jupyter lab
+
+```
