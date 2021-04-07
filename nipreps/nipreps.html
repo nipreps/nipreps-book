@@ -300,7 +300,7 @@ The study demonstrated the huge amount of variability in analytic approaches as 
 One encouraging finding was that 48% of teams chose to pre-process the data using fMRIPrep <a class="footnote-reference brackets" href="#esteban2019" id="id2">2</a>, a standardized pipeline for fMRI data.</p>
 <p>A similar predicament exists in the field of dMRI analysis.
 There has been a lot of effort in recent years to compare the influence of various pre-processing steps on tractography and structural connectivity <a class="footnote-reference brackets" href="#oldham2020" id="id3">3</a> <a class="footnote-reference brackets" href="#schilling2019" id="id4">4</a> and harmonize different datasets <a class="footnote-reference brackets" href="#tax2019" id="id5">5</a>.</p>
-<p>Differences in methods or parameters chosen <a class="footnote-reference brackets" href="#carp2012" id="id6">6</a> <a class="footnote-reference brackets" href="#bowring2019" id="id7">7</a>, implementations across software [^dickie2017], and even operating system or software version <a class="footnote-reference brackets" href="#gronenschild2012" id="id8">8</a> <a class="footnote-reference brackets" href="#glatard2015" id="id9">9</a> all contribute to variability.</p>
+<p>Differences in methods or parameters chosen <a class="footnote-reference brackets" href="#carp2012" id="id6">6</a> <a class="footnote-reference brackets" href="#bowring2019" id="id7">7</a>, implementations across software <a class="footnote-reference brackets" href="#dickie2017" id="id8">8</a>, and even operating system or software version <a class="footnote-reference brackets" href="#gronenschild2012" id="id9">9</a> <a class="footnote-reference brackets" href="#glatard2015" id="id10">10</a> all contribute to variability.</p>
 <p>Doing reproducible neuroimaging research is hard.
 All of this points to a need for creating standardized pipelines for pre-processing MRI data that will reduce methodological variability and enable comparisons between different datasets and downstream analysis decisions.</p>
 </div>
@@ -326,7 +326,7 @@ These principles distill some design and organizational foundations.</p>
 <div class="section" id="robust">
 <h3>1. Robust<a class="headerlink" href="#robust" title="Permalink to this headline">¶</a></h3>
 <p><em>NiPreps</em> are meant to be robust to different datasets and attempt to provide the best possible results independent of scanner manufacturer, acquisition parameters, or the presence of additional correction scans (such as field maps).
-The end-user tools only impose a single constraint on the input dataset - being compliant with BIDS (Brain Imaging Data Structure) <a class="footnote-reference brackets" href="#gorgolewski2016" id="id10">10</a>.
+The end-user tools only impose a single constraint on the input dataset - being compliant with BIDS (Brain Imaging Data Structure) <a class="footnote-reference brackets" href="#gorgolewski2016" id="id11">11</a>.
 BIDS enables consistency in how neuroimaging data is structured and ensures that the necessary metadata is complete.
 This minimizes human intervention in running the pipelines as they are able to adapt to the unique features of the input data and make decisions about whether a particular processing step is appropriate or not.</p>
 <p>The scope of these tools is strictly limited to pre-processing tasks.
@@ -336,28 +336,28 @@ This eases the burden of maintaining these tools but also helps focus on standar
 The pipelines are modular and rely on widely-used tools such as AFNI, ANTs, FreeSurfer, FSL, NiLearn, or DIPY and are extensible via plug-ins.
 This modularity in the code allows each step to be thoroughly tested. Some examples of tests performed on different parts of the pipeline are shown below:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="6950400f-d91e-411a-a6a2-91261be43519" name="a491c232-473a-4f00-8aa3-21aece949a88" type="radio">
-</input><label class="tabbed-label" for="6950400f-d91e-411a-a6a2-91261be43519">
+<input checked="checked" id="77fb65e5-2e7f-4385-afb9-6e83e4fc79e1" name="5f37237b-919b-4ff9-9bd2-f4bc2029203d" type="radio">
+</input><label class="tabbed-label" for="77fb65e5-2e7f-4385-afb9-6e83e4fc79e1">
 unittest</label><div class="tabbed-content docutils">
 <p>Checks whether a function or class method behaves as expected.</p>
 <p><img alt="unittest" src="../_images/unittest.png" /></p>
 </div>
-<input id="a776c4fa-95e4-4ff9-9337-4b24690460b2" name="a491c232-473a-4f00-8aa3-21aece949a88" type="radio">
-</input><label class="tabbed-label" for="a776c4fa-95e4-4ff9-9337-4b24690460b2">
+<input id="a4ce63af-c022-4740-96b0-daebd17359c9" name="5f37237b-919b-4ff9-9bd2-f4bc2029203d" type="radio">
+</input><label class="tabbed-label" for="a4ce63af-c022-4740-96b0-daebd17359c9">
 doctest</label><div class="tabbed-content docutils">
 <p>Also checks whether code behaves as expected and serves as an example for how to use the code.</p>
 <p><img alt="doctest1" src="../_images/doctest1.png" /></p>
 <p><img alt="doctest2" src="../_images/doctest2.png" /></p>
 </div>
-<input id="558424a2-c3d4-4230-bcf2-31073dfd30ec" name="a491c232-473a-4f00-8aa3-21aece949a88" type="radio">
-</input><label class="tabbed-label" for="558424a2-c3d4-4230-bcf2-31073dfd30ec">
+<input id="30d5b321-dcb5-465a-9702-021f8f459b26" name="5f37237b-919b-4ff9-9bd2-f4bc2029203d" type="radio">
+</input><label class="tabbed-label" for="30d5b321-dcb5-465a-9702-021f8f459b26">
 integration test</label><div class="tabbed-content docutils">
 <p>Checks the behaviour of a system (multiple pieces of code).
 Can also be used to determine whether the system is behaving suboptimally.</p>
 <p><img alt="integration_test" src="../_images/integration_test.png" /></p>
 </div>
-<input id="2504c704-b3d7-4ab4-b1f2-9498cc9f4963" name="a491c232-473a-4f00-8aa3-21aece949a88" type="radio">
-</input><label class="tabbed-label" for="2504c704-b3d7-4ab4-b1f2-9498cc9f4963">
+<input id="ca5317c0-c7c5-458d-ba71-62921ea64152" name="5f37237b-919b-4ff9-9bd2-f4bc2029203d" type="radio">
+</input><label class="tabbed-label" for="ca5317c0-c7c5-458d-ba71-62921ea64152">
 build test</label><div class="tabbed-content docutils">
 <p>Checks that code or software environment can be compiled and deployed.</p>
 <p><img alt="build_test" src="../_images/build_test.png" /></p>
@@ -366,7 +366,7 @@ build test</label><div class="tabbed-content docutils">
 </div>
 <div class="section" id="easy-to-use">
 <h3>2. Easy to use<a class="headerlink" href="#easy-to-use" title="Permalink to this headline">¶</a></h3>
-<p><em>NiPreps</em> are packaged as a fully-compliant BIDS-Apps <a class="footnote-reference brackets" href="#gorgolewski2017" id="id11">11</a>.
+<p><em>NiPreps</em> are packaged as a fully-compliant BIDS-Apps <a class="footnote-reference brackets" href="#gorgolewski2017" id="id12">12</a>.
 All of the software is containerized and the pipelines all share a common command-line interface:
 <code class="docutils literal notranslate"><span class="pre">&lt;pipelines_name&gt;</span> <span class="pre">&lt;bids_dir&gt;</span> <span class="pre">&lt;output_dir&gt;</span> <span class="pre">&lt;participant&gt;</span> <span class="pre">[--options]</span></code></p>
 <p>Thanks to limiting the input dataset to BIDS, manual parameter input is reduced to a minimum, allowing the pipelines to run in an automated fashion.</p>
@@ -381,40 +381,42 @@ All of the software is containerized and the pipelines all share a common comman
 The success of these tools has largely been driven by their strong uptake in the neuroimaging community.
 This has allowed them to be exercised on diverse datasets and has brought the interest of a variety of domain experts to contribute their knowledge towards improving the tools.
 The tools are “open source” and all of the code and ideas are visible on GitHub.</p>
-<hr class="docutils" />
 <hr class="footnotes docutils" />
 <dl class="footnote brackets">
 <dt class="label" id="botvinik2020"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p>Botvinik-Nezer, R., Holzmeister, F., Camerer, C.F. et al. Variability in the analysis of a single neuroimaging dataset by many teams. Nature 582, 84–88 (2020). <a class="reference external" href="https://doi.org/10.1038/s41586-020-2314-9">https://doi.org/10.1038/s41586-020-2314-9</a></p>
+<dd><p>Botvinik-Nezer, R., Holzmeister, F., Camerer, C.F. et al. Variability in the analysis of a single neuroimaging dataset by many teams. Nature 582, 84–88 (2020). doi: 10.1038/s41586-020-2314-9</p>
 </dd>
 <dt class="label" id="esteban2019"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
-<dd><p>Esteban, O., Markiewicz, C.J., Blair, R.W. et al. fMRIPrep: a robust preprocessing pipeline for functional MRI. Nat Methods 16, 111–116 (2019). <a class="reference external" href="https://doi.org/10.1038/s41592-018-0235-4">https://doi.org/10.1038/s41592-018-0235-4</a></p>
+<dd><p>Esteban, O., Markiewicz, C.J., Blair, R.W. et al. fMRIPrep: a robust preprocessing pipeline for functional MRI. Nat Methods 16, 111–116 (2019). doi: 10.1038/s41592-018-0235-4</p>
 </dd>
 <dt class="label" id="oldham2020"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
-<dd><p>Oldham, S., Arnatkevic̆iūtė, A., Smith, R.W., et al. The efficacy of different preprocessing steps in reducing motion-related confounds in diffusion MRI connectomics. NeuroImage 222 117252 (2020). <a class="reference external" href="https://doi.org/10.1016/j.neuroimage.2020.117252">https://doi.org/10.1016/j.neuroimage.2020.117252</a></p>
+<dd><p>Oldham, S., Arnatkevic̆iūtė, A., Smith, R.W., et al. The efficacy of different preprocessing steps in reducing motion-related confounds in diffusion MRI connectomics. NeuroImage 222 117252 (2020). doi: 10.1016/j.neuroimage.2020.117252</p>
 </dd>
 <dt class="label" id="schilling2019"><span class="brackets"><a class="fn-backref" href="#id4">4</a></span></dt>
-<dd><p>Schilling, K. G., Daducci, A., Maier-Hein, K., Poupon, C., Houde, J. C., Nath, V., Anderson, A. W., Landman, B. A., &amp; Descoteaux, M. (2019). Challenges in diffusion MRI tractography - Lessons learned from international benchmark competitions. Magnetic resonance imaging, 57, 194–209. <a class="reference external" href="https://doi.org/10.1016/j.mri.2018.11.014">https://doi.org/10.1016/j.mri.2018.11.014</a></p>
+<dd><p>Schilling, K. G., Daducci, A., Maier-Hein, K., Poupon, C., Houde, J. C., Nath, V., Anderson, A. W., Landman, B. A., &amp; Descoteaux, M. (2019). Challenges in diffusion MRI tractography - Lessons learned from international benchmark competitions. Magnetic resonance imaging, 57, 194–209. doi: 10.1016/j.mri.2018.11.014</p>
 </dd>
 <dt class="label" id="tax2019"><span class="brackets"><a class="fn-backref" href="#id5">5</a></span></dt>
-<dd><p>Tax, C. M., Grussu, F., Kaden, E., Ning, L., Rudrapatna, U., John Evans, C., St-Jean, S., Leemans, A., Koppers, S., Merhof, D., Ghosh, A., Tanno, R., Alexander, D. C., Zappalà, S., Charron, C., Kusmia, S., Linden, D. E., Jones, D. K., &amp; Veraart, J. (2019). Cross-scanner and cross-protocol diffusion MRI data harmonisation: A benchmark database and evaluation of algorithms. NeuroImage, 195, 285–299. <a class="reference external" href="https://doi.org/10.1016/j.neuroimage.2019.01.077">https://doi.org/10.1016/j.neuroimage.2019.01.077</a></p>
+<dd><p>Tax, C. M., Grussu, F., Kaden, E., Ning, L., Rudrapatna, U., John Evans, C., St-Jean, S., Leemans, A., Koppers, S., Merhof, D., Ghosh, A., Tanno, R., Alexander, D. C., Zappalà, S., Charron, C., Kusmia, S., Linden, D. E., Jones, D. K., &amp; Veraart, J. (2019). Cross-scanner and cross-protocol diffusion MRI data harmonisation: A benchmark database and evaluation of algorithms. NeuroImage, 195, 285–299. doi: 10.1016/j.neuroimage.2019.01.077</p>
 </dd>
 <dt class="label" id="carp2012"><span class="brackets"><a class="fn-backref" href="#id6">6</a></span></dt>
-<dd><p>Carp J. On the plurality of (methodological) worlds: estimating the analytic flexibility of FMRI experiments. Front Neurosci. 2012 Oct 11;6:149. doi: 10.3389/fnins.2012.00149.</p>
+<dd><p>Carp J. On the plurality of (methodological) worlds: estimating the analytic flexibility of FMRI experiments. Front Neurosci. 2012 Oct 11;6:149. doi: 10.3389/fnins.2012.00149</p>
 </dd>
 <dt class="label" id="bowring2019"><span class="brackets"><a class="fn-backref" href="#id7">7</a></span></dt>
-<dd><p>Bowring, A, Maumet, C, Nichols, TE. Exploring the impact of analysis software on task fMRI results. Hum Brain Mapp. 2019; 40: 3362– 3384. <a class="reference external" href="https://doi.org/10.1002/hbm.24603">https://doi.org/10.1002/hbm.24603</a></p>
+<dd><p>Bowring, A, Maumet, C, Nichols, TE. Exploring the impact of analysis software on task fMRI results. Hum Brain Mapp. 2019; 40: 3362– 3384. doi: 10.1002/hbm.24603</p>
 </dd>
-<dt class="label" id="gronenschild2012"><span class="brackets"><a class="fn-backref" href="#id8">8</a></span></dt>
+<dt class="label" id="dickie2017"><span class="brackets"><a class="fn-backref" href="#id8">8</a></span></dt>
+<dd><p>Dickie E, Hodge S, Craddock R, Poline J, Kennedy D (2017) Tools Matter: Comparison of Two Surface Analysis Tools Applied to the ABIDE Dataset. Research Ideas and Outcomes 3: e13726. doi: 10.3897/rio.3.e13726</p>
+</dd>
+<dt class="label" id="gronenschild2012"><span class="brackets"><a class="fn-backref" href="#id9">9</a></span></dt>
 <dd><p>Gronenschild EH, Habets P, Jacobs HI, Mengelers R, Rozendaal N, van Os J, Marcelis M. The effects of FreeSurfer version, workstation type, and Macintosh operating system version on anatomical volume and cortical thickness measurements. PLoS One. 2012;7(6):e38234. doi: 10.1371/journal.pone.0038234</p>
 </dd>
-<dt class="label" id="glatard2015"><span class="brackets"><a class="fn-backref" href="#id9">9</a></span></dt>
+<dt class="label" id="glatard2015"><span class="brackets"><a class="fn-backref" href="#id10">10</a></span></dt>
 <dd><p>Glatard T, Lewis LB, Ferreira da Silva R, Adalat R, Beck N, Lepage C, Rioux P, Rousseau M-E, Sherif T, Deelman E, Khalili-Mahani N and Evans AC (2015) Reproducibility of neuroimaging analyses across operating systems. Front. Neuroinform. 9:12. doi: 10.3389/fninf.2015.00012</p>
 </dd>
-<dt class="label" id="gorgolewski2016"><span class="brackets"><a class="fn-backref" href="#id10">10</a></span></dt>
-<dd><p>Gorgolewski, K., Auer, T., Calhoun, V. et al. The brain imaging data structure, a format for organizing and describing outputs of neuroimaging experiments. Sci Data 3, 160044 (2016). <a class="reference external" href="https://doi.org/10.1038/sdata.2016.44">https://doi.org/10.1038/sdata.2016.44</a></p>
+<dt class="label" id="gorgolewski2016"><span class="brackets"><a class="fn-backref" href="#id11">11</a></span></dt>
+<dd><p>Gorgolewski, K., Auer, T., Calhoun, V. et al. The brain imaging data structure, a format for organizing and describing outputs of neuroimaging experiments. Sci Data 3, 160044 (2016). doi: 10.1038/sdata.2016.44</p>
 </dd>
-<dt class="label" id="gorgolewski2017"><span class="brackets"><a class="fn-backref" href="#id11">11</a></span></dt>
+<dt class="label" id="gorgolewski2017"><span class="brackets"><a class="fn-backref" href="#id12">12</a></span></dt>
 <dd><p>Gorgolewski KJ, Alfaro-Almagro F, Auer T, Bellec P, Capotă M, Chakravarty MM, Churchill NW, Cohen AL, Craddock RC, Devenyi GA, Eklund A, Esteban O, Flandin G, Ghosh SS, Guntupalli JS, Jenkinson M, Keshavan A, Kiar G, Liem F, Raamana PR, Raffelt D, Steele CJ, Quirion PO, Smith RE, Strother SC, Varoquaux G, Wang Y, Yarkoni T, Poldrack RA. BIDS apps: Improving ease of use, accessibility, and reproducibility of neuroimaging data analysis methods. PLoS Comput Biol. 2017 Mar 9;13(3):e1005209. doi: 10.1371/journal.pcbi.1005209</p>
 </dd>
 </dl>

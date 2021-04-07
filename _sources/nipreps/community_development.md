@@ -1,7 +1,6 @@
 # Community Development
 
-```{admonition} Overview
-**Objectives**
+```{admonition} Objectives
 - Discover how "open source" projects are organized (*NiPreps* in particular)
 - Describe what a contribution is
 - Learn where to get help before making a contribution
@@ -78,22 +77,24 @@ Head to [the new features page](https://nipreps.org/community/features/) to lear
 
 ## Making a change
 
+https://nipreps.org/community/CONTRIBUTING/#making-a-change
+
 Make sure your git credentials are configured.
 
-```
+```bash
 git config --global user.name "Carl Jacobi"
 git config --global user.email "carl.jacobi@gmail.com"
 ```
 
 Fork the project of interest and clone your forked repository to your computer.
 
-```
+```bash
 git clone https://github.com/carljacobi/dmriprep.git
 ```
 
 To keep up with changes, add the "upstream" repository as a remote to your locally cloned repository.
 
-```
+```bash
 cd dmriprep
 
 git remote add upstream https://github.com/nipreps/dmriprep.git
@@ -101,8 +102,8 @@ git remote add upstream https://github.com/nipreps/dmriprep.git
 
 Keep your fork up to date with the upstream repository.
 
-```{code-cell} bash
+```bash
 git fetch upstream
 git checkout master
 git merge upstream/master
-``
+```

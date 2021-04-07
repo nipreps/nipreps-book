@@ -247,9 +247,8 @@
                 
   <div class="section" id="community-development">
 <h1>Community Development<a class="headerlink" href="#community-development" title="Permalink to this headline">¶</a></h1>
-<div class="admonition-overview admonition">
-<p class="admonition-title">Overview</p>
-<p><strong>Objectives</strong></p>
+<div class="admonition-objectives admonition">
+<p class="admonition-title">Objectives</p>
 <ul class="simple">
 <li><p>Discover how “open source” projects are organized (<em>NiPreps</em> in particular)</p></li>
 <li><p>Describe what a contribution is</p></li>
@@ -317,22 +316,28 @@ Opening a new issue, requesting feedback, and gauging interest are generally ver
 </div>
 <div class="section" id="making-a-change">
 <h2>Making a change<a class="headerlink" href="#making-a-change" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://nipreps.org/community/CONTRIBUTING/#making-a-change">https://nipreps.org/community/CONTRIBUTING/#making-a-change</a></p>
 <p>Make sure your git credentials are configured.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span> <span class="s2">&quot;Carl Jacobi&quot;</span>
-<span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span> <span class="s2">&quot;carl.jacobi@gmail.com&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git config --global user.name <span class="s2">&quot;Carl Jacobi&quot;</span>
+git config --global user.email <span class="s2">&quot;carl.jacobi@gmail.com&quot;</span>
 </pre></div>
 </div>
 <p>Fork the project of interest and clone your forked repository to your computer.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">carljacobi</span><span class="o">/</span><span class="n">dmriprep</span><span class="o">.</span><span class="n">git</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/carljacobi/dmriprep.git
 </pre></div>
 </div>
 <p>To keep up with changes, add the “upstream” repository as a remote to your locally cloned repository.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">dmriprep</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> dmriprep
 
-<span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">upstream</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">nipreps</span><span class="o">/</span><span class="n">dmriprep</span><span class="o">.</span><span class="n">git</span>
+git remote add upstream https://github.com/nipreps/dmriprep.git
 </pre></div>
 </div>
 <p>Keep your fork up to date with the upstream repository.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git fetch upstream
+git checkout master
+git merge upstream/master
+</pre></div>
+</div>
 </div>
 </div>
 
