@@ -188,28 +188,46 @@ It is important to note that in this format, the diffusion gradients are provide
 The diffusion gradient is critical for later analyzing the data
 
 ```{code-cell} python
+:tags: [output_scroll]
+
 import numpy as np
 
-bvecs_tr = np.matmul(dwi_affine[:3, :3], gt_bvecs.T).T
+if dwi_affine.shape == (4, 4):
+    dwi_affine = dwi_affine[:3, :3]
+
+rotated_bvecs = dwi_affine[np.newaxis, ...].dot(gt_bvecs.T)[0].T
+rotated_bvecs
 ```
 
 ```{code-cell} python
-from dipy.core.gradients import gradient_table
 
-gtab = gradient_table(gt_bvals, gt_bvecs)
+fig = plt.figure()
+ax = fig.add_subplot(111, projection="3d")
+ax.scatter(rotated_bvecs.T[0], rotated_bvecs.T[1], rotated_bvecs.T[2])
+plt.show()
 ```
 
 Inspired by MRtrix3 and proposed in the [BIDS spec](https://github.com/bids-standard/bids-specification/issues/349), dMRIPrep also creates an optional `.tsv` file where the diffusion gradients are reported in scanner coordinates as opposed to image coordinates.
 The [i j k] values reported earlier are recalculated in [R A S].
 
 ```{code-cell} python
-rasb = np.c_[bvecs_tr, gt_bvals]
+:tags: [output_scroll]
+
+rasb = np.c_[rotated_bvecs, gt_bvals]
+
+rasb
 ```
 
 We can write out this `.tsv` to a file.
 
 ```{code-cell} python
 np.savetxt(fname="../../data/sub-01_rasb.tsv", delimiter="\t", X=rasb)
+```
+
+```{code-cell} python
+from dipy.core.gradients import gradient_table
+
+gtab = gradient_table(gt_bvals, rotated_bvecs)
 ```
 
 ## Brain Masking
