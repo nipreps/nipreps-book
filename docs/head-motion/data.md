@@ -10,7 +10,7 @@ kernelspec:
   name: python3
 ---
 
-# Introduction to dMRI Data
+# Introduction to dMRI data
 
 ```{code-cell} python
 :tags: [hide-cell]
@@ -23,6 +23,8 @@ Diffusion imaging probes the random, microscopic motion of water protons by usin
 This is a popular technique for studying the white matter of the brain.
 The diffusion within biological structures, such as the brain, are often restricted due to barriers (eg. cell membranes), resulting in a preferred direction of diffusion (anisotropy).
 A typical dMRI scan will acquire multiple volumes that are sensitive to different diffusion directions.
+
+## NiBabel
 
 [NiBabel](https://nipy.org/nibabel/) is a Python package for reading and writing neuroimaging data.
 To learn more about how NiBabel handles NIfTIs, check out the [Working with NIfTI images](https://nipy.org/nibabel/nifti_images.html) page of the NiBabel documentation.
@@ -59,6 +61,8 @@ Now we'll move in to loading the actual *image data itself*.
 We can achieve this by using the `get_fdata()` method.
 
 ```{code-cell} python
+:tags: [output_scroll]
+
 dwi_data = dwi_img.get_fdata()
 dwi_data
 ```
@@ -90,12 +94,14 @@ This tells us that the image is 128, 128, 66
 Lets plot each volume.
 
 ```{code-cell} python
+:tags: [output_scroll]
+
 %matplotlib inline
 
 from nilearn import image
 from nilearn.plotting import plot_epi
 
-for img in image.iter_img(dwi_data):
+for img in image.iter_img(dwi):
     plot_epi(img, display_mode="z", cut_coords=(30, 53, 75), cmap="gray")
 ```
 
