@@ -19,44 +19,75 @@ import warnings
 warnings.filterwarnings("ignore")
 ```
 
-Diffusion imaging probes the random, microscopic motion of water protons by employing MRI sequences which are sensitive to the geometry and environmental organization surrounding the water protons.
+Diffusion imaging probes the random, microscopic motion of water protons by using MRI sequences that are sensitive to the geometry and environmental organization surrounding these protons.
 This is a popular technique for studying the white matter of the brain.
 The diffusion within biological structures, such as the brain, are often restricted due to barriers (eg. cell membranes), resulting in a preferred direction of diffusion (anisotropy).
-A typical dMRI scan will acquire multiple volumes that are sensitive to a particular diffusion direction.
+A typical dMRI scan will acquire multiple volumes that are sensitive to different diffusion directions.
 
-## Diffusion Gradient Schemes
+[NiBabel](https://nipy.org/nibabel/) is a Python package for reading and writing neuroimaging data.
+To learn more about how NiBabel handles NIfTIs, check out the [Working with NIfTI images](https://nipy.org/nibabel/nifti_images.html) page of the NiBabel documentation.
 
-In addition to the acquired diffusion images, two files are collected as part of the diffusion dataset.
-These files correspond to the gradient amplitude (b-values) and directions (b-vectors) of the diffusion measurement and are named with the extensions `.bval` and `.bvec` respectively.
+```{code-cell} python
+import nibabel as nib
+```
+
+First, use the `load()` function to create a NiBabel image object from a NIfTI file.
+We'll load in an example dMRI file from the `data` folder.
 
 ```{code-cell} python
 dwi = "../../data/sub-01_dwi.nii.gz"
-bvec = "../../data/sub-01_dwi.bvec"
-bval = "../../data/sub-01_dwi.bval"
+
+dwi_img = nib.load(dwi)
 ```
 
-The b-value is the diffusion-sensitizing factor, and reflects the timing & strength of the gradients (measured in s/mm2) used to acquire the diffusion-weighted images.
+Loading in a NIfTI file with `NiBabel` gives us a special type of data object which encodes all the information in the file.
+Each bit of information is called an **attribute** in Python's terminology.
+To see all of these attributes, type `dwi_img.` followed by <kbd>Tab</kbd>.
+There are three main attributes that we'll discuss today:
+
+### 1. [Header](https://nipy.org/nibabel/nibabel_images.html#the-image-header): contains metadata about the image, such as image dimensions, data type, etc.
 
 ```{code-cell} python
-!cat ../../data/sub-01_dwi.bval
+dwi_hdr = dwi_img.header
+print(dwi_hdr)
 ```
 
-The b-vector corresponds to the direction of the diffusion sensitivity. Each row corresponds to a value in the x, y, or z axis. The numbers are combined column-wise to get an [x y z] coordinate per DWI volume. 
+### 2. Data
+
+As you've seen above, the header contains useful information that gives us information about the properties (metadata) associated with the dMRI data we've loaded in.
+Now we'll move in to loading the actual *image data itself*.
+We can achieve this by using the `get_fdata()` method.
 
 ```{code-cell} python
-!cat ../../data/sub-01_dwi.bvec
+dwi_data = dwi_img.get_fdata()
+dwi_data
 ```
 
-Together these two files define the dMRI measurement as a set of gradient directions and corresponding amplitudes.
+What type of data is this exactly? We can determine this by calling the `type()` function on `dwi_data`.
 
-In the example data above, we see that 2 b-values were chosen for this scanning sequence.
-The first few images were acquired with a b-value of 0 and are typically referred to as b=0 images.
-In these images, no diffusion gradient is applied.
-These images don't hold any diffusion information and are used as a reference (head motion correction) since they aren't subject to the same types of scanner artifacts that affect diffusion-weighted images.
+```{code-cell} python
+type(dwi_data)
+```
 
-All of the remaining images have a b-value of 1000 and have a diffusion gradient associated with them.
-Diffusion that exhibits directionality in the same direction as the gradient result in a loss of signal.
-With further processing, the acquired images can provide measurements which are related to the microscopic changes and estimate white matter trajectories.
+The data is a multidimensional **array** representing the image data.
+
+How many dimensions are in the `dwi_data` array?
+
+```{code-cell} python
+dwi_data.ndim
+```
+
+As expected, the data contains 4 dimensions (*i, j, k* and gradient number).
+
+How big is each dimension?
+
+```{code-cell} python
+dwi_data.shape
+```
+
+This tells us that the image is 128, 128, 66
+
+Lets plot each volume.
 
 ```{code-cell} python
 %matplotlib inline
@@ -64,13 +95,85 @@ With further processing, the acquired images can provide measurements which are 
 from nilearn import image
 from nilearn.plotting import plot_epi
 
-selected_volumes = image.index_img(dwi, slice(3, 7))
-
-for img in image.iter_img(selected_volumes):
+for img in image.iter_img(dwi_data):
     plot_epi(img, display_mode="z", cut_coords=(30, 53, 75), cmap="gray")
 ```
 
-After reading the `.bval` and `.bvec` files with the `read_bvals_bvecs()` function, we get both in a numpy array. Notice that the `.bvec` file has been transposed so that the x, y, and z-components are in column format.
+One of the first things we do before image registration is brain extraction, separating any non-brain material from brain tissue.
+This is done so that our algorithms aren't biased or distracted by whatever is in non-brain material and we don't spend extra time analyzing things we don't care about
+
+INSERT brain masking section here.
+
+### 3. [Affine](https://nipy.org/nibabel/coordinate_systems.html): tells the position of the image array data in a reference space
+
+The final important piece of metadata associated with an image file is the **affine matrix**.
+Below is the affine matrix for our data.
+
+```{code-cell} python
+dwi_affine = dwi_img.affine
+dwi_affine
+```
+
+To explain this concept, recall that we referred to coordinates in our data as *(i,j,k)* coordinates such that:
+
+* i is the first dimension of `dwi_data`
+* j is the second dimension of `dwi_data`
+* k is the third dimension of `dwi_data`
+
+Although this tells us how to access our data in terms of voxels in a 3D volume, it doesn't tell us much about the actual dimensions in our data (centimetres, right or left, up or down, back or front).
+The affine matrix allows us to translate between *voxel coordinates* in (i,j,k) and *world space coordinates* in (left/right,bottom/top,back/front).
+An important thing to note is that in reality in which order you have:
+
+* left/right
+* bottom/top
+* back/front
+
+Depends on how you've constructed the affine matrix, but for the data we're dealing with it always refers to:
+
+* Right
+* Anterior
+* Superior
+
+Applying the affine matrix is done through using a *linear map* (matrix multiplication) on voxel coordinates (defined in `dwi_data`).
+
+## Diffusion gradient schemes
+
+In addition to the acquired diffusion images, two files are collected as part of the diffusion dataset.
+These files correspond to the gradient amplitude (b-values) and directions (b-vectors) of the diffusion measurement and are named with the extensions `.bval` and `.bvec` respectively.
+
+```{code-cell} python
+bvec = "../../data/sub-01_dwi.bvec"
+bval = "../../data/sub-01_dwi.bval"
+```
+
+The b-value is the diffusion-sensitizing factor, and reflects both the timing & strength of the gradients (measured in s/mm^2) used to acquire the diffusion-weighted images.
+
+```{code-cell} python
+!cat ../../data/sub-01_dwi.bval
+```
+
+The b-vector corresponds to the direction of the diffusion sensitivity. Each row corresponds to a value in the i, j, or k axis. The numbers are combined column-wise to get an [i j k] coordinate per DWI volume.
+
+```{code-cell} python
+!cat ../../data/sub-01_dwi.bvec
+```
+
+Together these two files define the dMRI measurement as a set of gradient directions and corresponding amplitudes.
+
+In our example data, we see that 2 b-values were chosen for this scanning sequence.
+The first few images were acquired with a b-value of 0 and are typically referred to as b=0 images.
+In these images, no diffusion gradient is applied.
+These images don't hold any diffusion information and are used as a reference (for head motion correction or brain masking) since they aren't subject to the same types of scanner artifacts that affect diffusion-weighted images.
+
+All of the remaining images have a b-value of 1000 and have a diffusion gradient associated with them.
+Diffusion that exhibits directionality in the same direction as the gradient results in a loss of signal.
+With further processing, the acquired images can provide measurements which are related to the microscopic changes and estimate white matter trajectories.
+
+```{figure} ../images/dMRI-signal-movie.mp4
+```
+
+We'll use some functions from [Dipy](https://dipy.org), a Python package for pre-processing and analyzing diffusion data.
+After reading the `.bval` and `.bvec` files with the `read_bvals_bvecs()` function, we get both in a numpy array. Notice that the `.bvec` file has been transposed so that the i, j, and k-components are in column format.
 
 ```{code-cell} python
 from dipy.io import read_bvals_bvecs
@@ -78,6 +181,8 @@ from dipy.io import read_bvals_bvecs
 gt_bvals, gt_bvecs = read_bvals_bvecs(bval, bvec)
 gt_bvecs
 ```
+
+Below is a plot of all of the diffusion directions that we've acquired.
 
 ```{code-cell} python
 import matplotlib.pyplot as plt
@@ -90,131 +195,31 @@ plt.show()
 
 It is important to note that in this format, the diffusion gradients are provided with respect to the image axes, not in real or scanner coordinates. Simply reformatting the image from sagittal to axial will effectively rotate the b-vectors, since this operation changes the image axes. Thus, a particular bvals/bvecs pair is only valid for the particular image that it corresponds to.
 
-## Diffusion Gradient Operations
-
-Because the diffusion gradient is critical for later analyzing the data, dMRIPrep performs several checks to ensure that the information is stored correctly.
-### BIDS Validator
-
-At the beginning of the pipeline, the BIDS Validator is run.
-This package ensures that the data is BIDS-compliant and also has several dMRI-specific checks summarized below:
-
-- all dMRI scans have a corresponding `.bvec` and `.bval` file
-- the files aren't empty and formatted correctly
-  - single space delimited
-  - only contain numeric values
-  - correct number of rows and volume information
-  - volume information matches between image, `.bvec` and `.bval` files
-
-### DiffusionGradientTable
+The diffusion gradient is critical for later analyzing the data
 
 In dMRIPrep, the `DiffusionGradientTable` class is used to read in the `.bvec` and `.bval` files, perform further sanity checks and make any corrections if needed.
 
 ```{code-cell} python
 from dmriprep.utils.vectors import DiffusionGradientTable
 
-dwi = "../../data/sub-02_dwi.nii.gz"
-bvec = "../../data/sub-02_dwi.bvec"
-bval = "../../data/sub-02_dwi.bval"
-
-gt_bvals, gt_bvecs = read_bvals_bvecs(bval, bvec)
-
 gtab = DiffusionGradientTable(dwi_file=dwi, bvecs=bvec, bvals=bval)
 ```
 
-Below is a comparison of the `.bvec` and `.bval` files as read originally using `dipy` and after being corrected using `DiffusionGradientTable`.
-
-```{code-cell} python
-gt_bvals
-```
-
-It looks like this data has 5 unique b-values: 0, 600, 900, 1200 and 1800.
-However, the actual values that are reported look slightly different.
-
-```{code-cell} python
-from collections import Counter
-Counter(sorted(gt_bvals))
-```
-
-dMRIPrep does a bit of rounding internally to cluster the b-values into shells.
-
-```{code-cell} python
-gtab.bvals
-```
-
-```{code-cell} python
-gt_bvecs[0:20]
-```
-
-It also replaces the b-vecs where a b-value of 0 is expected. 
-
-```{code-cell} python
-gtab.bvecs[0:20]
-```
-
 Inspired by MRtrix3 and proposed in the [BIDS spec](https://github.com/bids-standard/bids-specification/issues/349), dMRIPrep also creates an optional `.tsv` file where the diffusion gradients are reported in scanner coordinates as opposed to image coordinates.
-The [x y z] values reported earlier are recalculated in [R A S].
+The [i j k] values reported earlier are recalculated in [R A S].
 
 ```{code-cell} python
 gtab.gradients[0:20]
 ```
 
-Why is this important?
+We can write out this `.tsv` to a file.
 
-Below is an example of how improperly encoded bvecs can affect tractography.
-![incorrect_bvecs](../images/incorrect_bvecs.png)
+## DWI Data Object
 
-`MRtrix3` has actually created a handy tool called `dwigradcheck` to confirm whether the diffusion gradient table is oriented correctly.
+Managing all of our files in one place.
 
-```
-$ dwigradcheck -fslgrad ../../data/sub-02_dwi.bvec ../../data/sub-02_dwi.bval ../../data/sub-02_dwi.nii.gz
+```{code-cell} python
+from emc import dmri
 
-> Mean length     Axis flipped    Axis permutations    Axis basis
-52.41         none                (0, 1, 2)           image
-51.68         none                (0, 1, 2)           scanner
-32.70            1                (0, 1, 2)           image
-32.25            1                (0, 1, 2)           scanner
-31.23            0                (0, 2, 1)           scanner
-30.97            2                (0, 1, 2)           scanner
-30.82            0                (0, 2, 1)           image
-29.41            2                (0, 1, 2)           image
-29.31         none                (0, 2, 1)           image
-28.61         none                (1, 0, 2)           image
-28.57            2                (1, 0, 2)           scanner
-28.46         none                (0, 2, 1)           scanner
-28.41         none                (2, 1, 0)           scanner
-28.40         none                (1, 0, 2)           scanner
-28.14            0                (0, 1, 2)           scanner
-28.04         none                (2, 1, 0)           image
-27.92            1                (2, 1, 0)           image
-27.80            1                (2, 1, 0)           scanner
-27.71            2                (1, 0, 2)           image
-27.54            0                (0, 1, 2)           image
-23.43            1                (0, 2, 1)           image
-22.86            1                (0, 2, 1)           scanner
-21.55            2                (0, 2, 1)           scanner
-21.44            0                (1, 2, 0)           scanner
-21.35            2                (0, 2, 1)           image
-21.03            1                (1, 0, 2)           image
-20.88            0                (1, 0, 2)           image
-20.87            1                (1, 2, 0)           image
-20.80            0                (2, 0, 1)           scanner
-20.74            0                (1, 0, 2)           scanner
-20.41            2                (2, 0, 1)           scanner
-20.38            1                (1, 0, 2)           scanner
-20.25            0                (2, 1, 0)           image
-20.24            0                (1, 2, 0)           image
-20.21            1                (1, 2, 0)           scanner
-20.15            1                (2, 0, 1)           image
-20.13            2                (1, 2, 0)           scanner
-20.11            2                (2, 0, 1)           image
-20.04            1                (2, 0, 1)           scanner
-19.94            0                (2, 0, 1)           image
-19.87         none                (2, 0, 1)           scanner
-19.86         none                (2, 0, 1)           image
-19.83            2                (2, 1, 0)           scanner
-19.72            2                (1, 2, 0)           image
-19.59         none                (1, 2, 0)           image
-19.49            0                (2, 1, 0)           scanner
-19.45            2                (2, 1, 0)           image
-19.43         none                (1, 2, 0)           scanner
+?dmri.DWI
 ```
