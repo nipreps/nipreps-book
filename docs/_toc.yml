@@ -15,3 +15,6 @@
   - file: head-motion/models
   - file: head-motion/registration
   - file: head-motion/solution
+- part: extra
+  chapters:
+  - file: extra/nifti

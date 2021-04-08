@@ -1,3 +1,4 @@
+attr
 dipy
 emc @ git+https://github.com/nipreps/EddyMotionCorrection.git@main
 ghp-import
