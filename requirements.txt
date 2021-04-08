@@ -5,6 +5,7 @@ jupyter-book
 jupytext
 matplotlib
 nibabel
+nilearn
 nitransforms
 numpy
 sphinx-exercise

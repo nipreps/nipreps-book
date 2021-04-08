@@ -91,7 +91,7 @@ dwi_data.shape
 
 This tells us that the image is 128, 128, 66
 
-Lets plot each volume.
+Lets plot the first 10 volumes.
 
 ```{code-cell} python
 :tags: [output_scroll]
@@ -101,14 +101,11 @@ Lets plot each volume.
 from nilearn import image
 from nilearn.plotting import plot_epi
 
-for img in image.iter_img(dwi_img):
+selected_volumes = image.index_img(dwi, slice(0, 10))
+
+for img in image.iter_img(selected_volumes):
     plot_epi(img, display_mode="z", cut_coords=(30, 53, 75), cmap="gray")
 ```
-
-One of the first things we do before image registration is brain extraction, separating any non-brain material from brain tissue.
-This is done so that our algorithms aren't biased or distracted by whatever is in non-brain material and we don't spend extra time analyzing things we don't care about
-
-INSERT brain masking section here.
 
 ### 3. [Affine](https://nipy.org/nibabel/coordinate_systems.html): tells the position of the image array data in a reference space
 
@@ -202,24 +199,88 @@ It is important to note that in this format, the diffusion gradients are provide
 
 The diffusion gradient is critical for later analyzing the data
 
-In dMRIPrep, the `DiffusionGradientTable` class is used to read in the `.bvec` and `.bval` files, perform further sanity checks and make any corrections if needed.
+```{code-cell} python
+import numpy as np
+
+bvecs_tr = np.matmul(dwi_affine[:3, :3], gt_bvecs.T).T
+```
 
 ```{code-cell} python
-from dmriprep.utils.vectors import DiffusionGradientTable
+from dipy.core.gradients import gradient_table
 
-gtab = DiffusionGradientTable(dwi_file=dwi, bvecs=bvec, bvals=bval)
+gtab = gradient_table(gt_bvals, gt_bvecs)
 ```
 
 Inspired by MRtrix3 and proposed in the [BIDS spec](https://github.com/bids-standard/bids-specification/issues/349), dMRIPrep also creates an optional `.tsv` file where the diffusion gradients are reported in scanner coordinates as opposed to image coordinates.
 The [i j k] values reported earlier are recalculated in [R A S].
 
 ```{code-cell} python
-gtab.gradients[0:20]
+rasb = np.c_[bvecs_tr, gt_bvals]
 ```
 
 We can write out this `.tsv` to a file.
 
+```{code-cell} python
+np.savetxt(fname="../../data/sub-01_rasb.tsv", delimiter="\t", X=rasb)
+```
+
+## Brain Masking
+
+One of the first things we do before image registration is brain extraction, separating any non-brain material from brain tissue.
+This is done so that our algorithms aren't biased or distracted by whatever is in non-brain material and we don't spend extra time analyzing things we don't care about
+
+As mentioned before, the b0s are a good reference scan for doing brain masking. lets index them.
+
+```{code-cell} python
+gtab.b0s_mask
+```
+
+```{code-cell} python
+bzero = dwi_data[:, :, :, gtab.b0s_mask]
+```
+
+skullstrip
+5 volumes in b0
+
+```{code-cell} python
+bzero.shape
+```
+
+take median image
+
+```{code-cell} python
+
+median_bzero = np.median(bzero, axis=-1)
+```
+
+```{code-cell} python
+from dipy.segment.mask import median_otsu
+
+b0_mask, mask = median_otsu(median_bzero, median_radius=2, numpass=1)
+```
+
+```{code-cell} python
+from dipy.core.histeq import histeq
+
+sli = median_bzero.shape[2] // 2
+plt.subplot(1, 3, 1).set_axis_off()
+plt.imshow(histeq(median_bzero[:, :, sli].astype("float")).T,
+           cmap="gray", origin="lower")
+
+plt.subplot(1, 3, 2).set_axis_off()
+plt.imshow(mask[:, :, sli].astype("float").T, cmap="gray", origin="lower")
+
+plt.subplot(1, 3, 3).set_axis_off()
+plt.imshow(histeq(b0_mask[:, :, sli].astype("float")).T,
+           cmap="gray", origin="lower")
+```
+
 ## DWI Data Object
+
+dmri data
+bzero
+brain mask
+gradient table
 
 Managing all of our files in one place.
 
