@@ -1,7 +1,10 @@
-numpy
 dipy
-nitransforms
+emc @ git+https://github.com/nipreps/EddyMotionCorrection.git@main
 ghp-import
 jupyter-book
 jupytext
+matplotlib
+nibabel
+nitransforms
+numpy
 sphinx-exercise
