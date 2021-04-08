@@ -1,0 +1,1 @@
+# Image registration (spatial alignment)

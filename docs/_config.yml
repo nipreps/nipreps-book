@@ -5,6 +5,8 @@ copywright: 2020
 
 # Sphinx customizations
 sphinx:
+  config:
+    html_extra_path: ["assets"]
   extra_extensions:
     - sphinx_exercise
 
@@ -27,3 +29,9 @@ repository:
   url: https://github.com/nipreps/nipreps-book
   path_to_book: docs
   branch: main
+
+parse:
+  myst_enable_extensions:
+    # don't forget to list any other extensions you want enabled,
+    # including those that are enabled by default!
+    - html_image
