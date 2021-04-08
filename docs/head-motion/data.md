@@ -101,7 +101,7 @@ Lets plot each volume.
 from nilearn import image
 from nilearn.plotting import plot_epi
 
-for img in image.iter_img(dwi):
+for img in image.iter_img(dwi_img):
     plot_epi(img, display_mode="z", cut_coords=(30, 53, 75), cmap="gray")
 ```
 
@@ -175,8 +175,7 @@ All of the remaining images have a b-value of 1000 and have a diffusion gradient
 Diffusion that exhibits directionality in the same direction as the gradient results in a loss of signal.
 With further processing, the acquired images can provide measurements which are related to the microscopic changes and estimate white matter trajectories.
 
-```{figure} ../images/dMRI-signal-movie.mp4
-```
+<video loop="yes" muted="yes" autoplay="yes" controls="yes"><source src="../videos/dMRI-signal-movie.mp4" type="video/mp4"/></video>
 
 We'll use some functions from [Dipy](https://dipy.org), a Python package for pre-processing and analyzing diffusion data.
 After reading the `.bval` and `.bvec` files with the `read_bvals_bvecs()` function, we get both in a numpy array. Notice that the `.bvec` file has been transposed so that the i, j, and k-components are in column format.

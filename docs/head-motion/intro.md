@@ -6,7 +6,7 @@ This effect is exacerbated by the length of the acquisition (longer acquisitions
 For instance, although rats are typically accquired with head fixations and under sedation, their breathing (especially when assisted) generally causes motion.
 Even the vibration of the scanner itself can introduce motion!
 
-<video width="640" height="680" loop="yes" muted="yes" autoplay="yes" controls="yes"><source src="../videos/hm-sagittal.avi" type="video/png" /></video>
+<video width="640" height="680" loop="yes" muted="yes" autoplay="yes" controls="yes"><source src="../videos/hm-sagittal.mp4" type="video/mp4"/></video>
 
 ## Dimensions of the head-motion problem
 
