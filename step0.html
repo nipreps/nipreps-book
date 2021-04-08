@@ -5,57 +5,56 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Head Motion Correction &#8212; NiPreps</title>
+    <title>Before we start: How to follow this tutorial &#8212; NiPreps</title>
     
-  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
     
   <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
   <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
   <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     
       
   <link rel="stylesheet"
-    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
   <link rel="stylesheet"
-    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script src="_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
         const thebe_selector_output = ".output"
     </script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Introduction to dMRI Data" href="gradient_table.html" />
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -72,21 +71,21 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="../index.html">
+<a class="navbar-brand text-wrap" href="index.html">
   
   
   <h1 class="site-logo" id="site-title">NiPreps</h1>
   
 </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form>
 <nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
     <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../welcome.html">
-   NiPreps
+  <a class="reference internal" href="welcome.html">
+   Welcome!
   </a>
  </li>
 </ul>
@@ -97,35 +96,50 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../nipreps/nipreps.html">
+  <a class="reference internal" href="nipreps/nipreps.html">
    NeuroImaging PREProcessing toolS (NiPreps)
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../nipreps/community_development.html">
+  <a class="reference internal" href="nipreps/dmriprep.html">
+   About dMRIPrep
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="nipreps/community_development.html">
    Community Development
   </a>
  </li>
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
-  dmriprep
+  tutorial
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="dmriprep.html">
-   About dMRIPrep
+  <a class="reference internal" href="head-motion/intro.html">
+   The problem of head-motion in dMRI
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="gradient_table.html">
+  <a class="reference internal" href="head-motion/data.html">
    Introduction to dMRI Data
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Head Motion Correction
+ <li class="toctree-l1">
+  <a class="reference internal" href="head-motion/models.html">
+   Diffusion modelling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="head-motion/registration.html">
+   Image registration (spatial alignment)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="head-motion/solution.html">
+   Putting everything together
   </a>
  </li>
 </ul>
@@ -168,7 +182,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/dmriprep/hmc.md"><button type="button"
+        <a class="dropdown-buttons" href="_sources/step0.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -206,6 +220,31 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-binder">
+   Using Binder
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#local-installation-bare-metal">
+   Local installation (“bare-metal”)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#local-installation-docker-containers">
+   Local installation (“docker containers”)
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
         </div>
     </div>
 </div>
@@ -214,8 +253,37 @@
         
               <div>
                 
-  <div class="section" id="head-motion-correction">
-<h1>Head Motion Correction<a class="headerlink" href="#head-motion-correction" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="before-we-start-how-to-follow-this-tutorial">
+<h1>Before we start: How to follow this tutorial<a class="headerlink" href="#before-we-start-how-to-follow-this-tutorial" title="Permalink to this headline">¶</a></h1>
+<p>This tutorial contains a mix of lecture-based and interactive components.
+The interactive components can be executed in your personal computer locally or using the Binder service.
+You are welcome to follow along however you like, whether you just want to listen or code along with us.
+Each of the chapters involving code are actually Jupyter notebooks!</p>
+<div class="section" id="using-binder">
+<h2>Using Binder<a class="headerlink" href="#using-binder" title="Permalink to this headline">¶</a></h2>
+<p>Clicking the Binder icon in the top right corner will launch an interactive computing environment with all of the necessary software packages pre-installed.</p>
+<div class="figure align-default" id="binder-link">
+<img alt="_images/binder_link.png" src="_images/binder_link.png" />
+<p class="caption"><span class="caption-text">Binder Link</span><a class="headerlink" href="#binder-link" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="local-installation-bare-metal">
+<h2>Local installation (“bare-metal”)<a class="headerlink" href="#local-installation-bare-metal" title="Permalink to this headline">¶</a></h2>
+<p>If you would like to follow along using your own setup and you have a functional Python environment, you can:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. clone this repository</span>
+git clone https://github.com/nipreps/nipreps-book
+
+<span class="c1"># 2. install the necessary python packages in your Python environment</span>
+<span class="nb">cd</span> nipreps-book <span class="o">&amp;&amp;</span> pip install -r requirements.txt
+
+<span class="c1"># 3. launch a Jupyter lab instance</span>
+jupyter lab
+</pre></div>
+</div>
+</div>
+<div class="section" id="local-installation-docker-containers">
+<h2>Local installation (“docker containers”)<a class="headerlink" href="#local-installation-docker-containers" title="Permalink to this headline">¶</a></h2>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -231,7 +299,7 @@
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./dmriprep"
+            path: "./."
         },
         predefinedOutput: true
     }
@@ -243,7 +311,6 @@
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="gradient_table.html" title="previous page">Introduction to dMRI Data</a>
 
         </div>
         
@@ -266,7 +333,7 @@
     </div>
 
     
-  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
 
 
     

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Community Development &#8212; NiPreps</title>
+    <title>About dMRIPrep &#8212; NiPreps</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -55,8 +55,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="The problem of head-motion in dMRI" href="../head-motion/intro.html" />
-    <link rel="prev" title="About dMRIPrep" href="dmriprep.html" />
+    <link rel="next" title="Community Development" href="community_development.html" />
+    <link rel="prev" title="NeuroImaging PREProcessing toolS (NiPreps)" href="nipreps.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -102,13 +102,13 @@
    NeuroImaging PREProcessing toolS (NiPreps)
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="dmriprep.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    About dMRIPrep
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="community_development.html">
    Community Development
   </a>
  </li>
@@ -184,7 +184,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/nipreps/community_development.md"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/nipreps/dmriprep.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -229,23 +229,8 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#getting-started-with-github">
-   Getting started with GitHub
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#checking-the-contributing-guidelines">
-   Checking the contributing guidelines
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#preparing-a-proposal-for-a-new-feature-documentation-or-a-bug-fix">
-   Preparing a proposal for a new feature, documentation, or a bug fix
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#making-a-change">
-   Making a change
+  <a class="reference internal nav-link" href="#development">
+   Development
   </a>
  </li>
 </ul>
@@ -260,99 +245,43 @@
         
               <div>
                 
-  <div class="section" id="community-development">
-<h1>Community Development<a class="headerlink" href="#community-development" title="Permalink to this headline">¶</a></h1>
-<div class="admonition-objectives admonition">
-<p class="admonition-title">Objectives</p>
-<ul class="simple">
-<li><p>Discover how “open source” projects are organized (<em>NiPreps</em> in particular)</p></li>
-<li><p>Describe what a contribution is</p></li>
-<li><p>Learn where to get help before making a contribution</p></li>
-</ul>
+  <div class="section" id="about-dmriprep">
+<h1>About dMRIPrep<a class="headerlink" href="#about-dmriprep" title="Permalink to this headline">¶</a></h1>
+<p>The pre-processing of dMRI data involves numerous steps to reduce noise, remove artifacts, and standardize the data before fitting a particular model or carrying out tractography.</p>
+<p>dMRIPrep is an analysis-agnostic tool that addresses the challenge of robust and reproducible pre-processing for whole-brain dMRI data.</p>
+<div class="section" id="development">
+<h2>Development<a class="headerlink" href="#development" title="Permalink to this headline">¶</a></h2>
+<p>In his 2019 ISMRM talk <a class="footnote-reference brackets" href="#veraart2019" id="id1">1</a>, Jelle Veraart polled the developers of some of the major dMRI analysis software packages.
+The goal was to understand how much consensus there was in the field on whether to proceed with certain pre-processing steps.
+The poll showed that consensus is within reach.
+However, different pre-processing steps have varying levels of support.
+Head motion and eddy current correction, detecting outliers and denoising <em>must</em> be done.
+Susceptibility distortion correction and removing Gibbs-ringing are also good to do but depend on the acquisition parameters.
+Finally, for some steps such as correcting for B1 inhomogeneities or signal drift, their importance has not yet been demonstrated.</p>
+<div class="figure align-default" id="pre-processing-consensus">
+<img alt="../_images/veraart-2019.png" src="../_images/veraart-2019.png" />
+<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">Varying levels of support for different dMRI pre-processing steps</span><a class="headerlink" href="#pre-processing-consensus" title="Permalink to this image">¶</a></p>
 </div>
-<p>All <em>NiPreps</em> are open to community feedback and contributions.
-Contributing to seemingly big projects can feel scary at first. This lesson will help orient you to how an example <em>NiPreps</em> project is organized and how to begin making a contribution.</p>
-<div class="section" id="getting-started-with-github">
-<h2>Getting started with GitHub<a class="headerlink" href="#getting-started-with-github" title="Permalink to this headline">¶</a></h2>
-<p>For this example, let’s take a look at the <em>dMRIPrep</em> repository found <a class="reference external" href="https://github.com/nipreps/dmriprep">here</a>.</p>
-<div class="figure align-default" id="project-structure">
-<img alt="../_images/project_structure.png" src="../_images/project_structure.png" />
+<p>This information served as a starting point for the development of dMRIPrep.
+It also introduced some new questions.
+What are the minimal pre-processing steps for dMRI data?
+How does the ordering in which the steps are conducted affect the final results?
+How do different algorithms for the same method compare?</p>
+<p>Below is a figure of the proposed dMRI pre-processing steps dMRIPrep is working towards implementing.
+The progress and more detailed discussion can be tracked at this <a class="reference external" href="https://nipreps.org/dmriprep/roadmap.html">roadmap</a>.</p>
+<div class="figure align-default" id="dmriprep-workflow">
+<img alt="../_images/figure1.svg" src="../_images/figure1.svg" /><p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Proposed dMRI pre-processing workflow</span><a class="headerlink" href="#dmriprep-workflow" title="Permalink to this image">¶</a></p>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">README</span></code> is rendered on the main page of the project.
-If a project were a home, the <code class="docutils literal notranslate"><span class="pre">README</span></code> would be the door mat.
-It describes what the project does, who it is for, how to get started, and where to find key resources.</p>
-<p>Below is a more detailed breakdown of the project as well as a brief description of any areas of importance.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>dmriprep
-├── CHANGES.rst
-├── CONTRIBUTING.md
-├── Dockerfile
-├── LICENSE
-├── MANIFEST.in
-├── Makefile
-├── README.rst
-├── dmriprep                    # contains all code
-│   ├── cli/                    # contains code for adjusting the command line arguments
-│   ├── config/                 # contains configuration files
-│   ├── data/                   # contains sample data that can be used for testing code
-│   ├── interfaces/             # contains Nipype interfaces that act as building blocks for individual tasks
-│   ├── utils/                  # contains functions called by NiPype interfaces
-│   └── workflows               # contains NiPype workflows that are created by combining interfaces
-│       ├── base.py
-│       ├── dwi/
-│       └── fmap/
-├── docs/                       # contains code for building documentation
-├── get_version.py
-├── pyproject.toml
-├── setup.cfg
-├── setup.py
-└── versioneer.py
-</pre></div>
+<div class="figure align-default" id="contributors">
+<a class="reference internal image-reference" href="../_images/contributors.png"><img alt="../_images/contributors.png" src="../_images/contributors.png" style="width: 200px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Current list of contributors to dMRIPrep</span><a class="headerlink" href="#contributors" title="Permalink to this image">¶</a></p>
 </div>
-</div>
-<div class="section" id="checking-the-contributing-guidelines">
-<h2>Checking the contributing guidelines<a class="headerlink" href="#checking-the-contributing-guidelines" title="Permalink to this headline">¶</a></h2>
-<p>Before contributing to an open-source initiative, your first move <em>should</em> be checking how the project is seeking external feedback.
-Typically, that is stated in a <code class="docutils literal notranslate"><span class="pre">CONTRIBUTING.md</span></code> file located in the project’s root or <code class="docutils literal notranslate"><span class="pre">docs</span></code> folder.</p>
-<p>All <em>NiPreps</em> projects share a common set of <a class="reference external" href="https://nipreps.org/community/">contributing guidelines</a>.</p>
-<div class="figure align-default" id="contributing-guidelines">
-<img alt="images/contrib_guidelines.png" src="images/contrib_guidelines.png" />
-</div>
-</div>
-<div class="section" id="preparing-a-proposal-for-a-new-feature-documentation-or-a-bug-fix">
-<h2>Preparing a proposal for a new feature, documentation, or a bug fix<a class="headerlink" href="#preparing-a-proposal-for-a-new-feature-documentation-or-a-bug-fix" title="Permalink to this headline">¶</a></h2>
-<p>Impromptu contributions are typically difficult to absorb by projects involving several developers and/or with many users.
-For this reason, its best to first browse through the project’s <a class="reference external" href="https://github.com/nipreps/dmriprep">home page</a>.</p>
-<p>There are two locations where you’ll find details about ongoing and future work.
-The <a class="reference external" href="https://github.com/nipreps/dmriprep/pulls">existing and past pull requests tab</a> will give you an idea of what new features/bug fixes are currently in progress, and you can also check the requirements to get a pull request accepted by looking at closed (and “merged”) pull requests.</p>
-<p>Next to that tab, you’ll find <a class="reference external" href="https://github.com/nipreps/dmriprep/issues/">the issue tracker tab</a>.
-There, you should check that the feature you have in mind is not already in the works.
-Opening a new issue, requesting feedback, and gauging interest are generally very welcome.</p>
-<p>Head to <a class="reference external" href="https://nipreps.org/community/features/">the new features page</a> to learn more about the process of proposing a new feature.</p>
-</div>
-<div class="section" id="making-a-change">
-<h2>Making a change<a class="headerlink" href="#making-a-change" title="Permalink to this headline">¶</a></h2>
-<p>https://nipreps.org/community/CONTRIBUTING/#making-a-change</p>
-<p>Make sure your git credentials are configured.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git config --global user.name <span class="s2">&quot;Carl Jacobi&quot;</span>
-git config --global user.email <span class="s2">&quot;carl.jacobi@gmail.com&quot;</span>
-</pre></div>
-</div>
-<p>Fork the project of interest and clone your forked repository to your computer.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/carljacobi/dmriprep.git
-</pre></div>
-</div>
-<p>To keep up with changes, add the “upstream” repository as a remote to your locally cloned repository.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> dmriprep
-
-git remote add upstream https://github.com/nipreps/dmriprep.git
-</pre></div>
-</div>
-<p>Keep your fork up to date with the upstream repository.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git fetch upstream
-git checkout master
-git merge upstream/master
-</pre></div>
-</div>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="veraart2019"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Image Processing: Possible Guidelines for Standardization &amp; Clinical Applications. https://www.ismrm.org/19/program_files/MIS15.htm</p>
+</dd>
+</dl>
 </div>
 </div>
 
@@ -381,8 +310,8 @@ git merge upstream/master
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="dmriprep.html" title="previous page">About dMRIPrep</a>
-    <a class='right-next' id="next-link" href="../head-motion/intro.html" title="next page">The problem of head-motion in dMRI</a>
+    <a class='left-prev' id="prev-link" href="nipreps.html" title="previous page">NeuroImaging PREProcessing toolS (NiPreps)</a>
+    <a class='right-next' id="next-link" href="community_development.html" title="next page">Community Development</a>
 
         </div>
         

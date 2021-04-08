@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NiPreps &#8212; NiPreps</title>
+    <title>Welcome! &#8212; NiPreps</title>
     
   <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -86,7 +86,7 @@
     <ul class="nav sidenav_l1">
  <li class="toctree-l1 current active">
   <a class="reference internal" href="#">
-   NiPreps
+   Welcome!
   </a>
  </li>
 </ul>
@@ -102,6 +102,11 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="nipreps/dmriprep.html">
+   About dMRIPrep
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="nipreps/community_development.html">
    Community Development
   </a>
@@ -109,23 +114,33 @@
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
-  dmriprep
+  tutorial
  </span>
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="dmriprep/dmriprep.html">
-   About dMRIPrep
+  <a class="reference internal" href="head-motion/intro.html">
+   The problem of head-motion in dMRI
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="dmriprep/gradient_table.html">
+  <a class="reference internal" href="head-motion/data.html">
    Introduction to dMRI Data
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="dmriprep/hmc.html">
-   Head Motion Correction
+  <a class="reference internal" href="head-motion/models.html">
+   Diffusion modelling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="head-motion/registration.html">
+   Image registration (spatial alignment)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="head-motion/solution.html">
+   Putting everything together
   </a>
  </li>
 </ul>
@@ -213,8 +228,10 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#setup">
-   Setup
+  <a class="reference internal nav-link" href="#implementing-a-head-motion-correction-algorithm-for-diffusion-mri-in-python-using-dipy-and-nitransforms">
+   <em>
+    Implementing a head-motion correction algorithm for diffusion MRI in Python, using Dipy and NiTransforms
+   </em>
   </a>
   <ul class="nav section-nav flex-column">
   </ul>
@@ -231,8 +248,16 @@
         
               <div>
                 
-  <div class="section" id="nipreps">
-<h1>NiPreps<a class="headerlink" href="#nipreps" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="welcome">
+<h1>Welcome!<a class="headerlink" href="#welcome" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="implementing-a-head-motion-correction-algorithm-for-diffusion-mri-in-python-using-dipy-and-nitransforms">
+<h2><em>Implementing a head-motion correction algorithm for diffusion MRI in Python, using Dipy and NiTransforms</em><a class="headerlink" href="#implementing-a-head-motion-correction-algorithm-for-diffusion-mri-in-python-using-dipy-and-nitransforms" title="Permalink to this headline">¶</a></h2>
+<p><strong>Summary</strong>.
+This tutorial walks attendees through the development of one fundamental step in the processing of diffusion MRI data using a community-driven approach and relying on existing tools.
+The tutorial first justifies the <em>NiPreps</em> approach to preprocessing, describing how the framework attempts to enhance or extend the scanning device to produce “analysis-grade” data.
+This is important because data produced by the scanner is typically not digestible by statistical analysis directly.
+Researchers resort to either 1) modifying their experimental design so that it matches the requirements of large-scale studies that have made publicly available all their software tooling or 2) creating custom preprocessing pipelines tailored to each particular study.
+This tutorial has been designed to engage signal processing engineers and imaging researchers in the NiPreps community, demonstrating how to fill the gaps of their preprocessing needs regardless of their field.</p>
 <div class="admonition-objectives admonition">
 <p class="admonition-title">Objectives</p>
 <ul class="simple">
@@ -241,27 +266,6 @@
 <li><p>Understand the basics of dMRI data and pre-processing</p></li>
 <li><p>Discover how to integrate some of the tools in the <em>NiPreps</em> framework</p></li>
 </ul>
-</div>
-<div class="section" id="setup">
-<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
-<p>This tutorial contains a mix of lecture-based and interactive components.
-You are welcome to follow along however you like, whether you just want to listen or code along with us.</p>
-<p>Each of the chapters involving code are actually IPython notebooks!
-Clicking the Binder icon in the top right corner will launch an interactive computing environment with all of the necessary software packages pre-installed.</p>
-<div class="figure align-default" id="binder-link">
-<img alt="_images/binder_link.png" src="_images/binder_link.png" />
-<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">Binder Link</span><a class="headerlink" href="#binder-link" title="Permalink to this image">¶</a></p>
-</div>
-<p>If you would like to follow along using your own setup, you can:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. clone this repository</span>
-git clone https://github.com/nipreps/nipreps-book
-
-<span class="c1"># 2. install the necessary python packages in your Python environment</span>
-<span class="nb">cd</span> nipreps-book <span class="o">&amp;&amp;</span> pip install -r requirements.txt
-
-<span class="c1"># 3. launch a Jupyter lab instance</span>
-jupyter lab
-</pre></div>
 </div>
 <div class="toctree-wrapper compound">
 </div>

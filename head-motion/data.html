@@ -55,8 +55,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Head Motion Correction" href="hmc.html" />
-    <link rel="prev" title="About dMRIPrep" href="dmriprep.html" />
+    <link rel="next" title="Diffusion modelling" href="models.html" />
+    <link rel="prev" title="The problem of head-motion in dMRI" href="intro.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -87,7 +87,7 @@
     <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="../welcome.html">
-   NiPreps
+   Welcome!
   </a>
  </li>
 </ul>
@@ -103,6 +103,11 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="../nipreps/dmriprep.html">
+   About dMRIPrep
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../nipreps/community_development.html">
    Community Development
   </a>
@@ -110,13 +115,13 @@
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
-  dmriprep
+  tutorial
  </span>
 </p>
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="dmriprep.html">
-   About dMRIPrep
+  <a class="reference internal" href="intro.html">
+   The problem of head-motion in dMRI
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -125,8 +130,18 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="hmc.html">
-   Head Motion Correction
+  <a class="reference internal" href="models.html">
+   Diffusion modelling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="registration.html">
+   Image registration (spatial alignment)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="solution.html">
+   Putting everything together
   </a>
  </li>
 </ul>
@@ -168,11 +183,11 @@
     <div class="dropdown-buttons">
         <!-- ipynb file if we had a myst markdown file -->
         <a class="dropdown-buttons"
-            href="../_sources/dmriprep/gradient_table.ipynb"><button type="button"
+            href="../_sources/head-motion/data.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/dmriprep/gradient_table.md"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/head-motion/data.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -210,7 +225,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/nipreps/nipreps-book/main?urlpath=lab/tree/docs/dmriprep/gradient_table.md"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/nipreps/nipreps-book/main?urlpath=lab/tree/docs/head-motion/data.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -345,10 +360,67 @@ With further processing, the acquired images can provide measurements which are 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gradient_table_9_0.png" src="../_images/gradient_table_9_0.png" />
-<img alt="../_images/gradient_table_9_1.png" src="../_images/gradient_table_9_1.png" />
-<img alt="../_images/gradient_table_9_2.png" src="../_images/gradient_table_9_2.png" />
-<img alt="../_images/gradient_table_9_3.png" src="../_images/gradient_table_9_3.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">5</span><span class="o">-</span><span class="mi">3</span><span class="n">f9d131e3587</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_line_magic</span><span class="p">(</span><span class="s1">&#39;matplotlib&#39;</span><span class="p">,</span> <span class="s1">&#39;inline&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> 
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">nilearn</span> <span class="kn">import</span> <span class="n">image</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">nilearn.plotting</span> <span class="kn">import</span> <span class="n">plot_epi</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> 
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/IPython/core/interactiveshell.py</span> in <span class="ni">run_line_magic</span><span class="nt">(self, magic_name, line, _stack_depth)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2342</span>                 <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;local_ns&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_local_scope</span><span class="p">(</span><span class="n">stack_depth</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2343</span>             <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">builtin_trap</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">2344</span>                 <span class="n">result</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2345</span>             <span class="k">return</span> <span class="n">result</span>
+<span class="g g-Whitespace">   </span><span class="mi">2346</span> 
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/decorator.py</span> in <span class="ni">fun</span><span class="nt">(*args, **kw)</span>
+<span class="g g-Whitespace">    </span><span class="mi">229</span>             <span class="k">if</span> <span class="ow">not</span> <span class="n">kwsyntax</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">230</span>                 <span class="n">args</span><span class="p">,</span> <span class="n">kw</span> <span class="o">=</span> <span class="n">fix</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kw</span><span class="p">,</span> <span class="n">sig</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">231</span>             <span class="k">return</span> <span class="n">caller</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">extras</span> <span class="o">+</span> <span class="n">args</span><span class="p">),</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">232</span>     <span class="n">fun</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span>
+<span class="g g-Whitespace">    </span><span class="mi">233</span>     <span class="n">fun</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__doc__</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/IPython/core/magic.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(f, *a, **k)</span>
+<span class="g g-Whitespace">    </span><span class="mi">185</span>     <span class="c1"># but it&#39;s overkill for just that one bit of state.</span>
+<span class="g g-Whitespace">    </span><span class="mi">186</span>     <span class="k">def</span> <span class="nf">magic_deco</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">187</span>         <span class="n">call</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">f</span><span class="p">,</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">k</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">k</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">188</span> 
+<span class="g g-Whitespace">    </span><span class="mi">189</span>         <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/IPython/core/magics/pylab.py</span> in <span class="ni">matplotlib</span><span class="nt">(self, line)</span>
+<span class="g g-Whitespace">     </span><span class="mi">97</span>             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Available matplotlib backends: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">backends_list</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span>         <span class="k">else</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">99</span>             <span class="n">gui</span><span class="p">,</span> <span class="n">backend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">enable_matplotlib</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">gui</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">args</span><span class="o">.</span><span class="n">gui</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">100</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_show_matplotlib_backend</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">gui</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">101</span> 
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/ipykernel/zmqshell.py</span> in <span class="ni">enable_matplotlib</span><span class="nt">(self, gui)</span>
+<span class="g g-Whitespace">    </span><span class="mi">599</span> 
+<span class="g g-Whitespace">    </span><span class="mi">600</span>     <span class="k">def</span> <span class="nf">enable_matplotlib</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gui</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">601</span>         <span class="n">gui</span><span class="p">,</span> <span class="n">backend</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">ZMQInteractiveShell</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">enable_matplotlib</span><span class="p">(</span><span class="n">gui</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">602</span> 
+<span class="g g-Whitespace">    </span><span class="mi">603</span>         <span class="kn">from</span> <span class="nn">ipykernel.pylab.backend_inline</span> <span class="kn">import</span> <span class="n">configure_inline_support</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/IPython/core/interactiveshell.py</span> in <span class="ni">enable_matplotlib</span><span class="nt">(self, gui)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3511</span>         <span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">3512</span><span class="sd">         from IPython.core import pylabtools as pt</span>
+<span class="ne">-&gt; </span><span class="mi">3513</span><span class="sd">         gui, backend = pt.find_gui_and_backend(gui, self.pylab_gui_select)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3514</span><span class="sd"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">3515</span><span class="sd">         if gui != &#39;inline&#39;:</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/IPython/core/pylabtools.py</span> in <span class="ni">find_gui_and_backend</span><span class="nt">(gui, gui_select)</span>
+<span class="g g-Whitespace">    </span><span class="mi">278</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">279</span> 
+<span class="ne">--&gt; </span><span class="mi">280</span>     <span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="g g-Whitespace">    </span><span class="mi">281</span> 
+<span class="g g-Whitespace">    </span><span class="mi">282</span>     <span class="k">if</span> <span class="n">gui</span> <span class="ow">and</span> <span class="n">gui</span> <span class="o">!=</span> <span class="s1">&#39;auto&#39;</span><span class="p">:</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;matplotlib&#39;
+</pre></div>
+</div>
 </div>
 </div>
 <p>After reading the <code class="docutils literal notranslate"><span class="pre">.bval</span></code> and <code class="docutils literal notranslate"><span class="pre">.bvec</span></code> files with the <code class="docutils literal notranslate"><span class="pre">read_bvals_bvecs()</span></code> function, we get both in a numpy array. Notice that the <code class="docutils literal notranslate"><span class="pre">.bvec</span></code> file has been transposed so that the x, y, and z-components are in column format.</p>
@@ -358,75 +430,6 @@ With further processing, the acquired images can provide measurements which are 
 
 <span class="n">gt_bvals</span><span class="p">,</span> <span class="n">gt_bvecs</span> <span class="o">=</span> <span class="n">read_bvals_bvecs</span><span class="p">(</span><span class="n">bval</span><span class="p">,</span> <span class="n">bvec</span><span class="p">)</span>
 <span class="n">gt_bvecs</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.   ,  0.   ,  0.   ],
-       [ 0.   ,  0.   ,  0.   ],
-       [ 0.   ,  0.   ,  0.   ],
-       [ 0.   ,  0.   ,  0.   ],
-       [ 0.   ,  0.   ,  0.   ],
-       [-1.   ,  0.   ,  0.   ],
-       [-0.361,  0.933,  0.   ],
-       [ 0.255,  0.565,  0.785],
-       [-0.861, -0.464,  0.21 ],
-       [ 0.307, -0.766,  0.564],
-       [ 0.736,  0.013,  0.677],
-       [-0.532,  0.343,  0.774],
-       [-0.177,  0.965,  0.195],
-       [-0.771,  0.163,  0.615],
-       [-0.079, -0.996, -0.036],
-       [-0.109, -0.92 , -0.376],
-       [-0.302, -0.779, -0.549],
-       [ 0.464, -0.46 ,  0.757],
-       [ 0.464,  0.839,  0.284],
-       [ 0.529,  0.014, -0.849],
-       [ 0.825, -0.54 , -0.167],
-       [-0.697, -0.287, -0.657],
-       [-0.479, -0.338, -0.81 ],
-       [ 0.213, -0.851, -0.48 ],
-       [ 0.648,  0.736, -0.195],
-       [-0.58 ,  0.745,  0.33 ],
-       [ 0.729,  0.197, -0.656],
-       [-0.963, -0.264,  0.054],
-       [-0.229,  0.507,  0.831],
-       [ 0.016,  0.171, -0.985],
-       [-0.359, -0.932,  0.051],
-       [-0.806, -0.422, -0.415],
-       [ 0.045,  0.087,  0.995],
-       [ 0.177,  0.841, -0.511],
-       [-0.946,  0.315, -0.068],
-       [ 0.318,  0.257, -0.912],
-       [ 0.312,  0.165,  0.936],
-       [ 0.284, -0.2  , -0.938],
-       [ 0.421, -0.093,  0.902],
-       [ 0.963, -0.02 ,  0.271],
-       [ 0.881,  0.161,  0.444],
-       [-0.758, -0.45 ,  0.471],
-       [ 0.684,  0.72 ,  0.121],
-       [-0.932,  0.229,  0.281],
-       [ 0.648, -0.252,  0.719],
-       [-0.773,  0.61 , -0.174],
-       [-0.276, -0.533,  0.8  ],
-       [ 0.555,  0.591,  0.586],
-       [-0.007,  0.715,  0.699],
-       [-0.919, -0.07 ,  0.388],
-       [ 0.223, -0.589,  0.777],
-       [ 0.544, -0.73 ,  0.414],
-       [-0.867, -0.477, -0.145],
-       [-0.534, -0.554,  0.639],
-       [ 0.001,  0.726, -0.688],
-       [ 0.611, -0.791, -0.027],
-       [-0.691,  0.503, -0.519],
-       [-0.731,  0.475,  0.489],
-       [-0.024, -0.38 , -0.925],
-       [-0.453,  0.646,  0.615],
-       [-0.432, -0.82 ,  0.376],
-       [ 0.87 , -0.289,  0.399],
-       [-0.283,  0.912, -0.298],
-       [-0.088,  0.393, -0.915],
-       [ 0.016, -0.964,  0.265]])
 </pre></div>
 </div>
 </div>
@@ -441,9 +444,6 @@ With further processing, the acquired images can provide measurements which are 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/gradient_table_12_0.png" src="../_images/gradient_table_12_0.png" />
 </div>
 </div>
 <p>It is important to note that in this format, the diffusion gradients are provided with respect to the image axes, not in real or scanner coordinates. Simply reformatting the image from sagittal to axial will effectively rotate the b-vectors, since this operation changes the image axes. Thus, a particular bvals/bvecs pair is only valid for the particular image that it corresponds to.</p>
@@ -484,42 +484,11 @@ This package ensures that the data is BIDS-compliant and also has several dMRI-s
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inconsistent bvals and bvecs (13, 0 low-b, respectively).
-</pre></div>
-</div>
-</div>
 </div>
 <p>Below is a comparison of the <code class="docutils literal notranslate"><span class="pre">.bvec</span></code> and <code class="docutils literal notranslate"><span class="pre">.bval</span></code> files as read originally using <code class="docutils literal notranslate"><span class="pre">dipy</span></code> and after being corrected using <code class="docutils literal notranslate"><span class="pre">DiffusionGradientTable</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gt_bvals</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([   5.,    5.,  610., 1240.,  615., 1225.,  625., 1230.,  620.,
-       1230.,  610., 1240.,  615., 1225.,  620., 1220.,  620.,    5.,
-       1225.,  615., 1240.,  625., 1230.,  620., 1240.,  615., 1225.,
-        615., 1230.,  625., 1230.,  610., 1230.,    5.,  615., 1235.,
-        615., 1220.,  625., 1245.,  620., 1240.,  620., 1225.,  615.,
-       1235.,  620., 1225.,  605.,    5., 1225.,  625., 1235.,  615.,
-       1230.,  620., 1230.,  610., 1235.,  620., 1230.,  620., 1220.,
-        625., 1235.,    5.,  610., 1230.,  620., 1240.,  615., 1230.,
-        625., 1230.,  610., 1235.,  610., 1240.,  620., 1235.,  620.,
-          5., 1220.,  615., 1230.,  615., 1230.,  620., 1240.,  610.,
-       1215.,  620., 1240.,  620., 1225.,  620., 1225.,  615., 1230.,
-          5.,  890., 1800.,  895., 1785.,  910., 1790.,  900., 1795.,
-        890., 1800.,  895., 1785.,  905., 1780.,  900.,    5., 1785.,
-        895., 1805.,  905., 1795.,  900., 1800.,  895., 1780.,  895.,
-       1790.,  905., 1790.,  890., 1790.,    5.,  895., 1795.,  895.,
-       1775.,  905., 1805.,  900., 1805.,  900., 1785.,  895., 1795.,
-        900., 1785.,  885.,    5., 1785.,  905., 1795.,  895., 1795.,
-        900., 1790.,  890., 1795.,  900., 1790.,  900., 1780.,  910.,
-       1795.,    5.,  890., 1790.,  900., 1805.,  895., 1790.,  905.,
-       1790.,  890., 1795.,  890., 1800.,  905., 1800.,  900.,    5.,
-       1780.,  895., 1790.,  895., 1790.,  900., 1805.,  890., 1775.,
-        900., 1805.,  900., 1785.,  900., 1785.,  895., 1790.])
 </pre></div>
 </div>
 </div>
@@ -533,36 +502,6 @@ However, the actual values that are reported look slightly different.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({5.0: 13,
-         605.0: 1,
-         610.0: 8,
-         615.0: 13,
-         620.0: 17,
-         625.0: 7,
-         885.0: 1,
-         890.0: 8,
-         895.0: 13,
-         900.0: 15,
-         905.0: 7,
-         910.0: 2,
-         1215.0: 1,
-         1220.0: 4,
-         1225.0: 9,
-         1230.0: 15,
-         1235.0: 7,
-         1240.0: 9,
-         1245.0: 1,
-         1775.0: 2,
-         1780.0: 4,
-         1785.0: 8,
-         1790.0: 12,
-         1795.0: 9,
-         1800.0: 5,
-         1805.0: 6})
-</pre></div>
-</div>
-</div>
 </div>
 <p>dMRIPrep does a bit of rounding internally to cluster the b-values into shells.</p>
 <div class="cell docutils container">
@@ -571,57 +510,10 @@ However, the actual values that are reported look slightly different.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([   0,    0,  600, 1200,  600, 1200,  600, 1200,  600, 1200,  600,
-       1200,  600, 1200,  600, 1200,  600,    0, 1200,  600, 1200,  600,
-       1200,  600, 1200,  600, 1200,  600, 1200,  600, 1200,  600, 1200,
-          0,  600, 1200,  600, 1200,  600, 1200,  600, 1200,  600, 1200,
-        600, 1200,  600, 1200,  600,    0, 1200,  600, 1200,  600, 1200,
-        600, 1200,  600, 1200,  600, 1200,  600, 1200,  600, 1200,    0,
-        600, 1200,  600, 1200,  600, 1200,  600, 1200,  600, 1200,  600,
-       1200,  600, 1200,  600,    0, 1200,  600, 1200,  600, 1200,  600,
-       1200,  600, 1200,  600, 1200,  600, 1200,  600, 1200,  600, 1200,
-          0,  900, 1800,  900, 1800,  900, 1800,  900, 1800,  900, 1800,
-        900, 1800,  900, 1800,  900,    0, 1800,  900, 1800,  900, 1800,
-        900, 1800,  900, 1800,  900, 1800,  900, 1800,  900, 1800,    0,
-        900, 1800,  900, 1800,  900, 1800,  900, 1800,  900, 1800,  900,
-       1800,  900, 1800,  900,    0, 1800,  900, 1800,  900, 1800,  900,
-       1800,  900, 1800,  900, 1800,  900, 1800,  900, 1800,    0,  900,
-       1800,  900, 1800,  900, 1800,  900, 1800,  900, 1800,  900, 1800,
-        900, 1800,  900,    0, 1800,  900, 1800,  900, 1800,  900, 1800,
-        900, 1800,  900, 1800,  900, 1800,  900, 1800,  900, 1800],
-      dtype=uint16)
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gt_bvecs</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">20</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.531695  ,  0.58283   ,  0.6145    ],
-       [ 0.531695  ,  0.58283   ,  0.6145    ],
-       [-0.545977  ,  0.121865  , -0.82889   ],
-       [ 0.483628  ,  0.854567  , -0.189258  ],
-       [ 0.691191  , -0.512577  , -0.509432  ],
-       [-0.105459  ,  0.288723  ,  0.951587  ],
-       [-0.294575  , -0.941474  ,  0.163865  ],
-       [-0.867939  ,  0.445659  , -0.219247  ],
-       [-0.957356  , -0.288893  ,  0.00330035],
-       [ 0.14789   , -0.594316  ,  0.790517  ],
-       [ 0.296586  ,  0.26337   , -0.917972  ],
-       [-0.263343  ,  0.886353  ,  0.380827  ],
-       [-0.167652  , -0.748207  , -0.641933  ],
-       [-0.81816   , -0.384613  , -0.427418  ],
-       [ 0.568106  , -0.770115  ,  0.290135  ],
-       [ 0.825166  ,  0.0628862 , -0.561379  ],
-       [-0.707535  , -0.472155  ,  0.525798  ],
-       [ 0.531695  ,  0.58283   ,  0.6145    ],
-       [ 0.491263  ,  0.0442891 ,  0.869885  ],
-       [-0.697671  , -0.447981  , -0.559078  ]])
 </pre></div>
 </div>
 </div>
@@ -633,80 +525,12 @@ However, the actual values that are reported look slightly different.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.        ,  0.        ,  0.        ],
-       [ 0.        ,  0.        ,  0.        ],
-       [-0.5459769 ,  0.12186497, -0.82888985],
-       [ 0.48362815,  0.8545672 , -0.18925805],
-       [ 0.6911906 , -0.5125767 , -0.5094317 ],
-       [-0.10545897,  0.28872293,  0.9515868 ],
-       [-0.2945751 , -0.9414743 ,  0.16386504],
-       [-0.8679393 ,  0.44565916, -0.21924707],
-       [-0.95735574, -0.28889295,  0.00330035],
-       [ 0.14789   , -0.594316  ,  0.790517  ],
-       [ 0.29658607,  0.26337007, -0.9179722 ],
-       [-0.26334298,  0.8863529 ,  0.38082695],
-       [-0.1676521 , -0.7482074 , -0.6419334 ],
-       [-0.8181604 , -0.3846132 , -0.4274182 ],
-       [ 0.56810606, -0.7701151 ,  0.29013503],
-       [ 0.82516605,  0.06288621, -0.5613791 ],
-       [-0.70753515, -0.4721551 ,  0.52579814],
-       [ 0.        ,  0.        ,  0.        ],
-       [ 0.49126282,  0.04428909,  0.8698847 ],
-       [-0.697671  , -0.447981  , -0.559078  ]], dtype=float32)
-</pre></div>
-</div>
-</div>
 </div>
 <p>Inspired by MRtrix3 and proposed in the <a class="reference external" href="https://github.com/bids-standard/bids-specification/issues/349">BIDS spec</a>, dMRIPrep also creates an optional <code class="docutils literal notranslate"><span class="pre">.tsv</span></code> file where the diffusion gradients are reported in scanner coordinates as opposed to image coordinates.
 The [x y z] values reported earlier are recalculated in [R A S].</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gtab</span><span class="o">.</span><span class="n">gradients</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">20</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00,
-         0.00000000e+00],
-       [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00,
-         0.00000000e+00],
-       [-5.45976823e-01,  1.21864955e-01, -8.28889764e-01,
-         6.00000000e+02],
-       [ 4.83628165e-01,  8.54567250e-01, -1.89258058e-01,
-         1.20000000e+03],
-       [ 6.91190602e-01, -5.12576700e-01, -5.09431721e-01,
-         6.00000000e+02],
-       [-1.05458978e-01,  2.88722942e-01,  9.51586815e-01,
-         1.20000000e+03],
-       [-2.94575076e-01, -9.41474256e-01,  1.63865034e-01,
-         6.00000000e+02],
-       [-8.67939301e-01,  4.45659164e-01, -2.19247075e-01,
-         1.20000000e+03],
-       [-9.57355719e-01, -2.88892949e-01,  3.30034916e-03,
-         6.00000000e+02],
-       [ 1.47889998e-01, -5.94315991e-01,  7.90516952e-01,
-         1.20000000e+03],
-       [ 2.96586058e-01,  2.63370059e-01, -9.17972180e-01,
-         6.00000000e+02],
-       [-2.63342957e-01,  8.86352832e-01,  3.80826922e-01,
-         1.20000000e+03],
-       [-1.67652101e-01, -7.48207393e-01, -6.41933384e-01,
-         6.00000000e+02],
-       [-8.18160379e-01, -3.84613169e-01, -4.27418184e-01,
-         1.20000000e+03],
-       [ 5.68106039e-01, -7.70115056e-01,  2.90135018e-01,
-         6.00000000e+02],
-       [ 8.25165987e-01,  6.28862037e-02, -5.61379034e-01,
-         1.20000000e+03],
-       [-7.07535111e-01, -4.72155070e-01,  5.25798115e-01,
-         6.00000000e+02],
-       [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00,
-         0.00000000e+00],
-       [ 4.91262792e-01,  4.42890832e-02,  8.69884674e-01,
-         1.20000000e+03],
-       [-6.97671003e-01, -4.47981004e-01, -5.59077983e-01,
-         6.00000000e+02]])
 </pre></div>
 </div>
 </div>
@@ -785,7 +609,7 @@ The [x y z] values reported earlier are recalculated in [R A S].</p>
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./dmriprep"
+            path: "./head-motion"
         },
         predefinedOutput: true
     }
@@ -797,8 +621,8 @@ The [x y z] values reported earlier are recalculated in [R A S].</p>
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="dmriprep.html" title="previous page">About dMRIPrep</a>
-    <a class='right-next' id="next-link" href="hmc.html" title="next page">Head Motion Correction</a>
+    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">The problem of head-motion in dMRI</a>
+    <a class='right-next' id="next-link" href="models.html" title="next page">Diffusion modelling</a>
 
         </div>
         
