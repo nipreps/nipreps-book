@@ -5,9 +5,12 @@
 - part: nipreps
   chapters:
   - file: nipreps/nipreps
+  - file: nipreps/dmriprep
   - file: nipreps/community_development
-- part: dmriprep
+- part: tutorial
   chapters:
-  - file: dmriprep/dmriprep
-  - file: dmriprep/gradient_table
-  - file: dmriprep/hmc
+  - file: head-motion/intro
+  - file: head-motion/data
+  - file: head-motion/models
+  - file: head-motion/registration
+  - file: head-motion/solution
