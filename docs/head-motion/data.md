@@ -85,10 +85,62 @@ Let's test this memory structure with some *simulated* data:
 import numpy as np
 
 # Let's create a new DWI object, with only gradient information that is random
-dmri_dataset = DWI(gradients=np.random.normal(size=(4, 109)))
+dmri_dataset = DWI(gradients=np.random.normal(size=(4, 64)))
 
 # Let's call Python's built-in len() function
 print(len(dmri_dataset))
 ```
+The output of this `print()` statement is telling us that this (simulated) dataset has 64 diffusion weighted samples.
 
-For simplicity, we will be using the full implementation from our [`emc` (EddyMotionCorrection) package](https://github.com/nipreps/EddyMotionCorrection/blob/57c518929146b23cc9534ab0b2d024aa136e25f8/emc/dmri.py)
+## Using the new data representation object
+For simplicity, we will be using the full implementation of the `DWI` class from our [`eddymotion` package](https://github.com/nipreps/EddyMotionCorrection/blob/57c518929146b23cc9534ab0b2d024aa136e25f8/emc/dmri.py)
+Under the `data/` folder of this book's distribution, we have stored a sample DWI dataset with filename `dwi.h5`.
+Please note that the file has been minimized by zeroing all but two diffusion weighted orientation maps.
+Let's get some insights from it:
+
+```{code-cell} python
+# Import the class from the library
+from eddymotion.dmri import DWI
+
+# Load the sample file
+dmri_dataset = DWI.from_filename("../../data/dwi.h5")
+print(len(dmri_dataset))
+```
+In this case, the dataset is reporting to have 102 diffusion weighted samples.
+
+Python will automatically generate a summary of this object if we just issue the name of our new object.
+This pretty-printing of the object informs us about the data and metadata that together compose this particular DWI dataset:
+```{code-cell} python
+dmri_dataset
+```
+
+### Visualizing the data
+
+The fully-fledged `DWI` object has a convenience function to plot the dataset:
+```{code-cell} python
+dmri_dataset.plot_mosaic();
+```
+
+When calling `plot_mosaic()` without arguments, the *b=0* reference is plotted.
+This *b=0* reference is a map of the signal measured ***without gradient sensitization***, or in other words, when we are not measuring diffusion in any direction.
+The *b=0* map can be used by diffusion modeling as the reference to quantify the signal drop at every voxel and given a particular orientation gradient.
+
+We can also get an insight of how a diffusion weighted orientation looks like by selecting them with the argument `index`:
+```{code-cell} python
+dmri_dataset.plot_mosaic(index=10);
+```
+
+or:
+```{code-cell} python
+dmri_dataset.plot_mosaic(index=100);
+```
+
+As we can see, ***diffusion weighted*** images consistently drop almost all signal in voxels filled with cerebrospinal fluid because there, water-diffusion is free regardless of the direction you are measuring in.
+
+### Visualizing the gradient information
+
+Our `DWI` object stores the gradient information in the `gradients` attribute:
+
+```{code-cell} python
+dmri_dataset.gradients.shape
+```
