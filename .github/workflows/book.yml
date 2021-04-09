@@ -11,6 +11,20 @@ jobs:
   deploy-book:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/cache@v2
+      with:
+        path: /var/lib/apt
+        key: apt-cache-v2
+        restore-keys: |
+          apt-cache-v2
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y --no-install-recommends \
+                             dvipng \
+                             texlive-fonts-recommended \
+                             texlive-fonts-extra
+
     - uses: actions/checkout@v2
 
     # Install dependencies
