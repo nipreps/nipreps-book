@@ -61,7 +61,7 @@ They can be organized into 3 layers:
 - Middleware: contains functions that generalize across the end-user tools
 - End-user tools: perform pre-processing or quality control
 
-```{figure} ../images/nipreps-chart.svg
+```{figure} ../images/nipreps-chart.png
 :name: nipreps_chart
 
 ```
@@ -83,7 +83,7 @@ This eases the burden of maintaining these tools but also helps focus on standar
 *NiPreps* only support BIDS-Derivatives as output and so are agnostic to subsequent analysis.
 
 *NiPreps* also aim to be robust in their codebase.
-The pipelines are modular and rely on widely-used tools such as AFNI, ANTs, FreeSurfer, FSL, NiLearn, or DIPY and are extensible via plug-ins.
+The pipelines are modular and rely on widely-used tools such as AFNI, ANTs, FreeSurfer, FSL, Nilearn, or Dipy and are extensible via plug-ins.
 This modularity in the code allows each step to be thoroughly tested. Some examples of tests performed on different parts of the pipeline are shown below:
 
 ```{tabbed} unittest
