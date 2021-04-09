@@ -1,0 +1,48 @@
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 56, in single_nb_execution
+    record_timing=False,
+  File "/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/nbclient/client.py", line 1112, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/nbclient/util.py", line 74, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/nbclient/util.py", line 53, in just_run
+    return loop.run_until_complete(coro)
+  File "/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/asyncio/base_events.py", line 587, in run_until_complete
+    return future.result()
+  File "/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/nbclient/client.py", line 554, in async_execute
+    cell, index, execution_count=self.code_cells_executed + 1
+  File "/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/nbclient/client.py", line 857, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/nbclient/client.py", line 760, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+from dipy.core.gradients import gradient_table
+
+gtab = gradient_table(gt_bvals, rotated_bvecs)
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mValueError[0m                                Traceback (most recent call last)
+[0;32m<ipython-input-19-e42156f173fa>[0m in [0;36m<module>[0;34m[0m
+[1;32m      1[0m [0;32mfrom[0m [0mdipy[0m[0;34m.[0m[0mcore[0m[0;34m.[0m[0mgradients[0m [0;32mimport[0m [0mgradient_table[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      2[0m [0;34m[0m[0m
+[0;32m----> 3[0;31m [0mgtab[0m [0;34m=[0m [0mgradient_table[0m[0;34m([0m[0mgt_bvals[0m[0;34m,[0m [0mrotated_bvecs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m
+[0;32m/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/dipy/core/gradients.py[0m in [0;36mgradient_table[0;34m(bvals, bvecs, big_delta, small_delta, b0_threshold, atol, btens)[0m
+[1;32m    595[0m                                            [0msmall_delta[0m[0;34m=[0m[0msmall_delta[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    596[0m                                            [0mb0_threshold[0m[0;34m=[0m[0mb0_threshold[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 597[0;31m                                            atol=atol, btens=btens)
+[0m[1;32m    598[0m [0;34m[0m[0m
+[1;32m    599[0m [0;34m[0m[0m
+
+[0;32m/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/dipy/core/gradients.py[0m in [0;36mgradient_table_from_bvals_bvecs[0;34m(bvals, bvecs, b0_threshold, atol, btens, **kwargs)[0m
+[1;32m    302[0m         [0;32mraise[0m [0mValueError[0m[0;34m([0m[0;34m"bvecs should be (N, 3)"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    303[0m     [0;32mif[0m [0;32mnot[0m [0mnp[0m[0;34m.[0m[0mall[0m[0;34m([0m[0mbvecs_close_to_1[0m[0;34m[[0m[0mdwi_mask[0m[0;34m][0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 304[0;31m         raise ValueError("The vectors in bvecs should be unit (The tolerance "
+[0m[1;32m    305[0m                          "can be modified as an input parameter)")
+[1;32m    306[0m [0;34m[0m[0m
+
+[0;31mValueError[0m: The vectors in bvecs should be unit (The tolerance can be modified as an input parameter)
+ValueError: The vectors in bvecs should be unit (The tolerance can be modified as an input parameter)
+

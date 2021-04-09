@@ -1,0 +1,1330 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The extra mile &#8212; NiPreps</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Putting everything together" href="../head-motion/solution.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">NiPreps</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../welcome.html">
+   Welcome!
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  nipreps
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../nipreps/nipreps.html">
+   NeuroImaging PREProcessing toolS (NiPreps)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../nipreps/dmriprep.html">
+   About dMRIPrep
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../nipreps/community_development.html">
+   Community Development
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  tutorial
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../head-motion/step0.html">
+   Before we start: How to follow this tutorial
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../head-motion/intro.html">
+   The problem of head-motion in dMRI
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../head-motion/data.html">
+   Introduction to dMRI data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../head-motion/models.html">
+   Diffusion modelling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../head-motion/registration.html">
+   Image registration (spatial alignment)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../head-motion/solution.html">
+   Putting everything together
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  extra
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   The extra mile
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../_sources/extra/nifti.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/extra/nifti.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/nipreps/nipreps-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/nipreps/nipreps-book/main?urlpath=lab/tree/docs/extra/nifti.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#investigating-nifti-images-with-nibabel">
+   Investigating NIfTI images with
+   <em>
+    NiBabel
+   </em>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#header-contains-metadata-about-the-image-such-as-image-dimensions-data-type-etc">
+     1. Header: contains metadata about the image, such as image dimensions, data type, etc.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data">
+     2. Data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#affine-tells-the-position-of-the-image-array-data-in-a-reference-space">
+     3. Affine: tells the position of the image array data in a reference space
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#diffusion-gradient-schemes">
+   Diffusion gradient schemes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#brain-masking">
+   Brain Masking
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="the-extra-mile">
+<h1>The extra mile<a class="headerlink" href="#the-extra-mile" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="investigating-nifti-images-with-nibabel">
+<h2>Investigating NIfTI images with <em>NiBabel</em><a class="headerlink" href="#investigating-nifti-images-with-nibabel" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://nipy.org/nibabel/">NiBabel</a> is a Python package for reading and writing neuroimaging data.
+To learn more about how NiBabel handles NIfTIs, check out the <a class="reference external" href="https://nipy.org/nibabel/nifti_images.html">Working with NIfTI images</a> page of the NiBabel documentation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>First, use the <code class="docutils literal notranslate"><span class="pre">load()</span></code> function to create a NiBabel image object from a NIfTI file.
+We’ll load in an example dMRI file from the <code class="docutils literal notranslate"><span class="pre">data</span></code> folder.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dwi</span> <span class="o">=</span> <span class="s2">&quot;../../data/sub-01_dwi.nii.gz&quot;</span>
+
+<span class="n">dwi_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">dwi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Loading in a NIfTI file with <code class="docutils literal notranslate"><span class="pre">NiBabel</span></code> gives us a special type of data object which encodes all the information in the file.
+Each bit of information is called an <strong>attribute</strong> in Python’s terminology.
+To see all of these attributes, type <code class="docutils literal notranslate"><span class="pre">dwi_img.</span></code> followed by <kbd>Tab</kbd>.
+There are three main attributes that we’ll discuss today:</p>
+<div class="section" id="header-contains-metadata-about-the-image-such-as-image-dimensions-data-type-etc">
+<h3>1. <a class="reference external" href="https://nipy.org/nibabel/nibabel_images.html#the-image-header">Header</a>: contains metadata about the image, such as image dimensions, data type, etc.<a class="headerlink" href="#header-contains-metadata-about-the-image-such-as-image-dimensions-data-type-etc" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dwi_hdr</span> <span class="o">=</span> <span class="n">dwi_img</span><span class="o">.</span><span class="n">header</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dwi_hdr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;nibabel.nifti1.Nifti1Header&#39;&gt; object, endian=&#39;&lt;&#39;
+sizeof_hdr      : 348
+data_type       : b&#39;&#39;
+db_name         : b&#39;&#39;
+extents         : 0
+session_error   : 0
+regular         : b&#39;r&#39;
+dim_info        : 57
+dim             : [  4 128 128  66  65   1   1   1]
+intent_p1       : 0.0
+intent_p2       : 0.0
+intent_p3       : 0.0
+intent_code     : none
+datatype        : int16
+bitpix          : 16
+slice_start     : 0
+pixdim          : [-1.   2.   2.   2.   8.8  0.   0.   0. ]
+vox_offset      : 0.0
+scl_slope       : nan
+scl_inter       : nan
+slice_end       : 0
+slice_code      : unknown
+xyzt_units      : 10
+cal_max         : 0.0
+cal_min         : 0.0
+slice_duration  : 0.0
+toffset         : 0.0
+glmax           : 0
+glmin           : 0
+descrip         : b&#39;TE=81;Time=122951.000&#39;
+aux_file        : b&#39;&#39;
+qform_code      : scanner
+sform_code      : scanner
+quatern_b       : 0.0
+quatern_c       : 1.0
+quatern_d       : 0.0
+qoffset_x       : 126.844
+qoffset_y       : -94.824005
+qoffset_z       : -26.2652
+srow_x          : [ -2.      0.     -0.    126.844]
+srow_y          : [ -0.         2.        -0.       -94.824005]
+srow_z          : [  0.       0.       2.     -26.2652]
+intent_name     : b&#39;&#39;
+magic           : b&#39;n+1&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="data">
+<h3>2. Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h3>
+<p>As you’ve seen above, the header contains useful information that gives us information about the properties (metadata) associated with the dMRI data we’ve loaded in.
+Now we’ll move in to loading the actual <em>image data itself</em>.
+We can achieve this by using the <code class="docutils literal notranslate"><span class="pre">get_fdata()</span></code> method.</p>
+<div class="cell tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dwi_data</span> <span class="o">=</span> <span class="n">dwi_img</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
+<span class="n">dwi_data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[[[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]],
+
+        [[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]],
+
+        [[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]],
+
+        ...,
+
+        [[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]],
+
+        [[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]],
+
+        [[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]]],
+
+
+       [[[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]],
+
+        [[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]],
+
+        [[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]],
+
+        ...,
+
+        [[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]],
+
+        [[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]],
+
+        [[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]]],
+
+
+       [[[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]],
+
+        [[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]],
+
+        [[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]],
+
+        ...,
+
+        [[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]],
+
+        [[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]],
+
+        [[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]]],
+
+
+       ...,
+
+
+       [[[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]],
+
+        [[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]],
+
+        [[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 1., 1., ..., 0., 1., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]],
+
+        ...,
+
+        [[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]],
+
+        [[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]],
+
+        [[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]]],
+
+
+       [[[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]],
+
+        [[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]],
+
+        [[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]],
+
+        ...,
+
+        [[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]],
+
+        [[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]],
+
+        [[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]]],
+
+
+       [[[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]],
+
+        [[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]],
+
+        [[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]],
+
+        ...,
+
+        [[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]],
+
+        [[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]],
+
+        [[0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.],
+         [0., 0., 0., ..., 0., 0., 0.]]]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>What type of data is this exactly? We can determine this by calling the <code class="docutils literal notranslate"><span class="pre">type()</span></code> function on <code class="docutils literal notranslate"><span class="pre">dwi_data</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">dwi_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>numpy.ndarray
+</pre></div>
+</div>
+</div>
+</div>
+<p>The data is a multidimensional <strong>array</strong> representing the image data.</p>
+<p>How many dimensions are in the <code class="docutils literal notranslate"><span class="pre">dwi_data</span></code> array?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dwi_data</span><span class="o">.</span><span class="n">ndim</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+</pre></div>
+</div>
+</div>
+</div>
+<p>As expected, the data contains 4 dimensions (<em>i, j, k</em> and gradient number).</p>
+<p>How big is each dimension?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dwi_data</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(128, 128, 66, 65)
+</pre></div>
+</div>
+</div>
+</div>
+<p>This tells us that the image is 128, 128, 66</p>
+<p>Lets plot the first 10 volumes.</p>
+<div class="cell tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="kn">from</span> <span class="nn">nilearn</span> <span class="kn">import</span> <span class="n">image</span>
+<span class="kn">from</span> <span class="nn">nilearn.plotting</span> <span class="kn">import</span> <span class="n">plot_epi</span>
+
+<span class="n">selected_volumes</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">index_img</span><span class="p">(</span><span class="n">dwi</span><span class="p">,</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">img</span> <span class="ow">in</span> <span class="n">image</span><span class="o">.</span><span class="n">iter_img</span><span class="p">(</span><span class="n">selected_volumes</span><span class="p">):</span>
+    <span class="n">plot_epi</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">display_mode</span><span class="o">=</span><span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="n">cut_coords</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">75</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/nilearn/datasets/__init__.py:90: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
+  &quot;Numpy arrays.&quot;, FutureWarning)
+</pre></div>
+</div>
+<img alt="../_images/nifti_15_1.png" src="../_images/nifti_15_1.png" />
+<img alt="../_images/nifti_15_2.png" src="../_images/nifti_15_2.png" />
+<img alt="../_images/nifti_15_3.png" src="../_images/nifti_15_3.png" />
+<img alt="../_images/nifti_15_4.png" src="../_images/nifti_15_4.png" />
+<img alt="../_images/nifti_15_5.png" src="../_images/nifti_15_5.png" />
+<img alt="../_images/nifti_15_6.png" src="../_images/nifti_15_6.png" />
+<img alt="../_images/nifti_15_7.png" src="../_images/nifti_15_7.png" />
+<img alt="../_images/nifti_15_8.png" src="../_images/nifti_15_8.png" />
+<img alt="../_images/nifti_15_9.png" src="../_images/nifti_15_9.png" />
+<img alt="../_images/nifti_15_10.png" src="../_images/nifti_15_10.png" />
+</div>
+</div>
+</div>
+<div class="section" id="affine-tells-the-position-of-the-image-array-data-in-a-reference-space">
+<h3>3. <a class="reference external" href="https://nipy.org/nibabel/coordinate_systems.html">Affine</a>: tells the position of the image array data in a reference space<a class="headerlink" href="#affine-tells-the-position-of-the-image-array-data-in-a-reference-space" title="Permalink to this headline">¶</a></h3>
+<p>The final important piece of metadata associated with an image file is the <strong>affine matrix</strong>.
+Below is the affine matrix for our data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dwi_affine</span> <span class="o">=</span> <span class="n">dwi_img</span><span class="o">.</span><span class="n">affine</span>
+<span class="n">dwi_affine</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ -2.        ,   0.        ,  -0.        , 126.84400177],
+       [ -0.        ,   2.        ,  -0.        , -94.82400513],
+       [  0.        ,   0.        ,   2.        , -26.26519966],
+       [  0.        ,   0.        ,   0.        ,   1.        ]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>To explain this concept, recall that we referred to coordinates in our data as <em>(i,j,k)</em> coordinates such that:</p>
+<ul class="simple">
+<li><p>i is the first dimension of <code class="docutils literal notranslate"><span class="pre">dwi_data</span></code></p></li>
+<li><p>j is the second dimension of <code class="docutils literal notranslate"><span class="pre">dwi_data</span></code></p></li>
+<li><p>k is the third dimension of <code class="docutils literal notranslate"><span class="pre">dwi_data</span></code></p></li>
+</ul>
+<p>Although this tells us how to access our data in terms of voxels in a 3D volume, it doesn’t tell us much about the actual dimensions in our data (centimetres, right or left, up or down, back or front).
+The affine matrix allows us to translate between <em>voxel coordinates</em> in (i,j,k) and <em>world space coordinates</em> in (left/right,bottom/top,back/front).
+An important thing to note is that in reality in which order you have:</p>
+<ul class="simple">
+<li><p>left/right</p></li>
+<li><p>bottom/top</p></li>
+<li><p>back/front</p></li>
+</ul>
+<p>Depends on how you’ve constructed the affine matrix, but for the data we’re dealing with it always refers to:</p>
+<ul class="simple">
+<li><p>Right</p></li>
+<li><p>Anterior</p></li>
+<li><p>Superior</p></li>
+</ul>
+<p>Applying the affine matrix is done through using a <em>linear map</em> (matrix multiplication) on voxel coordinates (defined in <code class="docutils literal notranslate"><span class="pre">dwi_data</span></code>).</p>
+</div>
+</div>
+<div class="section" id="diffusion-gradient-schemes">
+<h2>Diffusion gradient schemes<a class="headerlink" href="#diffusion-gradient-schemes" title="Permalink to this headline">¶</a></h2>
+<p>In addition to the acquired diffusion images, two files are collected as part of the diffusion dataset.
+These files correspond to the gradient amplitude (b-values) and directions (b-vectors) of the diffusion measurement and are named with the extensions <code class="docutils literal notranslate"><span class="pre">.bval</span></code> and <code class="docutils literal notranslate"><span class="pre">.bvec</span></code> respectively.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bvec</span> <span class="o">=</span> <span class="s2">&quot;../../data/sub-01_dwi.bvec&quot;</span>
+<span class="n">bval</span> <span class="o">=</span> <span class="s2">&quot;../../data/sub-01_dwi.bval&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The b-value is the diffusion-sensitizing factor, and reflects both the timing &amp; strength of the gradients (measured in s/mm^2) used to acquire the diffusion-weighted images.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat ../../data/sub-01_dwi.bval
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 0 0 0 0 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000
+</pre></div>
+</div>
+</div>
+</div>
+<p>The b-vector corresponds to the direction of the diffusion sensitivity. Each row corresponds to a value in the i, j, or k axis. The numbers are combined column-wise to get an [i j k] coordinate per DWI volume.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat ../../data/sub-01_dwi.bvec
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 0 0 0 0 -1 -0.361 0.255 -0.861 0.307 0.736 -0.532 -0.177 -0.771 -0.079 -0.109 -0.302 0.464 0.464 0.529 0.825 -0.697 -0.479 0.213 0.648 -0.58 0.729 -0.963 -0.229 0.016 -0.359 -0.806 0.045 0.177 -0.946 0.318 0.312 0.284 0.421 0.963 0.881 -0.758 0.684 -0.932 0.648 -0.773 -0.276 0.555 -0.007 -0.919 0.223 0.544 -0.867 -0.534 0.001 0.611 -0.691 -0.731 -0.024 -0.453 -0.432 0.87 -0.283 -0.088 0.016
+0 0 0 0 0 0 0.933 0.565 -0.464 -0.766 0.013 0.343 0.965 0.163 -0.996 -0.92 -0.779 -0.46 0.839 0.014 -0.54 -0.287 -0.338 -0.851 0.736 0.745 0.197 -0.264 0.507 0.171 -0.932 -0.422 0.087 0.841 0.315 0.257 0.165 -0.2 -0.093 -0.02 0.161 -0.45 0.72 0.229 -0.252 0.61 -0.533 0.591 0.715 -0.07 -0.589 -0.73 -0.477 -0.554 0.726 -0.791 0.503 0.475 -0.38 0.646 -0.82 -0.289 0.912 0.393 -0.964
+0 0 0 0 0 0 0 0.785 0.21 0.564 0.677 0.774 0.195 0.615 -0.036 -0.376 -0.549 0.757 0.284 -0.849 -0.167 -0.657 -0.81 -0.48 -0.195 0.33 -0.656 0.054 0.831 -0.985 0.051 -0.415 0.995 -0.511 -0.068 -0.912 0.936 -0.938 0.902 0.271 0.444 0.471 0.121 0.281 0.719 -0.174 0.8 0.586 0.699 0.388 0.777 0.414 -0.145 0.639 -0.688 -0.027 -0.519 0.489 -0.925 0.615 0.376 0.399 -0.298 -0.915 0.265
+</pre></div>
+</div>
+</div>
+</div>
+<p>Together these two files define the dMRI measurement as a set of gradient directions and corresponding amplitudes.</p>
+<p>In our example data, we see that 2 b-values were chosen for this scanning sequence.
+The first few images were acquired with a b-value of 0 and are typically referred to as b=0 images.
+In these images, no diffusion gradient is applied.
+These images don’t hold any diffusion information and are used as a reference (for head motion correction or brain masking) since they aren’t subject to the same types of scanner artifacts that affect diffusion-weighted images.</p>
+<p>All of the remaining images have a b-value of 1000 and have a diffusion gradient associated with them.
+Diffusion that exhibits directionality in the same direction as the gradient results in a loss of signal.
+With further processing, the acquired images can provide measurements which are related to the microscopic changes and estimate white matter trajectories.</p>
+<p><video loop="yes" muted="yes" autoplay="yes" controls="yes"><source src="../videos/dMRI-signal-movie.mp4" type="video/mp4"/></video></p>
+<p>We’ll use some functions from <a class="reference external" href="https://dipy.org">Dipy</a>, a Python package for pre-processing and analyzing diffusion data.
+After reading the <code class="docutils literal notranslate"><span class="pre">.bval</span></code> and <code class="docutils literal notranslate"><span class="pre">.bvec</span></code> files with the <code class="docutils literal notranslate"><span class="pre">read_bvals_bvecs()</span></code> function, we get both in a numpy array. Notice that the <code class="docutils literal notranslate"><span class="pre">.bvec</span></code> file has been transposed so that the i, j, and k-components are in column format.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dipy.io</span> <span class="kn">import</span> <span class="n">read_bvals_bvecs</span>
+
+<span class="n">gt_bvals</span><span class="p">,</span> <span class="n">gt_bvecs</span> <span class="o">=</span> <span class="n">read_bvals_bvecs</span><span class="p">(</span><span class="n">bval</span><span class="p">,</span> <span class="n">bvec</span><span class="p">)</span>
+<span class="n">gt_bvecs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.   ,  0.   ,  0.   ],
+       [ 0.   ,  0.   ,  0.   ],
+       [ 0.   ,  0.   ,  0.   ],
+       [ 0.   ,  0.   ,  0.   ],
+       [ 0.   ,  0.   ,  0.   ],
+       [-1.   ,  0.   ,  0.   ],
+       [-0.361,  0.933,  0.   ],
+       [ 0.255,  0.565,  0.785],
+       [-0.861, -0.464,  0.21 ],
+       [ 0.307, -0.766,  0.564],
+       [ 0.736,  0.013,  0.677],
+       [-0.532,  0.343,  0.774],
+       [-0.177,  0.965,  0.195],
+       [-0.771,  0.163,  0.615],
+       [-0.079, -0.996, -0.036],
+       [-0.109, -0.92 , -0.376],
+       [-0.302, -0.779, -0.549],
+       [ 0.464, -0.46 ,  0.757],
+       [ 0.464,  0.839,  0.284],
+       [ 0.529,  0.014, -0.849],
+       [ 0.825, -0.54 , -0.167],
+       [-0.697, -0.287, -0.657],
+       [-0.479, -0.338, -0.81 ],
+       [ 0.213, -0.851, -0.48 ],
+       [ 0.648,  0.736, -0.195],
+       [-0.58 ,  0.745,  0.33 ],
+       [ 0.729,  0.197, -0.656],
+       [-0.963, -0.264,  0.054],
+       [-0.229,  0.507,  0.831],
+       [ 0.016,  0.171, -0.985],
+       [-0.359, -0.932,  0.051],
+       [-0.806, -0.422, -0.415],
+       [ 0.045,  0.087,  0.995],
+       [ 0.177,  0.841, -0.511],
+       [-0.946,  0.315, -0.068],
+       [ 0.318,  0.257, -0.912],
+       [ 0.312,  0.165,  0.936],
+       [ 0.284, -0.2  , -0.938],
+       [ 0.421, -0.093,  0.902],
+       [ 0.963, -0.02 ,  0.271],
+       [ 0.881,  0.161,  0.444],
+       [-0.758, -0.45 ,  0.471],
+       [ 0.684,  0.72 ,  0.121],
+       [-0.932,  0.229,  0.281],
+       [ 0.648, -0.252,  0.719],
+       [-0.773,  0.61 , -0.174],
+       [-0.276, -0.533,  0.8  ],
+       [ 0.555,  0.591,  0.586],
+       [-0.007,  0.715,  0.699],
+       [-0.919, -0.07 ,  0.388],
+       [ 0.223, -0.589,  0.777],
+       [ 0.544, -0.73 ,  0.414],
+       [-0.867, -0.477, -0.145],
+       [-0.534, -0.554,  0.639],
+       [ 0.001,  0.726, -0.688],
+       [ 0.611, -0.791, -0.027],
+       [-0.691,  0.503, -0.519],
+       [-0.731,  0.475,  0.489],
+       [-0.024, -0.38 , -0.925],
+       [-0.453,  0.646,  0.615],
+       [-0.432, -0.82 ,  0.376],
+       [ 0.87 , -0.289,  0.399],
+       [-0.283,  0.912, -0.298],
+       [-0.088,  0.393, -0.915],
+       [ 0.016, -0.964,  0.265]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Below is a plot of all of the diffusion directions that we’ve acquired.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s2">&quot;3d&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">gt_bvecs</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">gt_bvecs</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">gt_bvecs</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/nifti_27_0.png" src="../_images/nifti_27_0.png" />
+</div>
+</div>
+<p>It is important to note that in this format, the diffusion gradients are provided with respect to the image axes, not in real or scanner coordinates. Simply reformatting the image from sagittal to axial will effectively rotate the b-vectors, since this operation changes the image axes. Thus, a particular bvals/bvecs pair is only valid for the particular image that it corresponds to.</p>
+<p>The diffusion gradient is critical for later analyzing the data</p>
+<div class="cell tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">if</span> <span class="n">dwi_affine</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+    <span class="n">dwi_affine</span> <span class="o">=</span> <span class="n">dwi_affine</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="n">rotated_bvecs</span> <span class="o">=</span> <span class="n">dwi_affine</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">gt_bvecs</span><span class="o">.</span><span class="n">T</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">T</span>
+<span class="n">rotated_bvecs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.   ,  0.   ,  0.   ],
+       [ 0.   ,  0.   ,  0.   ],
+       [ 0.   ,  0.   ,  0.   ],
+       [ 0.   ,  0.   ,  0.   ],
+       [ 0.   ,  0.   ,  0.   ],
+       [ 2.   ,  0.   ,  0.   ],
+       [ 0.722,  1.866,  0.   ],
+       [-0.51 ,  1.13 ,  1.57 ],
+       [ 1.722, -0.928,  0.42 ],
+       [-0.614, -1.532,  1.128],
+       [-1.472,  0.026,  1.354],
+       [ 1.064,  0.686,  1.548],
+       [ 0.354,  1.93 ,  0.39 ],
+       [ 1.542,  0.326,  1.23 ],
+       [ 0.158, -1.992, -0.072],
+       [ 0.218, -1.84 , -0.752],
+       [ 0.604, -1.558, -1.098],
+       [-0.928, -0.92 ,  1.514],
+       [-0.928,  1.678,  0.568],
+       [-1.058,  0.028, -1.698],
+       [-1.65 , -1.08 , -0.334],
+       [ 1.394, -0.574, -1.314],
+       [ 0.958, -0.676, -1.62 ],
+       [-0.426, -1.702, -0.96 ],
+       [-1.296,  1.472, -0.39 ],
+       [ 1.16 ,  1.49 ,  0.66 ],
+       [-1.458,  0.394, -1.312],
+       [ 1.926, -0.528,  0.108],
+       [ 0.458,  1.014,  1.662],
+       [-0.032,  0.342, -1.97 ],
+       [ 0.718, -1.864,  0.102],
+       [ 1.612, -0.844, -0.83 ],
+       [-0.09 ,  0.174,  1.99 ],
+       [-0.354,  1.682, -1.022],
+       [ 1.892,  0.63 , -0.136],
+       [-0.636,  0.514, -1.824],
+       [-0.624,  0.33 ,  1.872],
+       [-0.568, -0.4  , -1.876],
+       [-0.842, -0.186,  1.804],
+       [-1.926, -0.04 ,  0.542],
+       [-1.762,  0.322,  0.888],
+       [ 1.516, -0.9  ,  0.942],
+       [-1.368,  1.44 ,  0.242],
+       [ 1.864,  0.458,  0.562],
+       [-1.296, -0.504,  1.438],
+       [ 1.546,  1.22 , -0.348],
+       [ 0.552, -1.066,  1.6  ],
+       [-1.11 ,  1.182,  1.172],
+       [ 0.014,  1.43 ,  1.398],
+       [ 1.838, -0.14 ,  0.776],
+       [-0.446, -1.178,  1.554],
+       [-1.088, -1.46 ,  0.828],
+       [ 1.734, -0.954, -0.29 ],
+       [ 1.068, -1.108,  1.278],
+       [-0.002,  1.452, -1.376],
+       [-1.222, -1.582, -0.054],
+       [ 1.382,  1.006, -1.038],
+       [ 1.462,  0.95 ,  0.978],
+       [ 0.048, -0.76 , -1.85 ],
+       [ 0.906,  1.292,  1.23 ],
+       [ 0.864, -1.64 ,  0.752],
+       [-1.74 , -0.578,  0.798],
+       [ 0.566,  1.824, -0.596],
+       [ 0.176,  0.786, -1.83 ],
+       [-0.032, -1.928,  0.53 ]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s2">&quot;3d&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">rotated_bvecs</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">rotated_bvecs</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">rotated_bvecs</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/nifti_30_0.png" src="../_images/nifti_30_0.png" />
+</div>
+</div>
+<p>Inspired by MRtrix3 and proposed in the <a class="reference external" href="https://github.com/bids-standard/bids-specification/issues/349">BIDS spec</a>, dMRIPrep also creates an optional <code class="docutils literal notranslate"><span class="pre">.tsv</span></code> file where the diffusion gradients are reported in scanner coordinates as opposed to image coordinates.
+The [i j k] values reported earlier are recalculated in [R A S].</p>
+<div class="cell tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rasb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">rotated_bvecs</span><span class="p">,</span> <span class="n">gt_bvals</span><span class="p">]</span>
+
+<span class="n">rasb</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.000e+00,  0.000e+00,  0.000e+00,  0.000e+00],
+       [ 0.000e+00,  0.000e+00,  0.000e+00,  0.000e+00],
+       [ 0.000e+00,  0.000e+00,  0.000e+00,  0.000e+00],
+       [ 0.000e+00,  0.000e+00,  0.000e+00,  0.000e+00],
+       [ 0.000e+00,  0.000e+00,  0.000e+00,  0.000e+00],
+       [ 2.000e+00,  0.000e+00,  0.000e+00,  1.000e+03],
+       [ 7.220e-01,  1.866e+00,  0.000e+00,  1.000e+03],
+       [-5.100e-01,  1.130e+00,  1.570e+00,  1.000e+03],
+       [ 1.722e+00, -9.280e-01,  4.200e-01,  1.000e+03],
+       [-6.140e-01, -1.532e+00,  1.128e+00,  1.000e+03],
+       [-1.472e+00,  2.600e-02,  1.354e+00,  1.000e+03],
+       [ 1.064e+00,  6.860e-01,  1.548e+00,  1.000e+03],
+       [ 3.540e-01,  1.930e+00,  3.900e-01,  1.000e+03],
+       [ 1.542e+00,  3.260e-01,  1.230e+00,  1.000e+03],
+       [ 1.580e-01, -1.992e+00, -7.200e-02,  1.000e+03],
+       [ 2.180e-01, -1.840e+00, -7.520e-01,  1.000e+03],
+       [ 6.040e-01, -1.558e+00, -1.098e+00,  1.000e+03],
+       [-9.280e-01, -9.200e-01,  1.514e+00,  1.000e+03],
+       [-9.280e-01,  1.678e+00,  5.680e-01,  1.000e+03],
+       [-1.058e+00,  2.800e-02, -1.698e+00,  1.000e+03],
+       [-1.650e+00, -1.080e+00, -3.340e-01,  1.000e+03],
+       [ 1.394e+00, -5.740e-01, -1.314e+00,  1.000e+03],
+       [ 9.580e-01, -6.760e-01, -1.620e+00,  1.000e+03],
+       [-4.260e-01, -1.702e+00, -9.600e-01,  1.000e+03],
+       [-1.296e+00,  1.472e+00, -3.900e-01,  1.000e+03],
+       [ 1.160e+00,  1.490e+00,  6.600e-01,  1.000e+03],
+       [-1.458e+00,  3.940e-01, -1.312e+00,  1.000e+03],
+       [ 1.926e+00, -5.280e-01,  1.080e-01,  1.000e+03],
+       [ 4.580e-01,  1.014e+00,  1.662e+00,  1.000e+03],
+       [-3.200e-02,  3.420e-01, -1.970e+00,  1.000e+03],
+       [ 7.180e-01, -1.864e+00,  1.020e-01,  1.000e+03],
+       [ 1.612e+00, -8.440e-01, -8.300e-01,  1.000e+03],
+       [-9.000e-02,  1.740e-01,  1.990e+00,  1.000e+03],
+       [-3.540e-01,  1.682e+00, -1.022e+00,  1.000e+03],
+       [ 1.892e+00,  6.300e-01, -1.360e-01,  1.000e+03],
+       [-6.360e-01,  5.140e-01, -1.824e+00,  1.000e+03],
+       [-6.240e-01,  3.300e-01,  1.872e+00,  1.000e+03],
+       [-5.680e-01, -4.000e-01, -1.876e+00,  1.000e+03],
+       [-8.420e-01, -1.860e-01,  1.804e+00,  1.000e+03],
+       [-1.926e+00, -4.000e-02,  5.420e-01,  1.000e+03],
+       [-1.762e+00,  3.220e-01,  8.880e-01,  1.000e+03],
+       [ 1.516e+00, -9.000e-01,  9.420e-01,  1.000e+03],
+       [-1.368e+00,  1.440e+00,  2.420e-01,  1.000e+03],
+       [ 1.864e+00,  4.580e-01,  5.620e-01,  1.000e+03],
+       [-1.296e+00, -5.040e-01,  1.438e+00,  1.000e+03],
+       [ 1.546e+00,  1.220e+00, -3.480e-01,  1.000e+03],
+       [ 5.520e-01, -1.066e+00,  1.600e+00,  1.000e+03],
+       [-1.110e+00,  1.182e+00,  1.172e+00,  1.000e+03],
+       [ 1.400e-02,  1.430e+00,  1.398e+00,  1.000e+03],
+       [ 1.838e+00, -1.400e-01,  7.760e-01,  1.000e+03],
+       [-4.460e-01, -1.178e+00,  1.554e+00,  1.000e+03],
+       [-1.088e+00, -1.460e+00,  8.280e-01,  1.000e+03],
+       [ 1.734e+00, -9.540e-01, -2.900e-01,  1.000e+03],
+       [ 1.068e+00, -1.108e+00,  1.278e+00,  1.000e+03],
+       [-2.000e-03,  1.452e+00, -1.376e+00,  1.000e+03],
+       [-1.222e+00, -1.582e+00, -5.400e-02,  1.000e+03],
+       [ 1.382e+00,  1.006e+00, -1.038e+00,  1.000e+03],
+       [ 1.462e+00,  9.500e-01,  9.780e-01,  1.000e+03],
+       [ 4.800e-02, -7.600e-01, -1.850e+00,  1.000e+03],
+       [ 9.060e-01,  1.292e+00,  1.230e+00,  1.000e+03],
+       [ 8.640e-01, -1.640e+00,  7.520e-01,  1.000e+03],
+       [-1.740e+00, -5.780e-01,  7.980e-01,  1.000e+03],
+       [ 5.660e-01,  1.824e+00, -5.960e-01,  1.000e+03],
+       [ 1.760e-01,  7.860e-01, -1.830e+00,  1.000e+03],
+       [-3.200e-02, -1.928e+00,  5.300e-01,  1.000e+03]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can write out this <code class="docutils literal notranslate"><span class="pre">.tsv</span></code> to a file.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="s2">&quot;../../data/sub-01_rasb.tsv&quot;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">X</span><span class="o">=</span><span class="n">rasb</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dipy.core.gradients</span> <span class="kn">import</span> <span class="n">gradient_table</span>
+
+<span class="n">gtab</span> <span class="o">=</span> <span class="n">gradient_table</span><span class="p">(</span><span class="n">gt_bvals</span><span class="p">,</span> <span class="n">rotated_bvecs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">19</span><span class="o">-</span><span class="n">e42156f173fa</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">dipy.core.gradients</span> <span class="kn">import</span> <span class="n">gradient_table</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> 
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">gtab</span> <span class="o">=</span> <span class="n">gradient_table</span><span class="p">(</span><span class="n">gt_bvals</span><span class="p">,</span> <span class="n">rotated_bvecs</span><span class="p">)</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/dipy/core/gradients.py</span> in <span class="ni">gradient_table</span><span class="nt">(bvals, bvecs, big_delta, small_delta, b0_threshold, atol, btens)</span>
+<span class="g g-Whitespace">    </span><span class="mi">595</span>                                            <span class="n">small_delta</span><span class="o">=</span><span class="n">small_delta</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">596</span>                                            <span class="n">b0_threshold</span><span class="o">=</span><span class="n">b0_threshold</span><span class="p">,</span>
+<span class="ne">--&gt; </span><span class="mi">597</span>                                            <span class="n">atol</span><span class="o">=</span><span class="n">atol</span><span class="p">,</span> <span class="n">btens</span><span class="o">=</span><span class="n">btens</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">598</span> 
+<span class="g g-Whitespace">    </span><span class="mi">599</span> 
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/dipy/core/gradients.py</span> in <span class="ni">gradient_table_from_bvals_bvecs</span><span class="nt">(bvals, bvecs, b0_threshold, atol, btens, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">302</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;bvecs should be (N, 3)&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">303</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">bvecs_close_to_1</span><span class="p">[</span><span class="n">dwi_mask</span><span class="p">]):</span>
+<span class="ne">--&gt; </span><span class="mi">304</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The vectors in bvecs should be unit (The tolerance &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">305</span>                          <span class="s2">&quot;can be modified as an input parameter)&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">306</span> 
+
+<span class="nn">ValueError: The vectors</span> in <span class="ni">bvecs should be unit </span><span class="nt">(The tolerance can be modified as an input parameter)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="brain-masking">
+<h2>Brain Masking<a class="headerlink" href="#brain-masking" title="Permalink to this headline">¶</a></h2>
+<p>One of the first things we do before image registration is brain extraction, separating any non-brain material from brain tissue.
+This is done so that our algorithms aren’t biased or distracted by whatever is in non-brain material and we don’t spend extra time analyzing things we don’t care about</p>
+<p>As mentioned before, the b0s are a good reference scan for doing brain masking. lets index them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gtab</span><span class="o">.</span><span class="n">b0s_mask</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bzero</span> <span class="o">=</span> <span class="n">dwi_data</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="n">gtab</span><span class="o">.</span><span class="n">b0s_mask</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>skullstrip
+5 volumes in b0</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bzero</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>take median image</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">median_bzero</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">bzero</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dipy.segment.mask</span> <span class="kn">import</span> <span class="n">median_otsu</span>
+
+<span class="n">b0_mask</span><span class="p">,</span> <span class="n">mask</span> <span class="o">=</span> <span class="n">median_otsu</span><span class="p">(</span><span class="n">median_bzero</span><span class="p">,</span> <span class="n">median_radius</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">numpass</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dipy.core.histeq</span> <span class="kn">import</span> <span class="n">histeq</span>
+
+<span class="n">sli</span> <span class="o">=</span> <span class="n">median_bzero</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">//</span> <span class="mi">2</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">histeq</span><span class="p">(</span><span class="n">median_bzero</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">sli</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="p">,</span>
+           <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s2">&quot;lower&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mask</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">sli</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s2">&quot;lower&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">histeq</span><span class="p">(</span><span class="n">b0_mask</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">sli</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="p">,</span>
+           <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s2">&quot;lower&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./extra"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="../head-motion/solution.html" title="previous page">Putting everything together</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By The NiPreps developers<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

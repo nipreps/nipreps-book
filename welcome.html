@@ -119,13 +119,18 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
+  <a class="reference internal" href="head-motion/step0.html">
+   Before we start: How to follow this tutorial
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="head-motion/intro.html">
    The problem of head-motion in dMRI
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="head-motion/data.html">
-   Introduction to dMRI Data
+   Introduction to dMRI data
   </a>
  </li>
  <li class="toctree-l1">
@@ -141,6 +146,18 @@
  <li class="toctree-l1">
   <a class="reference internal" href="head-motion/solution.html">
    Putting everything together
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  extra
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="extra/nifti.html">
+   The extra mile
   </a>
  </li>
 </ul>
@@ -253,11 +270,15 @@
 <div class="section" id="implementing-a-head-motion-correction-algorithm-for-diffusion-mri-in-python-using-dipy-and-nitransforms">
 <h2><em>Implementing a head-motion correction algorithm for diffusion MRI in Python, using Dipy and NiTransforms</em><a class="headerlink" href="#implementing-a-head-motion-correction-algorithm-for-diffusion-mri-in-python-using-dipy-and-nitransforms" title="Permalink to this headline">¶</a></h2>
 <p><strong>Summary</strong>.
-This tutorial walks attendees through the development of one fundamental step in the processing of diffusion MRI data using a community-driven approach and relying on existing tools.
-The tutorial first justifies the <em>NiPreps</em> approach to preprocessing, describing how the framework attempts to enhance or extend the scanning device to produce “analysis-grade” data.
-This is important because data produced by the scanner is typically not digestible by statistical analysis directly.
-Researchers resort to either 1) modifying their experimental design so that it matches the requirements of large-scale studies that have made publicly available all their software tooling or 2) creating custom preprocessing pipelines tailored to each particular study.
-This tutorial has been designed to engage signal processing engineers and imaging researchers in the NiPreps community, demonstrating how to fill the gaps of their preprocessing needs regardless of their field.</p>
+This tutorial walks attendees through the development of one fundamental step in the pre-processing of diffusion MRI data using a community-driven approach and relying on existing tools.
+The tutorial first justifies the <em>NiPreps</em> approach to pre-processing, describing how the framework attempts to enhance or extend the MRI scanner to produce “analysis-grade” data.
+This is important because data produced by the scanner is typically not digestible for statistical analysis directly.</p>
+<p>Researchers resort to either:</p>
+<ol class="simple">
+<li><p>modifying their experimental design so that it matches the requirements of large-scale studies that have made all of their software tools publicly available</p></li>
+<li><p>creating custom pre-processing pipelines tailored to each particular study</p></li>
+</ol>
+<p>This tutorial has been designed to engage signal processing engineers and imaging researchers in the <em>NiPreps</em> community, demonstrating how to fill in the gaps of their pre-processing needs regardless of their field.</p>
 <div class="admonition-objectives admonition">
 <p class="admonition-title">Objectives</p>
 <ul class="simple">
@@ -266,6 +287,8 @@ This tutorial has been designed to engage signal processing engineers and imagin
 <li><p>Understand the basics of dMRI data and pre-processing</p></li>
 <li><p>Discover how to integrate some of the tools in the <em>NiPreps</em> framework</p></li>
 </ul>
+</div>
+<div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">
 </div>

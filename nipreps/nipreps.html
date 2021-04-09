@@ -120,13 +120,18 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
+  <a class="reference internal" href="../head-motion/step0.html">
+   Before we start: How to follow this tutorial
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../head-motion/intro.html">
    The problem of head-motion in dMRI
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../head-motion/data.html">
-   Introduction to dMRI Data
+   Introduction to dMRI data
   </a>
  </li>
  <li class="toctree-l1">
@@ -142,6 +147,18 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../head-motion/solution.html">
    Putting everything together
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  extra
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../extra/nifti.html">
+   The extra mile
   </a>
  </li>
 </ul>
@@ -332,7 +349,8 @@ These tools arose out of the need to extend <em>fMRIPrep</em> to new imaging mod
 <li><p>End-user tools: perform pre-processing or quality control</p></li>
 </ul>
 <div class="figure align-default" id="nipreps-chart">
-<img alt="../_images/nipreps-chart.svg" src="../_images/nipreps-chart.svg" /></div>
+<img alt="../_images/nipreps-chart.png" src="../_images/nipreps-chart.png" />
+</div>
 </div>
 <div class="section" id="nipreps-driving-principles">
 <h2>NiPreps driving principles<a class="headerlink" href="#nipreps-driving-principles" title="Permalink to this headline">¶</a></h2>
@@ -348,31 +366,31 @@ This minimizes human intervention in running the pipelines as they are able to a
 This eases the burden of maintaining these tools but also helps focus on standardizing each processing step and reducing the amount of methodological variability.
 <em>NiPreps</em> only support BIDS-Derivatives as output and so are agnostic to subsequent analysis.</p>
 <p><em>NiPreps</em> also aim to be robust in their codebase.
-The pipelines are modular and rely on widely-used tools such as AFNI, ANTs, FreeSurfer, FSL, NiLearn, or DIPY and are extensible via plug-ins.
+The pipelines are modular and rely on widely-used tools such as AFNI, ANTs, FreeSurfer, FSL, Nilearn, or Dipy and are extensible via plug-ins.
 This modularity in the code allows each step to be thoroughly tested. Some examples of tests performed on different parts of the pipeline are shown below:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="25f7a61d-eaa0-4e9b-ac96-8cf14c1f0a06" name="3206f5f8-c46f-4905-8b5b-7c05616c0332" type="radio">
-</input><label class="tabbed-label" for="25f7a61d-eaa0-4e9b-ac96-8cf14c1f0a06">
+<input checked="checked" id="0c8af1e1-bcd6-4716-8ae7-12aadc0262fc" name="ba1c1375-09b8-47c2-8ab2-4987bf7739b0" type="radio">
+</input><label class="tabbed-label" for="0c8af1e1-bcd6-4716-8ae7-12aadc0262fc">
 unittest</label><div class="tabbed-content docutils">
 <p>Checks whether a function or class method behaves as expected.</p>
 <p><img alt="unittest" src="../_images/unittest.png" /></p>
 </div>
-<input id="3012f52e-d66e-4fb3-85b4-3ee924069eb7" name="3206f5f8-c46f-4905-8b5b-7c05616c0332" type="radio">
-</input><label class="tabbed-label" for="3012f52e-d66e-4fb3-85b4-3ee924069eb7">
+<input id="c9888338-10bb-477d-a615-1f2e4caf12fc" name="ba1c1375-09b8-47c2-8ab2-4987bf7739b0" type="radio">
+</input><label class="tabbed-label" for="c9888338-10bb-477d-a615-1f2e4caf12fc">
 doctest</label><div class="tabbed-content docutils">
 <p>Also checks whether code behaves as expected and serves as an example for how to use the code.</p>
 <p><img alt="doctest1" src="../_images/doctest1.png" /></p>
 <p><img alt="doctest2" src="../_images/doctest2.png" /></p>
 </div>
-<input id="95be5d04-e5ea-42e3-a312-832219ba1b6f" name="3206f5f8-c46f-4905-8b5b-7c05616c0332" type="radio">
-</input><label class="tabbed-label" for="95be5d04-e5ea-42e3-a312-832219ba1b6f">
+<input id="05d28d2a-8c9a-4289-a23b-cbe098756446" name="ba1c1375-09b8-47c2-8ab2-4987bf7739b0" type="radio">
+</input><label class="tabbed-label" for="05d28d2a-8c9a-4289-a23b-cbe098756446">
 integration test</label><div class="tabbed-content docutils">
 <p>Checks the behaviour of a system (multiple pieces of code).
 Can also be used to determine whether the system is behaving suboptimally.</p>
 <p><img alt="integration_test" src="../_images/integration_test.png" /></p>
 </div>
-<input id="af57f1fb-844f-4f47-94e1-119ca3f9585b" name="3206f5f8-c46f-4905-8b5b-7c05616c0332" type="radio">
-</input><label class="tabbed-label" for="af57f1fb-844f-4f47-94e1-119ca3f9585b">
+<input id="71cee718-e7b9-47d1-82a3-d51f35c5b1b1" name="ba1c1375-09b8-47c2-8ab2-4987bf7739b0" type="radio">
+</input><label class="tabbed-label" for="71cee718-e7b9-47d1-82a3-d51f35c5b1b1">
 build test</label><div class="tabbed-content docutils">
 <p>Checks that code or software environment can be compiled and deployed.</p>
 <p><img alt="build_test" src="../_images/build_test.png" /></p>
