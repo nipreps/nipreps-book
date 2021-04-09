@@ -1,7 +1,6 @@
 
 [build]
-  base = "docs"
-  command = "pip install -r requirements.txt && jupyter-book build ."
+  command = "pip install -r requirements.txt && jupyter-book build docs"
   publish = "docs/_build/html"
   latex = true
  
