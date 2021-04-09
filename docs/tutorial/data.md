@@ -92,9 +92,11 @@ dmri_dataset = DWI(gradients=np.random.normal(size=(4, 64)))
 # Let's call Python's built-in len() function
 print(len(dmri_dataset))
 ```
+
 The output of this `print()` statement is telling us that this (simulated) dataset has 64 diffusion weighted samples.
 
 ## Using the new data representation object
+
 For simplicity, we will be using the full implementation of the `DWI` class from our [`eddymotion` package](https://github.com/nipreps/EddyMotionCorrection/blob/57c518929146b23cc9534ab0b2d024aa136e25f8/emc/dmri.py)
 Under the `data/` folder of this book's distribution, we have stored a sample DWI dataset with filename `dwi.h5`.
 Please note that the file has been minimized by zeroing all but two diffusion weighted orientation maps.
@@ -108,10 +110,12 @@ from eddymotion.dmri import DWI
 dmri_dataset = DWI.from_filename("../../data/dwi.h5")
 print(len(dmri_dataset))
 ```
+
 In this case, the dataset is reporting to have 102 diffusion weighted samples.
 
 Python will automatically generate a summary of this object if we just issue the name of our new object.
 This pretty-printing of the object informs us about the data and metadata that together compose this particular DWI dataset:
+
 ```{code-cell} python
 dmri_dataset
 ```
@@ -119,6 +123,7 @@ dmri_dataset
 ### Visualizing the data
 
 The fully-fledged `DWI` object has a convenience function to plot the dataset:
+
 ```{code-cell} python
 dmri_dataset.plot_mosaic();
 ```
@@ -128,11 +133,13 @@ This *b=0* reference is a map of the signal measured ***without gradient sensiti
 The *b=0* map can be used by diffusion modeling as the reference to quantify the signal drop at every voxel and given a particular orientation gradient.
 
 We can also get an insight of how a diffusion weighted orientation looks like by selecting them with the argument `index`:
+
 ```{code-cell} python
 dmri_dataset.plot_mosaic(index=10);
 ```
 
 or:
+
 ```{code-cell} python
 dmri_dataset.plot_mosaic(index=100);
 ```
@@ -146,6 +153,7 @@ Our `DWI` object stores the gradient information in the `gradients` attribute:
 ```{code-cell} python
 dmri_dataset.gradients.shape
 ```
+<<<<<<< HEAD
 
 ### The *LOGO* (leave-one-gradient-out) splitter
 One final behavior that will make our endeavor easier in the long run is a convenience method for data splitting.
@@ -212,3 +220,5 @@ plot_dwi(data_test[0], dmri_dataset.affine, gradient=data_test[1]);
 
 where `data_train` is a tuple containing all DW volumes and corresponding gradient table excluding the left-out, which is store in `data_test`.
 Consequently, `data_test[0]` contains the held-out DW map and `data_test[1]` the corresponding gradient vector (RAS+B format).
+=======
+>>>>>>> fix spacing
