@@ -156,3 +156,45 @@ plot_dwi(data_test[0], dmri_dataset.affine, gradient=data_test[1]);
 ```
 
 ## Investigating the tensor model
+
+Now, we are ready to use the diffusion tensor model.
+We will use the wrap around DIPY's implementation that we distribute with `eddymotion`.
+
+```{code-cell} python
+:tags: [remove-cell]
+from tempfile import mkstemp
+from pathlib import Path
+import requests
+
+if dmri_dataset._filepath.exists():
+    dmri_dataset._filepath.unlink()
+url = "https://files.osf.io/v1/resources/8k95s/providers/osfstorage/6070b4c2f6585f03fb6123a2"
+datapath = Path(mkstemp(suffix=".h5")[1])
+if datapath.stat().st_size == 0:
+    datapath.write_bytes(
+        requests.get(url, allow_redirects=True).content
+    )
+
+dmri_dataset = DWI.from_filename(datapath)
+datapath.unlink()
+data_train, data_test = dmri_dataset.logo_split(88, with_b0=True)
+```
+
+### The model factory
+To permit flexibly select models, the `eddymotion` package offers a `ModelFactory` that implements the *facade design pattern*.
+This means that `ModelFactory` makes it easier for the user to switch between models:
+
+```{code-cell} python
+from eddymotion.model import ModelFactory
+
+# We are using now a full dataset, we need to split the data again
+
+model = ModelFactory.init(
+    gtab=data_train[1],
+    model="Tensor"
+)
+model.fit(data_train[0])
+predicted = model.predict(data_test[1])
+plot_dwi(predicted, dmri_dataset.affine, gradient=data_test[1]);
+plot_dwi(data_test[0], dmri_dataset.affine, gradient=data_test[1]);
+```

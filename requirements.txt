@@ -10,4 +10,5 @@ nilearn
 nitransforms
 niworkflows
 numpy
+requests
 sphinx-exercise
