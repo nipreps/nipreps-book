@@ -1,1 +1,158 @@
+---
+jupytext:
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
+kernelspec:
+  display_name: Python 3
+  language: python
+  name: python3
+---
+
 # Diffusion modelling
+
+The proposed method requires inferring a motion-less, reference DW map for a given diffusion orientation for which we want to estimate the misalignment.
+Inference of the reference map is achieved by first fitting some diffusion model (which we will draw from [DIPY](https://dipy.org)) using all data, except the particular DW map that is to be aligned.
+
+All models are required to offer the same API (application programmer interface):
+
+1. The initialization takes a gradient table as first argument, and then arbitrary parameters as keyword arguments.
+2. A `fit(data)` method, which only requires a positional argument `data`.
+3. A `predict(gradient)` method, which only requires a `gradient` entry (b-vector and b-value).
+
+```{code-cell} python
+:tags: [hide-cell]
+
+from eddymotion.dmri import DWI
+from eddymotion.viz import plot_dwi
+dmri_dataset = DWI.from_filename("../../data/dwi.h5")
+```
+
+## Implementing a trivial model
+
+We will first start implementing a *trivial* model.
+This model will always return the reference *b=0* map, regardless of the particular diffusion orientation model.
+In other words, it is just a ***constant*** model.
+
+Its simplicity does not diminish its great usefulness.
+First, when coding it is very important to build up iteratively in complexity.
+This model will allow to easily test the overal integration of the different components of our head-motion estimation algorithm.
+Also, this model will allow a very straightforward implementation of registration to the *b=0* reference, which is commonly used to initialize the head-motion estimation parameters.
+
+```{code-cell} python
+class TrivialB0Model:
+    """
+    A trivial model that returns a *b=0* map always.
+    Implements the interface of :obj:`dipy.reconst.base.ReconstModel`.
+    Instead of inheriting from the abstract base, this implementation
+    follows type adaptation principles, as it is easier to maintain
+    and to read (see https://www.youtube.com/watch?v=3MNVP9-hglc).
+    """
+
+    __slots__ = ("_S0",)
+
+    def __init__(self, gtab, S0=None, **kwargs):
+        """Implement object initialization."""
+        if S0 is None:
+            raise ValueError("S0 must be provided")
+
+        self._S0 = S0
+
+    def fit(self, *args, **kwargs):
+        """Do nothing."""
+
+    def predict(self, gradient, **kwargs):
+        """Return the *b=0* map."""
+        return self._S0
+```
+
+
+
+The model can easily be initalized as follows (assuming we still have our dataset loaded):
+```{code-cell} python
+model = TrivialB0Model(
+	dmri_dataset.gradients,
+	S0=dmri_dataset.bzero
+)
+```
+
+Then, at each iteration of our estimation strategy, we will fit this model (which does nothing) to the diffusion weighted data after holding one particular direction (`data_test`) out:
+
+```{code-cell} python
+data_train, data_test = dmri_dataset.logo_split(10)
+model.fit(data_train[0])
+```
+
+Finally, we can generate our registration reference with the `predict()` method:
+
+```{code-cell} python
+predicted = model.predict(data_test[1])
+plot_dwi(predicted, dmri_dataset.affine, gradient=data_test[1]);
+```
+
+As expected, the *b=0* doesn't look very much like the particular left-out direction, but it is a start!
+```{code-cell} python
+plot_dwi(data_test[0], dmri_dataset.affine, gradient=data_test[1]);
+```
+
+## Implementing a *regression to the mean* model
+
+**Exercise**: Extend the `TrivialB0Model` to produce an average of *all other* diffusion directions, instead of the *b=0*.
+
+```{code-cell} python
+class AverageDWModel:
+    """A trivial model that returns an average map."""
+
+    __slots__ = ("_data",)
+
+    def __init__(self, gtab, **kwargs):
+        """Implement object initialization."""
+        return  # do nothing at initalization time
+
+    def fit(self, data, **kwargs):
+        """Calculate the average."""
+        # self._data =  # Use numpy to calculate the average.
+
+    def predict(self, gradient, **kwargs):
+        """Return the average map."""
+        return self._data
+```
+
+**Solution**
+```{code-cell} python
+:tags: [hide-cell]
+
+class AverageDWModel:
+    """A trivial model that returns an average map."""
+
+    __slots__ = ("_data",)
+
+    def __init__(self, gtab, **kwargs):
+        """Implement object initialization."""
+        return  # do nothing at initalization time
+
+    def fit(self, data, **kwargs):
+        """Calculate the average."""
+        self._data =  data.mean(-1)
+
+    def predict(self, gradient, **kwargs):
+        """Return the average map."""
+        return self._data
+```
+
+**Exercise**: Use the new `AverageDWModel` you just created.
+**Solution**
+```{code-cell} python
+:tags: [hide-cell]
+
+model = AverageDWModel(
+    dmri_dataset.gradients,
+)
+model.fit(data_train[0])
+predicted = model.predict(data_test[1])
+plot_dwi(predicted, dmri_dataset.affine, gradient=data_test[1]);
+plot_dwi(data_test[0], dmri_dataset.affine, gradient=data_test[1]);
+```
+
+## Investigating the tensor model
