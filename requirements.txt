@@ -1,6 +1,6 @@
 attr
 dipy
-emc @ git+https://github.com/nipreps/EddyMotionCorrection.git@main
+git+https://github.com/nipreps/EddyMotionCorrection.git@main
 ghp-import
 jupyter-book
 jupytext
@@ -8,5 +8,6 @@ matplotlib
 nibabel
 nilearn
 nitransforms
+niworkflows
 numpy
 sphinx-exercise

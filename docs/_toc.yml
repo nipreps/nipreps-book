@@ -9,7 +9,7 @@
   - file: nipreps/community_development
 - part: tutorial
   chapters:
-  - file: step0
+  - file: head-motion/step0
   - file: head-motion/intro
   - file: head-motion/data
   - file: head-motion/models
