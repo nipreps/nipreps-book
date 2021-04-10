@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Diffusion modelling &#8212; NiPreps</title>
+    <title>Diffusion modeling &#8212; NiPreps</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -136,7 +136,7 @@
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Diffusion modelling
+   Diffusion modeling
   </a>
  </li>
  <li class="toctree-l1">
@@ -342,8 +342,8 @@
         
               <div>
                 
-  <div class="section" id="diffusion-modelling">
-<h1>Diffusion modelling<a class="headerlink" href="#diffusion-modelling" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="diffusion-modeling">
+<h1>Diffusion modeling<a class="headerlink" href="#diffusion-modeling" title="Permalink to this headline">¶</a></h1>
 <p>The proposed method requires inferring a motion-less, reference DW map for a given diffusion orientation for which we want to estimate the misalignment.
 Inference of the reference map is achieved by first fitting some diffusion model (which we will draw from <a class="reference external" href="https://dipy.org">DIPY</a>) using all data, except the particular DW map that is to be aligned.</p>
 <p>All models are required to offer the same API (application programmer interface):</p>
@@ -368,7 +368,7 @@ This model will always return the reference <em>b=0</em> map, regardless of the 
 In other words, it is just a <em><strong>constant</strong></em> model.</p>
 <p>Its simplicity does not diminish its great usefulness.
 First, when coding it is very important to build up iteratively in complexity.
-This model will allow to easily test the overal integration of the different components of our head-motion estimation algorithm.
+This model will allow to easily test the overall integration of the different components of our head-motion estimation algorithm.
 Also, this model will allow a very straightforward implementation of registration to the <em>b=0</em> reference, which is commonly used to initialize the head-motion estimation parameters.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -400,7 +400,7 @@ Also, this model will allow a very straightforward implementation of registratio
 </div>
 </div>
 </div>
-<p>The model can easily be initalized as follows (assuming we still have our dataset loaded):</p>
+<p>The model can easily be initialized as follows (assuming we still have our dataset loaded):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">TrivialB0Model</span><span class="p">(</span>
@@ -462,7 +462,7 @@ Also, this model will allow a very straightforward implementation of registratio
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gtab</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Implement object initialization.&quot;&quot;&quot;</span>
-        <span class="k">return</span>  <span class="c1"># do nothing at initalization time</span>
+        <span class="k">return</span>  <span class="c1"># do nothing at initialization time</span>
 
     <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Calculate the average.&quot;&quot;&quot;</span>
@@ -485,7 +485,7 @@ Also, this model will allow a very straightforward implementation of registratio
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gtab</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Implement object initialization.&quot;&quot;&quot;</span>
-        <span class="k">return</span>  <span class="c1"># do nothing at initalization time</span>
+        <span class="k">return</span>  <span class="c1"># do nothing at initialization time</span>
 
     <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Calculate the average.&quot;&quot;&quot;</span>
@@ -526,19 +526,6 @@ Also, this model will allow a very straightforward implementation of registratio
 <h2>Investigating the tensor model<a class="headerlink" href="#investigating-the-tensor-model" title="Permalink to this headline">¶</a></h2>
 <p>Now, we are ready to use the diffusion tensor model.
 We will use the wrap around DIPY’s implementation that we distribute with <code class="docutils literal notranslate"><span class="pre">eddymotion</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">plot_mosaic</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f91598abf50&gt;
-</pre></div>
-</div>
-<img alt="../_images/models_20_1.png" src="../_images/models_20_1.png" />
-</div>
-</div>
 <div class="section" id="the-model-factory">
 <h3>The model factory<a class="headerlink" href="#the-model-factory" title="Permalink to this headline">¶</a></h3>
 <p>To permit flexibly select models, the <code class="docutils literal notranslate"><span class="pre">eddymotion</span></code> package offers a <code class="docutils literal notranslate"><span class="pre">ModelFactory</span></code> that implements the <em>facade design pattern</em>.
@@ -578,7 +565,7 @@ This means that <code class="docutils literal notranslate"><span class="pre">Mod
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/models_26_0.png" src="../_images/models_26_0.png" />
+<img alt="../_images/models_25_0.png" src="../_images/models_25_0.png" />
 </div>
 </div>
 <p>Here’s the original DW map, for reference:</p>
@@ -589,7 +576,7 @@ This means that <code class="docutils literal notranslate"><span class="pre">Mod
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/models_28_0.png" src="../_images/models_28_0.png" />
+<img alt="../_images/models_27_0.png" src="../_images/models_27_0.png" />
 </div>
 </div>
 </div>
@@ -618,8 +605,8 @@ This means that <code class="docutils literal notranslate"><span class="pre">Mod
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/models_32_0.png" src="../_images/models_32_0.png" />
-<img alt="../_images/models_32_1.png" src="../_images/models_32_1.png" />
+<img alt="../_images/models_31_0.png" src="../_images/models_31_0.png" />
+<img alt="../_images/models_31_1.png" src="../_images/models_31_1.png" />
 </div>
 </div>
 </div>
