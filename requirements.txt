@@ -1,6 +1,6 @@
 attr
 dipy
-eddymotion >= 0.1.2
+git+https://github.com/nipreps/EddyMotionCorrection.git@main
 ghp-import
 jupyter-book
 jupytext
@@ -10,4 +10,5 @@ nilearn
 nitransforms
 niworkflows
 numpy
+requests
 sphinx-exercise
