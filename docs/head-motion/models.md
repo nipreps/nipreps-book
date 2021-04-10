@@ -185,7 +185,7 @@ data_train, data_test = dmri_dataset.logo_split(88, with_b0=True)
 ```
 
 ### The model factory
-To permit flexibly in selecting models, the `eddymotion` package offers a `ModelFactory` that implements the *facade design pattern*.
+To permit flexibility in selecting models, the `eddymotion` package offers a `ModelFactory` that implements the *facade design pattern*.
 This means that `ModelFactory` makes it easier for the user to switch between models:
 
 ```{code-cell} python
