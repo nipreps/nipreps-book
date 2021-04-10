@@ -199,7 +199,10 @@
 
     <div class="dropdown-buttons">
         <!-- ipynb file if we had a myst markdown file -->
-        
+        <a class="dropdown-buttons"
+            href="../_sources/head-motion/models.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
         <!-- Download raw file -->
         <a class="dropdown-buttons" href="../_sources/head-motion/models.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
@@ -234,11 +237,103 @@
 
             <!-- Launch buttons -->
 
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/nipreps/nipreps-book/main?urlpath=lab/tree/docs/head-motion/models.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
         </div>
 
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementing-a-trivial-model">
+   Implementing a trivial model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementing-a-regression-to-the-mean-model">
+   Implementing a
+   <em>
+    regression to the mean
+   </em>
+   model
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise">
+     Exercise
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Exercise
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#investigating-the-tensor-model">
+   Investigating the tensor model
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-model-factory">
+     The model factory
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#leveraging-the-fit-predict-api">
+     Leveraging the
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       fit()
+      </span>
+     </code>
+     /
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       predict()
+      </span>
+     </code>
+     API
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Exercise
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#next-steps-image-registration">
+   Next steps: image registration
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
         </div>
     </div>
 </div>
@@ -249,6 +344,290 @@
                 
   <div class="section" id="diffusion-modelling">
 <h1>Diffusion modelling<a class="headerlink" href="#diffusion-modelling" title="Permalink to this headline">¶</a></h1>
+<p>The proposed method requires inferring a motion-less, reference DW map for a given diffusion orientation for which we want to estimate the misalignment.
+Inference of the reference map is achieved by first fitting some diffusion model (which we will draw from <a class="reference external" href="https://dipy.org">DIPY</a>) using all data, except the particular DW map that is to be aligned.</p>
+<p>All models are required to offer the same API (application programmer interface):</p>
+<ol class="simple">
+<li><p>The initialization takes a gradient table as first argument, and then arbitrary parameters as keyword arguments.</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">fit(data)</span></code> method, which only requires a positional argument <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">predict(gradient)</span></code> method, which only requires a <code class="docutils literal notranslate"><span class="pre">gradient</span></code> entry (b-vector and b-value).</p></li>
+</ol>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eddymotion.dmri</span> <span class="kn">import</span> <span class="n">DWI</span>
+<span class="kn">from</span> <span class="nn">eddymotion.viz</span> <span class="kn">import</span> <span class="n">plot_dwi</span>
+<span class="n">dmri_dataset</span> <span class="o">=</span> <span class="n">DWI</span><span class="o">.</span><span class="n">from_filename</span><span class="p">(</span><span class="s2">&quot;../../data/dwi.h5&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="implementing-a-trivial-model">
+<h2>Implementing a trivial model<a class="headerlink" href="#implementing-a-trivial-model" title="Permalink to this headline">¶</a></h2>
+<p>We will first start implementing a <em>trivial</em> model.
+This model will always return the reference <em>b=0</em> map, regardless of the particular diffusion orientation model.
+In other words, it is just a <em><strong>constant</strong></em> model.</p>
+<p>Its simplicity does not diminish its great usefulness.
+First, when coding it is very important to build up iteratively in complexity.
+This model will allow to easily test the overal integration of the different components of our head-motion estimation algorithm.
+Also, this model will allow a very straightforward implementation of registration to the <em>b=0</em> reference, which is commonly used to initialize the head-motion estimation parameters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TrivialB0Model</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A trivial model that returns a *b=0* map always.</span>
+<span class="sd">    Implements the interface of :obj:`dipy.reconst.base.ReconstModel`.</span>
+<span class="sd">    Instead of inheriting from the abstract base, this implementation</span>
+<span class="sd">    follows type adaptation principles, as it is easier to maintain</span>
+<span class="sd">    and to read (see https://www.youtube.com/watch?v=3MNVP9-hglc).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;_S0&quot;</span><span class="p">,)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gtab</span><span class="p">,</span> <span class="n">S0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Implement object initialization.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">S0</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;S0 must be provided&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_S0</span> <span class="o">=</span> <span class="n">S0</span>
+
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Do nothing.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gradient</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the *b=0* map.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_S0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The model can easily be initalized as follows (assuming we still have our dataset loaded):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">TrivialB0Model</span><span class="p">(</span>
+	<span class="n">dmri_dataset</span><span class="o">.</span><span class="n">gradients</span><span class="p">,</span>
+	<span class="n">S0</span><span class="o">=</span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">bzero</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then, at each iteration of our estimation strategy, we will fit this model (which does nothing) to the diffusion weighted data after holding one particular direction (<code class="docutils literal notranslate"><span class="pre">data_test</span></code>) out:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_train</span><span class="p">,</span> <span class="n">data_test</span> <span class="o">=</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">logo_split</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data_train</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, we can generate our registration reference with the <code class="docutils literal notranslate"><span class="pre">predict()</span></code> method:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predicted</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data_test</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plot_dwi</span><span class="p">(</span><span class="n">predicted</span><span class="p">,</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span> <span class="n">gradient</span><span class="o">=</span><span class="n">data_test</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/nilearn/datasets/__init__.py:90: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
+  &quot;Numpy arrays.&quot;, FutureWarning)
+</pre></div>
+</div>
+<img alt="../_images/models_9_1.png" src="../_images/models_9_1.png" />
+</div>
+</div>
+<p>As expected, the <em>b=0</em> doesn’t look very much like the particular left-out direction, but it is a start!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_dwi</span><span class="p">(</span><span class="n">data_test</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span> <span class="n">gradient</span><span class="o">=</span><span class="n">data_test</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/models_11_0.png" src="../_images/models_11_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="implementing-a-regression-to-the-mean-model">
+<h2>Implementing a <em>regression to the mean</em> model<a class="headerlink" href="#implementing-a-regression-to-the-mean-model" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="exercise">
+<h3>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h3>
+<p><strong>Exercise</strong>: Extend the <code class="docutils literal notranslate"><span class="pre">TrivialB0Model</span></code> to produce an average of <em>all other</em> diffusion directions, instead of the <em>b=0</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AverageDWModel</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A trivial model that returns an average map.&quot;&quot;&quot;</span>
+
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;_data&quot;</span><span class="p">,)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gtab</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Implement object initialization.&quot;&quot;&quot;</span>
+        <span class="k">return</span>  <span class="c1"># do nothing at initalization time</span>
+
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calculate the average.&quot;&quot;&quot;</span>
+        <span class="c1"># self._data =  # Use numpy to calculate the average.</span>
+
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gradient</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the average map.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Solution</strong></p>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AverageDWModel</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A trivial model that returns an average map.&quot;&quot;&quot;</span>
+
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;_data&quot;</span><span class="p">,)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gtab</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Implement object initialization.&quot;&quot;&quot;</span>
+        <span class="k">return</span>  <span class="c1"># do nothing at initalization time</span>
+
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calculate the average.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span>  <span class="n">data</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gradient</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the average map.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id1">
+<h3>Exercise<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p><strong>Exercise</strong>: Use the new <code class="docutils literal notranslate"><span class="pre">AverageDWModel</span></code> you just created.
+<strong>Solution</strong></p>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">AverageDWModel</span><span class="p">(</span>
+    <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">gradients</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data_train</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">predicted</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data_test</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plot_dwi</span><span class="p">(</span><span class="n">predicted</span><span class="p">,</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span> <span class="n">gradient</span><span class="o">=</span><span class="n">data_test</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="n">plot_dwi</span><span class="p">(</span><span class="n">data_test</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span> <span class="n">gradient</span><span class="o">=</span><span class="n">data_test</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/models_17_0.png" src="../_images/models_17_0.png" />
+<img alt="../_images/models_17_1.png" src="../_images/models_17_1.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="investigating-the-tensor-model">
+<h2>Investigating the tensor model<a class="headerlink" href="#investigating-the-tensor-model" title="Permalink to this headline">¶</a></h2>
+<p>Now, we are ready to use the diffusion tensor model.
+We will use the wrap around DIPY’s implementation that we distribute with <code class="docutils literal notranslate"><span class="pre">eddymotion</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">plot_mosaic</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f91598abf50&gt;
+</pre></div>
+</div>
+<img alt="../_images/models_20_1.png" src="../_images/models_20_1.png" />
+</div>
+</div>
+<div class="section" id="the-model-factory">
+<h3>The model factory<a class="headerlink" href="#the-model-factory" title="Permalink to this headline">¶</a></h3>
+<p>To permit flexibly select models, the <code class="docutils literal notranslate"><span class="pre">eddymotion</span></code> package offers a <code class="docutils literal notranslate"><span class="pre">ModelFactory</span></code> that implements the <em>facade design pattern</em>.
+This means that <code class="docutils literal notranslate"><span class="pre">ModelFactory</span></code> makes it easier for the user to switch between models:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eddymotion.model</span> <span class="kn">import</span> <span class="n">ModelFactory</span>
+
+<span class="c1"># We are using now a full dataset, we need to split the data again</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">ModelFactory</span><span class="o">.</span><span class="n">init</span><span class="p">(</span>
+    <span class="n">gtab</span><span class="o">=</span><span class="n">data_train</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;Tensor&quot;</span><span class="p">,</span>
+    <span class="n">S0</span><span class="o">=</span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">bzero</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="leveraging-the-fit-predict-api">
+<h3>Leveraging the <code class="docutils literal notranslate"><span class="pre">fit()</span></code> / <code class="docutils literal notranslate"><span class="pre">predict()</span></code> API<a class="headerlink" href="#leveraging-the-fit-predict-api" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">ModelFactory</span></code> returns a model object that is compliant with the interface sketched above:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data_train</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">predicted</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data_test</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, the predicted map for the particular <em><strong>b</strong></em> gradient looks much closer to the original:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_dwi</span><span class="p">(</span><span class="n">predicted</span><span class="p">,</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span> <span class="n">gradient</span><span class="o">=</span><span class="n">data_test</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">black_bg</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/models_26_0.png" src="../_images/models_26_0.png" />
+</div>
+</div>
+<p>Here’s the original DW map, for reference:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_dwi</span><span class="p">(</span><span class="n">data_test</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span> <span class="n">gradient</span><span class="o">=</span><span class="n">data_test</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/models_28_0.png" src="../_images/models_28_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>Exercise<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p><strong>Exercise</strong>: Use the <code class="docutils literal notranslate"><span class="pre">ModelFactory</span></code> to initialize a <code class="docutils literal notranslate"><span class="pre">&quot;DKI&quot;</span></code> (diffusion Kurtosis imaging) model</p>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">ModelFactory</span><span class="o">.</span><span class="n">init</span><span class="p">(</span>
+    <span class="n">gtab</span><span class="o">=</span><span class="n">data_train</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;DKI&quot;</span><span class="p">,</span>
+    <span class="n">S0</span><span class="o">=</span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">bzero</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Once the model has been initialized, we can easily generate a new prediction.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data_train</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">predicted</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data_test</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plot_dwi</span><span class="p">(</span><span class="n">predicted</span><span class="p">,</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span> <span class="n">gradient</span><span class="o">=</span><span class="n">data_test</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">black_bg</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+<span class="n">plot_dwi</span><span class="p">(</span><span class="n">data_test</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span> <span class="n">gradient</span><span class="o">=</span><span class="n">data_test</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/models_32_0.png" src="../_images/models_32_0.png" />
+<img alt="../_images/models_32_1.png" src="../_images/models_32_1.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="next-steps-image-registration">
+<h2>Next steps: image registration<a class="headerlink" href="#next-steps-image-registration" title="Permalink to this headline">¶</a></h2>
+<p>Once we have our model factory readily available, it will be easy to generate predictions that we can use for reference in image registration.</p>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
