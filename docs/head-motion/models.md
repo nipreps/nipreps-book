@@ -19,7 +19,8 @@ All models are required to offer the same API (application programmer interface)
 
 1. The initialization takes a DIPY `GradientTable` as the first argument, and then arbitrary parameters as keyword arguments.
 2. A `fit(data)` method, which only requires a positional argument `data`, a 4D array with DWI data.
-3. A `predict(gradient_table)` method, which only requires a `GradientTable` as input. This method produces a prediction of the signal for every voxel in every direction represented in the input `gradient_table`.
+3. A `predict(gradient_table)` method, which only requires a `GradientTable` as input.
+   This method produces a prediction of the signal for every voxel in every direction represented in the input `gradient_table`.
 
 ```{code-cell} python
 :tags: [hide-cell]
