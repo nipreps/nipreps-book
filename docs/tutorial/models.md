@@ -78,6 +78,7 @@ The model can easily be initialized as follows (assuming we still have our datas
 ```{code-cell} python
 model = TrivialB0Model(
 	dmri_dataset.gradients,
+	S0=dmri_dataset.bzero,
 )
 ```
 
