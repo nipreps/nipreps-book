@@ -13,13 +13,13 @@ kernelspec:
 # Diffusion modeling
 
 The proposed method requires inferring a motion-less, reference DW map for a given diffusion orientation for which we want to estimate the misalignment.
-Inference of the reference map is achieved by first fitting some diffusion model (which we will draw from [DIPY](https://dipy.org)) using all data, except the particular DW map that is to be aligned.
+Inference of the reference map is achieved by first fitting some diffusion model (which we will draw from [DIPY](https://dipy.org)) using all data, except the particular DW map that is to be aligned. We call this scheme "leave one gradient out" or "logo".
 
 All models are required to offer the same API (application programmer interface):
 
-1. The initialization takes a gradient table as first argument, and then arbitrary parameters as keyword arguments.
-2. A `fit(data)` method, which only requires a positional argument `data`.
-3. A `predict(gradient)` method, which only requires a `gradient` entry (b-vector and b-value).
+1. The initialization takes a DIPY `GradientTable` as the first argument, and then arbitrary parameters as keyword arguments.
+2. A `fit(data)` method, which only requires a positional argument `data`, a 4D array with DWI data.
+3. A `predict(gradient_table)` method, which only requires a `GradientTable` as input. This method produces a prediction of the signal for every voxel in every direction represented in the input `gradient_table`.
 
 ```{code-cell} python
 :tags: [hide-cell]
@@ -50,34 +50,30 @@ class TrivialB0Model:
     and to read (see https://www.youtube.com/watch?v=3MNVP9-hglc).
     """
 
-    __slots__ = ("_S0",)
+    __slots__ = ("_gtab", "_model_params")
 
     def __init__(self, gtab, S0=None, **kwargs):
         """Implement object initialization."""
-        if S0 is None:
-            raise ValueError("S0 must be provided")
+        self._gtab
 
-        self._S0 = S0
-
-    def fit(self, *args, **kwargs):
+    def fit(self, data, **kwargs):
         """Do nothing."""
+        self._model_params = np.mean(np.data[..., self.gtab.b0s_mask], -1)
 
-    def predict(self, gradient, **kwargs):
+    def predict(self, gtab, **kwargs):
         """Return the *b=0* map."""
-        return self._S0
+        return self._model_params
 ```
-
 
 
 The model can easily be initialized as follows (assuming we still have our dataset loaded):
 ```{code-cell} python
 model = TrivialB0Model(
 	dmri_dataset.gradients,
-	S0=dmri_dataset.bzero
 )
 ```
 
-Then, at each iteration of our estimation strategy, we will fit this model (which does nothing) to the diffusion weighted data after holding one particular direction (`data_test`) out:
+Then, at each iteration of our estimation strategy, we will fit this model to the data, after holding one particular direction (`data_test`) out, using the `logo_split` method of the dataset. In every iteration, this finds the b=0 volumes in the data and averages their values in every voxel:
 
 ```{code-cell} python
 data_train, data_test = dmri_dataset.logo_split(10)
@@ -183,7 +179,7 @@ data_train, data_test = dmri_dataset.logo_split(88, with_b0=True)
 ```
 
 ### The model factory
-To permit flexibly select models, the `eddymotion` package offers a `ModelFactory` that implements the *facade design pattern*.
+To permit flexibly in selecting models, the `eddymotion` package offers a `ModelFactory` that implements the *facade design pattern*.
 This means that `ModelFactory` makes it easier for the user to switch between models:
 
 ```{code-cell} python
