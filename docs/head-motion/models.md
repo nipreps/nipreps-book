@@ -10,7 +10,7 @@ kernelspec:
   name: python3
 ---
 
-# Diffusion modelling
+# Diffusion modeling
 
 The proposed method requires inferring a motion-less, reference DW map for a given diffusion orientation for which we want to estimate the misalignment.
 Inference of the reference map is achieved by first fitting some diffusion model (which we will draw from [DIPY](https://dipy.org)) using all data, except the particular DW map that is to be aligned.
@@ -37,7 +37,7 @@ In other words, it is just a ***constant*** model.
 
 Its simplicity does not diminish its great usefulness.
 First, when coding it is very important to build up iteratively in complexity.
-This model will allow to easily test the overal integration of the different components of our head-motion estimation algorithm.
+This model will allow to easily test the overall integration of the different components of our head-motion estimation algorithm.
 Also, this model will allow a very straightforward implementation of registration to the *b=0* reference, which is commonly used to initialize the head-motion estimation parameters.
 
 ```{code-cell} python
@@ -69,7 +69,7 @@ class TrivialB0Model:
 
 
 
-The model can easily be initalized as follows (assuming we still have our dataset loaded):
+The model can easily be initialized as follows (assuming we still have our dataset loaded):
 ```{code-cell} python
 model = TrivialB0Model(
 	dmri_dataset.gradients,
@@ -109,7 +109,7 @@ class AverageDWModel:
 
     def __init__(self, gtab, **kwargs):
         """Implement object initialization."""
-        return  # do nothing at initalization time
+        return  # do nothing at initialization time
 
     def fit(self, data, **kwargs):
         """Calculate the average."""
@@ -131,7 +131,7 @@ class AverageDWModel:
 
     def __init__(self, gtab, **kwargs):
         """Implement object initialization."""
-        return  # do nothing at initalization time
+        return  # do nothing at initialization time
 
     def fit(self, data, **kwargs):
         """Calculate the average."""
@@ -180,10 +180,6 @@ if datapath.stat().st_size == 0:
 dmri_dataset = DWI.from_filename(datapath)
 datapath.unlink()
 data_train, data_test = dmri_dataset.logo_split(88, with_b0=True)
-```
-
-```{code-cell} python
-dmri_dataset.plot_mosaic()
 ```
 
 ### The model factory
