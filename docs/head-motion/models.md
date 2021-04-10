@@ -13,7 +13,8 @@ kernelspec:
 # Diffusion modeling
 
 The proposed method requires inferring a motion-less, reference DW map for a given diffusion orientation for which we want to estimate the misalignment.
-Inference of the reference map is achieved by first fitting some diffusion model (which we will draw from [DIPY](https://dipy.org)) using all data, except the particular DW map that is to be aligned. We call this scheme "leave one gradient out" or "logo".
+Inference of the reference map is achieved by first fitting some diffusion model (which we will draw from [DIPY](https://dipy.org)) using all data, except the particular DW map that is to be aligned.
+We call this scheme "leave one gradient out" or "logo".
 
 All models are required to offer the same API (application programmer interface):
 
