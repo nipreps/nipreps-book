@@ -7,8 +7,6 @@ copyright: "2021"
 sphinx:
   config:
     html_extra_path: ["assets"]
-  extra_extensions:
-    - sphinx_exercise
 
 # Execution settings
 execute:
