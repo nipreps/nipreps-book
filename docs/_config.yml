@@ -12,7 +12,7 @@ sphinx:
 
 # Execution settings
 execute:
-  timeout: 300
+  timeout: 3000
   execute_notebooks: auto
 
 # HTML-specific settings

@@ -98,6 +98,7 @@ plot_dwi(data_test[0], dmri_dataset.affine, gradient=data_test[1]);
 
 ## Implementing a *regression to the mean* model
 
+### Exercise
 **Exercise**: Extend the `TrivialB0Model` to produce an average of *all other* diffusion directions, instead of the *b=0*.
 
 ```{code-cell} python
@@ -141,6 +142,7 @@ class AverageDWModel:
         return self._data
 ```
 
+### Exercise
 **Exercise**: Use the new `AverageDWModel` you just created.
 **Solution**
 ```{code-cell} python
@@ -180,6 +182,10 @@ datapath.unlink()
 data_train, data_test = dmri_dataset.logo_split(88, with_b0=True)
 ```
 
+```{code-cell} python
+dmri_dataset.plot_mosaic()
+```
+
 ### The model factory
 To permit flexibly select models, the `eddymotion` package offers a `ModelFactory` that implements the *facade design pattern*.
 This means that `ModelFactory` makes it easier for the user to switch between models:
@@ -191,10 +197,52 @@ from eddymotion.model import ModelFactory
 
 model = ModelFactory.init(
     gtab=data_train[1],
-    model="Tensor"
+    model="Tensor",
+    S0=dmri_dataset.bzero,
 )
+```
+
+### Leveraging the `fit()` / `predict()` API
+
+The `ModelFactory` returns a model object that is compliant with the interface sketched above:
+
+```{code-cell} python
 model.fit(data_train[0])
 predicted = model.predict(data_test[1])
-plot_dwi(predicted, dmri_dataset.affine, gradient=data_test[1]);
+```
+
+Now, the predicted map for the particular ***b*** gradient looks much closer to the original:
+```{code-cell} python
+plot_dwi(predicted, dmri_dataset.affine, gradient=data_test[1], black_bg=True);
+```
+
+Here's the original DW map, for reference:
+```{code-cell} python
 plot_dwi(data_test[0], dmri_dataset.affine, gradient=data_test[1]);
 ```
+
+### Exercise
+
+**Exercise**: Use the `ModelFactory` to initialize a `"DKI"` (diffusion Kurtosis imaging) model
+```{code-cell} python
+:tags: [hide-cell]
+
+model = ModelFactory.init(
+    gtab=data_train[1],
+    model="DKI",
+    S0=dmri_dataset.bzero,
+)
+```
+
+Once the model has been initialized, we can easily generate a new prediction.
+
+```{code-cell} python
+model.fit(data_train[0])
+predicted = model.predict(data_test[1])
+plot_dwi(predicted, dmri_dataset.affine, gradient=data_test[1], black_bg=True)
+plot_dwi(data_test[0], dmri_dataset.affine, gradient=data_test[1])
+```
+
+## Next steps: image registration
+
+Once we have our model factory readily available, it will be easy to generate predictions that we can use for reference in image registration.
