@@ -41,28 +41,34 @@ This model will allow to easily test the overall integration of the different co
 Also, this model will allow a very straightforward implementation of registration to the *b=0* reference, which is commonly used to initialize the head-motion estimation parameters.
 
 ```{code-cell} python
+
 class TrivialB0Model:
     """
     A trivial model that returns a *b=0* map always.
+
     Implements the interface of :obj:`dipy.reconst.base.ReconstModel`.
     Instead of inheriting from the abstract base, this implementation
     follows type adaptation principles, as it is easier to maintain
     and to read (see https://www.youtube.com/watch?v=3MNVP9-hglc).
+
     """
 
-    __slots__ = ("_gtab", "_model_params")
+    __slots__ = ("_S0",)
 
     def __init__(self, gtab, S0=None, **kwargs):
         """Implement object initialization."""
-        self._gtab
+        if S0 is None:
+            raise ValueError("S0 must be provided")
 
-    def fit(self, data, **kwargs):
+        self._S0 = S0
+
+    def fit(self, *args, **kwargs):
         """Do nothing."""
-        self._model_params = np.mean(np.data[..., self.gtab.b0s_mask], -1)
 
-    def predict(self, gtab, **kwargs):
+    def predict(self, gradient, **kwargs):
         """Return the *b=0* map."""
-        return self._model_params
+        return self._S0
+
 ```
 
 
