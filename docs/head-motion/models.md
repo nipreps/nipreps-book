@@ -239,8 +239,8 @@ Once the model has been initialized, we can easily generate a new prediction.
 ```{code-cell} python
 model.fit(data_train[0])
 predicted = model.predict(data_test[1])
-plot_dwi(predicted, dmri_dataset.affine, gradient=data_test[1], black_bg=True)
-plot_dwi(data_test[0], dmri_dataset.affine, gradient=data_test[1])
+plot_dwi(predicted, dmri_dataset.affine, gradient=data_test[1], black_bg=True);
+plot_dwi(data_test[0], dmri_dataset.affine, gradient=data_test[1]);
 ```
 
 ## Next steps: image registration
