@@ -411,26 +411,8 @@ Also, this model will allow a very straightforward implementation of registratio
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">TrivialB0Model</span><span class="p">(</span>
 	<span class="n">dmri_dataset</span><span class="o">.</span><span class="n">gradients</span><span class="p">,</span>
+	<span class="n">S0</span><span class="o">=</span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">bzero</span><span class="p">,</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">3</span><span class="o">-</span><span class="mi">57</span><span class="n">ffd94e5f1e</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">model</span> <span class="o">=</span> <span class="n">TrivialB0Model</span><span class="p">(</span>
-<span class="ne">----&gt; </span><span class="mi">2</span>         <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">gradients</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="p">)</span>
-
-<span class="nn">&lt;ipython-input-2-85858524ea44&gt;</span> in <span class="ni">__init__</span><span class="nt">(self, gtab, S0, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span>         <span class="sd">&quot;&quot;&quot;Implement object initialization.&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span>         <span class="k">if</span> <span class="n">S0</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">17</span>             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;S0 must be provided&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span> 
-<span class="g g-Whitespace">     </span><span class="mi">19</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_S0</span> <span class="o">=</span> <span class="n">S0</span>
-
-<span class="ne">ValueError</span>: S0 must be provided
 </pre></div>
 </div>
 </div>
@@ -452,6 +434,13 @@ Also, this model will allow a very straightforward implementation of registratio
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/nilearn/datasets/__init__.py:90: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
+  &quot;Numpy arrays.&quot;, FutureWarning)
+</pre></div>
+</div>
+<img alt="../_images/models_9_1.png" src="../_images/models_9_1.png" />
+</div>
 </div>
 <p>As expected, the <em>b=0</em> doesn’t look very much like the particular left-out direction, but it is a start!</p>
 <div class="cell docutils container">
@@ -459,6 +448,9 @@ Also, this model will allow a very straightforward implementation of registratio
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_dwi</span><span class="p">(</span><span class="n">data_test</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span> <span class="n">gradient</span><span class="o">=</span><span class="n">data_test</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/models_11_0.png" src="../_images/models_11_0.png" />
 </div>
 </div>
 </div>
@@ -529,6 +521,10 @@ Also, this model will allow a very straightforward implementation of registratio
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/models_17_0.png" src="../_images/models_17_0.png" />
+<img alt="../_images/models_17_1.png" src="../_images/models_17_1.png" />
+</div>
 </div>
 </div>
 </div>
@@ -574,6 +570,9 @@ This means that <code class="docutils literal notranslate"><span class="pre">Mod
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/models_25_0.png" src="../_images/models_25_0.png" />
+</div>
 </div>
 <p>Here’s the original DW map, for reference:</p>
 <div class="cell docutils container">
@@ -581,6 +580,9 @@ This means that <code class="docutils literal notranslate"><span class="pre">Mod
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_dwi</span><span class="p">(</span><span class="n">data_test</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span> <span class="n">gradient</span><span class="o">=</span><span class="n">data_test</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/models_27_0.png" src="../_images/models_27_0.png" />
 </div>
 </div>
 </div>
@@ -607,6 +609,10 @@ This means that <code class="docutils literal notranslate"><span class="pre">Mod
 <span class="n">plot_dwi</span><span class="p">(</span><span class="n">data_test</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span> <span class="n">gradient</span><span class="o">=</span><span class="n">data_test</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/models_31_0.png" src="../_images/models_31_0.png" />
+<img alt="../_images/models_31_1.png" src="../_images/models_31_1.png" />
 </div>
 </div>
 </div>
