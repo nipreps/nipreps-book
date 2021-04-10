@@ -2,19 +2,27 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 - file: welcome
+
+- part: preparation
+  chapters:
+  - file: step0
+
 - part: nipreps
   chapters:
   - file: nipreps/nipreps
   - file: nipreps/dmriprep
-  - file: nipreps/community_development
+
+- part: opensource
+  chapters:
+  - file: opensource/community_development
+
 - part: tutorial
   chapters:
-  - file: head-motion/step0
-  - file: head-motion/intro
-  - file: head-motion/data
-  - file: head-motion/models
-  - file: head-motion/registration
-  - file: head-motion/solution
+  - file: tutorial/intro
+  - file: tutorial/data
+  - file: tutorial/models
+  - file: tutorial/registration
+  - file: tutorial/solution
 - part: extra
   chapters:
   - file: extra/nifti

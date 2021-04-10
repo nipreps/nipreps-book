@@ -15,8 +15,8 @@ Researchers resort to either:
 This tutorial has been designed to engage signal processing engineers and imaging researchers in the *NiPreps* community, demonstrating how to fill in the gaps of their pre-processing needs regardless of their field.
 
 ```{admonition} Objectives
-- Learn how to contribute to "open source" software
 - Get a tour of the *NiPreps* framework
+- Learn how to contribute to "open source" software
 - Understand the basics of dMRI data and pre-processing
 - Discover how to integrate some of the tools in the *NiPreps* framework
 ```
