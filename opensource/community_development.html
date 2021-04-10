@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Before we start: How to follow this tutorial &#8212; NiPreps</title>
+    <title>Community Development &#8212; NiPreps</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -55,8 +55,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="The problem of head-motion in dMRI" href="intro.html" />
-    <link rel="prev" title="Community Development" href="../nipreps/community_development.html" />
+    <link rel="next" title="The problem of head-motion in dMRI" href="../tutorial/intro.html" />
+    <link rel="prev" title="About dMRIPrep" href="../nipreps/dmriprep.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -107,8 +107,15 @@
    About dMRIPrep
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../nipreps/community_development.html">
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  opensource
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Community Development
   </a>
  </li>
@@ -118,34 +125,29 @@
   tutorial
  </span>
 </p>
-<ul class="current nav sidenav_l1">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Before we start: How to follow this tutorial
-  </a>
- </li>
+<ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="intro.html">
+  <a class="reference internal" href="../tutorial/intro.html">
    The problem of head-motion in dMRI
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="data.html">
+  <a class="reference internal" href="../tutorial/data.html">
    Introduction to dMRI data
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="models.html">
+  <a class="reference internal" href="../tutorial/models.html">
    Diffusion modeling
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="registration.html">
+  <a class="reference internal" href="../tutorial/registration.html">
    Image registration (spatial alignment)
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="solution.html">
+  <a class="reference internal" href="../tutorial/solution.html">
    Putting everything together
   </a>
  </li>
@@ -201,7 +203,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/head-motion/step0.md"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/opensource/community_development.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -246,18 +248,23 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#using-binder">
-   Using Binder
+  <a class="reference internal nav-link" href="#getting-started-with-github">
+   Getting started with GitHub
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#local-installation-bare-metal">
-   Local installation (“bare-metal”)
+  <a class="reference internal nav-link" href="#checking-the-contributing-guidelines">
+   Checking the contributing guidelines
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#local-installation-docker-containers">
-   Local installation (“docker containers”)
+  <a class="reference internal nav-link" href="#preparing-a-proposal-for-a-new-feature-documentation-or-a-bug-fix">
+   Preparing a proposal for a new feature, documentation, or a bug fix
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#making-a-change">
+   Making a change
   </a>
  </li>
 </ul>
@@ -272,36 +279,99 @@
         
               <div>
                 
-  <div class="section" id="before-we-start-how-to-follow-this-tutorial">
-<h1>Before we start: How to follow this tutorial<a class="headerlink" href="#before-we-start-how-to-follow-this-tutorial" title="Permalink to this headline">¶</a></h1>
-<p>This tutorial contains a mix of lecture-based and interactive components.
-The interactive components can be executed in your personal computer locally or using the Binder service.
-You are welcome to follow along however you like, whether you just want to listen or code along with us.
-Each of the chapters involving code are actually Jupyter notebooks!</p>
-<div class="section" id="using-binder">
-<h2>Using Binder<a class="headerlink" href="#using-binder" title="Permalink to this headline">¶</a></h2>
-<p>Clicking the Binder icon in the top right corner will launch an interactive computing environment with all of the necessary software packages pre-installed.</p>
-<div class="figure align-default" id="binder-link">
-<img alt="head-motion/images/binder_link.png" src="head-motion/images/binder_link.png" />
-<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Binder Link</span><a class="headerlink" href="#binder-link" title="Permalink to this image">¶</a></p>
+  <div class="section" id="community-development">
+<h1>Community Development<a class="headerlink" href="#community-development" title="Permalink to this headline">¶</a></h1>
+<div class="admonition-objectives admonition">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Discover how “open source” projects are organized (<em>NiPreps</em> in particular)</p></li>
+<li><p>Describe what a contribution is</p></li>
+<li><p>Learn where to get help before making a contribution</p></li>
+</ul>
 </div>
+<p>All <em>NiPreps</em> are open to community feedback and contributions.
+Contributing to seemingly big projects can feel scary at first. This lesson will help orient you to how an example <em>NiPreps</em> project is organized and how to begin making a contribution.</p>
+<div class="section" id="getting-started-with-github">
+<h2>Getting started with GitHub<a class="headerlink" href="#getting-started-with-github" title="Permalink to this headline">¶</a></h2>
+<p>For this example, let’s take a look at the <em>dMRIPrep</em> repository found <a class="reference external" href="https://github.com/nipreps/dmriprep">here</a>.</p>
+<div class="figure align-default" id="project-structure">
+<img alt="../_images/project_structure.png" src="../_images/project_structure.png" />
 </div>
-<div class="section" id="local-installation-bare-metal">
-<h2>Local installation (“bare-metal”)<a class="headerlink" href="#local-installation-bare-metal" title="Permalink to this headline">¶</a></h2>
-<p>If you would like to follow along using your own setup and you have a functional Python environment, you can:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. clone this repository</span>
-git clone https://github.com/nipreps/nipreps-book
-
-<span class="c1"># 2. install the necessary python packages in your Python environment</span>
-<span class="nb">cd</span> nipreps-book <span class="o">&amp;&amp;</span> pip install -r requirements.txt
-
-<span class="c1"># 3. launch a Jupyter lab instance</span>
-jupyter lab
+<p>The <code class="docutils literal notranslate"><span class="pre">README</span></code> is rendered on the main page of the project.
+If a project were a home, the <code class="docutils literal notranslate"><span class="pre">README</span></code> would be the door mat.
+It describes what the project does, who it is for, how to get started, and where to find key resources.</p>
+<p>Below is a more detailed breakdown of the project as well as a brief description of any areas of importance.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>dmriprep
+├── CHANGES.rst
+├── CONTRIBUTING.md
+├── Dockerfile
+├── LICENSE
+├── MANIFEST.in
+├── Makefile
+├── README.rst
+├── dmriprep                    # contains all code
+│   ├── cli/                    # contains code for adjusting the command line arguments
+│   ├── config/                 # contains configuration files
+│   ├── data/                   # contains sample data that can be used for testing code
+│   ├── interfaces/             # contains Nipype interfaces that act as building blocks for individual tasks
+│   ├── utils/                  # contains functions called by NiPype interfaces
+│   └── workflows               # contains NiPype workflows that are created by combining interfaces
+│       ├── base.py
+│       ├── dwi/
+│       └── fmap/
+├── docs/                       # contains code for building documentation
+├── get_version.py
+├── pyproject.toml
+├── setup.cfg
+├── setup.py
+└── versioneer.py
 </pre></div>
 </div>
 </div>
-<div class="section" id="local-installation-docker-containers">
-<h2>Local installation (“docker containers”)<a class="headerlink" href="#local-installation-docker-containers" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="checking-the-contributing-guidelines">
+<h2>Checking the contributing guidelines<a class="headerlink" href="#checking-the-contributing-guidelines" title="Permalink to this headline">¶</a></h2>
+<p>Before contributing to an open-source initiative, your first move <em>should</em> be checking how the project is seeking external feedback.
+Typically, that is stated in a <code class="docutils literal notranslate"><span class="pre">CONTRIBUTING.md</span></code> file located in the project’s root or <code class="docutils literal notranslate"><span class="pre">docs</span></code> folder.</p>
+<p>All <em>NiPreps</em> projects share a common set of <a class="reference external" href="https://nipreps.org/community/">contributing guidelines</a>.</p>
+<div class="figure align-default" id="contributing-guidelines">
+<img alt="images/contrib_guidelines.png" src="images/contrib_guidelines.png" />
+</div>
+</div>
+<div class="section" id="preparing-a-proposal-for-a-new-feature-documentation-or-a-bug-fix">
+<h2>Preparing a proposal for a new feature, documentation, or a bug fix<a class="headerlink" href="#preparing-a-proposal-for-a-new-feature-documentation-or-a-bug-fix" title="Permalink to this headline">¶</a></h2>
+<p>Impromptu contributions are typically difficult to absorb by projects involving several developers and/or with many users.
+For this reason, its best to first browse through the project’s <a class="reference external" href="https://github.com/nipreps/dmriprep">home page</a>.</p>
+<p>There are two locations where you’ll find details about ongoing and future work.
+The <a class="reference external" href="https://github.com/nipreps/dmriprep/pulls">existing and past pull requests tab</a> will give you an idea of what new features/bug fixes are currently in progress, and you can also check the requirements to get a pull request accepted by looking at closed (and “merged”) pull requests.</p>
+<p>Next to that tab, you’ll find <a class="reference external" href="https://github.com/nipreps/dmriprep/issues/">the issue tracker tab</a>.
+There, you should check that the feature you have in mind is not already in the works.
+Opening a new issue, requesting feedback, and gauging interest are generally very welcome.</p>
+<p>Head to <a class="reference external" href="https://nipreps.org/community/features/">the new features page</a> to learn more about the process of proposing a new feature.</p>
+</div>
+<div class="section" id="making-a-change">
+<h2>Making a change<a class="headerlink" href="#making-a-change" title="Permalink to this headline">¶</a></h2>
+<p>https://nipreps.org/community/CONTRIBUTING/#making-a-change</p>
+<p>Make sure your git credentials are configured.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git config --global user.name <span class="s2">&quot;Carl Jacobi&quot;</span>
+git config --global user.email <span class="s2">&quot;carl.jacobi@gmail.com&quot;</span>
+</pre></div>
+</div>
+<p>Fork the project of interest and clone your forked repository to your computer.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/carljacobi/dmriprep.git
+</pre></div>
+</div>
+<p>To keep up with changes, add the “upstream” repository as a remote to your locally cloned repository.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> dmriprep
+
+git remote add upstream https://github.com/nipreps/dmriprep.git
+</pre></div>
+</div>
+<p>Keep your fork up to date with the upstream repository.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git fetch upstream
+git checkout master
+git merge upstream/master
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -318,7 +388,7 @@ jupyter lab
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./head-motion"
+            path: "./opensource"
         },
         predefinedOutput: true
     }
@@ -330,8 +400,8 @@ jupyter lab
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../nipreps/community_development.html" title="previous page">Community Development</a>
-    <a class='right-next' id="next-link" href="intro.html" title="next page">The problem of head-motion in dMRI</a>
+    <a class='left-prev' id="prev-link" href="../nipreps/dmriprep.html" title="previous page">About dMRIPrep</a>
+    <a class='right-next' id="next-link" href="../tutorial/intro.html" title="next page">The problem of head-motion in dMRI</a>
 
         </div>
         
@@ -343,7 +413,7 @@ jupyter lab
         
           By The NiPreps developers<br/>
         
-            &copy; Copyright 2020.<br/>
+            &copy; Copyright 2021.<br/>
       </p>
     </div>
   </footer>

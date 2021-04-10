@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Putting everything together &#8212; NiPreps</title>
+    <title>Before we start: How to follow this tutorial &#8212; NiPreps</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -55,8 +55,6 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="The extra mile" href="../extra/nifti.html" />
-    <link rel="prev" title="Image registration (spatial alignment)" href="registration.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -107,8 +105,15 @@
    About dMRIPrep
   </a>
  </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  opensource
+ </span>
+</p>
+<ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../nipreps/community_development.html">
+  <a class="reference internal" href="../opensource/community_development.html">
    Community Development
   </a>
  </li>
@@ -118,34 +123,29 @@
   tutorial
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="step0.html">
-   Before we start: How to follow this tutorial
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="intro.html">
+  <a class="reference internal" href="../tutorial/intro.html">
    The problem of head-motion in dMRI
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="data.html">
+  <a class="reference internal" href="../tutorial/data.html">
    Introduction to dMRI data
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="models.html">
+  <a class="reference internal" href="../tutorial/models.html">
    Diffusion modeling
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="registration.html">
+  <a class="reference internal" href="../tutorial/registration.html">
    Image registration (spatial alignment)
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tutorial/solution.html">
    Putting everything together
   </a>
  </li>
@@ -201,7 +201,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/head-motion/solution.md"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/preparation/step0.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -239,6 +239,31 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-binder">
+   Using Binder
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#local-installation-bare-metal">
+   Local installation (“bare-metal”)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#local-installation-docker-containers">
+   Local installation (“docker containers”)
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
         </div>
     </div>
 </div>
@@ -247,8 +272,37 @@
         
               <div>
                 
-  <div class="section" id="putting-everything-together">
-<h1>Putting everything together<a class="headerlink" href="#putting-everything-together" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="before-we-start-how-to-follow-this-tutorial">
+<h1>Before we start: How to follow this tutorial<a class="headerlink" href="#before-we-start-how-to-follow-this-tutorial" title="Permalink to this headline">¶</a></h1>
+<p>This tutorial contains a mix of lecture-based and interactive components.
+The interactive components can be executed in your personal computer locally or using the Binder service.
+You are welcome to follow along however you like, whether you just want to listen or code along with us.
+Each of the chapters involving code are actually Jupyter notebooks!</p>
+<div class="section" id="using-binder">
+<h2>Using Binder<a class="headerlink" href="#using-binder" title="Permalink to this headline">¶</a></h2>
+<p>Clicking the Binder icon in the top right corner will launch an interactive computing environment with all of the necessary software packages pre-installed.</p>
+<div class="figure align-default" id="binder-link">
+<img alt="preparation/images/binder_link.png" src="preparation/images/binder_link.png" />
+<p class="caption"><span class="caption-text">Binder Link</span><a class="headerlink" href="#binder-link" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="local-installation-bare-metal">
+<h2>Local installation (“bare-metal”)<a class="headerlink" href="#local-installation-bare-metal" title="Permalink to this headline">¶</a></h2>
+<p>If you would like to follow along using your own setup and you have a functional Python environment, you can:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. clone this repository</span>
+git clone https://github.com/nipreps/nipreps-book
+
+<span class="c1"># 2. install the necessary python packages in your Python environment</span>
+<span class="nb">cd</span> nipreps-book <span class="o">&amp;&amp;</span> pip install -r requirements.txt
+
+<span class="c1"># 3. launch a Jupyter lab instance</span>
+jupyter lab
+</pre></div>
+</div>
+</div>
+<div class="section" id="local-installation-docker-containers">
+<h2>Local installation (“docker containers”)<a class="headerlink" href="#local-installation-docker-containers" title="Permalink to this headline">¶</a></h2>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -264,7 +318,7 @@
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./head-motion"
+            path: "./preparation"
         },
         predefinedOutput: true
     }
@@ -276,8 +330,6 @@
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="registration.html" title="previous page">Image registration (spatial alignment)</a>
-    <a class='right-next' id="next-link" href="../extra/nifti.html" title="next page">The extra mile</a>
 
         </div>
         
@@ -289,7 +341,7 @@
         
           By The NiPreps developers<br/>
         
-            &copy; Copyright 2020.<br/>
+            &copy; Copyright 2021.<br/>
       </p>
     </div>
   </footer>

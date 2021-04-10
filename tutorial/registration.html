@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The problem of head-motion in dMRI &#8212; NiPreps</title>
+    <title>Image registration (spatial alignment) &#8212; NiPreps</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -55,8 +55,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Introduction to dMRI data" href="data.html" />
-    <link rel="prev" title="Before we start: How to follow this tutorial" href="step0.html" />
+    <link rel="next" title="Putting everything together" href="solution.html" />
+    <link rel="prev" title="Diffusion modeling" href="models.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -107,8 +107,15 @@
    About dMRIPrep
   </a>
  </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  opensource
+ </span>
+</p>
+<ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../nipreps/community_development.html">
+  <a class="reference internal" href="../opensource/community_development.html">
    Community Development
   </a>
  </li>
@@ -120,12 +127,7 @@
 </p>
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="step0.html">
-   Before we start: How to follow this tutorial
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+  <a class="reference internal" href="intro.html">
    The problem of head-motion in dMRI
   </a>
  </li>
@@ -139,8 +141,8 @@
    Diffusion modeling
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="registration.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Image registration (spatial alignment)
   </a>
  </li>
@@ -201,7 +203,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/head-motion/intro.md"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/tutorial/registration.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -239,26 +241,6 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i>
-            Contents
-        </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#dimensions-of-the-head-motion-problem">
-   Dimensions of the head-motion problem
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#objective-implement-a-head-motion-estimation-code">
-   Objective: Implement a head-motion estimation code
-  </a>
- </li>
-</ul>
-
-        </nav>
-        
         </div>
     </div>
 </div>
@@ -267,29 +249,8 @@
         
               <div>
                 
-  <div class="section" id="the-problem-of-head-motion-in-dmri">
-<h1>The problem of head-motion in dMRI<a class="headerlink" href="#the-problem-of-head-motion-in-dmri" title="Permalink to this headline">¶</a></h1>
-<p>A recurring problem for any MRI acquisition is that image reconstruction and modeling are extremely sensitive to very small changes in the position of the imaged object.
-Rigid-body, bulk-motion of the head will degrade every image, even if the experimenters closely followed all the standard operation procedures and carefully prepared the experiment (e.g., setting correctly the head paddings), and even if the participant was experienced with the MR settings and strictly followed indications to avoid any movement outside time windows allocated for rest.
-This effect is exacerbated by the length of the acquisition (longer acquisitions will have more motion), and is not limited to humans.
-For instance, although rats are typically acquired with head fixations and under sedation, their breathing (especially when assisted) generally causes motion.
-Even the vibration of the scanner itself can introduce motion!</p>
-<p><video width="640" height="680" loop="yes" muted="yes" autoplay="yes" controls="yes"><source src="../videos/hm-sagittal.mp4" type="video/mp4"/></video></p>
-<div class="section" id="dimensions-of-the-head-motion-problem">
-<h2>Dimensions of the head-motion problem<a class="headerlink" href="#dimensions-of-the-head-motion-problem" title="Permalink to this headline">¶</a></h2>
-<p>These sudden and unavoidable motion of the head (for instance, when the participant swallowed) result in two degrading consequences that confuse the diffusion model through which we will attempt to understand the data:</p>
-<ul class="simple">
-<li><p><strong>Misalignment between the different angular samplings</strong>, which means that the same <em>(i, j, k)</em> voxel in one orientation will not contain a diffusion measurement of exactly the same anatomical location of the rest of the orientations (see <a class="reference external" href="http://ftp.nmr.mgh.harvard.edu/pub/docs/TraculaNov2013/tracula.workshop.iv.pdf">these slides by Dr. A. Yendiki in 2013</a>).</p></li>
-<li><p><strong>Attenuation</strong> in the recorded intensity of a particular orientation, especially present when the sudden motion occurred during the diffusion-encoding gradient pulse.</p></li>
-</ul>
-<p>While we can address the misalignment, it is really problematic to overcome the attenuation.</p>
-</div>
-<div class="section" id="objective-implement-a-head-motion-estimation-code">
-<h2>Objective: Implement a head-motion estimation code<a class="headerlink" href="#objective-implement-a-head-motion-estimation-code" title="Permalink to this headline">¶</a></h2>
-<p>This tutorial focuses on the misalignment problem.
-We will build from existing software (Dipy, for diffusion modeling) and ANTs (for image registration), as well as commonplace Python libraries (NumPy) a software framework for head-motion estimation in diffusion MRI data.</p>
-<p>The algorithmic and theoretical foundations of the method are described by Dr. M. Cieslak in his <a class="reference external" href="https://github.com/mattcieslak/ohbm_shoreline/blob/master/cieslakOHBM2019.pdf">OHBM 2019 poster</a>.</p>
-</div>
+  <div class="section" id="image-registration-spatial-alignment">
+<h1>Image registration (spatial alignment)<a class="headerlink" href="#image-registration-spatial-alignment" title="Permalink to this headline">¶</a></h1>
 </div>
 
     <script type="text/x-thebe-config">
@@ -305,7 +266,7 @@ We will build from existing software (Dipy, for diffusion modeling) and ANTs (fo
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./head-motion"
+            path: "./tutorial"
         },
         predefinedOutput: true
     }
@@ -317,8 +278,8 @@ We will build from existing software (Dipy, for diffusion modeling) and ANTs (fo
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="step0.html" title="previous page">Before we start: How to follow this tutorial</a>
-    <a class='right-next' id="next-link" href="data.html" title="next page">Introduction to dMRI data</a>
+    <a class='left-prev' id="prev-link" href="models.html" title="previous page">Diffusion modeling</a>
+    <a class='right-next' id="next-link" href="solution.html" title="next page">Putting everything together</a>
 
         </div>
         
@@ -330,7 +291,7 @@ We will build from existing software (Dipy, for diffusion modeling) and ANTs (fo
         
           By The NiPreps developers<br/>
         
-            &copy; Copyright 2020.<br/>
+            &copy; Copyright 2021.<br/>
       </p>
     </div>
   </footer>
