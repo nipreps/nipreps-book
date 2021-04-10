@@ -16,6 +16,8 @@ kernelspec:
 :tags: [hide-cell]
 
 import warnings
+from eddymotion.viz import plot_dwi
+
 warnings.filterwarnings("ignore")
 
 
@@ -144,3 +146,69 @@ Our `DWI` object stores the gradient information in the `gradients` attribute:
 ```{code-cell} python
 dmri_dataset.gradients.shape
 ```
+
+### The *LOGO* (leave-one-gradient-out) splitter
+One final behavior that will make our endeavor easier in the long run is a convenience method for data splitting.
+In particular, we are implementing some sort of cross-validation scheme where we will iterate over different data splits.
+In this case, the splitting strategy is a simple leave-one-out.
+Because one "*datapoint*" in our DW dataset corresponds to one gradient, we will refer to this partitioning of the dataset as *leave-one-gradient-out (LOGO)*:
+
+```{code-cell} python
+    def logo_split(self, index, with_b0=False):
+        """
+        Produce one fold of LOGO (leave-one-gradient-out).
+        
+        Parameters
+        ----------
+        index : :obj:`int`
+            Index of the DWI orientation to be left out in this fold.
+        with_b0 : :obj:`bool`
+            Insert the *b=0* reference at the beginning of the training dataset.
+
+        Return
+        ------
+        (train_data, train_gradients) : :obj:`tuple`
+            Training DWI and corresponding gradients.
+            Training data/gradients come **from the updated dataset**.
+        (test_data, test_gradients) :obj:`tuple`
+            Test 3D map (one DWI orientation) and corresponding b-vector/value.
+            The test data/gradient come **from the original dataset**.
+
+        """
+        dwframe = self.dataobj[..., index]
+        bframe = self.gradients[..., index]
+
+        # if the size of the mask does not match data, cache is stale
+        mask = np.zeros(len(self), dtype=bool)
+        mask[index] = True
+
+        train_data = self.dataobj[..., ~mask]
+        train_gradients = self.gradients[..., ~mask]
+
+        if with_b0:
+            train_data = np.concatenate(
+                (np.asanyarray(self.bzero)[..., np.newaxis], train_data),
+                axis=-1,
+            )
+            b0vec = np.zeros((4, 1))
+            b0vec[0, 0] = 1
+            train_gradients = np.concatenate(
+                (b0vec, train_gradients),
+                axis=-1,
+            )
+
+        return (
+            (train_data, train_gradients),
+            (dwframe, bframe),
+        )
+```
+
+This function will allow us to easily partition the dataset as follows:
+
+```{code-cell} python
+data_train, data_test = dmri_dataset.logo_split(10)
+plot_dwi(data_test[0], dmri_dataset.affine, gradient=data_test[1]);
+```
+
+where `data_train` is a tuple containing all DW volumes and corresponding gradient table excluding the left-out, which is store in `data_test`.
+Consequently, `data_test[0]` contains the held-out DW map and `data_test[1]` the corresponding gradient vector (RAS+B format).
