@@ -44,6 +44,11 @@ In summary, dMRI involves ***complex data types*** that, as programmers, we want
 Python is an [object oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming) language.
 It allows us to represent and encapsulate data types and corresponding behaviors into programming structures called *objects*.
 
+```{admonition} Data structures
+How you feed in data into your algorithm will impose constraints that might completely hinder the implementation of nonfunctional requirements down the line.
+Therefore, a careful plan must also be thought out for the data structures we are going to handle.
+```
+
 Therefore, let's leverage Python to create *objects* that contain dMRI data.
 In Python, *objects* can be specified by defining a class.
 In the example code below, we've created a class with the name `DWI`.

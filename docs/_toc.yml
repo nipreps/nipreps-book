@@ -19,7 +19,6 @@
 - part: tutorial
   chapters:
   - file: tutorial/intro
-  - file: tutorial/intro2
   - file: tutorial/data
   - file: tutorial/models
   - file: tutorial/registration
@@ -27,3 +26,5 @@
 - part: extra
   chapters:
   - file: extra/nifti
+  - file: extra/exercises
+  - file: extra/references

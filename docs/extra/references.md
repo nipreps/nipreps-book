@@ -1,4 +1,4 @@
-# Head-motion and eddy-currents estimation
+# References
 
 ```{admonition} Overview
 **Questions**
