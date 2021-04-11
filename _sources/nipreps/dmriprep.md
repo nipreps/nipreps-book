@@ -6,7 +6,7 @@ dMRIPrep is an analysis-agnostic tool that addresses the challenge of robust and
 
 ## Development
 
-In his 2019 ISMRM talk [^veraart2019], Jelle Veraart polled the developers of some of the major dMRI analysis software packages.
+In his 2019 ISMRM talk [^veraart2019], Dr. J. Veraart polled the developers of some of the major dMRI analysis software packages.
 The goal was to understand how much consensus there was in the field on whether to proceed with certain pre-processing steps.
 The poll showed that consensus is within reach.
 However, different pre-processing steps have varying levels of support.

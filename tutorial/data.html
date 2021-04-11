@@ -31,7 +31,6 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -276,27 +275,30 @@
   <a class="reference internal nav-link" href="#using-the-new-data-representation-object">
    Using the new data representation object
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#visualizing-the-data">
-     Visualizing the data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#visualizing-the-gradient-information">
-     Visualizing the gradient information
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-logo-leave-one-gradient-out-splitter">
-     The
-     <em>
-      LOGO
-     </em>
-     (leave-one-gradient-out) splitter
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualizing-the-data">
+   Visualizing the data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualizing-the-gradient-information">
+   Visualizing the gradient information
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-logo-leave-one-gradient-out-splitter">
+   The
+   <em>
+    LOGO
+   </em>
+   (leave-one-gradient-out) splitter
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#next-steps-diffusion-modeling">
+   Next steps: diffusion modeling
+  </a>
  </li>
 </ul>
 
@@ -315,42 +317,44 @@
 <div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
-<span class="kn">from</span> <span class="nn">eddymotion.viz</span> <span class="kn">import</span> <span class="n">plot_dwi</span>
 
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">_data_repr</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;None&quot;</span>
-    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;</span><span class="si">{</span><span class="s1">&#39;x&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">value</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">value</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="s2">)&gt;&quot;</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Diffusion imaging probes the random, microscopic motion of water protons by using MRI sequences that are sensitive to the geometry and environmental organization surrounding these protons.
+<p>Diffusion imaging probes the random, microscopic movement of water molecules by using MRI sequences that are sensitive to the geometry and environmental organization surrounding these protons.
 This is a popular technique for studying the white matter of the brain.
 The diffusion within biological structures, such as the brain, are often restricted due to barriers (eg. cell membranes), resulting in a preferred direction of diffusion (anisotropy).
-A typical dMRI scan will acquire multiple volumes (or <em><strong>angular samples</strong></em>), each sensitive to a particular <em><strong>diffusion direction</strong></em>.
-These <em>diffusion directions</em> (or <em><strong>orientations</strong></em>) are a fundamental piece of metadata to interpret dMRI data, as models need to know the exact orientation of each angular sample.</p>
+A typical dMRI scan will acquire multiple volumes (or <em><strong>angular samples</strong></em>), each sensitive to a particular <em><strong>diffusion direction</strong></em>.</p>
+<p><video loop="yes" muted="yes" autoplay="yes" controls="yes"><source src="../videos/dMRI-signal-movie.mp4" type="video/mp4"/></video></p>
+<p><em>Sourced from Dr. A. Rokem, DIPY Workshop 2021</em></p>
+<p>These <em>diffusion directions</em> (or <em><strong>orientations</strong></em>) are a fundamental piece of metadata to interpret dMRI data, as models need to know the exact orientation of each angular sample.</p>
 <div class="admonition-main-elements-of-a-dmri-dataset admonition">
 <p class="admonition-title">Main elements of a dMRI dataset</p>
 <ul class="simple">
 <li><p>A 4D data array, where the last dimension encodes the reconstructed <strong>diffusion direction <em>maps</em></strong>.</p></li>
-<li><p>Tabular data or a 2D array, listing the <strong>diffusion directions</strong> and the encoding gradient strength.</p></li>
+<li><p>Tabular data or a 2D array, listing the <strong>diffusion directions</strong> (<code class="docutils literal notranslate"><span class="pre">.bvec</span></code>) and the encoding <strong>gradient strength</strong> (<code class="docutils literal notranslate"><span class="pre">.bval</span></code>).</p></li>
 </ul>
 </div>
 <p>In summary, dMRI involves <em><strong>complex data types</strong></em> that, as programmers, we want to access, query and manipulate with ease.</p>
 <div class="section" id="python-and-object-oriented-programming">
 <h2>Python and object oriented programming<a class="headerlink" href="#python-and-object-oriented-programming" title="Permalink to this headline">¶</a></h2>
-<p>Python is an <a class="reference external" href="https://en.wikipedia.org/wiki/Object-oriented_programming">object oriented programming</a> language, which represent and encapsulate data types and corresponding behaviors into programming structures called <em>objects</em>.</p>
+<p>Python is an <a class="reference external" href="https://en.wikipedia.org/wiki/Object-oriented_programming">object oriented programming</a> language.
+It allows us to represent and encapsulate data types and corresponding behaviors into programming structures called <em>objects</em>.</p>
 <p>Therefore, let’s leverage Python to create <em>objects</em> that contain dMRI data.
-In Python, <em>objects</em> can be specified by defining a class with name <code class="docutils literal notranslate"><span class="pre">DWI</span></code>.
-To simplify class creation, we’ll use the magic of a Python library called <a class="reference external" href="https://www.attrs.org/en/stable/"><code class="docutils literal notranslate"><span class="pre">attrs</span></code></a>.</p>
+In Python, <em>objects</em> can be specified by defining a class.
+In the example code below, we’ve created a class with the name <code class="docutils literal notranslate"><span class="pre">DWI</span></code>.
+To simplify class creation, we’ve also used the magic of a Python library called <a class="reference external" href="https://www.attrs.org/en/stable/"><code class="docutils literal notranslate"><span class="pre">attrs</span></code></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Representing data in hard-disk and memory.&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">attr</span>
+
+<span class="k">def</span> <span class="nf">_data_repr</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;None&quot;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;</span><span class="si">{</span><span class="s1">&#39;x&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">value</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">value</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="s2">)&gt;&quot;</span>
 
 
 <span class="nd">@attr</span><span class="o">.</span><span class="n">s</span><span class="p">(</span><span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -378,18 +382,18 @@ To simplify class creation, we’ll use the magic of a Python library called <a 
 </div>
 </div>
 </div>
-<p>This first code implements several <em>attributes</em> and the first <em>behavior</em> - the <code class="docutils literal notranslate"><span class="pre">__len__</span></code> <em>method</em>.
-The <code class="docutils literal notranslate"><span class="pre">__len__</span></code> method is special in Python, as it will be executed when we call the built-in function <code class="docutils literal notranslate"><span class="pre">len()</span></code> on our object.
-Let’s test this memory structure with some <em>simulated</em> data:</p>
+<p>This code implements several <em>attributes</em> as well as a <em>behavior</em> - the <code class="docutils literal notranslate"><span class="pre">__len__</span></code> <em>method</em>.
+The <code class="docutils literal notranslate"><span class="pre">__len__</span></code> method is special in Python, as it will be executed when we call the built-in function <code class="docutils literal notranslate"><span class="pre">len()</span></code> on our object.</p>
+<p>Let’s test out the <code class="docutils literal notranslate"><span class="pre">DWI</span></code> data structure with some <em>simulated</em> data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># NumPy is a fundamental Python library</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># NumPy is a fundamental Python library for working with arrays</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="c1"># Let&#39;s create a new DWI object, with only gradient information that is random</span>
+<span class="c1"># create a new DWI object, with only gradient information that is random</span>
 <span class="n">dmri_dataset</span> <span class="o">=</span> <span class="n">DWI</span><span class="p">(</span><span class="n">gradients</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">64</span><span class="p">)))</span>
 
-<span class="c1"># Let&#39;s call Python&#39;s built-in len() function</span>
+<span class="c1"># call Python&#39;s built-in len() function</span>
 <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dmri_dataset</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -400,20 +404,20 @@ Let’s test this memory structure with some <em>simulated</em> data:</p>
 </div>
 </div>
 </div>
-<p>The output of this <code class="docutils literal notranslate"><span class="pre">print()</span></code> statement is telling us that this (simulated) dataset has 64 diffusion weighted samples.</p>
+<p>The output of this <code class="docutils literal notranslate"><span class="pre">print()</span></code> statement is telling us that this (simulated) dataset has 64 diffusion-weighted samples.</p>
 </div>
 <div class="section" id="using-the-new-data-representation-object">
 <h2>Using the new data representation object<a class="headerlink" href="#using-the-new-data-representation-object" title="Permalink to this headline">¶</a></h2>
-<p>For simplicity, we will be using the full implementation of the <code class="docutils literal notranslate"><span class="pre">DWI</span></code> class from our <a class="reference external" href="https://github.com/nipreps/EddyMotionCorrection/blob/57c518929146b23cc9534ab0b2d024aa136e25f8/emc/dmri.py"><code class="docutils literal notranslate"><span class="pre">eddymotion</span></code> package</a>
+<p>The code shown above was just a snippet of the <code class="docutils literal notranslate"><span class="pre">DWI</span></code> class. For simplicity, we will be using the full implementation of this class from our <a class="reference external" href="https://github.com/nipreps/EddyMotionCorrection/blob/main/eddymotion/dmri.py"><code class="docutils literal notranslate"><span class="pre">eddymotion</span></code> package</a>
 Under the <code class="docutils literal notranslate"><span class="pre">data/</span></code> folder of this book’s distribution, we have stored a sample DWI dataset with filename <code class="docutils literal notranslate"><span class="pre">dwi.h5</span></code>.
-Please note that the file has been minimized by zeroing all but two diffusion weighted orientation maps.
-Let’s get some insights from it:</p>
+Please note that the file has been minimized by zeroing all but two diffusion-weighted orientation maps.</p>
+<p>Let’s get some insights from it:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the class from the library</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import the class from the library</span>
 <span class="kn">from</span> <span class="nn">eddymotion.dmri</span> <span class="kn">import</span> <span class="n">DWI</span>
 
-<span class="c1"># Load the sample file</span>
+<span class="c1"># load the sample file</span>
 <span class="n">dmri_dataset</span> <span class="o">=</span> <span class="n">DWI</span><span class="o">.</span><span class="n">from_filename</span><span class="p">(</span><span class="s2">&quot;../../data/dwi.h5&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dmri_dataset</span><span class="p">))</span>
 </pre></div>
@@ -425,9 +429,9 @@ Let’s get some insights from it:</p>
 </div>
 </div>
 </div>
-<p>In this case, the dataset is reporting to have 102 diffusion weighted samples.</p>
-<p>Python will automatically generate a summary of this object if we just issue the name of our new object.
-This pretty-printing of the object informs us about the data and metadata that together compose this particular DWI dataset:</p>
+<p>In this case, the dataset is reporting to have 102 diffusion-weighted samples.</p>
+<p>Python will automatically generate a summary of this object if we just type the name of our new object.
+This pretty-printing of the object informs us about the data and metadata that, together, compose this particular DWI dataset:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dmri_dataset</span>
@@ -440,50 +444,76 @@ This pretty-printing of the object informs us about the data and metadata that t
 </div>
 </div>
 </div>
+<p>We’ll go over some of the components of <code class="docutils literal notranslate"><span class="pre">dmri_dataset</span></code> through this lesson.</p>
+</div>
 <div class="section" id="visualizing-the-data">
-<h3>Visualizing the data<a class="headerlink" href="#visualizing-the-data" title="Permalink to this headline">¶</a></h3>
-<p>The fully-fledged <code class="docutils literal notranslate"><span class="pre">DWI</span></code> object has a convenience function to plot the dataset:</p>
+<h2>Visualizing the data<a class="headerlink" href="#visualizing-the-data" title="Permalink to this headline">¶</a></h2>
+<p>Let’s start out by seeing what the data looks like.
+The fully-fledged <code class="docutils literal notranslate"><span class="pre">DWI</span></code> object has a convenience function to plot the dataset:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">plot_mosaic</span><span class="p">();</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">plot_mosaic</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/data_11_0.png" src="../_images/data_11_0.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f6d3ae8b810&gt;
+</pre></div>
+</div>
+<img alt="../_images/data_11_1.png" src="../_images/data_11_1.png" />
 </div>
 </div>
-<p>When calling <code class="docutils literal notranslate"><span class="pre">plot_mosaic()</span></code> without arguments, the <em>b=0</em> reference is plotted.
+<p>When calling <code class="docutils literal notranslate"><span class="pre">plot_mosaic()</span></code> without any arguments, the <em>b=0</em> reference is plotted.
 This <em>b=0</em> reference is a map of the signal measured <em><strong>without gradient sensitization</strong></em>, or in other words, when we are not measuring diffusion in any direction.
 The <em>b=0</em> map can be used by diffusion modeling as the reference to quantify the signal drop at every voxel and given a particular orientation gradient.</p>
-<p>We can also get an insight of how a diffusion weighted orientation looks like by selecting them with the argument <code class="docutils literal notranslate"><span class="pre">index</span></code>:</p>
-<div class="cell docutils container">
+<p>We can also get some insight into how a particular diffusion-weighted orientation looks like by selecting them with the argument <code class="docutils literal notranslate"><span class="pre">index</span></code>.</p>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Try calling <code class="docutils literal notranslate"><span class="pre">plot_mosaic</span></code> with an index of 10 or 100.</p>
+</div>
+<p><strong>Solution</strong></p>
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">plot_mosaic</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">10</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">plot_mosaic</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/data_13_0.png" src="../_images/data_13_0.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f6d3b1e58d0&gt;
+</pre></div>
+</div>
+<img alt="../_images/data_13_1.png" src="../_images/data_13_1.png" />
 </div>
 </div>
 <p>or:</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">plot_mosaic</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">100</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">plot_mosaic</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/data_15_0.png" src="../_images/data_15_0.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f6d3b05e410&gt;
+</pre></div>
+</div>
+<img alt="../_images/data_15_1.png" src="../_images/data_15_1.png" />
 </div>
 </div>
-<p>As we can see, <em><strong>diffusion weighted</strong></em> images consistently drop almost all signal in voxels filled with cerebrospinal fluid because there, water-diffusion is free regardless of the direction you are measuring in.</p>
+<p>Diffusion that exhibits directionality in the same direction as the gradient results in a loss of signal.
+As we can see, <em><strong>diffusion-weighted</strong></em> images consistently drop almost all signal in voxels filled with cerebrospinal fluid because there, water diffusion is free (isotropic) regardless of the direction that is being measured.</p>
+<p>We can also see that the images at <code class="docutils literal notranslate"><span class="pre">index=10</span></code> and <code class="docutils literal notranslate"><span class="pre">index=100</span></code> have different gradient strengths.
+The higher the magnitude of the gradient, the more diffusion that is allowed to occur, indicated by the overall decrease in signal intensity.
+There is also a lot more noise.</p>
 </div>
 <div class="section" id="visualizing-the-gradient-information">
-<h3>Visualizing the gradient information<a class="headerlink" href="#visualizing-the-gradient-information" title="Permalink to this headline">¶</a></h3>
-<p>Our <code class="docutils literal notranslate"><span class="pre">DWI</span></code> object stores the gradient information in the <code class="docutils literal notranslate"><span class="pre">gradients</span></code> attribute:</p>
-<div class="cell docutils container">
+<h2>Visualizing the gradient information<a class="headerlink" href="#visualizing-the-gradient-information" title="Permalink to this headline">¶</a></h2>
+<p>Our <code class="docutils literal notranslate"><span class="pre">DWI</span></code> object stores the gradient information in the <code class="docutils literal notranslate"><span class="pre">gradients</span></code> attribute.</p>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Let’s see the shape of the gradient information</p>
+</div>
+<p><strong>Solution</strong></p>
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">gradients</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
@@ -495,81 +525,228 @@ The <em>b=0</em> map can be used by diffusion modeling as the reference to quant
 </div>
 </div>
 </div>
+<p>We get a $4\times102$.</p>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Try printing the gradient information to see what it contains.
+Remember to transpose (<code class="docutils literal notranslate"><span class="pre">.T</span></code>) the array</p>
 </div>
-<div class="section" id="the-logo-leave-one-gradient-out-splitter">
-<h3>The <em>LOGO</em> (leave-one-gradient-out) splitter<a class="headerlink" href="#the-logo-leave-one-gradient-out-splitter" title="Permalink to this headline">¶</a></h3>
-<p>One final behavior that will make our endeavor easier in the long run is a convenience method for data splitting.
-In particular, we are implementing some sort of cross-validation scheme where we will iterate over different data splits.
-In this case, the splitting strategy is a simple leave-one-out.
-Because one “<em>datapoint</em>” in our DW dataset corresponds to one gradient, we will refer to this partitioning of the dataset as <em>leave-one-gradient-out (LOGO)</em>:</p>
-<div class="cell docutils container">
+<p><strong>Solution</strong></p>
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">logo_split</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">with_b0</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Produce one fold of LOGO (leave-one-gradient-out).</span>
-<span class="sd">        </span>
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        index : :obj:`int`</span>
-<span class="sd">            Index of the DWI orientation to be left out in this fold.</span>
-<span class="sd">        with_b0 : :obj:`bool`</span>
-<span class="sd">            Insert the *b=0* reference at the beginning of the training dataset.</span>
-
-<span class="sd">        Return</span>
-<span class="sd">        ------</span>
-<span class="sd">        (train_data, train_gradients) : :obj:`tuple`</span>
-<span class="sd">            Training DWI and corresponding gradients.</span>
-<span class="sd">            Training data/gradients come **from the updated dataset**.</span>
-<span class="sd">        (test_data, test_gradients) :obj:`tuple`</span>
-<span class="sd">            Test 3D map (one DWI orientation) and corresponding b-vector/value.</span>
-<span class="sd">            The test data/gradient come **from the original dataset**.</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">dwframe</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataobj</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">index</span><span class="p">]</span>
-        <span class="n">bframe</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gradients</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">index</span><span class="p">]</span>
-
-        <span class="c1"># if the size of the mask does not match data, cache is stale</span>
-        <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
-        <span class="n">mask</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-
-        <span class="n">train_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataobj</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="o">~</span><span class="n">mask</span><span class="p">]</span>
-        <span class="n">train_gradients</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gradients</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="o">~</span><span class="n">mask</span><span class="p">]</span>
-
-        <span class="k">if</span> <span class="n">with_b0</span><span class="p">:</span>
-            <span class="n">train_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span>
-                <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asanyarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bzero</span><span class="p">)[</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">train_data</span><span class="p">),</span>
-                <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
-            <span class="p">)</span>
-            <span class="n">b0vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-            <span class="n">b0vec</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-            <span class="n">train_gradients</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span>
-                <span class="p">(</span><span class="n">b0vec</span><span class="p">,</span> <span class="n">train_gradients</span><span class="p">),</span>
-                <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
-            <span class="p">)</span>
-
-        <span class="k">return</span> <span class="p">(</span>
-            <span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">train_gradients</span><span class="p">),</span>
-            <span class="p">(</span><span class="n">dwframe</span><span class="p">,</span> <span class="n">bframe</span><span class="p">),</span>
-        <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>This function will allow us to easily partition the dataset as follows:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_train</span><span class="p">,</span> <span class="n">data_test</span> <span class="o">=</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">logo_split</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">plot_dwi</span><span class="p">(</span><span class="n">data_test</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span> <span class="n">gradient</span><span class="o">=</span><span class="n">data_test</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">gradients</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/data_21_0.png" src="../_images/data_21_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-6.04914188e-01 -6.79875135e-01 -4.14546251e-01  3.00000000e+02]
+ [ 7.51762651e-03  9.17056799e-01 -3.98685753e-01  3.00000000e+02]
+ [-8.86579394e-01  3.21218759e-01 -3.32859576e-01  3.00000000e+02]
+ [ 8.16364467e-01  2.68300444e-01 -5.11433184e-01  3.00000000e+02]
+ [ 4.34362024e-01 -7.33946085e-01 -5.22161603e-01  3.00000000e+02]
+ [ 9.60559174e-02 -7.31587410e-02  9.92683768e-01  3.05000000e+02]
+ [ 5.85605621e-01  7.62755051e-02  8.06999445e-01  1.00500000e+03]
+ [ 1.32749856e-01  3.81094962e-01 -9.14955795e-01  9.95000000e+02]
+ [-9.10080016e-01  3.49084914e-01  2.23369867e-01  1.00000000e+03]
+ [-1.42672375e-01 -9.87846315e-01 -6.16788231e-02  1.00000000e+03]
+ [-3.14908028e-01  4.70339447e-01  8.24386895e-01  1.00500000e+03]
+ [ 9.26234543e-01  3.46899480e-01 -1.47479758e-01  1.00000000e+03]
+ [ 6.95218086e-01  6.17206156e-01 -3.68413389e-01  9.95000000e+02]
+ [ 1.79834515e-01 -9.48279917e-01  2.61581242e-01  1.00000000e+03]
+ [-5.72267652e-01  8.19448650e-01 -3.18384580e-02  1.00000000e+03]
+ [ 6.62053525e-01 -3.44300926e-01  6.65689111e-01  1.00500000e+03]
+ [-1.81866080e-01  7.04759300e-01 -6.85739756e-01  9.95000000e+02]
+ [-6.36256397e-01 -7.67920136e-01 -7.40036741e-02  1.00000000e+03]
+ [-2.50486493e-01 -7.25317061e-01  6.41226709e-01  1.00500000e+03]
+ [-1.81372240e-01 -5.50868332e-01 -8.14646065e-01  9.95000000e+02]
+ [ 2.51025885e-01 -9.41051543e-01 -2.26733208e-01  1.00000000e+03]
+ [ 8.59194577e-01  4.16565776e-01  2.97081828e-01  1.00000000e+03]
+ [-5.87923348e-01 -4.98144925e-01 -6.37336493e-01  9.95000000e+02]
+ [-2.08524555e-01  6.58749491e-02  9.75796103e-01  1.00500000e+03]
+ [-8.81649256e-01 -4.38893167e-03 -4.71884906e-01  9.95000000e+02]
+ [-6.17551386e-01  6.92788363e-01  3.72390330e-01  1.00000000e+03]
+ [-2.11339086e-01 -1.57031611e-01 -9.64715958e-01  9.95000000e+02]
+ [ 5.63584268e-01  3.84537101e-01 -7.31097817e-01  9.95000000e+02]
+ [-1.04902856e-01  7.80609608e-01  6.16152585e-01  1.00500000e+03]
+ [-3.27980161e-01 -8.34259689e-01 -4.43215251e-01  1.00000000e+03]
+ [ 9.97081280e-01 -3.60786468e-02  6.72850981e-02  1.00000000e+03]
+ [-3.64686340e-01 -8.92125309e-01  2.66676456e-01  1.00000000e+03]
+ [ 2.97879040e-01 -3.06824297e-01  9.03950751e-01  1.00500000e+03]
+ [ 7.01884270e-01 -3.75511825e-01 -6.05267942e-01  9.95000000e+02]
+ [ 5.85624397e-01 -2.57630497e-02 -8.10173035e-01  9.95000000e+02]
+ [ 8.74492407e-01  2.43720673e-02 -4.84426469e-01  9.95000000e+02]
+ [ 5.51209927e-01 -7.06570625e-01  4.43762958e-01  1.00500000e+03]
+ [ 8.55460048e-01 -4.86520320e-01  1.77443221e-01  1.00000000e+03]
+ [-6.43364310e-01 -2.89421439e-01 -7.08743691e-01  1.99500000e+03]
+ [ 1.21839322e-01  3.67268413e-01  9.22100365e-01  2.01000000e+03]
+ [ 8.67053568e-01 -2.20949143e-01 -4.46541786e-01  1.99500000e+03]
+ [-7.46472776e-01  8.38321110e-04 -6.65415406e-01  1.99500000e+03]
+ [ 3.49373311e-01  4.06477451e-01 -8.44224155e-01  1.99000000e+03]
+ [-5.60097814e-01  1.76819220e-01 -8.09336364e-01  1.99500000e+03]
+ [-4.30994742e-02  9.74978864e-01  2.18079522e-01  2.00000000e+03]
+ [-2.40879446e-01  8.55759144e-01  4.57879245e-01  2.00500000e+03]
+ [-7.79660225e-01 -6.15284383e-01  1.16426118e-01  2.00000000e+03]
+ [ 4.48004901e-01 -8.49978268e-01  2.77179599e-01  2.00500000e+03]
+ [ 3.74817163e-01 -9.27097678e-01 -1.41696935e-03  2.00000000e+03]
+ [ 6.10155761e-01 -5.36033213e-01  5.83419502e-01  2.00500000e+03]
+ [ 9.50321257e-01 -1.07752405e-01  2.92025506e-01  2.00000000e+03]
+ [-8.09516788e-01  2.45182857e-01 -5.33449113e-01  1.99500000e+03]
+ [ 9.56617057e-01 -2.84275055e-01  6.38084337e-02  2.00000000e+03]
+ [ 4.44206297e-01  6.86384022e-01  5.75810552e-01  2.00500000e+03]
+ [ 9.54805911e-01  1.77383393e-01  2.38497064e-01  2.00000000e+03]
+ [ 6.78448856e-01  4.65783864e-01 -5.68113148e-01  1.99500000e+03]
+ [-1.22661926e-01 -5.87784886e-01  7.99664319e-01  2.00500000e+03]
+ [ 4.10763621e-01 -1.32623598e-01 -9.02044475e-01  1.99000000e+03]
+ [-9.28761899e-01 -1.47203013e-01  3.40195030e-01  2.00500000e+03]
+ [-4.32663143e-01  4.41911817e-01 -7.85822213e-01  1.99500000e+03]
+ [-1.73938900e-01 -7.22244203e-01 -6.69409096e-01  1.99500000e+03]
+ [ 3.93927962e-01  4.76803184e-01  7.85798609e-01  2.00500000e+03]
+ [ 2.16246262e-01 -8.66339266e-01  4.50215280e-01  2.00500000e+03]
+ [ 5.89937627e-01 -5.72140634e-01 -5.69761992e-01  1.99500000e+03]
+ [ 3.72014821e-01  9.28178847e-01 -9.43302456e-03  2.00000000e+03]
+ [ 8.53485584e-01 -5.17996848e-01 -5.69352657e-02  2.00000000e+03]
+ [ 2.51451343e-01  9.32365298e-01  2.59744376e-01  2.00000000e+03]
+ [ 6.35405779e-02 -5.95680475e-01 -8.00704300e-01  1.99500000e+03]
+ [-7.51151621e-01 -6.28546119e-01 -2.01744899e-01  2.00000000e+03]
+ [-1.09398387e-01  9.92227495e-01 -5.93008772e-02  2.00000000e+03]
+ [-5.18000782e-01  3.63550693e-01  7.74277806e-01  2.00500000e+03]
+ [-8.37094843e-01 -4.31998879e-01  3.35632533e-01  2.00500000e+03]
+ [ 7.27129698e-01  1.49743423e-01 -6.69969618e-01  1.99500000e+03]
+ [-5.17419696e-01 -7.40754366e-01  4.28438783e-01  2.00500000e+03]
+ [ 7.27875590e-01  4.97373462e-01  4.72034663e-01  2.00500000e+03]
+ [-3.26542199e-01  7.36291781e-02 -9.42310452e-01  1.99000000e+03]
+ [-6.14776909e-02 -8.78977180e-01 -4.72884387e-01  1.99500000e+03]
+ [-7.73990631e-01  5.15239596e-01 -3.68057936e-01  1.99500000e+03]
+ [-3.58383171e-03  1.07271522e-01  9.94223297e-01  2.01000000e+03]
+ [-1.60011083e-01  5.34122169e-01 -8.30126464e-01  1.99000000e+03]
+ [ 9.88182724e-01  1.43299058e-01 -5.44080175e-02  2.00000000e+03]
+ [-9.05943990e-01 -4.18793827e-01 -6.22674413e-02  2.00000000e+03]
+ [ 2.03286484e-01  1.53597519e-01 -9.66996610e-01  1.99000000e+03]
+ [ 4.36532289e-01  6.08863235e-01 -6.62363291e-01  1.99500000e+03]
+ [ 6.82894647e-01 -7.17134774e-01 -1.39185578e-01  2.00000000e+03]
+ [ 7.86479354e-01 -4.98139858e-01 -3.65112156e-01  1.99500000e+03]
+ [-4.65987802e-01  8.39519799e-01  2.79395491e-01  2.00000000e+03]
+ [ 7.21606970e-01 -1.46813065e-01 -6.76556945e-01  1.99500000e+03]
+ [ 5.12317955e-01  8.17944586e-01  2.61719227e-01  2.00000000e+03]
+ [ 3.80590975e-01 -6.98121727e-01  6.06445849e-01  2.00500000e+03]
+ [ 3.18718821e-01 -6.50580406e-01 -6.89320982e-01  1.99500000e+03]
+ [ 4.12478864e-01  2.02624902e-01  8.88146579e-01  2.00500000e+03]
+ [ 1.32435739e-01  9.71343756e-01 -1.97362855e-01  1.99500000e+03]
+ [-9.72415447e-01  1.24751076e-01  1.97092354e-01  2.00000000e+03]
+ [-2.45995522e-01 -8.56899619e-01  4.53000307e-01  2.00500000e+03]
+ [ 1.21794799e-02  7.88615406e-01 -6.14766181e-01  1.99500000e+03]
+ [-8.40300739e-01 -2.33427882e-01 -4.89291459e-01  1.99500000e+03]
+ [ 4.91548866e-01  1.66130796e-01 -8.54856849e-01  1.99000000e+03]
+ [ 6.91248178e-01 -6.99574709e-01  1.81028187e-01  2.00000000e+03]
+ [-5.76671958e-01 -8.02036345e-01  1.55522212e-01  2.00000000e+03]
+ [-7.08378106e-02  2.88473666e-01 -9.54863846e-01  1.99000000e+03]
+ [-1.85595229e-01  3.32799673e-01  9.24553275e-01  2.01000000e+03]]
+</pre></div>
 </div>
 </div>
-<p>where <code class="docutils literal notranslate"><span class="pre">data_train</span></code> is a tuple containing all DW volumes and corresponding gradient table excluding the left-out, which is store in <code class="docutils literal notranslate"><span class="pre">data_test</span></code>.
-Consequently, <code class="docutils literal notranslate"><span class="pre">data_test[0]</span></code> contains the held-out DW map and <code class="docutils literal notranslate"><span class="pre">data_test[1]</span></code> the corresponding gradient vector (RAS+B format).</p>
 </div>
+<p>Later, we’ll refer to this array as the gradient table.</p>
+<p>It consists of one row per diffusion-weighted image, with each row consisting of 4 values corresponding to [ R A S+ b ].</p>
+<p>[ R A S+ ] are the components of the <strong>gradient direction</strong>.
+Note that the directions have been re-oriented with respect to <em>world space coordinates</em>.
+For more information on this, refer to <a class="reference internal" href="../extra/nifti.html"><span class="doc">The extra mile</span></a>.</p>
+<p>The last column, b, reflects the <strong>timing and strength of the gradients</strong> in units of s/mm².</p>
+<p>To get a better sense of which gradient directions were sampled, let’s plot them!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">plot_gradients</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">23</span><span class="n">c8e9a91047</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">plot_gradients</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">)</span>
+
+<span class="ne">AttributeError</span>: &#39;DWI&#39; object has no attribute &#39;plot_gradients&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’ve projected all of the gradient directions onto the surface of a sphere, with each unique gradient strength colour-coded.</p>
+</div>
+<div class="section" id="the-logo-leave-one-gradient-out-splitter">
+<h2>The <em>LOGO</em> (leave-one-gradient-out) splitter<a class="headerlink" href="#the-logo-leave-one-gradient-out-splitter" title="Permalink to this headline">¶</a></h2>
+<p>One final behavior that will make our endeavor easier in the long run is a convenience method for data splitting.
+In particular, we are implementing some sort of cross-validation scheme where we will iterate over different data splits.
+In this case, the splitting strategy is a simple leave-one-out.
+Because one “<em>datapoint</em>” in our DWI dataset corresponds to one gradient, we will refer to this partitioning of the dataset as <em>leave-one-gradient-out (LOGO)</em>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">logo_split</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">with_b0</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Produce one fold of LOGO (leave-one-gradient-out).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    index : :obj:`int`</span>
+<span class="sd">        Index of the DWI orientation to be left out in this fold.</span>
+<span class="sd">    with_b0 : :obj:`bool`</span>
+<span class="sd">        Insert the *b=0* reference at the beginning of the training dataset.</span>
+
+<span class="sd">    Return</span>
+<span class="sd">    ------</span>
+<span class="sd">    (train_data, train_gradients) : :obj:`tuple`</span>
+<span class="sd">        Training DWI and corresponding gradients.</span>
+<span class="sd">        Training data/gradients come **from the updated dataset**.</span>
+<span class="sd">    (test_data, test_gradients) :obj:`tuple`</span>
+<span class="sd">        Test 3D map (one DWI orientation) and corresponding b-vector/value.</span>
+<span class="sd">        The test data/gradient come **from the original dataset**.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dwframe</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataobj</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">index</span><span class="p">]</span>
+    <span class="n">bframe</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gradients</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">index</span><span class="p">]</span>
+
+    <span class="c1"># if the size of the mask does not match data, cache is stale</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">mask</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="n">train_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataobj</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="o">~</span><span class="n">mask</span><span class="p">]</span>
+    <span class="n">train_gradients</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gradients</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="o">~</span><span class="n">mask</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">with_b0</span><span class="p">:</span>
+        <span class="n">train_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asanyarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bzero</span><span class="p">)[</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">train_data</span><span class="p">),</span>
+            <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">b0vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">b0vec</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">train_gradients</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">b0vec</span><span class="p">,</span> <span class="n">train_gradients</span><span class="p">),</span>
+            <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">train_gradients</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">dwframe</span><span class="p">,</span> <span class="n">bframe</span><span class="p">),</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This function is contained in the <code class="docutils literal notranslate"><span class="pre">DWI</span></code> class shown earlier and will allow us to easily partition the dataset as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eddymotion.viz</span> <span class="kn">import</span> <span class="n">plot_dwi</span>
+
+<span class="n">data_train</span><span class="p">,</span> <span class="n">data_test</span> <span class="o">=</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">logo_split</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plot_dwi</span><span class="p">(</span><span class="n">data_test</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span> <span class="n">gradient</span><span class="o">=</span><span class="n">data_test</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">data_train</span></code> is a tuple containing all diffusion-weighted volumes and the corresponding gradient table, excluding the left-out, which is stored in <code class="docutils literal notranslate"><span class="pre">data_test</span></code>.
+<code class="docutils literal notranslate"><span class="pre">data_test[0]</span></code> contains the held-out diffusion-weighted volume and <code class="docutils literal notranslate"><span class="pre">data_test[1]</span></code>, the corresponding gradient table.</p>
+</div>
+<div class="section" id="next-steps-diffusion-modeling">
+<h2>Next steps: diffusion modeling<a class="headerlink" href="#next-steps-diffusion-modeling" title="Permalink to this headline">¶</a></h2>
+<p>By modeling the diffusion signal, the acquired images can provide measurements which are related to the microscopic changes and estimate white matter trajectories.</p>
 </div>
 </div>
 
