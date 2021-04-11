@@ -52,6 +52,8 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Putting everything together" href="solution.html" />
@@ -297,12 +299,12 @@ This means that, brain sulci and gyri, the ventricles, subcortical structures, e
 That allows, for instance, for <strong>image fusion</strong>, and hence screening both images together (for example, applying some transparency to the one on top) should not give us the perception that they <em>are not aligned</em>.</p>
 <div class="section" id="ants-advanced-normalization-tools">
 <h2>ANTs - Advanced Normalization ToolS<a class="headerlink" href="#ants-advanced-normalization-tools" title="Permalink to this headline">¶</a></h2>
-<p>The ANTs toolbox is widely recognized as a powerful image registration (and <em>normalization</em>, which is registration to some standard space) framework.</p>
+<p>The <a class="reference external" href="http://stnava.github.io/ANTs/">ANTs toolbox</a> is widely recognized as a powerful image registration (and <em>normalization</em>, which is registration to some standard space) framework.</p>
 <p>The output of an image registration process is the <em>estimated transform</em> that brings the information in the two images into alignment.
 In our case, the head-motion is a rigid-body displacement of the head.
-Therefore, a very simple (<em>linear</em>) model –an affine 4x4 matrix– can be used to formalize the <em>estimated transforms</em>.</p>
-<p>Only very recently, ANTs offers a Python interface to run their tools.
-For this reason, we will use the very much consolidated <em>Nipype</em> wrapping of the ANTs’ command-line interface.
+Therefore, a very simple (<em>linear</em>) model –an affine <span class="math notranslate nohighlight">\(4\times 4\)</span> matrix– can be used to formalize the <em>estimated transforms</em>.</p>
+<p>Only very recently, <a class="reference external" href="https://doi.org/10.1101/2020.10.19.20215392">ANTs offers a Python interface</a> to run their tools.
+For this reason, we will use the very much consolidated <a class="reference external" href="https://nipype.readthedocs.io/en/latest/api/generated/nipype.interfaces.ants.html#registration"><em>Nipype</em> wrapping of the ANTs’ command-line interface</a>.
 The code is <em>almost</em> as simple as follows:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nipype.interfaces.ants</span> <span class="kn">import</span> <span class="n">Registration</span>
 

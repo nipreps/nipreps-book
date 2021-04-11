@@ -13,14 +13,14 @@ This means that, brain sulci and gyri, the ventricles, subcortical structures, e
 That allows, for instance, for **image fusion**, and hence screening both images together (for example, applying some transparency to the one on top) should not give us the perception that they *are not aligned*.
 
 ## ANTs - Advanced Normalization ToolS
-The ANTs toolbox is widely recognized as a powerful image registration (and *normalization*, which is registration to some standard space) framework.
+The [ANTs toolbox](http://stnava.github.io/ANTs/) is widely recognized as a powerful image registration (and *normalization*, which is registration to some standard space) framework.
 
 The output of an image registration process is the *estimated transform* that brings the information in the two images into alignment.
 In our case, the head-motion is a rigid-body displacement of the head.
-Therefore, a very simple (*linear*) model --an affine 4x4 matrix-- can be used to formalize the *estimated transforms*.
+Therefore, a very simple (*linear*) model --an affine $4\times 4$ matrix-- can be used to formalize the *estimated transforms*.
 
-Only very recently, ANTs offers a Python interface to run their tools.
-For this reason, we will use the very much consolidated *Nipype* wrapping of the ANTs' command-line interface.
+Only very recently, [ANTs offers a Python interface](https://doi.org/10.1101/2020.10.19.20215392) to run their tools.
+For this reason, we will use the very much consolidated [*Nipype* wrapping of the ANTs' command-line interface](https://nipype.readthedocs.io/en/latest/api/generated/nipype.interfaces.ants.html#registration).
 The code is *almost* as simple as follows:
 
 ```Python

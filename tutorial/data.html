@@ -342,7 +342,7 @@
 </div>
 <p>Diffusion imaging probes the random, microscopic movement of water molecules by using MRI sequences that are sensitive to the geometry and environmental organization surrounding these protons.
 This is a popular technique for studying the white matter of the brain.
-The diffusion within biological structures, such as the brain, are often restricted due to barriers (eg. cell membranes), resulting in a preferred direction of diffusion (anisotropy).
+The diffusion within biological structures, such as the brain, are often restricted due to barriers (e.g., cell membranes), resulting in a preferred direction of diffusion (anisotropy).
 A typical dMRI scan will acquire multiple volumes (or <em><strong>angular samples</strong></em>), each sensitive to a particular <em><strong>diffusion direction</strong></em>.</p>
 <p><video loop="yes" muted="yes" autoplay="yes" controls="yes"><source src="../videos/dMRI-signal-movie.mp4" type="video/mp4"/></video></p>
 <p><em>Sourced from Dr. A. Rokem, DIPY Workshop 2021</em></p>
@@ -474,7 +474,7 @@ The fully-fledged <code class="docutils literal notranslate"><span class="pre">D
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f55d6f5b8d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f26f0069cd0&gt;
 </pre></div>
 </div>
 <img alt="../_images/data_11_1.png" src="../_images/data_11_1.png" />
@@ -496,7 +496,7 @@ The <em>b=0</em> map can be used by diffusion modeling as the reference to quant
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f55d4e2bc90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f26edf40050&gt;
 </pre></div>
 </div>
 <img alt="../_images/data_13_1.png" src="../_images/data_13_1.png" />
@@ -510,7 +510,7 @@ The <em>b=0</em> map can be used by diffusion modeling as the reference to quant
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f55d4d208d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f26ede2db50&gt;
 </pre></div>
 </div>
 <img alt="../_images/data_15_1.png" src="../_images/data_15_1.png" />
@@ -518,9 +518,9 @@ The <em>b=0</em> map can be used by diffusion modeling as the reference to quant
 </div>
 <p>Diffusion that exhibits directionality in the same direction as the gradient results in a loss of signal.
 As we can see, <em><strong>diffusion-weighted</strong></em> images consistently drop almost all signal in voxels filled with cerebrospinal fluid because there, water diffusion is free (isotropic) regardless of the direction that is being measured.</p>
-<p>We can also see that the images at <code class="docutils literal notranslate"><span class="pre">index=10</span></code> and <code class="docutils literal notranslate"><span class="pre">index=100</span></code> have different gradient strengths.
+<p>We can also see that the images at <code class="docutils literal notranslate"><span class="pre">index=10</span></code> and <code class="docutils literal notranslate"><span class="pre">index=100</span></code> have different gradient strength (“<em>b-value</em>”).
 The higher the magnitude of the gradient, the more diffusion that is allowed to occur, indicated by the overall decrease in signal intensity.
-There is also a lot more noise.</p>
+Stronger gradients yield diffusion maps with substantially lower SNR (signal-to-noise ratio), as well as larger distortions derived from the so-called “<em>Eddy-currents</em>”.</p>
 </div>
 <div class="section" id="visualizing-the-gradient-information">
 <h2>Visualizing the gradient information<a class="headerlink" href="#visualizing-the-gradient-information" title="Permalink to this headline">¶</a></h2>
@@ -542,11 +542,11 @@ There is also a lot more noise.</p>
 </div>
 </div>
 </div>
-<p>We get a <span class="math notranslate nohighlight">\(4\times102\)</span>.</p>
+<p>We get a <span class="math notranslate nohighlight">\(4\times102\)</span> – three spatial coordinates (<span class="math notranslate nohighlight">\(b_x\)</span>, <span class="math notranslate nohighlight">\(b_y\)</span>, <span class="math notranslate nohighlight">\(b_z\)</span>) of the unit-norm “<em>b-vector</em>”, plus the gradient sensitization magnitude (the “<em>b-value</em>”), with a total of 102 different orientations for the case at hand.</p>
 <div class="admonition-exercise admonition">
 <p class="admonition-title">Exercise</p>
 <p>Try printing the gradient information to see what it contains.
-Remember to transpose (<code class="docutils literal notranslate"><span class="pre">.T</span></code>) the array</p>
+Remember to transpose (<code class="docutils literal notranslate"><span class="pre">.T</span></code>) the array.</p>
 </div>
 <p><strong>Solution</strong></p>
 <div class="cell tag_hide-cell docutils container">
@@ -758,7 +758,7 @@ Because one “<em>datapoint</em>” in our DWI dataset corresponds to one gradi
 </div>
 </div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">data_train</span></code> is a tuple containing all diffusion-weighted volumes and the corresponding gradient table, excluding the left-out, which is stored in <code class="docutils literal notranslate"><span class="pre">data_test</span></code>.
+<p><code class="docutils literal notranslate"><span class="pre">data_train</span></code> is a tuple containing all diffusion-weighted volumes and the corresponding gradient table, excluding the left-out, which is stored in <code class="docutils literal notranslate"><span class="pre">data_test</span></code> (the 11<sup>th</sup> gradient indexed by <code class="docutils literal notranslate"><span class="pre">10</span></code>, in this example).
 <code class="docutils literal notranslate"><span class="pre">data_test[0]</span></code> contains the held-out diffusion-weighted volume and <code class="docutils literal notranslate"><span class="pre">data_test[1]</span></code>, the corresponding gradient table.</p>
 </div>
 <div class="section" id="next-steps-diffusion-modeling">

@@ -9,7 +9,7 @@ Different kinds of artifacts can occur during a scan due to:
   - breathing, heart beating, blood vessels
   - metal items
 - scanner hardware limitations
-  - distortions due to B0 and B1 inhomogeneities
+  - distortions due to *B<sub>0</sub>* and *B<sub>1</sub>* inhomogeneities
   - eddy currents
   - signal drift
 - signal processing
@@ -18,12 +18,13 @@ Different kinds of artifacts can occur during a scan due to:
 These physiological and acquisition artifacts can confound the interpretation of our analysis results.
 Thus, pre-processing is necessary to minimize their influence.
 
-Pre-processing can also help prepare the data for analysis in other ways. Some examples include:
+Pre-processing can also help prepare the data for analysis in other ways.
+Some examples include:
 
 - image registration between acquisitions (e.g., sessions, runs, modalities, etc.)
-- image registration to normalized spaces
+- image registration to standard spaces
 - identifying spurious sources of signal
-- automated segmentation (eg. brain masking, tissue classification)
+- automated segmentation (e.g., brain masking, tissue classification)
 
 ## The problem of methodological variability
 
@@ -32,7 +33,7 @@ The complexity of these workflows has snowballed with rapid advances in acquisit
 
 In Botvinik et al., 2020 [^botvinik2020], 70 independent teams were tasked with analyzing the same fMRI dataset and testing 9 hypotheses.
 The study demonstrated the huge amount of variability in analytic approaches as *no two teams* chose identical workflows.
-One encouraging finding was that 48% of teams chose to pre-process the data using fMRIPrep [^esteban2019], a standardized pipeline for fMRI data.
+One encouraging finding was that 48% of teams chose to pre-process the data using *fMRIPrep* [^esteban2019], a standardized pipeline for fMRI data.
 
 A similar predicament exists in the field of dMRI analysis.
 There has been a lot of effort in recent years to compare the influence of various pre-processing steps on tractography and structural connectivity [^oldham2020] [^schilling2019] and harmonize different datasets [^tax2019].
@@ -50,15 +51,20 @@ All of this points to a need for creating standardized pipelines for pre-process
 :align: right
 ```
 
-*NiPreps* are a collection of tools that work as an extension of the scanner in that they **minimally pre-process** the data and make them **"safe to consume"** for analysis - kinda like *sashimi*!
+*NiPreps* are a collection of tools that work as an extension of the scanner produce "*analysis-grade*" data.
+By *analysis-grade* we mean something like *sushi-grade fish*:
+*NiPreps* produce ***minimally preprocessed*** data that nonetheless are **"*safe to consume*"** (meaning, ready for modeling and statistical analysis).
+From the reversed perspective, *NiPreps* are designed to be ***agnostic to downstream analysis***.
+This means that *NiPreps* are carefully designed not to limit the potential analyses that can be performed on the preprocessed data.
+For instance, because spatial smoothing is a processing step tightly linked with the assumptions of your statistical model, *fMRIPrep* does not perform any spatial smoothing step.
 
-Below is a depiction of the projects currently maintained by the NiPreps community.
+Below is a depiction of the projects currently maintained by the *NiPreps community*.
 These tools arose out of the need to extend *fMRIPrep* to new imaging modalities and populations.
 
 They can be organized into 3 layers:
 
 - Software infrastructure: deliver low-level interfaces and utilities
-- Middleware: contains functions that generalize across the end-user tools
+- Middleware: contain functions that generalize across the end-user tools
 - End-user tools: perform pre-processing or quality control
 
 ```{figure} ../images/nipreps-chart.png
@@ -68,10 +74,10 @@ They can be organized into 3 layers:
 
 ## NiPreps driving principles
 
-*NiPreps* are driven by 3 main principles, which are summarized below.
+*NiPreps* are driven by three main principles, which are summarized below.
 These principles distill some design and organizational foundations.
 
-### 1. Robust
+### 1. Robust with very diverse data
 
 *NiPreps* are meant to be robust to different datasets and attempt to provide the best possible results independent of scanner manufacturer, acquisition parameters, or the presence of additional correction scans (such as field maps).
 The end-user tools only impose a single constraint on the input dataset - being compliant with BIDS (Brain Imaging Data Structure) [^gorgolewski2016].
@@ -80,7 +86,7 @@ This minimizes human intervention in running the pipelines as they are able to a
 
 The scope of these tools is strictly limited to pre-processing tasks.
 This eases the burden of maintaining these tools but also helps focus on standardizing each processing step and reducing the amount of methodological variability.
-*NiPreps* only support BIDS-Derivatives as output and so are agnostic to subsequent analysis.
+*NiPreps* only support BIDS-Derivatives as output.
 
 *NiPreps* also aim to be robust in their codebase.
 The pipelines are modular and rely on widely-used tools such as AFNI, ANTs, FreeSurfer, FSL, Nilearn, or DIPY and are extensible via plug-ins.
@@ -138,6 +144,8 @@ Thanks to limiting the input dataset to BIDS, manual parameter input is reduced 
 The success of these tools has largely been driven by their strong uptake in the neuroimaging community.
 This has allowed them to be exercised on diverse datasets and has brought the interest of a variety of domain experts to contribute their knowledge towards improving the tools.
 The tools are "open source" and all of the code and ideas are visible on GitHub.
+
+### References
 
 [^botvinik2020]: Botvinik-Nezer, R., Holzmeister, F., Camerer, C.F. et al. Variability in the analysis of a single neuroimaging dataset by many teams. Nature 582, 84–88 (2020). doi: 10.1038/s41586-020-2314-9
 

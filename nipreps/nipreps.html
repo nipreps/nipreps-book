@@ -277,8 +277,8 @@
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#robust">
-     1. Robust
+    <a class="reference internal nav-link" href="#robust-with-very-diverse-data">
+     1. Robust with very diverse data
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -289,6 +289,11 @@
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#glass-box-philosophy">
      3. “Glass box” philosophy
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#references">
+     References
     </a>
    </li>
   </ul>
@@ -319,7 +324,7 @@
 </li>
 <li><p>scanner hardware limitations</p>
 <ul>
-<li><p>distortions due to B0 and B1 inhomogeneities</p></li>
+<li><p>distortions due to <em>B<sub>0</sub></em> and <em>B<sub>1</sub></em> inhomogeneities</p></li>
 <li><p>eddy currents</p></li>
 <li><p>signal drift</p></li>
 </ul>
@@ -332,12 +337,13 @@
 </ul>
 <p>These physiological and acquisition artifacts can confound the interpretation of our analysis results.
 Thus, pre-processing is necessary to minimize their influence.</p>
-<p>Pre-processing can also help prepare the data for analysis in other ways. Some examples include:</p>
+<p>Pre-processing can also help prepare the data for analysis in other ways.
+Some examples include:</p>
 <ul class="simple">
 <li><p>image registration between acquisitions (e.g., sessions, runs, modalities, etc.)</p></li>
-<li><p>image registration to normalized spaces</p></li>
+<li><p>image registration to standard spaces</p></li>
 <li><p>identifying spurious sources of signal</p></li>
-<li><p>automated segmentation (eg. brain masking, tissue classification)</p></li>
+<li><p>automated segmentation (e.g., brain masking, tissue classification)</p></li>
 </ul>
 <div class="section" id="the-problem-of-methodological-variability">
 <h2>The problem of methodological variability<a class="headerlink" href="#the-problem-of-methodological-variability" title="Permalink to this headline">¶</a></h2>
@@ -345,7 +351,7 @@ Thus, pre-processing is necessary to minimize their influence.</p>
 The complexity of these workflows has snowballed with rapid advances in acquisition parameters and processing steps.</p>
 <p>In Botvinik et al., 2020 <a class="footnote-reference brackets" href="#botvinik2020" id="id1">1</a>, 70 independent teams were tasked with analyzing the same fMRI dataset and testing 9 hypotheses.
 The study demonstrated the huge amount of variability in analytic approaches as <em>no two teams</em> chose identical workflows.
-One encouraging finding was that 48% of teams chose to pre-process the data using fMRIPrep <a class="footnote-reference brackets" href="#esteban2019" id="id2">2</a>, a standardized pipeline for fMRI data.</p>
+One encouraging finding was that 48% of teams chose to pre-process the data using <em>fMRIPrep</em> <a class="footnote-reference brackets" href="#esteban2019" id="id2">2</a>, a standardized pipeline for fMRI data.</p>
 <p>A similar predicament exists in the field of dMRI analysis.
 There has been a lot of effort in recent years to compare the influence of various pre-processing steps on tractography and structural connectivity <a class="footnote-reference brackets" href="#oldham2020" id="id3">3</a> <a class="footnote-reference brackets" href="#schilling2019" id="id4">4</a> and harmonize different datasets <a class="footnote-reference brackets" href="#tax2019" id="id5">5</a>.</p>
 <p>Differences in methods or parameters chosen <a class="footnote-reference brackets" href="#carp2012" id="id6">6</a> <a class="footnote-reference brackets" href="#bowring2019" id="id7">7</a>, implementations across software <a class="footnote-reference brackets" href="#dickie2017" id="id8">8</a>, and even operating systems or software versions <a class="footnote-reference brackets" href="#gronenschild2012" id="id9">9</a> <a class="footnote-reference brackets" href="#glatard2015" id="id10">10</a> all contribute to variability.</p>
@@ -355,13 +361,18 @@ All of this points to a need for creating standardized pipelines for pre-process
 <div class="section" id="augmenting-the-scanner-to-produce-analysis-grade-data">
 <h2>Augmenting the scanner to produce “analysis grade” data<a class="headerlink" href="#augmenting-the-scanner-to-produce-analysis-grade-data" title="Permalink to this headline">¶</a></h2>
 <a class="reference internal image-reference" href="../_images/sashimi.jpg" id="sashimi"><img alt="../_images/sashimi.jpg" class="align-right" id="sashimi" src="../_images/sashimi.jpg" style="width: 200px;" /></a>
-<p><em>NiPreps</em> are a collection of tools that work as an extension of the scanner in that they <strong>minimally pre-process</strong> the data and make them <strong>“safe to consume”</strong> for analysis - kinda like <em>sashimi</em>!</p>
-<p>Below is a depiction of the projects currently maintained by the NiPreps community.
+<p><em>NiPreps</em> are a collection of tools that work as an extension of the scanner produce “<em>analysis-grade</em>” data.
+By <em>analysis-grade</em> we mean something like <em>sushi-grade fish</em>:
+<em>NiPreps</em> produce <em><strong>minimally preprocessed</strong></em> data that nonetheless are <strong>“<em>safe to consume</em>”</strong> (meaning, ready for modeling and statistical analysis).
+From the reversed perspective, <em>NiPreps</em> are designed to be <em><strong>agnostic to downstream analysis</strong></em>.
+This means that <em>NiPreps</em> are carefully designed not to limit the potential analyses that can be performed on the preprocessed data.
+For instance, because spatial smoothing is a processing step tightly linked with the assumptions of your statistical model, <em>fMRIPrep</em> does not perform any spatial smoothing step.</p>
+<p>Below is a depiction of the projects currently maintained by the <em>NiPreps community</em>.
 These tools arose out of the need to extend <em>fMRIPrep</em> to new imaging modalities and populations.</p>
 <p>They can be organized into 3 layers:</p>
 <ul class="simple">
 <li><p>Software infrastructure: deliver low-level interfaces and utilities</p></li>
-<li><p>Middleware: contains functions that generalize across the end-user tools</p></li>
+<li><p>Middleware: contain functions that generalize across the end-user tools</p></li>
 <li><p>End-user tools: perform pre-processing or quality control</p></li>
 </ul>
 <div class="figure align-default" id="nipreps-chart">
@@ -370,43 +381,43 @@ These tools arose out of the need to extend <em>fMRIPrep</em> to new imaging mod
 </div>
 <div class="section" id="nipreps-driving-principles">
 <h2>NiPreps driving principles<a class="headerlink" href="#nipreps-driving-principles" title="Permalink to this headline">¶</a></h2>
-<p><em>NiPreps</em> are driven by 3 main principles, which are summarized below.
+<p><em>NiPreps</em> are driven by three main principles, which are summarized below.
 These principles distill some design and organizational foundations.</p>
-<div class="section" id="robust">
-<h3>1. Robust<a class="headerlink" href="#robust" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="robust-with-very-diverse-data">
+<h3>1. Robust with very diverse data<a class="headerlink" href="#robust-with-very-diverse-data" title="Permalink to this headline">¶</a></h3>
 <p><em>NiPreps</em> are meant to be robust to different datasets and attempt to provide the best possible results independent of scanner manufacturer, acquisition parameters, or the presence of additional correction scans (such as field maps).
 The end-user tools only impose a single constraint on the input dataset - being compliant with BIDS (Brain Imaging Data Structure) <a class="footnote-reference brackets" href="#gorgolewski2016" id="id11">11</a>.
 BIDS enables consistency in how neuroimaging data is structured and ensures that the necessary metadata is complete.
 This minimizes human intervention in running the pipelines as they are able to adapt to the unique features of the input data and make decisions about whether a particular processing step is appropriate or not.</p>
 <p>The scope of these tools is strictly limited to pre-processing tasks.
 This eases the burden of maintaining these tools but also helps focus on standardizing each processing step and reducing the amount of methodological variability.
-<em>NiPreps</em> only support BIDS-Derivatives as output and so are agnostic to subsequent analysis.</p>
+<em>NiPreps</em> only support BIDS-Derivatives as output.</p>
 <p><em>NiPreps</em> also aim to be robust in their codebase.
 The pipelines are modular and rely on widely-used tools such as AFNI, ANTs, FreeSurfer, FSL, Nilearn, or DIPY and are extensible via plug-ins.
 This modularity in the code allows each step to be thoroughly tested. Some examples of tests performed on different parts of the pipeline are shown below:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="5e2a06bc-ae66-45e5-bc0e-e0e54e748805" name="d8f351f6-a581-4884-bc2d-ff34cdc38725" type="radio">
-</input><label class="tabbed-label" for="5e2a06bc-ae66-45e5-bc0e-e0e54e748805">
+<input checked="checked" id="e9dc22d8-2c97-4d44-9983-f9c6c4b9c222" name="d660aa6e-b50f-4227-8c04-fc0d45bcd085" type="radio">
+</input><label class="tabbed-label" for="e9dc22d8-2c97-4d44-9983-f9c6c4b9c222">
 unittest</label><div class="tabbed-content docutils">
 <p>Checks whether a function or class method behaves as expected.</p>
 <p><img alt="unittest" src="../_images/unittest.png" /></p>
 </div>
-<input id="05194f1f-eb24-41e3-9183-42752378132c" name="d8f351f6-a581-4884-bc2d-ff34cdc38725" type="radio">
-</input><label class="tabbed-label" for="05194f1f-eb24-41e3-9183-42752378132c">
+<input id="ee18cd06-9c51-4bf6-9edc-18789d020152" name="d660aa6e-b50f-4227-8c04-fc0d45bcd085" type="radio">
+</input><label class="tabbed-label" for="ee18cd06-9c51-4bf6-9edc-18789d020152">
 doctest</label><div class="tabbed-content docutils">
 <p>Also checks whether code behaves as expected and serves as an example for how to use the code.</p>
 <p><img alt="doctest1" src="../_images/doctest1.png" /></p>
 <p><img alt="doctest2" src="../_images/doctest2.png" /></p>
 </div>
-<input id="16b6f764-b3bc-4f05-b27e-f199d3ecd819" name="d8f351f6-a581-4884-bc2d-ff34cdc38725" type="radio">
-</input><label class="tabbed-label" for="16b6f764-b3bc-4f05-b27e-f199d3ecd819">
+<input id="765cfe49-f04b-4792-ac25-d69f8cdbdbe4" name="d660aa6e-b50f-4227-8c04-fc0d45bcd085" type="radio">
+</input><label class="tabbed-label" for="765cfe49-f04b-4792-ac25-d69f8cdbdbe4">
 integration test</label><div class="tabbed-content docutils">
 <p>Checks the behaviour of a system (multiple pieces of code).
 Can also be used to determine whether the system is behaving suboptimally.</p>
 <p><img alt="integration_test" src="../_images/integration_test.png" /></p>
 </div>
-<input id="13913a24-d599-4542-ad04-f3d04b6c8571" name="d8f351f6-a581-4884-bc2d-ff34cdc38725" type="radio">
-</input><label class="tabbed-label" for="13913a24-d599-4542-ad04-f3d04b6c8571">
+<input id="12eb83da-3c7d-49dc-862d-2a6d6076d228" name="d660aa6e-b50f-4227-8c04-fc0d45bcd085" type="radio">
+</input><label class="tabbed-label" for="12eb83da-3c7d-49dc-862d-2a6d6076d228">
 build test</label><div class="tabbed-content docutils">
 <p>Checks that code or software environment can be compiled and deployed.</p>
 <p><img alt="build_test" src="../_images/build_test.png" /></p>
@@ -430,6 +441,9 @@ All of the software is containerized and the pipelines all share a common comman
 The success of these tools has largely been driven by their strong uptake in the neuroimaging community.
 This has allowed them to be exercised on diverse datasets and has brought the interest of a variety of domain experts to contribute their knowledge towards improving the tools.
 The tools are “open source” and all of the code and ideas are visible on GitHub.</p>
+</div>
+<div class="section" id="references">
+<h3>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h3>
 <hr class="footnotes docutils" />
 <dl class="footnote brackets">
 <dt class="label" id="botvinik2020"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>

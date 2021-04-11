@@ -23,7 +23,7 @@ warnings.filterwarnings("ignore")
 
 Diffusion imaging probes the random, microscopic movement of water molecules by using MRI sequences that are sensitive to the geometry and environmental organization surrounding these protons.
 This is a popular technique for studying the white matter of the brain.
-The diffusion within biological structures, such as the brain, are often restricted due to barriers (eg. cell membranes), resulting in a preferred direction of diffusion (anisotropy).
+The diffusion within biological structures, such as the brain, are often restricted due to barriers (e.g., cell membranes), resulting in a preferred direction of diffusion (anisotropy).
 A typical dMRI scan will acquire multiple volumes (or ***angular samples***), each sensitive to a particular ***diffusion direction***.
 
 <video loop="yes" muted="yes" autoplay="yes" controls="yes"><source src="../videos/dMRI-signal-movie.mp4" type="video/mp4"/></video>
@@ -178,9 +178,10 @@ dmri_dataset.plot_mosaic(index=100, vmax=5000)
 Diffusion that exhibits directionality in the same direction as the gradient results in a loss of signal.
 As we can see, ***diffusion-weighted*** images consistently drop almost all signal in voxels filled with cerebrospinal fluid because there, water diffusion is free (isotropic) regardless of the direction that is being measured.
 
-We can also see that the images at `index=10` and `index=100` have different gradient strengths.
+We can also see that the images at `index=10` and `index=100` have different gradient strength ("*b-value*").
 The higher the magnitude of the gradient, the more diffusion that is allowed to occur, indicated by the overall decrease in signal intensity.
-There is also a lot more noise.
+Stronger gradients yield diffusion maps with substantially lower SNR (signal-to-noise ratio), as well as larger distortions derived from the so-called "*Eddy-currents*".
+
 ## Visualizing the gradient information
 
 Our `DWI` object stores the gradient information in the `gradients` attribute.
@@ -198,11 +199,11 @@ dmri_dataset.gradients.shape
 
 ```
 
-We get a $4\times102$.
+We get a $4\times102$ -- three spatial coordinates ($b_x$, $b_y$, $b_z$) of the unit-norm "*b-vector*", plus the gradient sensitization magnitude (the "*b-value*"), with a total of 102 different orientations for the case at hand.
 
 ```{admonition} Exercise
 Try printing the gradient information to see what it contains.
-Remember to transpose (`.T`) the array
+Remember to transpose (`.T`) the array.
 ```
 
 **Solution**
@@ -304,7 +305,7 @@ plot_dwi(data_test[0], dmri_dataset.affine, gradient=data_test[1])
 
 ```
 
-`data_train` is a tuple containing all diffusion-weighted volumes and the corresponding gradient table, excluding the left-out, which is stored in `data_test`.
+`data_train` is a tuple containing all diffusion-weighted volumes and the corresponding gradient table, excluding the left-out, which is stored in `data_test` (the 11<sup>th</sup> gradient indexed by `10`, in this example).
 `data_test[0]` contains the held-out diffusion-weighted volume and `data_test[1]`, the corresponding gradient table.
 
 ## Next steps: diffusion modeling
