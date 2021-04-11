@@ -26,5 +26,3 @@
 - part: extra
   chapters:
   - file: extra/nifti
-  - file: extra/exercises
-  - file: extra/references

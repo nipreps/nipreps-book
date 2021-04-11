@@ -22,7 +22,7 @@ While we can address the misalignment, it is really problematic to overcome the 
 This tutorial focuses on the misalignment problem.
 We will build from existing software (Dipy for diffusion modeling and ANTs for image registration), as well as commonplace Python libraries (NumPy), a software framework for head-motion estimation in diffusion MRI data.
 
-The algorithmic and theoretical foundations of the method are based on an idea first proposed by [Ben-Amitay et al.](https://pubmed.ncbi.nlm.nih.gov/22183784/) and later implemented in QSIPREP (see this [OHBM 2019 poster](https://github.com/mattcieslak/ohbm_shoreline/blob/master/cieslakOHBM2019.pdf)).
+The algorithmic and theoretical foundations of the method are based on an idea first proposed by [Ben-Amitay et al.](https://pubmed.ncbi.nlm.nih.gov/22183784/) and later implemented in *QSIPREP* (see this [OHBM 2019 poster](https://github.com/mattcieslak/ohbm_shoreline/blob/master/cieslakOHBM2019.pdf)).
 The idea works as follows:
 
   1. Leave one DWI (diffusion weighted image) orientation out.
@@ -68,11 +68,11 @@ pointed at by the variable `data`, and assuming we have a list of rigid-body tra
 a potential API would have a `.fit()` and `.predict()` members which run the algorithm (the former) and generate an EM-corrected
 DWI (the latter):
 
-```
+```Python
 from emc import EddyMotionEstimator
 
 estimator = EddyMotionEstimator()
-estimator.fit(data, init=mats)
+estimator.fit(data, model="Tensor")
 
 corrected = estimator.predict(data)
 ```
