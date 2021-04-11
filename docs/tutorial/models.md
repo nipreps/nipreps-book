@@ -43,7 +43,6 @@ This model will allow to easily test the overall integration of the different co
 Also, this model will allow a very straightforward implementation of registration to the *b=0* reference, which is commonly used to initialize the head-motion estimation parameters.
 
 ```{code-cell} python
-
 class TrivialB0Model:
     """
     A trivial model that returns a *b=0* map always.
@@ -70,15 +69,14 @@ class TrivialB0Model:
     def predict(self, gradient, **kwargs):
         """Return the *b=0* map."""
         return self._S0
-
 ```
 
-
 The model can easily be initialized as follows (assuming we still have our dataset loaded):
+
 ```{code-cell} python
 model = TrivialB0Model(
-	dmri_dataset.gradients,
-	S0=dmri_dataset.bzero,
+    dmri_dataset.gradients,
+    S0=dmri_dataset.bzero,
 )
 ```
 
@@ -97,14 +95,16 @@ plot_dwi(predicted, dmri_dataset.affine, gradient=data_test[1]);
 ```
 
 As expected, the *b=0* doesn't look very much like the particular left-out direction, but it is a start!
+
 ```{code-cell} python
 plot_dwi(data_test[0], dmri_dataset.affine, gradient=data_test[1]);
 ```
 
 ## Implementing a *regression to the mean* model
 
-### Exercise
-**Exercise**: Extend the `TrivialB0Model` to produce an average of *all other* diffusion directions, instead of the *b=0*.
+```{admonition} Exercise
+Extend the `TrivialB0Model` to produce an average of *all other* diffusion directions, instead of the *b=0*.
+```
 
 ```{code-cell} python
 class AverageDWModel:
@@ -126,6 +126,7 @@ class AverageDWModel:
 ```
 
 **Solution**
+
 ```{code-cell} python
 :tags: [hide-cell]
 
@@ -147,9 +148,12 @@ class AverageDWModel:
         return self._data
 ```
 
-### Exercise
-**Exercise**: Use the new `AverageDWModel` you just created.
+```{admonition} Exercise
+ Use the new `AverageDWModel` you just created.
+```
+
 **Solution**
+
 ```{code-cell} python
 :tags: [hide-cell]
 
@@ -169,6 +173,7 @@ We will use the wrap around DIPY's implementation that we distribute with `eddym
 
 ```{code-cell} python
 :tags: [remove-cell]
+
 from tempfile import mkstemp
 from pathlib import Path
 import requests
@@ -188,6 +193,7 @@ data_train, data_test = dmri_dataset.logo_split(88, with_b0=True)
 ```
 
 ### The model factory
+
 To permit flexibility in selecting models, the `eddymotion` package offers a `ModelFactory` that implements the *facade design pattern*.
 This means that `ModelFactory` makes it easier for the user to switch between models:
 
@@ -213,18 +219,23 @@ predicted = model.predict(data_test[1])
 ```
 
 Now, the predicted map for the particular ***b*** gradient looks much closer to the original:
+
 ```{code-cell} python
 plot_dwi(predicted, dmri_dataset.affine, gradient=data_test[1], black_bg=True);
 ```
 
 Here's the original DW map, for reference:
+
 ```{code-cell} python
 plot_dwi(data_test[0], dmri_dataset.affine, gradient=data_test[1]);
 ```
 
-### Exercise
+```{admonition} Exercise
+Use the `ModelFactory` to initialize a `"DKI"` (diffusion Kurtosis imaging) model.
+```
 
-**Exercise**: Use the `ModelFactory` to initialize a `"DKI"` (diffusion Kurtosis imaging) model
+**Solution**
+
 ```{code-cell} python
 :tags: [hide-cell]
 

@@ -13,6 +13,7 @@ This means that, brain sulci and gyri, the ventricles, subcortical structures, e
 That allows, for instance, for **image fusion**, and hence screening both images together (for example, applying some transparency to the one on top) should not give us the perception that they *are not aligned*.
 
 ## ANTs - Advanced Normalization ToolS
+
 The [ANTs toolbox](http://stnava.github.io/ANTs/) is widely recognized as a powerful image registration (and *normalization*, which is registration to some standard space) framework.
 
 The output of an image registration process is the *estimated transform* that brings the information in the two images into alignment.
@@ -23,11 +24,11 @@ Only very recently, [ANTs offers a Python interface](https://doi.org/10.1101/202
 For this reason, we will use the very much consolidated [*Nipype* wrapping of the ANTs' command-line interface](https://nipype.readthedocs.io/en/latest/api/generated/nipype.interfaces.ants.html#registration).
 The code is *almost* as simple as follows:
 
-```Python
+```python
 from nipype.interfaces.ants import Registration
 
 registration_framework = Registration(
-	fixed_image="reference.nii.gz",
+    fixed_image="reference.nii.gz",
     moving_image="left-out-gradient.nii.gz",
     from_file="settings-file.json"
 )
@@ -81,6 +82,7 @@ The most relevant piece of settings to highlight is the `"transforms"` key, wher
 It is beyond the scope of this tutorial to understand ANTs and/or image registration altogether.
 
 ## Resampling an image
+
 Once we have estimated what is the *transform* that brings two images into alignment, we can *bring* the data in the *moving* image and *move this image* into the *reference*'s grid through *resampling*.
 
 The process works as follows:
@@ -91,7 +93,8 @@ The process works as follows:
 We will be using *NiTransforms* to *apply* these transforms we estimate with ANTs -- effectively *resampling* moving images into their reference's grid.
 
 To read a transform produced by ANTs with *NiTransforms*, we use the following piece of code:
-```Python
+
+```python
 import nitransforms as nt
 
 xform = nt.io.itk.ITKLinearTransform.from_filename("ants-generated-rigid-xform.mat")
@@ -99,7 +102,7 @@ xform = nt.io.itk.ITKLinearTransform.from_filename("ants-generated-rigid-xform.m
 
 Resampling an image requires two pieces of information: the *reference* image (which provides the new grid where we want to have the data) and the *moving* image which contains the actual data we are interested in:
 
-```Python
+```python
 xform.reference = "reference-image.nii.gz"
 resampled = xform.apply("moving-image.nii.gz")
 ```
