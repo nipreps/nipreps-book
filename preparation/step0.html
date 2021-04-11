@@ -54,6 +54,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="NeuroImaging PREProcessing toolS (NiPreps)" href="../nipreps/nipreps.html" />
+    <link rel="prev" title="Welcome!" href="../welcome.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -85,6 +87,18 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../welcome.html">
    Welcome!
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  preparation
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Before we start: How to follow this tutorial
   </a>
  </li>
 </ul>
@@ -219,7 +233,10 @@
             href="https://github.com/nipreps/nipreps-book"><button type="button" class="btn btn-secondary topbarbtn"
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
-        
+        <a class="issues-button"
+            href="https://github.com/nipreps/nipreps-book/issues/new?title=Issue%20on%20page%20%2Fpreparation/step0.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
     </div>
 </div>
@@ -245,17 +262,23 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#using-binder">
+  <a class="reference internal nav-link" href="#i-class-fa-fa-rocket-aria-hidden-true-i-using-binder">
+   <i aria-hidden="true" class="fa fa-rocket">
+   </i>
    Using Binder
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#local-installation-bare-metal">
+  <a class="reference internal nav-link" href="#i-class-fas-fa-hammer-i-local-installation-bare-metal">
+   <i class="fas fa-hammer">
+   </i>
    Local installation (“bare-metal”)
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#local-installation-docker-containers">
+  <a class="reference internal nav-link" href="#i-class-fab-fa-docker-i-local-installation-docker-containers">
+   <i class="fab fa-docker">
+   </i>
    Local installation (“docker containers”)
   </a>
  </li>
@@ -274,19 +297,25 @@
   <div class="section" id="before-we-start-how-to-follow-this-tutorial">
 <h1>Before we start: How to follow this tutorial<a class="headerlink" href="#before-we-start-how-to-follow-this-tutorial" title="Permalink to this headline">¶</a></h1>
 <p>This tutorial contains a mix of lecture-based and interactive components.
-The interactive components can be executed in your personal computer locally or using the Binder service.
+The interactive components can be executed in your personal computer locally or using the <a class="reference external" href="https://jupyter.org/binder">Binder</a> service.
 You are welcome to follow along however you like, whether you just want to listen or code along with us.
 Each of the chapters involving code are actually Jupyter notebooks!</p>
-<div class="section" id="using-binder">
-<h2>Using Binder<a class="headerlink" href="#using-binder" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="i-class-fa-fa-rocket-aria-hidden-true-i-using-binder">
+<h2><i class="fa fa-rocket" aria-hidden="true"></i> Using Binder<a class="headerlink" href="#i-class-fa-fa-rocket-aria-hidden-true-i-using-binder" title="Permalink to this headline">¶</a></h2>
 <p>Clicking the Binder icon in the top right corner will launch an interactive computing environment with all of the necessary software packages pre-installed.</p>
+<p>This is the easiest and quickest way to get started.</p>
 <div class="figure align-default" id="binder-link">
 <img alt="../_images/binder_link.png" src="../_images/binder_link.png" />
-<p class="caption"><span class="caption-text">Binder Link</span><a class="headerlink" href="#binder-link" title="Permalink to this image">¶</a></p>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>If using Binder, please be aware that the state of the computational environment it provides is not permanent.
+If you are inactive for more than 10 minutes, the environment will timeout and all data will be lost.
+If you would like to preserve any progress, please save the changed files to your computer.</p>
 </div>
 </div>
-<div class="section" id="local-installation-bare-metal">
-<h2>Local installation (“bare-metal”)<a class="headerlink" href="#local-installation-bare-metal" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="i-class-fas-fa-hammer-i-local-installation-bare-metal">
+<h2><i class="fas fa-hammer"></i> Local installation (“bare-metal”)<a class="headerlink" href="#i-class-fas-fa-hammer-i-local-installation-bare-metal" title="Permalink to this headline">¶</a></h2>
 <p>If you would like to follow along using your own setup and you have a functional Python environment, you can:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. clone this repository</span>
 git clone https://github.com/nipreps/nipreps-book
@@ -298,9 +327,23 @@ git clone https://github.com/nipreps/nipreps-book
 jupyter lab
 </pre></div>
 </div>
+<p>The image registration lesson requires an installation of <a class="reference external" href="https://github.com/ANTsX/ANTs">ANTs</a>.
+Separate instructions can be found for <a class="reference external" href="https://github.com/ANTsX/ANTs/wiki/Compiling-ANTs-on-Linux-and-Mac-OS">Linux/MacOS users</a> and <a class="reference external" href="https://github.com/ANTsX/ANTs/wiki/Compiling-ANTs-on-Windows-10">Windows users</a>.</p>
 </div>
-<div class="section" id="local-installation-docker-containers">
-<h2>Local installation (“docker containers”)<a class="headerlink" href="#local-installation-docker-containers" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="i-class-fab-fa-docker-i-local-installation-docker-containers">
+<h2><i class="fab fa-docker"></i> Local installation (“docker containers”)<a class="headerlink" href="#i-class-fab-fa-docker-i-local-installation-docker-containers" title="Permalink to this headline">¶</a></h2>
+<p>If you have a working Docker installation and would like to use the workshop’s Docker container, you can:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. download the Docker container</span>
+docker pull nipreps/nipreps-book:latest
+
+<span class="c1"># 2. run the container</span>
+docker run --rm <span class="se">\</span>
+ -p <span class="m">127</span>.0.0.1:9999:8888 <span class="se">\</span>
+ nipreps/nipreps-book:latest
+</pre></div>
+</div>
+<p>Your terminal will output a URL that you can copy and paste into your browser.
+Make sure to change the port from <code class="docutils literal notranslate"><span class="pre">8888</span></code> to <code class="docutils literal notranslate"><span class="pre">9999</span></code> after pasting the URL.</p>
 </div>
 </div>
 
@@ -329,6 +372,8 @@ jupyter lab
         
         <div class='prev-next-bottom'>
             
+    <a class='left-prev' id="prev-link" href="../welcome.html" title="previous page">Welcome!</a>
+    <a class='right-next' id="next-link" href="../nipreps/nipreps.html" title="next page">NeuroImaging PREProcessing toolS (NiPreps)</a>
 
         </div>
         

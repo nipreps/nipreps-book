@@ -55,7 +55,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="About dMRIPrep" href="dmriprep.html" />
-    <link rel="prev" title="Welcome!" href="../welcome.html" />
+    <link rel="prev" title="Before we start: How to follow this tutorial" href="../preparation/step0.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -87,6 +87,18 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../welcome.html">
    Welcome!
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  preparation
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../preparation/step0.html">
+   Before we start: How to follow this tutorial
   </a>
  </li>
 </ul>
@@ -221,7 +233,10 @@
             href="https://github.com/nipreps/nipreps-book"><button type="button" class="btn btn-secondary topbarbtn"
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
-        
+        <a class="issues-button"
+            href="https://github.com/nipreps/nipreps-book/issues/new?title=Issue%20on%20page%20%2Fnipreps/nipreps.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
     </div>
 </div>
@@ -333,7 +348,7 @@ The study demonstrated the huge amount of variability in analytic approaches as 
 One encouraging finding was that 48% of teams chose to pre-process the data using fMRIPrep <a class="footnote-reference brackets" href="#esteban2019" id="id2">2</a>, a standardized pipeline for fMRI data.</p>
 <p>A similar predicament exists in the field of dMRI analysis.
 There has been a lot of effort in recent years to compare the influence of various pre-processing steps on tractography and structural connectivity <a class="footnote-reference brackets" href="#oldham2020" id="id3">3</a> <a class="footnote-reference brackets" href="#schilling2019" id="id4">4</a> and harmonize different datasets <a class="footnote-reference brackets" href="#tax2019" id="id5">5</a>.</p>
-<p>Differences in methods or parameters chosen <a class="footnote-reference brackets" href="#carp2012" id="id6">6</a> <a class="footnote-reference brackets" href="#bowring2019" id="id7">7</a>, implementations across software <a class="footnote-reference brackets" href="#dickie2017" id="id8">8</a>, and even operating system or software version <a class="footnote-reference brackets" href="#gronenschild2012" id="id9">9</a> <a class="footnote-reference brackets" href="#glatard2015" id="id10">10</a> all contribute to variability.</p>
+<p>Differences in methods or parameters chosen <a class="footnote-reference brackets" href="#carp2012" id="id6">6</a> <a class="footnote-reference brackets" href="#bowring2019" id="id7">7</a>, implementations across software <a class="footnote-reference brackets" href="#dickie2017" id="id8">8</a>, and even operating systems or software versions <a class="footnote-reference brackets" href="#gronenschild2012" id="id9">9</a> <a class="footnote-reference brackets" href="#glatard2015" id="id10">10</a> all contribute to variability.</p>
 <p>Doing reproducible neuroimaging research is hard.
 All of this points to a need for creating standardized pipelines for pre-processing MRI data that will reduce methodological variability and enable comparisons between different datasets and downstream analysis decisions.</p>
 </div>
@@ -370,28 +385,28 @@ This eases the burden of maintaining these tools but also helps focus on standar
 The pipelines are modular and rely on widely-used tools such as AFNI, ANTs, FreeSurfer, FSL, Nilearn, or DIPY and are extensible via plug-ins.
 This modularity in the code allows each step to be thoroughly tested. Some examples of tests performed on different parts of the pipeline are shown below:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="424e7e30-f5c1-4499-be10-04e9618626f8" name="44dfce44-8969-43fa-9acc-75be375b61b2" type="radio">
-</input><label class="tabbed-label" for="424e7e30-f5c1-4499-be10-04e9618626f8">
+<input checked="checked" id="2f67703b-b050-4155-9a69-47c53c8291be" name="351ba8a2-efa4-4a7d-8734-8d7ee0cf5ecf" type="radio">
+</input><label class="tabbed-label" for="2f67703b-b050-4155-9a69-47c53c8291be">
 unittest</label><div class="tabbed-content docutils">
 <p>Checks whether a function or class method behaves as expected.</p>
 <p><img alt="unittest" src="../_images/unittest.png" /></p>
 </div>
-<input id="dc92ab07-e1e8-4feb-9714-32d209d4f1e9" name="44dfce44-8969-43fa-9acc-75be375b61b2" type="radio">
-</input><label class="tabbed-label" for="dc92ab07-e1e8-4feb-9714-32d209d4f1e9">
+<input id="c81666bf-1bea-4d09-b539-d8cbcb8b3a53" name="351ba8a2-efa4-4a7d-8734-8d7ee0cf5ecf" type="radio">
+</input><label class="tabbed-label" for="c81666bf-1bea-4d09-b539-d8cbcb8b3a53">
 doctest</label><div class="tabbed-content docutils">
 <p>Also checks whether code behaves as expected and serves as an example for how to use the code.</p>
 <p><img alt="doctest1" src="../_images/doctest1.png" /></p>
 <p><img alt="doctest2" src="../_images/doctest2.png" /></p>
 </div>
-<input id="962e9a15-fad6-4e57-bf68-11a92241a605" name="44dfce44-8969-43fa-9acc-75be375b61b2" type="radio">
-</input><label class="tabbed-label" for="962e9a15-fad6-4e57-bf68-11a92241a605">
+<input id="93fd6a7f-1aa0-4c81-aa32-728f6ebb34d3" name="351ba8a2-efa4-4a7d-8734-8d7ee0cf5ecf" type="radio">
+</input><label class="tabbed-label" for="93fd6a7f-1aa0-4c81-aa32-728f6ebb34d3">
 integration test</label><div class="tabbed-content docutils">
 <p>Checks the behaviour of a system (multiple pieces of code).
 Can also be used to determine whether the system is behaving suboptimally.</p>
 <p><img alt="integration_test" src="../_images/integration_test.png" /></p>
 </div>
-<input id="7dd6cb6d-d0f1-493f-8a21-6d663a4a67a6" name="44dfce44-8969-43fa-9acc-75be375b61b2" type="radio">
-</input><label class="tabbed-label" for="7dd6cb6d-d0f1-493f-8a21-6d663a4a67a6">
+<input id="5b068590-f19b-4406-bde3-f28a384e43c9" name="351ba8a2-efa4-4a7d-8734-8d7ee0cf5ecf" type="radio">
+</input><label class="tabbed-label" for="5b068590-f19b-4406-bde3-f28a384e43c9">
 build test</label><div class="tabbed-content docutils">
 <p>Checks that code or software environment can be compiled and deployed.</p>
 <p><img alt="build_test" src="../_images/build_test.png" /></p>
@@ -483,7 +498,7 @@ The tools are “open source” and all of the code and ideas are visible on Git
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../welcome.html" title="previous page">Welcome!</a>
+    <a class='left-prev' id="prev-link" href="../preparation/step0.html" title="previous page">Before we start: How to follow this tutorial</a>
     <a class='right-next' id="next-link" href="dmriprep.html" title="next page">About dMRIPrep</a>
 
         </div>
