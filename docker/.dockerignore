@@ -1,0 +1,22 @@
+# python cache
+__pycache__/**/*
+__pycache__
+*.pyc
+
+# binder
+binder
+
+# other
+.vscode
+
+# website builds
+_build
+
+# git
+.gitignore
+.git/**/*
+.git
+
+# CI, etc.
+.github/**/*
+netlify.toml

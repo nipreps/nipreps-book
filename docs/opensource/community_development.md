@@ -75,6 +75,10 @@ Opening a new issue, requesting feedback, and gauging interest are generally ver
 
 Head to [the new features page](https://nipreps.org/community/features/) to learn more about the process of proposing a new feature.
 
+Once you get the 👍 from the project maintainers, you are ready to begin your contribution!
+
+## Plan ahead
+
 ## Making a change
 
 https://nipreps.org/community/CONTRIBUTING/#making-a-change

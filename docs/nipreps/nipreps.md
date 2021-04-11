@@ -37,7 +37,7 @@ One encouraging finding was that 48% of teams chose to pre-process the data usin
 A similar predicament exists in the field of dMRI analysis.
 There has been a lot of effort in recent years to compare the influence of various pre-processing steps on tractography and structural connectivity [^oldham2020] [^schilling2019] and harmonize different datasets [^tax2019].
 
-Differences in methods or parameters chosen [^carp2012] [^bowring2019], implementations across software [^dickie2017], and even operating system or software version [^gronenschild2012] [^glatard2015] all contribute to variability.
+Differences in methods or parameters chosen [^carp2012] [^bowring2019], implementations across software [^dickie2017], and even operating systems or software versions [^gronenschild2012] [^glatard2015] all contribute to variability.
 
 Doing reproducible neuroimaging research is hard.
 All of this points to a need for creating standardized pipelines for pre-processing MRI data that will reduce methodological variability and enable comparisons between different datasets and downstream analysis decisions.

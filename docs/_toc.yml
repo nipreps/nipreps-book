@@ -5,7 +5,7 @@
 
 - part: preparation
   chapters:
-  - file: step0
+  - file: preparation/step0
 
 - part: nipreps
   chapters:
