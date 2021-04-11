@@ -21,28 +21,26 @@ RUN mkdir -p $ANTSPATH && \
     | tar -xzC $ANTSPATH --strip-components 1
 ENV PATH=$ANTSPATH:$PATH
 
+USER $NB_UID
+
 # Installing precomputed python packages
-RUN conda install -y \
+RUN conda install -y -c anaconda -c conda-forge \
                   attr \
                   dipy \
-                  eddymotion=0.1.2 \
-                  jupyterlab \
                   jupytext \
                   nibabel \
                   nilearn \
-                  nitransforms \
-                  niworkflows \
                   matplotlib=2.2 \
                   numpy=1.20 \
-                  pip=20.3 \
                   requests \
-                  setuptools=51.1 \
-                  zlib; sync && \
-    conda build purge-all; sync && \
-    conda clean -tipsy && sync
+                  zlib && \
+    conda clean --all -f -y && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
+
+# Install remaining python packages
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir eddymotion nitransforms niworkflows
 
 # Installing nipreps-book
 COPY . $HOME/nipreps-book
-
-# Start Jupyter lab
-CMD jupyter lab --port=8888 --no-browser --ip=0.0.0.0 --allow-root
