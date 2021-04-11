@@ -1,6 +1,6 @@
 # Welcome!
 
-## *Implementing a head-motion correction algorithm for diffusion MRI in Python, using Dipy and NiTransforms*
+## *Implementing a head-motion correction algorithm for diffusion MRI in Python, using DIPY and NiTransforms*
 
 **Summary**.
 This tutorial walks attendees through the development of one fundamental step in the pre-processing of diffusion MRI data using a community-driven approach and relying on existing tools.

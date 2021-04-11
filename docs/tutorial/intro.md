@@ -20,6 +20,6 @@ While we can address the misalignment, it is really problematic to overcome the 
 ## Objective: Implement a head-motion estimation code
 
 This tutorial focuses on the misalignment problem.
-We will build from existing software (Dipy, for diffusion modeling) and ANTs (for image registration), as well as commonplace Python libraries (NumPy) a software framework for head-motion estimation in diffusion MRI data.
+We will build from existing software (Dipy for diffusion modeling and ANTs for image registration), as well as commonplace Python libraries (NumPy), a software framework for head-motion estimation in diffusion MRI data.
 
 The algorithmic and theoretical foundations of the method are described by Dr. M. Cieslak in his [OHBM 2019 poster](https://github.com/mattcieslak/ohbm_shoreline/blob/master/cieslakOHBM2019.pdf).
