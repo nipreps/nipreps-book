@@ -22,4 +22,57 @@ While we can address the misalignment, it is really problematic to overcome the 
 This tutorial focuses on the misalignment problem.
 We will build from existing software (Dipy for diffusion modeling and ANTs for image registration), as well as commonplace Python libraries (NumPy), a software framework for head-motion estimation in diffusion MRI data.
 
-The algorithmic and theoretical foundations of the method are described by Dr. M. Cieslak in his [OHBM 2019 poster](https://github.com/mattcieslak/ohbm_shoreline/blob/master/cieslakOHBM2019.pdf).
+The algorithmic and theoretical foundations of the method are based on an idea first proposed by [Ben-Amitay et al.](https://pubmed.ncbi.nlm.nih.gov/22183784/) and later implemented in *QSIPREP* (see this [OHBM 2019 poster](https://github.com/mattcieslak/ohbm_shoreline/blob/master/cieslakOHBM2019.pdf)).
+The idea works as follows:
+
+  1. Leave one DWI (diffusion weighted image) orientation out.
+  2. Using the rest of the dataset, impute the excluded orientation using a diffusion model.
+     Because it was generated based on the remainder of the data, the simulated volume will be
+     free of head-motion and eddy-current spatial distortions.
+  3. Run a volumetric registration algorithm between the imputed volume and the original volume.
+  4. Iterate over the whole dataset until convergence.
+
+**Identify an I/O (inputs/outputs) specification**: briefly anticipate what are the inputs to your new algorithm and the expected outcomes.
+
+Inputs
+
+- A *b=0* reference - this is a 3D file resulting from a varyingly sophisticated average across the *b=0* volumes in the dataset.
+- Orientation matrix in "RAS+B" format. This means that b-vectors are given in "scanner" coordinates (as opposed to "voxel" coordinates) and must have unit-norm. An additional column provides the sensitization intensity value (*b* value) in *s/mm^2*.
+- *high-b* DWI data (4D file) - in other words, the original DWI dataset after extracting the *b=0* volumes out.
+- A boolean indicating whether this is single-shell, multi-shell or non-shelled (e.g., Cartesian sampling such as DSI) dataset.
+- DWI prediction model specification (model name + parameters)
+- Image registration framework specification (including parameters)
+
+Outputs
+
+- List of affine matrices estimated by algorithm, which collapse the distortion from both sources.
+- List of rigid-body transformation matrices decomposed from the latter, representing the estimated head-motion parameters.
+- List of the residuals of the previous decomposition, representing the affine distortions attributed to eddy-currents.
+- A new DWI file (4D) resampling the data via the estimated affine matrices.
+- New orientation matrix in "RAS+B" format, after rotation by the rigid-body motions estimated.
+
+What this idea doesn't cover:
+
+- Conversion into RAS+B format of the gradient matrix.
+- Calculation of Framewise-Displacement or any other data quality estimation.
+- Outlier removal or correcting intensity dropout
+
+**Nonfunctional requirements**: briefly anticipate further requirements that are important, but do not alter the goal of the project.
+
+- Memory fingerprint: DWIs can be large, and storing them in memory (and subsequent derivatives thereof) can be cumbersome, or even prohibitive.
+- Parallelism: simulation and registration are CPU-intensive processes - for the runtime to be in a manageable scale, we'll need to leverage parallelism.
+
+**Sketch out an API (Application Programming Interface)**: Plan how the new software will expose the implementation downstream.
+Assuming our DWI data is encapsulated in an object (holding not just the data array, but also metadata such as the gradient table)
+pointed at by the variable `data`, and assuming we have a list of rigid-body transform matrices to initialize the algorithm (`mats`),
+a potential API would have a `.fit()` and `.predict()` members which run the algorithm (the former) and generate an EM-corrected
+DWI (the latter):
+
+```Python
+from emc import EddyMotionEstimator
+
+estimator = EddyMotionEstimator()
+estimator.fit(data, model="Tensor")
+
+corrected = estimator.predict(data)
+```
