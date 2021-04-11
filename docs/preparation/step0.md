@@ -16,7 +16,17 @@ This is the easiest and quickest way to get started.
 
 ```
 
-```{caution}
+````{tip}
+At first, the lesson may open as a Markdown file.
+You can re-open it as a Jupyter notebook by right-clicking the filename on the right sidebar, clicking "Open With" and finally clicking "Notebook".
+
+```{figure} ../images/convert_notebook.png
+:name: convert_notebook
+
+```
+````
+
+```{attention}
 If using Binder, please be aware that the state of the computational environment it provides is not permanent.
 If you are inactive for more than 10 minutes, the environment will timeout and all data will be lost.
 If you would like to preserve any progress, please save the changed files to your computer.
@@ -24,7 +34,7 @@ If you would like to preserve any progress, please save the changed files to you
 
 ## <i class="fas fa-hammer"></i> Local installation ("bare-metal")
 
-If you would like to follow along using your own setup and you have a functional Python environment, you can:
+If you would like to follow along using your own setup and you have a functional Python environment, you can run the following commands in your terminal:
 
 ```bash
 
@@ -44,19 +54,20 @@ Separate instructions can be found for [Linux/MacOS users](https://github.com/AN
 
 ## <i class="fab fa-docker"></i> Local installation ("docker containers")
 
-If you have a working Docker installation and would like to use the workshop's Docker container, you can:
+If you have a working Docker installation and would like to use the workshop's Docker image, you can run the following command in your terminal:
 
 ```bash
 
-# 1. download the Docker container
-docker pull nipreps/nipreps-book:latest
-
-# 2. run the container
-docker run --rm \
- -p 127.0.0.1:9999:8888 \
- nipreps/nipreps-book:latest
+docker run --rm -p 9999:8888 -e JUPYTER_ENABLE=yes nipreps/nipreps-book:latest
 
 ```
 
-Your terminal will output a URL that you can copy and paste into your browser.
-Make sure to change the port from `8888` to `9999` after pasting the URL.
+This pulls the latest release of the nipreps/nipreps-book image from Docker Hub.
+It then starts a container running a Jupyter Notebook server and exposes the server on host port 9999.
+The server logs are printed to the terminal.
+Visiting `http://127.0.0.1:9999/?token=<token>` in a browser loads JupyterLab, where token is the secret token printed in the terminal.
+Docker destroys the container after notebook server exit.
+
+```{tip}
+If you'd like to add a folder on your computer to access within the container (for example, your own dMRI dataset), you can do so by adding the `-v <folderpath>:/home/jovyan/work` flag to the `docker run` command.
+```
