@@ -44,10 +44,19 @@ Separate instructions can be found for [Linux/MacOS users](https://github.com/AN
 
 ## <i class="fab fa-docker"></i> Local installation ("docker containers")
 
-
+If you have a working Docker installation and would like to use the workshop's Docker container, you can:
 
 ```bash
 
-docker run
+# 1. download the Docker container
+docker pull nipreps/nipreps-book:latest
+
+# 2. run the container
+docker run --rm \
+ -p 127.0.0.1:9999:8888 \
+ nipreps/nipreps-book:latest
 
 ```
+
+Your terminal will output a URL that you can copy and paste into your browser.
+Make sure to change the port from `8888` to `9999` after pasting the URL.

@@ -42,7 +42,7 @@ RUN conda install -y \
     conda clean -tipsy && sync
 
 # Installing nipreps-book
-COPY ../ $HOME/nipreps-book
+COPY . $HOME/nipreps-book
 
 # Start Jupyter lab
 CMD jupyter lab --port=8888 --no-browser --ip=0.0.0.0 --allow-root
