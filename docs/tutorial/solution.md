@@ -205,7 +205,7 @@ class EddyMotionEstimator:
 
 The above code allows us to use our estimator as follows:
 
-```{code-cell} python
+```Python
 from eddymotion.estimator import EddyMotionEstimator
 
 estimated_affines = EddyMotionEstimator.fit(dmri_dataset, model="b0")
@@ -250,5 +250,5 @@ Some ideas to achieve this are:
 * a fully synthetic dataset such as the Fiber Box, or
 * a fully synthetic dataset containing a repeated *b=0* image (this evaluation would be limited to work with the `TrivialB0Model`, for instance).
 
-***Please head to https://github.com/nipreps/EddyMotionCorrection and share your ideas with us! We are welcoming new contributors!***
+***Please head to [the GitHub repository](https://github.com/nipreps/EddyMotionCorrection) and share your ideas with us! We are welcoming new contributors!***
 
