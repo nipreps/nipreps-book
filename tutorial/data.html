@@ -359,6 +359,11 @@ A typical dMRI scan will acquire multiple volumes (or <em><strong>angular sample
 <h2>Python and object oriented programming<a class="headerlink" href="#python-and-object-oriented-programming" title="Permalink to this headline">¶</a></h2>
 <p>Python is an <a class="reference external" href="https://en.wikipedia.org/wiki/Object-oriented_programming">object oriented programming</a> language.
 It allows us to represent and encapsulate data types and corresponding behaviors into programming structures called <em>objects</em>.</p>
+<div class="admonition-data-structures admonition">
+<p class="admonition-title">Data structures</p>
+<p>How you feed in data into your algorithm will impose constraints that might completely hinder the implementation of nonfunctional requirements down the line.
+Therefore, a careful plan must also be thought out for the data structures we are going to handle.</p>
+</div>
 <p>Therefore, let’s leverage Python to create <em>objects</em> that contain dMRI data.
 In Python, <em>objects</em> can be specified by defining a class.
 In the example code below, we’ve created a class with the name <code class="docutils literal notranslate"><span class="pre">DWI</span></code>.
@@ -474,7 +479,7 @@ The fully-fledged <code class="docutils literal notranslate"><span class="pre">D
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f26f0069cd0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f9b31ebbd90&gt;
 </pre></div>
 </div>
 <img alt="../_images/data_11_1.png" src="../_images/data_11_1.png" />
@@ -496,7 +501,7 @@ The <em>b=0</em> map can be used by diffusion modeling as the reference to quant
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f26edf40050&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f9b2fd8cbd0&gt;
 </pre></div>
 </div>
 <img alt="../_images/data_13_1.png" src="../_images/data_13_1.png" />
@@ -510,7 +515,7 @@ The <em>b=0</em> map can be used by diffusion modeling as the reference to quant
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f26ede2db50&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f9b2fc33f50&gt;
 </pre></div>
 </div>
 <img alt="../_images/data_15_1.png" src="../_images/data_15_1.png" />
