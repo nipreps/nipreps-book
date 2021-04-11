@@ -1,4 +1,8 @@
-export ANTSPATH="/usr/lib/ants"
+#!/bin/bash
+
+jupyter lab build -y --dev-build=False --minimize=False
+jupyter lab clean -y
+export ANTSPATH="$HOME/src/ants"
 mkdir -p $ANTSPATH
 curl -sSL "https://dl.dropbox.com/s/gwf51ykkk5bifyj/ants-Linux-centos6_x86_64-v2.3.4.tar.gz" | tar -xzC $ANTSPATH --strip-components 1
 export PATH="$ANTSPATH:$PATH"
