@@ -1,1 +1,89 @@
 # Image registration (spatial alignment)
+
+At this point of the tutorial we have covered two of the three initial requirements:
+
+* we have a powerful data structure to access our dMRI dataset with agility, and
+* we have a reliable (thanks to DIPY!) model factory to generate *motion-less* references.
+
+Therefore, we are only one step away from our goal - aligning any given DW map with the *motion-less* reference.
+The estimation of the ***spatial transform*** that brings two maps into alignment is called ***image registration***.
+
+**Image registration** is therefore the process through which we bring the structural features of two images into alignment.
+This means that, brain sulci and gyri, the ventricles, subcortical structures, etc. are located exactly at the same place in the two images.
+That allows, for instance, for **image fusion**, and hence screening both images together (for example, applying some transparency to the one on top) should not give us the perception that they *are not aligned*.
+
+## ANTs - Advanced Normalization ToolS
+The ANTs toolbox is widely recognized as a powerful image registration (and *normalization*, which is registration to some standard space) framework.
+
+The output of an image registration process is the *estimated transform* that brings the information in the two images into alignment.
+In our case, the head-motion is a rigid-body displacement of the head.
+Therefore, a very simple (*linear*) model --an affine 4x4 matrix-- can be used to formalize the *estimated transforms*.
+
+Only very recently, ANTs offers a Python interface to run their tools.
+For this reason, we will use the very much consolidated *Nipype* wrapping of the ANTs' command-line interface.
+The code is *almost* as simple as follows:
+
+```Python
+from nipype.interfaces.ants import Registration
+
+registration_framework = Registration(
+	fixed_image="reference.nii.gz",
+    moving_image="left-out-gradient.nii.gz",
+    from_file="settings-file.json"
+)
+```
+
+At the minimum, we need to establish our registration framework using the *fixed* (our synthetic, motion-less reference) and the *moving* (the left-out gradient) images.
+We can *easily* configure registration by creating a `settings-file.json` that may look like the following:
+
+```JSON
+{
+  "collapse_output_transforms": true,
+  "convergence_threshold": [ 1E-5, 1E-6 ],
+  "convergence_window_size": [ 5, 2 ],
+  "dimension": 3,
+  "initialize_transforms_per_stage": false,
+  "interpolation": "BSpline",
+  "metric": [ "Mattes", "Mattes" ],
+  "metric_weight": [ 1.0, 1.0 ],
+  "number_of_iterations": [
+    [ 100, 50, 0 ],
+    [ 10 ]
+  ],
+  "radius_or_number_of_bins": [ 32, 32 ],
+  "sampling_percentage": [ 0.05, 0.1 ],
+  "sampling_strategy": [ "Regular", "Random" ],
+  "shrink_factors": [
+    [ 2, 2, 1 ],
+    [ 1 ]
+  ],
+  "sigma_units": [ "vox", "vox" ],
+  "smoothing_sigmas": [
+    [ 4.0, 2.0, 0.0 ],
+    [ 0.0 ]
+  ],
+  "transform_parameters": [
+    [ 0.01 ],
+    [ 0.01 ]
+  ],
+  "transforms": [ "Rigid", "Rigid" ],
+  "use_estimate_learning_rate_once": [ false, true ],
+  "use_histogram_matching": [ true, true ],
+  "verbose": true,
+  "winsorize_lower_quantile": 0.0001,
+  "winsorize_upper_quantile": 0.9998,
+  "write_composite_transform": false
+}
+```
+
+Yes, configuring image registration is definitely not *straightforward*.
+The most relevant piece of settings to highlight is the `"transforms"` key, where we can observe we will be using a `"Rigid"` transform model.
+It is beyond the scope of this tutorial to understand ANTs and/or image registration altogether.
+
+## Resampling an image
+Once we have estimated what is the *transform* that brings two images into alignment, we can *bring* the data in the *moving* image and *move this image* into the *reference*'s grid through *resampling*.
+
+The process works as follows:
+
+![nitransforms](https://raw.githubusercontent.com/poldracklab/nitransforms/master/docs/_static/figure1-joss.png)
+
