@@ -234,11 +234,12 @@ To get a better sense of which gradient directions were sampled, let's plot them
 
 ```{code-cell} python
 
-dmri_dataset.plot_gradients(cmap="viridis")
+dmri_dataset.plot_gradients();
 
 ```
 
 We've projected all of the gradient directions onto the surface of a sphere, with each unique gradient strength colour-coded.
+Darkest hues correspond to the lowest *b*-values and brighter to the highest.
 
 ## The *LOGO* (leave-one-gradient-out) splitter
 
