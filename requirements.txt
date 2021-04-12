@@ -8,6 +8,6 @@ matplotlib
 nibabel
 nilearn
 nitransforms
-niworkflows
+niworkflows >= 1.4.0rc5
 numpy
 requests
