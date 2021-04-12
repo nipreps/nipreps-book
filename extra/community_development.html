@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Community Development &#8212; NiPreps</title>
+    <title>Community development &#8212; NiPreps</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -54,8 +54,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="The problem of head-motion in dMRI" href="../tutorial/intro.html" />
-    <link rel="prev" title="About dMRIPrep" href="../nipreps/dmriprep.html" />
+    <link rel="prev" title="The extra mile" href="nifti.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -121,18 +120,6 @@
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
-  opensource
- </span>
-</p>
-<ul class="current nav sidenav_l1">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Community Development
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
   tutorial
  </span>
 </p>
@@ -168,10 +155,15 @@
   extra
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="current nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../extra/nifti.html">
+  <a class="reference internal" href="nifti.html">
    The extra mile
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Community development
   </a>
  </li>
 </ul>
@@ -214,7 +206,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/opensource/community_development.md"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/extra/community_development.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -234,7 +226,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/nipreps/nipreps-book/issues/new?title=Issue%20on%20page%20%2Fopensource/community_development.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/nipreps/nipreps-book/issues/new?title=Issue%20on%20page%20%2Fextra/community_development.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -299,7 +291,7 @@
               <div>
                 
   <div class="section" id="community-development">
-<h1>Community Development<a class="headerlink" href="#community-development" title="Permalink to this headline">¶</a></h1>
+<h1>Community development<a class="headerlink" href="#community-development" title="Permalink to this headline">¶</a></h1>
 <div class="admonition-objectives admonition">
 <p class="admonition-title">Objectives</p>
 <ul class="simple">
@@ -386,11 +378,11 @@ This section goes into more detail on how to create a local copy of a GitHub pro
 git config --global user.email <span class="s2">&quot;carl.jacobi@gmail.com&quot;</span>
 </pre></div>
 </div>
-<p>Fork the project of interest and clone your forked repository to your computer.</p>
+<p><a class="reference external" href="https://docs.github.com/en/github/getting-started-with-github/fork-a-repo">Fork</a> the project of interest and <a class="reference external" href="https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository">clone</a> your forked repository to your computer.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/carljacobi/dmriprep.git
 </pre></div>
 </div>
-<p>To keep up with changes, add the “upstream” repository as a remote to your locally cloned repository.</p>
+<p>To keep up with changes, add the “upstream” repository (the original repository that you forked) as a remote to your locally cloned repository.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> dmriprep
 
 git remote add upstream https://github.com/nipreps/dmriprep.git
@@ -418,7 +410,7 @@ git merge upstream/master
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./opensource"
+            path: "./extra"
         },
         predefinedOutput: true
     }
@@ -430,8 +422,7 @@ git merge upstream/master
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../nipreps/dmriprep.html" title="previous page">About dMRIPrep</a>
-    <a class='right-next' id="next-link" href="../tutorial/intro.html" title="next page">The problem of head-motion in dMRI</a>
+    <a class='left-prev' id="prev-link" href="nifti.html" title="previous page">The extra mile</a>
 
         </div>
         

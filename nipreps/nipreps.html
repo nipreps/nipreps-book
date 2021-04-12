@@ -121,18 +121,6 @@
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
-  opensource
- </span>
-</p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="../opensource/community_development.html">
-   Community Development
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
   tutorial
  </span>
 </p>
@@ -172,6 +160,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../extra/nifti.html">
    The extra mile
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../extra/community_development.html">
+   Community development
   </a>
  </li>
 </ul>
@@ -329,14 +322,14 @@
 <li><p>signal drift</p></li>
 </ul>
 </li>
-<li><p>signal processing</p>
+<li><p>image reconstruction</p>
 <ul>
 <li><p>Gibbs ringing</p></li>
 </ul>
 </li>
 </ul>
-<p>These physiological and acquisition artifacts can confound the interpretation of our analysis results.
-Thus, pre-processing is necessary to minimize their influence.</p>
+<p>These physiological and acquisition artifacts can lower the accuracy, precision, and robustness of our analyses, and confound the interpretation of the results.
+Thus, pre-processing is necessary to minimize their influence and to promote more sensitive analyses.</p>
 <p>Pre-processing can also help prepare the data for analysis in other ways.
 Some examples include:</p>
 <ul class="simple">
@@ -396,28 +389,28 @@ This eases the burden of maintaining these tools but also helps focus on standar
 The pipelines are modular and rely on widely-used tools such as AFNI, ANTs, FreeSurfer, FSL, Nilearn, or DIPY and are extensible via plug-ins.
 This modularity in the code allows each step to be thoroughly tested. Some examples of tests performed on different parts of the pipeline are shown below:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="cf8ae779-f6a9-4e36-bbc5-7de2b394d21d" name="ccd0bb80-dd7f-4177-90d3-44807a739506" type="radio">
-</input><label class="tabbed-label" for="cf8ae779-f6a9-4e36-bbc5-7de2b394d21d">
+<input checked="checked" id="5733c7fb-57c7-4683-a7e5-a771bf8c2f7b" name="c3d9028c-f6c7-4c2e-9097-948192283c7a" type="radio">
+</input><label class="tabbed-label" for="5733c7fb-57c7-4683-a7e5-a771bf8c2f7b">
 unittest</label><div class="tabbed-content docutils">
 <p>Checks whether a function or class method behaves as expected.</p>
 <p><img alt="unittest" src="../_images/unittest.png" /></p>
 </div>
-<input id="ccb32b6f-ba29-4e6b-b808-566fd2d399e9" name="ccd0bb80-dd7f-4177-90d3-44807a739506" type="radio">
-</input><label class="tabbed-label" for="ccb32b6f-ba29-4e6b-b808-566fd2d399e9">
+<input id="586c22b7-e51d-4767-9b4a-06be133b7c26" name="c3d9028c-f6c7-4c2e-9097-948192283c7a" type="radio">
+</input><label class="tabbed-label" for="586c22b7-e51d-4767-9b4a-06be133b7c26">
 doctest</label><div class="tabbed-content docutils">
 <p>Also checks whether code behaves as expected and serves as an example for how to use the code.</p>
 <p><img alt="doctest1" src="../_images/doctest1.png" /></p>
 <p><img alt="doctest2" src="../_images/doctest2.png" /></p>
 </div>
-<input id="360fb1aa-d29a-496a-99b3-080b1becc999" name="ccd0bb80-dd7f-4177-90d3-44807a739506" type="radio">
-</input><label class="tabbed-label" for="360fb1aa-d29a-496a-99b3-080b1becc999">
+<input id="6a13623d-edac-4a2c-b502-2daf03edd3de" name="c3d9028c-f6c7-4c2e-9097-948192283c7a" type="radio">
+</input><label class="tabbed-label" for="6a13623d-edac-4a2c-b502-2daf03edd3de">
 integration test</label><div class="tabbed-content docutils">
 <p>Checks the behaviour of a system (multiple pieces of code).
 Can also be used to determine whether the system is behaving suboptimally.</p>
 <p><img alt="integration_test" src="../_images/integration_test.png" /></p>
 </div>
-<input id="a88e3d5d-ebe8-4da9-87d7-625d16f49e5a" name="ccd0bb80-dd7f-4177-90d3-44807a739506" type="radio">
-</input><label class="tabbed-label" for="a88e3d5d-ebe8-4da9-87d7-625d16f49e5a">
+<input id="64460b32-905c-4447-9da0-1b7d25d614c2" name="c3d9028c-f6c7-4c2e-9097-948192283c7a" type="radio">
+</input><label class="tabbed-label" for="64460b32-905c-4447-9da0-1b7d25d614c2">
 build test</label><div class="tabbed-content docutils">
 <p>Checks that code or software environment can be compiled and deployed.</p>
 <p><img alt="build_test" src="../_images/build_test.png" /></p>

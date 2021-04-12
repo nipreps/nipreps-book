@@ -55,7 +55,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Introduction to dMRI data" href="data.html" />
-    <link rel="prev" title="Community Development" href="../opensource/community_development.html" />
+    <link rel="prev" title="About dMRIPrep" href="../nipreps/dmriprep.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -121,18 +121,6 @@
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
-  opensource
- </span>
-</p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="../opensource/community_development.html">
-   Community Development
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
   tutorial
  </span>
 </p>
@@ -172,6 +160,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../extra/nifti.html">
    The extra mile
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../extra/community_development.html">
+   Community development
   </a>
  </li>
 </ul>
@@ -323,21 +316,21 @@ For instance, although rats are typically acquired with head fixations and under
 Even the vibration of the scanner itself can introduce motion!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;&lt;video width=&quot;640&quot; height=&quot;680&quot; loop=&quot;yes&quot; muted=&quot;yes&quot; autoplay=&quot;yes&quot; controls=&quot;yes&quot;&gt;&lt;source src=&quot;../assets/videos/hm-sagittal.mp4&quot; type=&quot;video/mp4&quot;/&gt;&lt;/video&gt;&quot;&quot;&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;&lt;video width=&quot;640&quot; height=&quot;680&quot; loop=&quot;yes&quot; muted=&quot;yes&quot; autoplay=&quot;yes&quot; controls=&quot;yes&quot;&gt;&lt;source src=&quot;../videos/hm-sagittal.mp4&quot; type=&quot;video/mp4&quot;/&gt;&lt;/video&gt;&quot;&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><video width="640" height="680" loop="yes" muted="yes" autoplay="yes" controls="yes"><source src="../assets/videos/hm-sagittal.mp4" type="video/mp4"/></video></div></div>
+<div class="output text_html"><video width="640" height="680" loop="yes" muted="yes" autoplay="yes" controls="yes"><source src="../videos/hm-sagittal.mp4" type="video/mp4"/></video></div></div>
 </div>
 <div class="section" id="dimensions-of-the-head-motion-problem">
 <h2>Dimensions of the head-motion problem<a class="headerlink" href="#dimensions-of-the-head-motion-problem" title="Permalink to this headline">¶</a></h2>
 <p>These sudden and unavoidable motion of the head (for instance, when the participant swallowed) result in two degrading consequences that confuse the diffusion model through which we will attempt to understand the data:</p>
 <ul class="simple">
-<li><p><strong>Misalignment between the different angular samplings</strong>, which means that the same <em>(i, j, k)</em> voxel in one orientation will not contain a diffusion measurement of exactly the same anatomical location of the rest of the orientations (see <a class="reference external" href="http://ftp.nmr.mgh.harvard.edu/pub/docs/TraculaNov2013/tracula.workshop.iv.pdf">these slides by Dr. A. Yendiki in 2013</a>).</p></li>
-<li><p><strong>Attenuation</strong> in the recorded intensity of a particular orientation, especially present when the sudden motion occurred during the diffusion-encoding gradient pulse.</p></li>
+<li><p><strong>Misalignment</strong> between the different angular samplings (between-volume), which means that the same <em>(i, j, k)</em> voxel in one orientation will not contain a diffusion measurement of exactly the same anatomical location of the rest of the orientations (see <a class="reference external" href="http://ftp.nmr.mgh.harvard.edu/pub/docs/TraculaNov2013/tracula.workshop.iv.pdf">these slides by Dr. A. Yendiki in 2013</a>).</p></li>
+<li><p><strong>Attenuation</strong> in the recorded intensity of a particular orientation (within-volume), especially present when the sudden motion occurred during the diffusion-encoding gradient pulse.</p></li>
 </ul>
-<p>While we can address the misalignment, it is really problematic to overcome the attenuation.</p>
+<p>While we can address the between-volume motion using head motion correction, the within-volume motion is often identified as a signal outlier and omitted from further analysis.</p>
 </div>
 <div class="section" id="objective-implement-a-head-motion-estimation-code">
 <h2>Objective: Implement a head-motion estimation code<a class="headerlink" href="#objective-implement-a-head-motion-estimation-code" title="Permalink to this headline">¶</a></h2>
@@ -354,7 +347,8 @@ free of head-motion and eddy-current spatial distortions.</p></li>
 <li><p>Iterate over the whole dataset until convergence.</p></li>
 </ol>
 <p><strong>Identify an I/O (inputs/outputs) specification</strong>: briefly anticipate what are the inputs to your new algorithm and the expected outcomes.</p>
-<p>Inputs</p>
+<div class="admonition-inputs admonition">
+<p class="admonition-title">Inputs</p>
 <ul class="simple">
 <li><p>A <em>b=0</em> reference - this is a 3D file resulting from a varyingly sophisticated average across the <em>b=0</em> volumes in the dataset.</p></li>
 <li><p>Orientation matrix in “RAS+B” format. This means that b-vectors are given in “scanner” coordinates (as opposed to “voxel” coordinates) and must have unit-norm. An additional column provides the sensitization intensity value (<em>b</em> value) in <em>s/mm^2</em>.</p></li>
@@ -363,7 +357,9 @@ free of head-motion and eddy-current spatial distortions.</p></li>
 <li><p>DWI prediction model specification (model name + parameters)</p></li>
 <li><p>Image registration framework specification (including parameters)</p></li>
 </ul>
-<p>Outputs</p>
+</div>
+<div class="admonition-outputs admonition">
+<p class="admonition-title">Outputs</p>
 <ul class="simple">
 <li><p>List of affine matrices estimated by algorithm, which collapse the distortion from both sources.</p></li>
 <li><p>List of rigid-body transformation matrices decomposed from the latter, representing the estimated head-motion parameters.</p></li>
@@ -371,12 +367,16 @@ free of head-motion and eddy-current spatial distortions.</p></li>
 <li><p>A new DWI file (4D) resampling the data via the estimated affine matrices.</p></li>
 <li><p>New orientation matrix in “RAS+B” format, after rotation by the rigid-body motions estimated.</p></li>
 </ul>
-<p>What this idea doesn’t cover:</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>What this idea doesn’t cover:</strong></p>
 <ul class="simple">
 <li><p>Conversion into RAS+B format of the gradient matrix.</p></li>
 <li><p>Calculation of Framewise-Displacement or any other data quality estimation.</p></li>
 <li><p>Outlier removal or correcting intensity dropout</p></li>
 </ul>
+</div>
 <p><strong>Nonfunctional requirements</strong>: briefly anticipate further requirements that are important, but do not alter the goal of the project.</p>
 <ul class="simple">
 <li><p>Memory fingerprint: DWIs can be large, and storing them in memory (and subsequent derivatives thereof) can be cumbersome, or even prohibitive.</p></li>
@@ -423,7 +423,7 @@ DWI (the latter):</p>
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../opensource/community_development.html" title="previous page">Community Development</a>
+    <a class='left-prev' id="prev-link" href="../nipreps/dmriprep.html" title="previous page">About dMRIPrep</a>
     <a class='right-next' id="next-link" href="data.html" title="next page">Introduction to dMRI data</a>
 
         </div>
