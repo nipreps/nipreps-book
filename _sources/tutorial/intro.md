@@ -13,7 +13,7 @@ kernelspec:
 # The problem of head-motion in dMRI
 
 ```{code-cell} python
-:tags: [hide-cell]
+:tags: [remove-cell]
 
 import warnings
 

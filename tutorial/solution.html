@@ -298,47 +298,6 @@
                 
   <div class="section" id="putting-everything-together">
 <h1>Putting everything together<a class="headerlink" href="#putting-everything-together" title="Permalink to this headline">¶</a></h1>
-<div class="cell tag_hide-cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
-
-<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
-
-<span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">mkstemp</span>
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">import</span> <span class="nn">requests</span>
-
-<span class="k">if</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">_filepath</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
-    <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">_filepath</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
-<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://files.osf.io/v1/resources/8k95s/providers/osfstorage/6070b4c2f6585f03fb6123a2&quot;</span>
-<span class="n">datapath</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">mkstemp</span><span class="p">(</span><span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;.h5&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
-<span class="k">if</span> <span class="n">datapath</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="n">datapath</span><span class="o">.</span><span class="n">write_bytes</span><span class="p">(</span>
-        <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">allow_redirects</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">content</span>
-    <span class="p">)</span>
-
-<span class="n">dmri_dataset</span> <span class="o">=</span> <span class="n">DWI</span><span class="o">.</span><span class="n">from_filename</span><span class="p">(</span><span class="n">datapath</span><span class="p">)</span>
-<span class="n">dmri_dataset</span><span class="o">.</span><span class="n">dataobj</span> <span class="o">=</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">dataobj</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="p">:</span><span class="mi">32</span><span class="p">]</span>
-<span class="n">dmri_dataset</span><span class="o">.</span><span class="n">gradients</span> <span class="o">=</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">gradients</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="p">:</span><span class="mi">32</span><span class="p">]</span>
-<span class="n">datapath</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">a662488204c5</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">import</span> <span class="nn">requests</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> 
-<span class="ne">----&gt; </span><span class="mi">9</span> <span class="k">if</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">_filepath</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">_filepath</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://files.osf.io/v1/resources/8k95s/providers/osfstorage/6070b4c2f6585f03fb6123a2&quot;</span>
-
-<span class="ne">NameError</span>: name &#39;dmri_dataset&#39; is not defined
-</pre></div>
-</div>
-</div>
-</div>
 <p>Once we have finalized the main components of the solution, it is time for integration.
 We now want to iterate over all the <em>LOGO</em> partitions of the dataset, generate a synthetic reference through the model of choice, and finally estimate the misalignment between the left-out gradient and the synthetic reference.
 This solution, must also abide by the API we have envisioned.</p>
