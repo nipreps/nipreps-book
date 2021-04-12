@@ -1,4 +1,4 @@
-# Community Development
+# Community development
 
 ```{admonition} Objectives
 - Discover how "open source" projects are organized (*NiPreps* in particular)
@@ -99,13 +99,13 @@ git config --global user.name "Carl Jacobi"
 git config --global user.email "carl.jacobi@gmail.com"
 ```
 
-Fork the project of interest and clone your forked repository to your computer.
+[Fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) the project of interest and [clone](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) your forked repository to your computer.
 
 ```bash
 git clone https://github.com/carljacobi/dmriprep.git
 ```
 
-To keep up with changes, add the "upstream" repository as a remote to your locally cloned repository.
+To keep up with changes, add the "upstream" repository (the original repository that you forked) as a remote to your locally cloned repository.
 
 ```bash
 cd dmriprep

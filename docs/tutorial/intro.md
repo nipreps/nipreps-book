@@ -29,17 +29,17 @@ For instance, although rats are typically acquired with head fixations and under
 Even the vibration of the scanner itself can introduce motion!
 
 ```{code-cell} python
-HTML("""<video width="640" height="680" loop="yes" muted="yes" autoplay="yes" controls="yes"><source src="../assets/videos/hm-sagittal.mp4" type="video/mp4"/></video>""")
+HTML("""<video width="640" height="680" loop="yes" muted="yes" autoplay="yes" controls="yes"><source src="../videos/hm-sagittal.mp4" type="video/mp4"/></video>""")
 ```
 
 ## Dimensions of the head-motion problem
 
 These sudden and unavoidable motion of the head (for instance, when the participant swallowed) result in two degrading consequences that confuse the diffusion model through which we will attempt to understand the data:
 
-- **Misalignment between the different angular samplings**, which means that the same *(i, j, k)* voxel in one orientation will not contain a diffusion measurement of exactly the same anatomical location of the rest of the orientations (see [these slides by Dr. A. Yendiki in 2013](http://ftp.nmr.mgh.harvard.edu/pub/docs/TraculaNov2013/tracula.workshop.iv.pdf)).
-- **Attenuation** in the recorded intensity of a particular orientation, especially present when the sudden motion occurred during the diffusion-encoding gradient pulse.
+- **Misalignment** between the different angular samplings (between-volume), which means that the same *(i, j, k)* voxel in one orientation will not contain a diffusion measurement of exactly the same anatomical location of the rest of the orientations (see [these slides by Dr. A. Yendiki in 2013](http://ftp.nmr.mgh.harvard.edu/pub/docs/TraculaNov2013/tracula.workshop.iv.pdf)).
+- **Attenuation** in the recorded intensity of a particular orientation (within-volume), especially present when the sudden motion occurred during the diffusion-encoding gradient pulse.
 
-While we can address the misalignment, it is really problematic to overcome the attenuation.
+While we can address the between-volume motion using head motion correction, the within-volume motion is often identified as a signal outlier and omitted from further analysis.
 
 ## Objective: Implement a head-motion estimation code
 
@@ -58,28 +58,30 @@ The idea works as follows:
 
 **Identify an I/O (inputs/outputs) specification**: briefly anticipate what are the inputs to your new algorithm and the expected outcomes.
 
-Inputs
-
+```{admonition} Inputs
 - A *b=0* reference - this is a 3D file resulting from a varyingly sophisticated average across the *b=0* volumes in the dataset.
 - Orientation matrix in "RAS+B" format. This means that b-vectors are given in "scanner" coordinates (as opposed to "voxel" coordinates) and must have unit-norm. An additional column provides the sensitization intensity value (*b* value) in *s/mm^2*.
 - *high-b* DWI data (4D file) - in other words, the original DWI dataset after extracting the *b=0* volumes out.
 - A boolean indicating whether this is single-shell, multi-shell or non-shelled (e.g., Cartesian sampling such as DSI) dataset.
 - DWI prediction model specification (model name + parameters)
 - Image registration framework specification (including parameters)
+```
 
-Outputs
-
+```{admonition} Outputs
 - List of affine matrices estimated by algorithm, which collapse the distortion from both sources.
 - List of rigid-body transformation matrices decomposed from the latter, representing the estimated head-motion parameters.
 - List of the residuals of the previous decomposition, representing the affine distortions attributed to eddy-currents.
 - A new DWI file (4D) resampling the data via the estimated affine matrices.
 - New orientation matrix in "RAS+B" format, after rotation by the rigid-body motions estimated.
+```
 
-What this idea doesn't cover:
+```{warning}
+**What this idea doesn't cover:**
 
 - Conversion into RAS+B format of the gradient matrix.
 - Calculation of Framewise-Displacement or any other data quality estimation.
 - Outlier removal or correcting intensity dropout
+```
 
 **Nonfunctional requirements**: briefly anticipate further requirements that are important, but do not alter the goal of the project.
 
