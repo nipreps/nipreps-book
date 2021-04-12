@@ -7,7 +7,8 @@
 ```
 
 All *NiPreps* are open to community feedback and contributions.
-Contributing to seemingly big projects can feel scary at first. This lesson will help orient you to how an example *NiPreps* project is organized and how to begin making a contribution.
+Contributing to seemingly big projects can feel scary at first.
+This lesson will help orient you to how an example *NiPreps* project is organized and how to begin making a contribution.
 
 ## Getting started with GitHub
 
@@ -79,9 +80,17 @@ Once you get the 👍 from the project maintainers, you are ready to begin your 
 
 ## Plan ahead
 
+It's important to start off by defining the problem.
+Have a clear aim for what you want your contribution to achieve.
+While you are making changes, you might discover certain ideas that hadn't come to mind before.
+However, it's important to stay on target and keep your contribution easily digestible.
+
 ## Making a change
 
-https://nipreps.org/community/CONTRIBUTING/#making-a-change
+From here, continue following the [Making a change secion](https://nipreps.org/community/CONTRIBUTING/#making-a-change) of the contributing guidelines.
+This section goes into more detail on how to create a local copy of a GitHub project and use version control to keep track of your changes.
+
+You can find a brief summary below:
 
 Make sure your git credentials are configured.
 

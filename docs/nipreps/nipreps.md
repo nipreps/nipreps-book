@@ -69,7 +69,6 @@ They can be organized into 3 layers:
 
 ```{figure} ../images/nipreps-chart.png
 :name: nipreps_chart
-
 ```
 
 ## NiPreps driving principles
@@ -96,7 +95,6 @@ This modularity in the code allows each step to be thoroughly tested. Some examp
 Checks whether a function or class method behaves as expected.
 
 ![unittest](../images/unittest.png)
-
 ```
 
 ```{tabbed} doctest
@@ -105,7 +103,6 @@ Also checks whether code behaves as expected and serves as an example for how to
 ![doctest1](../images/doctest1.png)
 
 ![doctest2](../images/doctest2.png)
-
 ```
 
 ```{tabbed} integration test
@@ -113,14 +110,12 @@ Checks the behaviour of a system (multiple pieces of code).
 Can also be used to determine whether the system is behaving suboptimally.
 
 ![integration_test](../images/integration_test.png)
-
 ```
 
 ```{tabbed} build test
 Checks that code or software environment can be compiled and deployed.
 
 ![build_test](../images/build_test.png)
-
 ```
 
 ### 2. Easy to use
@@ -137,7 +132,6 @@ Thanks to limiting the input dataset to BIDS, manual parameter input is reduced 
 
 ```{figure} ../images/dwi_reportlet.gif
 :name: reportlet
-
 ```
 
 *NiPreps* are also community-driven.
