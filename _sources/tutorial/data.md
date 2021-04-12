@@ -314,6 +314,28 @@ plot_dwi(data_test[0], dmri_dataset.affine, gradient=data_test[1])
 `data_train` is a tuple containing all diffusion-weighted volumes and the corresponding gradient table, excluding the left-out, which is stored in `data_test` (the 11<sup>th</sup> gradient indexed by `10`, in this example).
 `data_test[0]` contains the held-out diffusion-weighted volume and `data_test[1]`, the corresponding gradient table.
 
+```{admonition} Exercise
+Try printing the shapes of elements in the `data_train` tuple.
+```
+
+```{code-cell} python
+:tags: [hide-cell]
+
+print(f"data_train[0] is the DW maps dataset and has {data_train[0].shape} dimensions")
+print(f"data_train[1] is a gradient table and has {data_train[1].shape} dimensions")
+```
+
+```{admonition} Exercise
+Likewise for the left-out gradient, try printing the shapes of elements in the `data_test` tuple.
+```
+
+```{code-cell} python
+:tags: [hide-cell]
+
+print(f"data_test[0] is left-out DW map and has {data_test[0].shape} dimensions")
+print(f"data_test[1] is the corresponding DW gradient and has {data_test[1].shape} dimensions")
+```
+
 ## Next steps: diffusion modeling
 
 By modeling the diffusion signal, the acquired images can provide measurements which are related to the microscopic changes and estimate white matter trajectories.
