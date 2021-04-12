@@ -31,9 +31,12 @@ All models are required to offer the same API (application programmer interface)
 3. A `predict(gradient_table)` method, which only requires a `GradientTable` as input.
    This method produces a prediction of the signal for every voxel in every direction represented in the input `gradient_table`.
 
-```{code-cell} python
-:tags: [hide-cell]
+```{attention}
+By default, the code running in each Jupyter notebook is its own process.
+We must reload the dataset again to use it in this notebook.
+```
 
+```{code-cell} python
 from eddymotion.dmri import DWI
 from eddymotion.viz import plot_dwi
 dmri_dataset = DWI.from_filename("../../data/dwi.h5")
