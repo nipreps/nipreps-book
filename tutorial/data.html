@@ -479,7 +479,7 @@ The fully-fledged <code class="docutils literal notranslate"><span class="pre">D
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f207dd9d2d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7ff0c89fc090&gt;
 </pre></div>
 </div>
 <img alt="../_images/data_11_1.png" src="../_images/data_11_1.png" />
@@ -501,7 +501,7 @@ The <em>b=0</em> map can be used by diffusion modeling as the reference to quant
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f207e1d2510&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7ff0c8d7f410&gt;
 </pre></div>
 </div>
 <img alt="../_images/data_13_1.png" src="../_images/data_13_1.png" />
@@ -515,7 +515,7 @@ The <em>b=0</em> map can be used by diffusion modeling as the reference to quant
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f207e01ab50&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7ff0c8c0bf90&gt;
 </pre></div>
 </div>
 <img alt="../_images/data_15_1.png" src="../_images/data_15_1.png" />
@@ -676,37 +676,16 @@ For more information on this, refer to <a class="reference internal" href="../ex
 <p>To get a better sense of which gradient directions were sampled, let’s plot them!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">plot_gradients</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">plot_gradients</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">23</span><span class="n">c8e9a91047</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">plot_gradients</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">)</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/eddymotion/dmri.py</span> in <span class="ni">plot_gradients</span><span class="nt">(self, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">192</span>         <span class="k">return</span> <span class="n">plot_gradients</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">193</span>             <span class="bp">self</span><span class="o">.</span><span class="n">gradients</span><span class="p">,</span>
-<span class="ne">--&gt; </span><span class="mi">194</span>             <span class="o">**</span><span class="n">kwargs</span>
-<span class="g g-Whitespace">    </span><span class="mi">195</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">196</span> 
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/eddymotion/viz.py</span> in <span class="ni">plot_gradients</span><span class="nt">(gradients, title, ax, spacing, filename, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">250</span> 
-<span class="g g-Whitespace">    </span><span class="mi">251</span>     <span class="c1"># Visualization after re-projecting all shells to the unit sphere</span>
-<span class="ne">--&gt; </span><span class="mi">252</span>     <span class="n">draw_points</span><span class="p">(</span><span class="n">gradients</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">253</span> 
-<span class="g g-Whitespace">    </span><span class="mi">254</span>     <span class="k">if</span> <span class="n">title</span><span class="p">:</span>
-
-<span class="ne">TypeError</span>: draw_points() got an unexpected keyword argument &#39;cmap&#39;
-</pre></div>
-</div>
-<img alt="../_images/data_21_1.png" src="../_images/data_21_1.png" />
+<img alt="../_images/data_21_0.png" src="../_images/data_21_0.png" />
 </div>
 </div>
-<p>We’ve projected all of the gradient directions onto the surface of a sphere, with each unique gradient strength colour-coded.</p>
+<p>We’ve projected all of the gradient directions onto the surface of a sphere, with each unique gradient strength colour-coded.
+Darkest hues correspond to the lowest <em>b</em>-values and brighter to the highest.</p>
 </div>
 <div class="section" id="the-logo-leave-one-gradient-out-splitter">
 <h2>The <em>LOGO</em> (leave-one-gradient-out) splitter<a class="headerlink" href="#the-logo-leave-one-gradient-out-splitter" title="Permalink to this headline">¶</a></h2>
@@ -776,6 +755,12 @@ Because one “<em>datapoint</em>” in our DWI dataset corresponds to one gradi
 <span class="n">plot_dwi</span><span class="p">(</span><span class="n">data_test</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span> <span class="n">gradient</span><span class="o">=</span><span class="n">data_test</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7ff0f0218190&gt;
+</pre></div>
+</div>
+<img alt="../_images/data_25_1.png" src="../_images/data_25_1.png" />
 </div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">data_train</span></code> is a tuple containing all diffusion-weighted volumes and the corresponding gradient table, excluding the left-out, which is stored in <code class="docutils literal notranslate"><span class="pre">data_test</span></code> (the 11<sup>th</sup> gradient indexed by <code class="docutils literal notranslate"><span class="pre">10</span></code>, in this example).
