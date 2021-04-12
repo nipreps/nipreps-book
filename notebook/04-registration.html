@@ -1,0 +1,453 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image registration (spatial alignment) &#8212; NiPreps</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">NiPreps</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../welcome.html">
+   Welcome!
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  preparation
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../preparation/step0.html">
+   Before we start: How to follow this tutorial
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  nipreps
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../nipreps/nipreps.html">
+   NeuroImaging PREProcessing toolS (NiPreps)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../nipreps/dmriprep.html">
+   About dMRIPrep
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  tutorial
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tutorial/intro.html">
+   The problem of head-motion in dMRI
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tutorial/data.html">
+   Introduction to dMRI data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tutorial/models.html">
+   Diffusion modeling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tutorial/registration.html">
+   Image registration (spatial alignment)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tutorial/solution.html">
+   Putting everything together
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  extra
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../extra/nifti.html">
+   The extra mile
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../extra/community_development.html">
+   Community development
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebook/04-registration.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/nipreps/nipreps-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/nipreps/nipreps-book/issues/new?title=Issue%20on%20page%20%2Fnotebook/04-registration.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/nipreps/nipreps-book/main?urlpath=lab/tree/docs/notebook/04-registration.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ants-advanced-normalization-tools">
+   ANTs - Advanced Normalization ToolS
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#resampling-an-image">
+   Resampling an image
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="image-registration-spatial-alignment">
+<h1>Image registration (spatial alignment)<a class="headerlink" href="#image-registration-spatial-alignment" title="Permalink to this headline">¶</a></h1>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>At this point of the tutorial we have covered two of the three initial requirements:</p>
+<ul class="simple">
+<li><p>we have a powerful data structure to access our dMRI dataset with agility, and</p></li>
+<li><p>we have a reliable (thanks to DIPY!) model factory to generate <em>motion-less</em> references.</p></li>
+</ul>
+<p>Therefore, we are only one step away from our goal - aligning any given DW map with the <em>motion-less</em> reference.
+The estimation of the <em><strong>spatial transform</strong></em> that brings two maps into alignment is called <em><strong>image registration</strong></em>.</p>
+<p><strong>Image registration</strong> is therefore the process through which we bring the structural features of two images into alignment.
+This means that, brain sulci and gyri, the ventricles, subcortical structures, etc. are located exactly at the same place in the two images.
+That allows, for instance, for <strong>image fusion</strong>, and hence screening both images together (for example, applying some transparency to the one on top) should not give us the perception that they <em>are not aligned</em>.</p>
+<div class="section" id="ants-advanced-normalization-tools">
+<h2>ANTs - Advanced Normalization ToolS<a class="headerlink" href="#ants-advanced-normalization-tools" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="http://stnava.github.io/ANTs/">ANTs toolbox</a> is widely recognized as a powerful image registration (and <em>normalization</em>, which is registration to some standard space) framework.</p>
+<p>The output of an image registration process is the <em>estimated transform</em> that brings the information in the two images into alignment.
+In our case, the head-motion is a rigid-body displacement of the head.
+Therefore, a very simple (<em>linear</em>) model –an affine <span class="math notranslate nohighlight">\(4\times 4\)</span> matrix– can be used to formalize the <em>estimated transforms</em>.</p>
+<p>Only very recently, <a class="reference external" href="https://doi.org/10.1101/2020.10.19.20215392">ANTs offers a Python interface</a> to run their tools.
+For this reason, we will use the very much consolidated <a class="reference external" href="https://nipype.readthedocs.io/en/latest/api/generated/nipype.interfaces.ants.html#registration"><em>Nipype</em> wrapping of the ANTs’ command-line interface</a>.
+The code is <em>almost</em> as simple as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nipype.interfaces.ants</span> <span class="kn">import</span> <span class="n">Registration</span>
+
+<span class="n">registration_framework</span> <span class="o">=</span> <span class="n">Registration</span><span class="p">(</span>
+    <span class="n">fixed_image</span><span class="o">=</span><span class="s2">&quot;reference.nii.gz&quot;</span><span class="p">,</span>
+    <span class="n">moving_image</span><span class="o">=</span><span class="s2">&quot;left-out-gradient.nii.gz&quot;</span><span class="p">,</span>
+    <span class="n">from_file</span><span class="o">=</span><span class="s2">&quot;settings-file.json&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>At the minimum, we need to establish our registration framework using the <em>fixed</em> (our synthetic, motion-less reference) and the <em>moving</em> (the left-out gradient) images.
+We can <em>easily</em> configure registration by creating a <code class="docutils literal notranslate"><span class="pre">settings-file.json</span></code> that may look like the following:</p>
+<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;collapse_output_transforms&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nt">&quot;convergence_threshold&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="mf">1E-5</span><span class="p">,</span> <span class="mf">1E-6</span> <span class="p">],</span>
+  <span class="nt">&quot;convergence_window_size&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span> <span class="p">],</span>
+  <span class="nt">&quot;dimension&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="nt">&quot;initialize_transforms_per_stage&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nt">&quot;interpolation&quot;</span><span class="p">:</span> <span class="s2">&quot;BSpline&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;metric&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="s2">&quot;Mattes&quot;</span><span class="p">,</span> <span class="s2">&quot;Mattes&quot;</span> <span class="p">],</span>
+  <span class="nt">&quot;metric_weight&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span> <span class="p">],</span>
+  <span class="nt">&quot;number_of_iterations&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">[</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">0</span> <span class="p">],</span>
+    <span class="p">[</span> <span class="mi">10</span> <span class="p">]</span>
+  <span class="p">],</span>
+  <span class="nt">&quot;radius_or_number_of_bins&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span> <span class="p">],</span>
+  <span class="nt">&quot;sampling_percentage&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.1</span> <span class="p">],</span>
+  <span class="nt">&quot;sampling_strategy&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="s2">&quot;Regular&quot;</span><span class="p">,</span> <span class="s2">&quot;Random&quot;</span> <span class="p">],</span>
+  <span class="nt">&quot;shrink_factors&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">[</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span> <span class="p">],</span>
+    <span class="p">[</span> <span class="mi">1</span> <span class="p">]</span>
+  <span class="p">],</span>
+  <span class="nt">&quot;sigma_units&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="s2">&quot;vox&quot;</span><span class="p">,</span> <span class="s2">&quot;vox&quot;</span> <span class="p">],</span>
+  <span class="nt">&quot;smoothing_sigmas&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">[</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.0</span> <span class="p">],</span>
+    <span class="p">[</span> <span class="mf">0.0</span> <span class="p">]</span>
+  <span class="p">],</span>
+  <span class="nt">&quot;transform_parameters&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">[</span> <span class="mf">0.01</span> <span class="p">],</span>
+    <span class="p">[</span> <span class="mf">0.01</span> <span class="p">]</span>
+  <span class="p">],</span>
+  <span class="nt">&quot;transforms&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="s2">&quot;Rigid&quot;</span><span class="p">,</span> <span class="s2">&quot;Rigid&quot;</span> <span class="p">],</span>
+  <span class="nt">&quot;use_estimate_learning_rate_once&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">true</span> <span class="p">],</span>
+  <span class="nt">&quot;use_histogram_matching&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span> <span class="p">],</span>
+  <span class="nt">&quot;verbose&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nt">&quot;winsorize_lower_quantile&quot;</span><span class="p">:</span> <span class="mf">0.0001</span><span class="p">,</span>
+  <span class="nt">&quot;winsorize_upper_quantile&quot;</span><span class="p">:</span> <span class="mf">0.9998</span><span class="p">,</span>
+  <span class="nt">&quot;write_composite_transform&quot;</span><span class="p">:</span> <span class="kc">false</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Yes, configuring image registration is definitely not <em>straightforward</em>.
+The most relevant piece of settings to highlight is the <code class="docutils literal notranslate"><span class="pre">&quot;transforms&quot;</span></code> key, where we can observe we will be using a <code class="docutils literal notranslate"><span class="pre">&quot;Rigid&quot;</span></code> transform model.
+It is beyond the scope of this tutorial to understand ANTs and/or image registration altogether.</p>
+</div>
+<div class="section" id="resampling-an-image">
+<h2>Resampling an image<a class="headerlink" href="#resampling-an-image" title="Permalink to this headline">¶</a></h2>
+<p>Once we have estimated what is the <em>transform</em> that brings two images into alignment, we can <em>bring</em> the data in the <em>moving</em> image and <em>move this image</em> into the <em>reference</em>’s grid through <em>resampling</em>.</p>
+<p>The process works as follows:</p>
+<p><img alt="nitransforms" src="https://raw.githubusercontent.com/poldracklab/nitransforms/master/docs/_static/figure1-joss.png" /></p>
+<p><a class="reference external" href="https://doi.org/10.1109/ISBI45749.2020.9098466"><em>NiTransforms</em></a> (<a class="reference external" href="https://doi.org/10.31219/osf.io/8aq7b">open-access pre-print here</a>) is an ongoing project to bring a compatibility layer into <em>NiBabel</em> between the many transform file formats generated by neuroimaging packages.
+We will be using <em>NiTransforms</em> to <em>apply</em> these transforms we estimate with ANTs – effectively <em>resampling</em> moving images into their reference’s grid.</p>
+<p>To read a transform produced by ANTs with <em>NiTransforms</em>, we use the following piece of code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nitransforms</span> <span class="k">as</span> <span class="nn">nt</span>
+
+<span class="n">xform</span> <span class="o">=</span> <span class="n">nt</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">itk</span><span class="o">.</span><span class="n">ITKLinearTransform</span><span class="o">.</span><span class="n">from_filename</span><span class="p">(</span><span class="s2">&quot;ants-generated-rigid-xform.mat&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Resampling an image requires two pieces of information: the <em>reference</em> image (which provides the new grid where we want to have the data) and the <em>moving</em> image which contains the actual data we are interested in:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">xform</span><span class="o">.</span><span class="n">reference</span> <span class="o">=</span> <span class="s2">&quot;reference-image.nii.gz&quot;</span>
+<span class="n">resampled</span> <span class="o">=</span> <span class="n">xform</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s2">&quot;moving-image.nii.gz&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebook"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By The NiPreps developers<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

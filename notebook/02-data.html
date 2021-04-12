@@ -1,0 +1,664 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Introduction to dMRI data &#8212; NiPreps</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">NiPreps</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../welcome.html">
+   Welcome!
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  preparation
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../preparation/step0.html">
+   Before we start: How to follow this tutorial
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  nipreps
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../nipreps/nipreps.html">
+   NeuroImaging PREProcessing toolS (NiPreps)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../nipreps/dmriprep.html">
+   About dMRIPrep
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  tutorial
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tutorial/intro.html">
+   The problem of head-motion in dMRI
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tutorial/data.html">
+   Introduction to dMRI data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tutorial/models.html">
+   Diffusion modeling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tutorial/registration.html">
+   Image registration (spatial alignment)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tutorial/solution.html">
+   Putting everything together
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  extra
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../extra/nifti.html">
+   The extra mile
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../extra/community_development.html">
+   Community development
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebook/02-data.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/nipreps/nipreps-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/nipreps/nipreps-book/issues/new?title=Issue%20on%20page%20%2Fnotebook/02-data.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/nipreps/nipreps-book/main?urlpath=lab/tree/docs/notebook/02-data.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python-and-object-oriented-programming">
+   Python and object oriented programming
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-the-new-data-representation-object">
+   Using the new data representation object
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualizing-the-data">
+   Visualizing the data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualizing-the-gradient-information">
+   Visualizing the gradient information
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-logo-leave-one-gradient-out-splitter">
+   The
+   <em>
+    LOGO
+   </em>
+   (leave-one-gradient-out) splitter
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#next-steps-diffusion-modeling">
+   Next steps: diffusion modeling
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="introduction-to-dmri-data">
+<h1>Introduction to dMRI data<a class="headerlink" href="#introduction-to-dmri-data" title="Permalink to this headline">¶</a></h1>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Diffusion imaging probes the random, microscopic movement of water molecules by using MRI sequences that are sensitive to the geometry and environmental organization surrounding these protons.
+This is a popular technique for studying the white matter of the brain.
+The diffusion within biological structures, such as the brain, are often restricted due to barriers (e.g., cell membranes), resulting in a preferred direction of diffusion (anisotropy).
+A typical dMRI scan will acquire multiple volumes (or <em><strong>angular samples</strong></em>), each sensitive to a particular <em><strong>diffusion direction</strong></em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;&lt;video loop=&quot;yes&quot; muted=&quot;yes&quot; autoplay=&quot;yes&quot; controls=&quot;yes&quot;&gt;&lt;source src=&quot;../assets/videos/dMRI-signal-movie.mp4&quot; type=&quot;video/mp4&quot;/&gt;&lt;/video&gt;&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><video loop="yes" muted="yes" autoplay="yes" controls="yes"><source src="../assets/videos/dMRI-signal-movie.mp4" type="video/mp4"/></video></div></div>
+</div>
+<p><em>Sourced from Dr. A. Rokem, DIPY Workshop 2021</em></p>
+<p>These <em>diffusion directions</em> (or <em><strong>orientations</strong></em>) are a fundamental piece of metadata to interpret dMRI data, as models need to know the exact orientation of each angular sample.</p>
+<div class="admonition-main-elements-of-a-dmri-dataset admonition">
+<p class="admonition-title">Main elements of a dMRI dataset</p>
+<ul class="simple">
+<li><p>A 4D data array, where the last dimension encodes the reconstructed <strong>diffusion direction <em>maps</em></strong>.</p></li>
+<li><p>Tabular data or a 2D array, listing the <strong>diffusion directions</strong> (<code class="docutils literal notranslate"><span class="pre">.bvec</span></code>) and the encoding <strong>gradient strength</strong> (<code class="docutils literal notranslate"><span class="pre">.bval</span></code>).</p></li>
+</ul>
+</div>
+<p>In summary, dMRI involves <em><strong>complex data types</strong></em> that, as programmers, we want to access, query and manipulate with ease.</p>
+<div class="section" id="python-and-object-oriented-programming">
+<h2>Python and object oriented programming<a class="headerlink" href="#python-and-object-oriented-programming" title="Permalink to this headline">¶</a></h2>
+<p>Python is an <a class="reference external" href="https://en.wikipedia.org/wiki/Object-oriented_programming">object oriented programming</a> language.
+It allows us to represent and encapsulate data types and corresponding behaviors into programming structures called <em>objects</em>.</p>
+<div class="admonition-data-structures admonition">
+<p class="admonition-title">Data structures</p>
+<p>How you feed in data into your algorithm will impose constraints that might completely hinder the implementation of nonfunctional requirements down the line.
+Therefore, a careful plan must also be thought out for the data structures we are going to handle.</p>
+</div>
+<p>Therefore, let’s leverage Python to create <em>objects</em> that contain dMRI data.
+In Python, <em>objects</em> can be specified by defining a class.
+In the example code below, we’ve created a class with the name <code class="docutils literal notranslate"><span class="pre">DWI</span></code>.
+To simplify class creation, we’ve also used the magic of a Python library called <a class="reference external" href="https://www.attrs.org/en/stable/"><code class="docutils literal notranslate"><span class="pre">attrs</span></code></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Representing data in hard-disk and memory.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">attr</span>
+
+<span class="k">def</span> <span class="nf">_data_repr</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;None&quot;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;</span><span class="si">{</span><span class="s1">&#39;x&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">value</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">value</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="s2">)&gt;&quot;</span>
+
+
+<span class="nd">@attr</span><span class="o">.</span><span class="n">s</span><span class="p">(</span><span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">DWI</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Data representation structure for dMRI data.&quot;&quot;&quot;</span>
+
+    <span class="n">dataobj</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="n">_data_repr</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;A numpy ndarray object for the data array, without *b=0* volumes.&quot;&quot;&quot;</span>
+    <span class="n">brainmask</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="n">_data_repr</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;A boolean ndarray object containing a corresponding brainmask.&quot;&quot;&quot;</span>
+    <span class="n">bzero</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="n">_data_repr</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;A *b=0* reference map, preferably obtained by some smart averaging.&quot;&quot;&quot;</span>
+    <span class="n">gradients</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="n">_data_repr</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;A 2D numpy array of the gradient table in RAS+B format.&quot;&quot;&quot;</span>
+    <span class="n">em_affines</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    List of :obj:`nitransforms.linear.Affine` objects that bring</span>
+<span class="sd">    DWIs (i.e., no b=0) into alignment.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Obtain the number of high-*b* orientations.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gradients</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This code implements several <em>attributes</em> as well as a <em>behavior</em> - the <code class="docutils literal notranslate"><span class="pre">__len__</span></code> <em>method</em>.
+The <code class="docutils literal notranslate"><span class="pre">__len__</span></code> method is special in Python, as it will be executed when we call the built-in function <code class="docutils literal notranslate"><span class="pre">len()</span></code> on our object.</p>
+<p>Let’s test out the <code class="docutils literal notranslate"><span class="pre">DWI</span></code> data structure with some <em>simulated</em> data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># NumPy is a fundamental Python library for working with arrays</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># create a new DWI object, with only gradient information that is random</span>
+<span class="n">dmri_dataset</span> <span class="o">=</span> <span class="n">DWI</span><span class="p">(</span><span class="n">gradients</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">64</span><span class="p">)))</span>
+
+<span class="c1"># call Python&#39;s built-in len() function</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dmri_dataset</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>64
+</pre></div>
+</div>
+</div>
+</div>
+<p>The output of this <code class="docutils literal notranslate"><span class="pre">print()</span></code> statement is telling us that this (simulated) dataset has 64 diffusion-weighted samples.</p>
+</div>
+<div class="section" id="using-the-new-data-representation-object">
+<h2>Using the new data representation object<a class="headerlink" href="#using-the-new-data-representation-object" title="Permalink to this headline">¶</a></h2>
+<p>The code shown above was just a snippet of the <code class="docutils literal notranslate"><span class="pre">DWI</span></code> class. For simplicity, we will be using the full implementation of this class from our <a class="reference external" href="https://github.com/nipreps/EddyMotionCorrection/blob/main/eddymotion/dmri.py"><code class="docutils literal notranslate"><span class="pre">eddymotion</span></code> package</a>
+Under the <code class="docutils literal notranslate"><span class="pre">data/</span></code> folder of this book’s distribution, we have stored a sample DWI dataset with filename <code class="docutils literal notranslate"><span class="pre">dwi.h5</span></code>.
+Please note that the file has been minimized by zeroing all but two diffusion-weighted orientation maps.</p>
+<p>Let’s get some insights from it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import the class from the library</span>
+<span class="kn">from</span> <span class="nn">eddymotion.dmri</span> <span class="kn">import</span> <span class="n">DWI</span>
+
+<span class="c1"># load the sample file</span>
+<span class="n">dmri_dataset</span> <span class="o">=</span> <span class="n">DWI</span><span class="o">.</span><span class="n">from_filename</span><span class="p">(</span><span class="s2">&quot;../../data/dwi.h5&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dmri_dataset</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>102
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this case, the dataset is reporting to have 102 diffusion-weighted samples.</p>
+<p>Python will automatically generate a summary of this object if we just type the name of our new object.
+This pretty-printing of the object informs us about the data and metadata that, together, compose this particular DWI dataset:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dmri_dataset</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DWI(dataobj=&lt;118x118x78x102 (int16)&gt;, affine=&lt;4x4 (float64)&gt;, brainmask=None, bzero=&lt;118x118x78 (int16)&gt;, gradients=&lt;4x102 (float32)&gt;, em_affines=None, fieldmap=None)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’ll go over some of the components of <code class="docutils literal notranslate"><span class="pre">dmri_dataset</span></code> through this lesson.</p>
+</div>
+<div class="section" id="visualizing-the-data">
+<h2>Visualizing the data<a class="headerlink" href="#visualizing-the-data" title="Permalink to this headline">¶</a></h2>
+<p><strong>Exercise</strong></p>
+<p>Let’s start out by seeing what the data looks like.
+The fully-fledged <code class="docutils literal notranslate"><span class="pre">DWI</span></code> object has a convenience function to plot the dataset.</p>
+<p>Hint: To see all of the instances and behaviors available to an object, try typing the object name, followed by <code class="docutils literal notranslate"><span class="pre">.</span></code> and <kbd>Tab</kbd></p>
+<p><strong>Solution</strong></p>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dmri_dataset</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">  File</span><span class="nn"> &quot;&lt;ipython-input-7-f531a4f6d96b&gt;&quot;</span><span class="gt">, line </span><span class="mi">1</span>
+    <span class="n">dmri_dataset</span><span class="o">.</span>
+                 <span class="o">^</span>
+<span class="ne">SyntaxError</span>: invalid syntax
+</pre></div>
+</div>
+</div>
+</div>
+<p>When calling <code class="docutils literal notranslate"><span class="pre">plot_mosaic()</span></code> without any arguments, the <em>b=0</em> reference is plotted.
+This <em>b=0</em> reference is a map of the signal measured <em><strong>without gradient sensitization</strong></em>, or in other words, when we are not measuring diffusion in any direction.
+The <em>b=0</em> map can be used by diffusion modeling as the reference to quantify the signal drop at every voxel and given a particular orientation gradient.</p>
+<p>We can also get some insight into how a particular diffusion-weighted orientation looks like by selecting them with the argument <code class="docutils literal notranslate"><span class="pre">index</span></code>.</p>
+<p><strong>Exercise</strong></p>
+<p>Try calling <code class="docutils literal notranslate"><span class="pre">plot_mosaic</span></code> with an index of 10 or 100.</p>
+<p><strong>Solution</strong></p>
+<p>Diffusion that exhibits directionality in the same direction as the gradient results in a loss of signal.
+As we can see, <em><strong>diffusion-weighted</strong></em> images consistently drop almost all signal in voxels filled with cerebrospinal fluid because there, water diffusion is free (isotropic) regardless of the direction that is being measured.</p>
+<p>We can also see that the images at <code class="docutils literal notranslate"><span class="pre">index=10</span></code> and <code class="docutils literal notranslate"><span class="pre">index=100</span></code> have different gradient strength (“<em>b-value</em>”).
+The higher the magnitude of the gradient, the more diffusion that is allowed to occur, indicated by the overall decrease in signal intensity.
+Stronger gradients yield diffusion maps with substantially lower SNR (signal-to-noise ratio), as well as larger distortions derived from the so-called “<em>Eddy-currents</em>”.</p>
+</div>
+<div class="section" id="visualizing-the-gradient-information">
+<h2>Visualizing the gradient information<a class="headerlink" href="#visualizing-the-gradient-information" title="Permalink to this headline">¶</a></h2>
+<p>Our <code class="docutils literal notranslate"><span class="pre">DWI</span></code> object stores the gradient information in the <code class="docutils literal notranslate"><span class="pre">gradients</span></code> attribute.</p>
+<p><strong>Exercise</strong>
+Let’s see the shape of the gradient information.</p>
+<p><strong>Solution</strong></p>
+<p>We get a <span class="math notranslate nohighlight">\(4\times102\)</span> – three spatial coordinates (<span class="math notranslate nohighlight">\(b_x\)</span>, <span class="math notranslate nohighlight">\(b_y\)</span>, <span class="math notranslate nohighlight">\(b_z\)</span>) of the unit-norm “<em>b-vector</em>”, plus the gradient sensitization magnitude (the “<em>b-value</em>”), with a total of 102 different orientations for the case at hand.</p>
+<p><strong>Exercise</strong></p>
+<p>Try printing the gradient information to see what it contains.
+Remember to transpose (<code class="docutils literal notranslate"><span class="pre">.T</span></code>) the array.</p>
+<p><strong>Solution</strong></p>
+<p>Later, we’ll refer to this array as the gradient table.</p>
+<p>It consists of one row per diffusion-weighted image, with each row consisting of 4 values corresponding to [ R A S+ b ].</p>
+<p>[ R A S+ ] are the components of the <strong>gradient direction</strong>.
+Note that the directions have been re-oriented with respect to <em>world space coordinates</em>.
+For more information on this, refer to <a class="reference internal" href="../extra/nifti.html"><span class="doc">the Affine section in The extra mile</span></a>.</p>
+<p>The last column, b, reflects the <strong>timing and strength of the gradients</strong> in units of s/mm².</p>
+<p><strong>Exercise</strong></p>
+<p>To get a better sense of which gradient directions were sampled, let’s plot them!</p>
+<p><strong>Solution</strong></p>
+<p>We’ve projected all of the gradient directions onto the surface of a sphere, with each unique gradient strength colour-coded.
+Darkest hues correspond to the lowest <em>b</em>-values and brighter to the highest.</p>
+</div>
+<div class="section" id="the-logo-leave-one-gradient-out-splitter">
+<h2>The <em>LOGO</em> (leave-one-gradient-out) splitter<a class="headerlink" href="#the-logo-leave-one-gradient-out-splitter" title="Permalink to this headline">¶</a></h2>
+<p>One final behavior that will make our endeavor easier in the long run is a convenience method for data splitting.
+In particular, we are implementing some sort of cross-validation scheme where we will iterate over different data splits.
+In this case, the splitting strategy is a simple leave-one-out.
+Because one “<em>datapoint</em>” in our DWI dataset corresponds to one gradient, we will refer to this partitioning of the dataset as <em>leave-one-gradient-out (LOGO)</em>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">logo_split</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">with_b0</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Produce one fold of LOGO (leave-one-gradient-out).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    index : :obj:`int`</span>
+<span class="sd">        Index of the DWI orientation to be left out in this fold.</span>
+<span class="sd">    with_b0 : :obj:`bool`</span>
+<span class="sd">        Insert the *b=0* reference at the beginning of the training dataset.</span>
+
+<span class="sd">    Return</span>
+<span class="sd">    ------</span>
+<span class="sd">    (train_data, train_gradients) : :obj:`tuple`</span>
+<span class="sd">        Training DWI and corresponding gradients.</span>
+<span class="sd">        Training data/gradients come **from the updated dataset**.</span>
+<span class="sd">    (test_data, test_gradients) :obj:`tuple`</span>
+<span class="sd">        Test 3D map (one DWI orientation) and corresponding b-vector/value.</span>
+<span class="sd">        The test data/gradient come **from the original dataset**.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dwframe</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataobj</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">index</span><span class="p">]</span>
+    <span class="n">bframe</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gradients</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">index</span><span class="p">]</span>
+
+    <span class="c1"># if the size of the mask does not match data, cache is stale</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">mask</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="n">train_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataobj</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="o">~</span><span class="n">mask</span><span class="p">]</span>
+    <span class="n">train_gradients</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gradients</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="o">~</span><span class="n">mask</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">with_b0</span><span class="p">:</span>
+        <span class="n">train_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asanyarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bzero</span><span class="p">)[</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">train_data</span><span class="p">),</span>
+            <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">b0vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">b0vec</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">train_gradients</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">b0vec</span><span class="p">,</span> <span class="n">train_gradients</span><span class="p">),</span>
+            <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">train_gradients</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">dwframe</span><span class="p">,</span> <span class="n">bframe</span><span class="p">),</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This function is contained in the <code class="docutils literal notranslate"><span class="pre">DWI</span></code> class shown earlier and will allow us to easily partition the dataset as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eddymotion.viz</span> <span class="kn">import</span> <span class="n">plot_dwi</span>
+
+<span class="n">data_train</span><span class="p">,</span> <span class="n">data_test</span> <span class="o">=</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">logo_split</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plot_dwi</span><span class="p">(</span><span class="n">data_test</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span> <span class="n">gradient</span><span class="o">=</span><span class="n">data_test</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">data_train</span></code> is a tuple containing all diffusion-weighted volumes and the corresponding gradient table, excluding the left-out, which is stored in <code class="docutils literal notranslate"><span class="pre">data_test</span></code> (the 11<sup>th</sup> gradient indexed by <code class="docutils literal notranslate"><span class="pre">10</span></code>, in this example).
+<code class="docutils literal notranslate"><span class="pre">data_test[0]</span></code> contains the held-out diffusion-weighted volume and <code class="docutils literal notranslate"><span class="pre">data_test[1]</span></code>, the corresponding gradient table.</p>
+<p><strong>Exercise</strong></p>
+<p>Try printing the shapes of elements in the <code class="docutils literal notranslate"><span class="pre">data_train</span></code> tuple.</p>
+<p><strong>Solution</strong></p>
+<p><strong>Exercise</strong></p>
+<p>Likewise for the left-out gradient, try printing the shapes of elements in the <code class="docutils literal notranslate"><span class="pre">data_test</span></code> tuple.</p>
+<p><strong>Solution</strong></p>
+</div>
+<div class="section" id="next-steps-diffusion-modeling">
+<h2>Next steps: diffusion modeling<a class="headerlink" href="#next-steps-diffusion-modeling" title="Permalink to this headline">¶</a></h2>
+<p>By modeling the diffusion signal, the acquired images can provide measurements which are related to the microscopic changes and estimate white matter trajectories.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebook"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By The NiPreps developers<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
