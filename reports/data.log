@@ -22,10 +22,24 @@ dmri_dataset.plot_gradients(cmap="viridis")
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mAttributeError[0m                            Traceback (most recent call last)
+[0;31mTypeError[0m                                 Traceback (most recent call last)
 [0;32m<ipython-input-11-23c8e9a91047>[0m in [0;36m<module>[0;34m[0m
 [0;32m----> 1[0;31m [0mdmri_dataset[0m[0;34m.[0m[0mplot_gradients[0m[0;34m([0m[0mcmap[0m[0;34m=[0m[0;34m"viridis"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0m
-[0;31mAttributeError[0m: 'DWI' object has no attribute 'plot_gradients'
-AttributeError: 'DWI' object has no attribute 'plot_gradients'
+[0;32m/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/eddymotion/dmri.py[0m in [0;36mplot_gradients[0;34m(self, **kwargs)[0m
+[1;32m    192[0m         return plot_gradients(
+[1;32m    193[0m             [0mself[0m[0;34m.[0m[0mgradients[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 194[0;31m             [0;34m**[0m[0mkwargs[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    195[0m         )
+[1;32m    196[0m [0;34m[0m[0m
+
+[0;32m/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/eddymotion/viz.py[0m in [0;36mplot_gradients[0;34m(gradients, title, ax, spacing, filename, **kwargs)[0m
+[1;32m    250[0m [0;34m[0m[0m
+[1;32m    251[0m     [0;31m# Visualization after re-projecting all shells to the unit sphere[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 252[0;31m     [0mdraw_points[0m[0;34m([0m[0mgradients[0m[0;34m,[0m [0max[0m[0;34m,[0m [0;34m**[0m[0mkwargs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    253[0m [0;34m[0m[0m
+[1;32m    254[0m     [0;32mif[0m [0mtitle[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mTypeError[0m: draw_points() got an unexpected keyword argument 'cmap'
+TypeError: draw_points() got an unexpected keyword argument 'cmap'
 
