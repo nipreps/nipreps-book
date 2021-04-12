@@ -17,45 +17,35 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-from niworkflows.viz.notebook import display
-
-display(
-    fixed_path,
-    moving_path,
-    fixed_label="Predicted",
-    moving_label="Left-out gradient",
-);
+result = registration.run(cwd=str(tempdir.absolute()))
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mTypeError[0m                                 Traceback (most recent call last)
-[0;32m<ipython-input-4-4bcb8b7f79a7>[0m in [0;36m<module>[0;34m[0m
-[1;32m      5[0m     [0mmoving_path[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      6[0m     [0mfixed_label[0m[0;34m=[0m[0;34m"Predicted"[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
-[0;32m----> 7[0;31m     [0mmoving_label[0m[0;34m=[0m[0;34m"Left-out gradient"[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m      8[0m );
+[0;31mOSError[0m                                   Traceback (most recent call last)
+[0;32m<ipython-input-7-73beed2b16d8>[0m in [0;36m<module>[0;34m[0m
+[0;32m----> 1[0;31m [0mresult[0m [0;34m=[0m [0mregistration[0m[0;34m.[0m[0mrun[0m[0;34m([0m[0mcwd[0m[0;34m=[0m[0mstr[0m[0;34m([0m[0mtempdir[0m[0;34m.[0m[0mabsolute[0m[0;34m([0m[0;34m)[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m
+[0;32m/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/nipype/interfaces/base/core.py[0m in [0;36mrun[0;34m(self, cwd, ignore_exception, **inputs)[0m
+[1;32m    432[0m         [0;32mtry[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    433[0m             [0mruntime[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0m_pre_run_hook[0m[0;34m([0m[0mruntime[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 434[0;31m             [0mruntime[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0m_run_interface[0m[0;34m([0m[0mruntime[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    435[0m             [0mruntime[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0m_post_run_hook[0m[0;34m([0m[0mruntime[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    436[0m             [0moutputs[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0maggregate_outputs[0m[0;34m([0m[0mruntime[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 
-[0;32m/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/niworkflows/viz/notebook.py[0m in [0;36mdisplay[0;34m(fixed_image, moving_image, contour, cuts, fixed_label, moving_label)[0m
-[1;32m     56[0m                     [0mlabel[0m[0;34m=[0m[0mmoving_label[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
-[1;32m     57[0m                     [0mcontour[0m[0;34m=[0m[0mcontour[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
-[0;32m---> 58[0;31m                     [0mcompress[0m[0;34m=[0m[0;32mFalse[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m     59[0m                 ),
-[1;32m     60[0m             )
+[0;32m/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/nipype/interfaces/ants/registration.py[0m in [0;36m_run_interface[0;34m(self, runtime, correct_return_codes)[0m
+[1;32m   1010[0m [0;34m[0m[0m
+[1;32m   1011[0m     [0;32mdef[0m [0m_run_interface[0m[0;34m([0m[0mself[0m[0;34m,[0m [0mruntime[0m[0;34m,[0m [0mcorrect_return_codes[0m[0;34m=[0m[0;34m([0m[0;36m0[0m[0;34m,[0m[0;34m)[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 1012[0;31m         [0mruntime[0m [0;34m=[0m [0msuper[0m[0;34m([0m[0mRegistration[0m[0;34m,[0m [0mself[0m[0;34m)[0m[0;34m.[0m[0m_run_interface[0m[0;34m([0m[0mruntime[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   1013[0m [0;34m[0m[0m
+[1;32m   1014[0m         [0;31m# Parse some profiling info[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
 
-[0;32m/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/niworkflows/viz/utils.py[0m in [0;36mcompose_view[0;34m(bg_svgs, fg_svgs, ref, out_file)[0m
-[1;32m    359[0m     [0;34m"""Compose the input svgs into one standalone svg with CSS flickering animation."""[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    360[0m     [0mout_file[0m [0;34m=[0m [0mPath[0m[0;34m([0m[0mout_file[0m[0;34m)[0m[0;34m.[0m[0mabsolute[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0;32m--> 361[0;31m     [0mout_file[0m[0;34m.[0m[0mwrite_text[0m[0;34m([0m[0;34m"\n"[0m[0;34m.[0m[0mjoin[0m[0;34m([0m[0m_compose_view[0m[0;34m([0m[0mbg_svgs[0m[0;34m,[0m [0mfg_svgs[0m[0;34m,[0m [0mref[0m[0;34m=[0m[0mref[0m[0;34m)[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m    362[0m     [0;32mreturn[0m [0mstr[0m[0;34m([0m[0mout_file[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    363[0m [0;34m[0m[0m
+[0;32m/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/nipype/interfaces/base/core.py[0m in [0;36m_run_interface[0;34m(self, runtime, correct_return_codes)[0m
+[1;32m    816[0m                 [0;34m'No command "%s" found on host %s. Please check that the '[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    817[0m                 [0;34m"corresponding package is installed."[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 818[0;31m                 [0;34m%[0m [0;34m([0m[0mexecutable_name[0m[0;34m,[0m [0mruntime[0m[0;34m.[0m[0mhostname[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    819[0m             )
+[1;32m    820[0m [0;34m[0m[0m
 
-[0;32m/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/niworkflows/viz/utils.py[0m in [0;36m_compose_view[0;34m(bg_svgs, fg_svgs, ref)[0m
-[1;32m    394[0m     [0myoffset[0m [0;34m=[0m [0;36m0[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    395[0m     [0;32mfor[0m [0mi[0m[0;34m,[0m [0mr[0m [0;32min[0m [0menumerate[0m[0;34m([0m[0mroots[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[0;32m--> 396[0;31m         [0mr[0m[0;34m.[0m[0mmoveto[0m[0;34m([0m[0;36m0[0m[0;34m,[0m [0myoffset[0m[0;34m,[0m [0mscale[0m[0;34m=[0m[0mscales[0m[0;34m[[0m[0mi[0m[0;34m][0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m    397[0m         [0;32mif[0m [0mi[0m [0;34m==[0m [0;34m([0m[0mnsvgs[0m [0;34m-[0m [0;36m1[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    398[0m             [0myoffset[0m [0;34m=[0m [0;36m0[0m[0;34m[0m[0;34m[0m[0m
-
-[0;31mTypeError[0m: moveto() got an unexpected keyword argument 'scale'
-TypeError: moveto() got an unexpected keyword argument 'scale'
+[0;31mOSError[0m: No command "antsRegistration" found on host fv-az177-145. Please check that the corresponding package is installed.
+OSError: No command "antsRegistration" found on host fv-az177-145. Please check that the corresponding package is installed.
 
