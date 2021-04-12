@@ -57,11 +57,10 @@ It then starts a container running a Jupyter Notebook server and exposes the ser
 The server logs are printed to the terminal.
 
 ```{attention}
-Visiting `http://127.0.0.1:9999/?token=<token>` in a browser loads JupyterLab, where token is the secret token printed in the terminal.
+In any browser, copy and paste the last line from the server logs into the address bar.
+Make sure to change the `8888` to `9999`.
+
+![jupyter_port](../images/jupyter_port.png)
 ```
 
 Docker destroys the container after notebook server exit.
-
-```{tip}
-If you'd like to add a folder on your computer to access within the container (for example, your own dMRI dataset), you can do so by adding the `-v <folderpath>:/home/jovyan/work` flag to the `docker run` command.
-```

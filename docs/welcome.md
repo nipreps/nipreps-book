@@ -4,7 +4,7 @@
 
 **Summary**.
 This tutorial walks attendees through the development of one fundamental step in the pre-processing of diffusion MRI data using a community-driven approach and relying on existing tools.
-The tutorial first justifies the *NiPreps* approach to pre-processing, describing how the framework attempts to enhance or extend the MRI scanner to produce "analysis-grade" data.
+The tutorial justifies the *NiPreps* approach to pre-processing, describing how the framework attempts to enhance or extend the MRI scanner to produce "analysis-grade" data.
 This is important because data produced by the scanner is typically not digestible for statistical analyses directly.
 
 Researchers resort to either:

@@ -13,7 +13,7 @@ kernelspec:
 # Introduction to dMRI data
 
 ```{code-cell} python
-:tags: [hide-cell]
+:tags: [remove-cell]
 
 import warnings
 
@@ -138,10 +138,21 @@ We'll go over some of the components of `dmri_dataset` through this lesson.
 
 ## Visualizing the data
 
+````{admonition} Exercise
 Let's start out by seeing what the data looks like.
-The fully-fledged `DWI` object has a convenience function to plot the dataset:
+The fully-fledged `DWI` object has a convenience function to plot the dataset.
+
+```{hint}
+To see all of the instances and behaviors available to an object, try typing the object name, followed by `.` and <kbd>Tab</kbd>
+```
+
+````
+
+**Solution**
 
 ```{code-cell} python
+:tags: [hide-cell]
+
 dmri_dataset.plot_mosaic();
 ```
 
