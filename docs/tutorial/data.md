@@ -209,7 +209,7 @@ It consists of one row per diffusion-weighted image, with each row consisting of
 
 [ R A S+ ] are the components of the **gradient direction**.
 Note that the directions have been re-oriented with respect to *world space coordinates*.
-For more information on this, refer to {doc}`../extra/nifti`.
+For more information on this, refer to {doc}`the Affine section in The extra mile <../extra/nifti>`.
 
 The last column, b, reflects the **timing and strength of the gradients** in units of s/mm².
 
