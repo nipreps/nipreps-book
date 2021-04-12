@@ -39,11 +39,6 @@ jobs:
       run: |
         pip install -r requirements.txt
 
-    - name: convert
-      run: |
-          jupytext --set-formats ipynb docs/tutorial/*.md
-          jupytext --sync *.ipynb
-
     # Build the page
     - name: Build the book
       run: |

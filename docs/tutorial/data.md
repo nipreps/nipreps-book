@@ -18,6 +18,8 @@ kernelspec:
 import warnings
 
 warnings.filterwarnings("ignore")
+
+from IPython.display import HTML
 ```
 
 Diffusion imaging probes the random, microscopic movement of water molecules by using MRI sequences that are sensitive to the geometry and environmental organization surrounding these protons.
@@ -25,7 +27,9 @@ This is a popular technique for studying the white matter of the brain.
 The diffusion within biological structures, such as the brain, are often restricted due to barriers (e.g., cell membranes), resulting in a preferred direction of diffusion (anisotropy).
 A typical dMRI scan will acquire multiple volumes (or ***angular samples***), each sensitive to a particular ***diffusion direction***.
 
-<video loop="yes" muted="yes" autoplay="yes" controls="yes"><source src="../videos/dMRI-signal-movie.mp4" type="video/mp4"/></video>
+```{code-cell} python
+HTML("""<video loop="yes" muted="yes" autoplay="yes" controls="yes"><source src="../videos/dMRI-signal-movie.mp4" type="video/mp4"/></video>""")
+```
 
 *Sourced from Dr. A. Rokem, DIPY Workshop 2021*
 
