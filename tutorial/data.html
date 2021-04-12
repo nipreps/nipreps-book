@@ -336,6 +336,8 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
 </pre></div>
 </div>
 </div>
@@ -344,7 +346,15 @@
 This is a popular technique for studying the white matter of the brain.
 The diffusion within biological structures, such as the brain, are often restricted due to barriers (e.g., cell membranes), resulting in a preferred direction of diffusion (anisotropy).
 A typical dMRI scan will acquire multiple volumes (or <em><strong>angular samples</strong></em>), each sensitive to a particular <em><strong>diffusion direction</strong></em>.</p>
-<p><video loop="yes" muted="yes" autoplay="yes" controls="yes"><source src="../videos/dMRI-signal-movie.mp4" type="video/mp4"/></video></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;&lt;video loop=&quot;yes&quot; muted=&quot;yes&quot; autoplay=&quot;yes&quot; controls=&quot;yes&quot;&gt;&lt;source src=&quot;../videos/dMRI-signal-movie.mp4&quot; type=&quot;video/mp4&quot;/&gt;&lt;/video&gt;&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><video loop="yes" muted="yes" autoplay="yes" controls="yes"><source src="../videos/dMRI-signal-movie.mp4" type="video/mp4"/></video></div></div>
+</div>
 <p><em>Sourced from Dr. A. Rokem, DIPY Workshop 2021</em></p>
 <p>These <em>diffusion directions</em> (or <em><strong>orientations</strong></em>) are a fundamental piece of metadata to interpret dMRI data, as models need to know the exact orientation of each angular sample.</p>
 <div class="admonition-main-elements-of-a-dmri-dataset admonition">
@@ -479,7 +489,7 @@ The fully-fledged <code class="docutils literal notranslate"><span class="pre">D
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/data_11_0.png" src="../_images/data_11_0.png" />
+<img alt="../_images/data_13_0.png" src="../_images/data_13_0.png" />
 </div>
 </div>
 <p>When calling <code class="docutils literal notranslate"><span class="pre">plot_mosaic()</span></code> without any arguments, the <em>b=0</em> reference is plotted.
@@ -498,7 +508,7 @@ The <em>b=0</em> map can be used by diffusion modeling as the reference to quant
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/data_13_0.png" src="../_images/data_13_0.png" />
+<img alt="../_images/data_15_0.png" src="../_images/data_15_0.png" />
 </div>
 </div>
 <div class="cell tag_hide-cell docutils container">
@@ -508,7 +518,7 @@ The <em>b=0</em> map can be used by diffusion modeling as the reference to quant
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/data_14_0.png" src="../_images/data_14_0.png" />
+<img alt="../_images/data_16_0.png" src="../_images/data_16_0.png" />
 </div>
 </div>
 <p>Diffusion that exhibits directionality in the same direction as the gradient results in a loss of signal.
@@ -671,7 +681,7 @@ For more information on this, refer to <a class="reference internal" href="../ex
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/data_20_0.png" src="../_images/data_20_0.png" />
+<img alt="../_images/data_22_0.png" src="../_images/data_22_0.png" />
 </div>
 </div>
 <p>We’ve projected all of the gradient directions onto the surface of a sphere, with each unique gradient strength colour-coded.
@@ -747,7 +757,7 @@ Because one “<em>datapoint</em>” in our DWI dataset corresponds to one gradi
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/data_24_0.png" src="../_images/data_24_0.png" />
+<img alt="../_images/data_26_0.png" src="../_images/data_26_0.png" />
 </div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">data_train</span></code> is a tuple containing all diffusion-weighted volumes and the corresponding gradient table, excluding the left-out, which is stored in <code class="docutils literal notranslate"><span class="pre">data_test</span></code> (the 11<sup>th</sup> gradient indexed by <code class="docutils literal notranslate"><span class="pre">10</span></code>, in this example).

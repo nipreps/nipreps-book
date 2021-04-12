@@ -1,4 +1,26 @@
+---
+jupytext:
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
+kernelspec:
+  display_name: Python 3
+  language: python
+  name: python3
+---
+
 # The problem of head-motion in dMRI
+
+```{code-cell} python
+:tags: [hide-cell]
+
+import warnings
+
+warnings.filterwarnings("ignore")
+
+from IPython.display import HTML
+```
 
 A recurring problem for any MRI acquisition is that image reconstruction and modeling are extremely sensitive to very small changes in the position of the imaged object.
 Rigid-body, bulk-motion of the head will degrade every image, even if the experimenters closely followed all the standard operation procedures and carefully prepared the experiment (e.g., setting correctly the head paddings), and even if the participant was experienced with the MR settings and strictly followed indications to avoid any movement outside time windows allocated for rest.
@@ -6,7 +28,9 @@ This effect is exacerbated by the length of the acquisition (longer acquisitions
 For instance, although rats are typically acquired with head fixations and under sedation, their breathing (especially when assisted) generally causes motion.
 Even the vibration of the scanner itself can introduce motion!
 
-<video width="640" height="680" loop="yes" muted="yes" autoplay="yes" controls="yes"><source src="../videos/hm-sagittal.mp4" type="video/mp4"/></video>
+```{code-cell} python
+HTML("""<video width="640" height="680" loop="yes" muted="yes" autoplay="yes" controls="yes"><source src="../assets/videos/hm-sagittal.mp4" type="video/mp4"/></video>""")
+```
 
 ## Dimensions of the head-motion problem
 

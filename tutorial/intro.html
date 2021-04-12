@@ -212,7 +212,10 @@
 
     <div class="dropdown-buttons">
         <!-- ipynb file if we had a myst markdown file -->
-        
+        <a class="dropdown-buttons"
+            href="../_sources/tutorial/intro.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
         <!-- Download raw file -->
         <a class="dropdown-buttons" href="../_sources/tutorial/intro.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
@@ -250,6 +253,23 @@
 
             <!-- Launch buttons -->
 
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/nipreps/nipreps-book/main?urlpath=lab/tree/docs/tutorial/intro.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
         </div>
 
         <!-- Table of contents -->
@@ -285,12 +305,31 @@
                 
   <div class="section" id="the-problem-of-head-motion-in-dmri">
 <h1>The problem of head-motion in dMRI<a class="headerlink" href="#the-problem-of-head-motion-in-dmri" title="Permalink to this headline">¶</a></h1>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
+</pre></div>
+</div>
+</div>
+</div>
 <p>A recurring problem for any MRI acquisition is that image reconstruction and modeling are extremely sensitive to very small changes in the position of the imaged object.
 Rigid-body, bulk-motion of the head will degrade every image, even if the experimenters closely followed all the standard operation procedures and carefully prepared the experiment (e.g., setting correctly the head paddings), and even if the participant was experienced with the MR settings and strictly followed indications to avoid any movement outside time windows allocated for rest.
 This effect is exacerbated by the length of the acquisition (longer acquisitions will have more motion), and is not limited to humans.
 For instance, although rats are typically acquired with head fixations and under sedation, their breathing (especially when assisted) generally causes motion.
 Even the vibration of the scanner itself can introduce motion!</p>
-<p><video width="640" height="680" loop="yes" muted="yes" autoplay="yes" controls="yes"><source src="../videos/hm-sagittal.mp4" type="video/mp4"/></video></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;&lt;video width=&quot;640&quot; height=&quot;680&quot; loop=&quot;yes&quot; muted=&quot;yes&quot; autoplay=&quot;yes&quot; controls=&quot;yes&quot;&gt;&lt;source src=&quot;../assets/videos/hm-sagittal.mp4&quot; type=&quot;video/mp4&quot;/&gt;&lt;/video&gt;&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><video width="640" height="680" loop="yes" muted="yes" autoplay="yes" controls="yes"><source src="../assets/videos/hm-sagittal.mp4" type="video/mp4"/></video></div></div>
+</div>
 <div class="section" id="dimensions-of-the-head-motion-problem">
 <h2>Dimensions of the head-motion problem<a class="headerlink" href="#dimensions-of-the-head-motion-problem" title="Permalink to this headline">¶</a></h2>
 <p>These sudden and unavoidable motion of the head (for instance, when the participant swallowed) result in two degrading consequences that confuse the diffusion model through which we will attempt to understand the data:</p>
