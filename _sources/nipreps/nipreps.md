@@ -122,6 +122,7 @@ Checks that code or software environment can be compiled and deployed.
 
 *NiPreps* are packaged as a fully-compliant BIDS-Apps [^gorgolewski2017].
 All of the software is containerized and the pipelines all share a common command-line interface:
+
 `<pipelines_name> <bids_dir> <output_dir> <participant> [--options]`
 
 Thanks to limiting the input dataset to BIDS, manual parameter input is reduced to a minimum, allowing the pipelines to run in an automated fashion.
