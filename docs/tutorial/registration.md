@@ -19,9 +19,12 @@ import warnings
 import requests
 from tempfile import mkstemp
 from pathlib import Path
+import numpy as np
+import nibabel as nb
 
 from eddymotion.dmri import DWI
 from eddymotion.viz import plot_dwi
+from eddymotion.estimator import _advanced_clip
 
 warnings.filterwarnings("ignore")
 
@@ -34,6 +37,20 @@ if datapath.stat().st_size == 0:
 
 dmri_dataset = DWI.from_filename(datapath)
 datapath.unlink()
+
+
+def _to_nifti(
+    data, affine, filename, clip=True
+):
+    data = np.squeeze(data)
+    if clip:
+        data = _advanced_clip(data)
+    nb.Nifti1Image(
+        data,
+        affine,
+        None,
+    ).to_filename(filename)
+
 ```
 
 At this point of the tutorial we have covered two of the three initial requirements:
@@ -140,7 +157,6 @@ Let's write out two NIfTI files in a temporary folder:
 ```{code-cell} python
 from pathlib import Path
 from tempfile import mkdtemp
-from eddymotion.estimator import _to_nifti
 
 tempdir = Path(mkdtemp())
 
