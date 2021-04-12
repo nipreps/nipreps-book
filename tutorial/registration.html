@@ -419,20 +419,6 @@ Let’s write out two NIfTI files in a temporary folder:</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">3</span><span class="o">-</span><span class="n">f9f54fccc673</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">mkdtemp</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">eddymotion.estimator</span> <span class="kn">import</span> <span class="n">_to_nifti</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> 
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">tempdir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">mkdtemp</span><span class="p">())</span>
-
-<span class="ne">ImportError</span>: cannot import name &#39;_to_nifti&#39; from &#39;eddymotion.estimator&#39; (/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/eddymotion/estimator.py)
-</pre></div>
-</div>
-</div>
 </div>
 <p>We can now visualize our reference (the prediction) and the actual DW map.
 Please notice the subtle <em>nodding</em> of the head, perhaps more apparent when looking at the corpus callosum in the sagittal views:</p>
@@ -446,6 +432,40 @@ Please notice the subtle <em>nodding</em> of the head, perhaps more apparent whe
     <span class="n">fixed_label</span><span class="o">=</span><span class="s2">&quot;Predicted&quot;</span><span class="p">,</span>
     <span class="n">moving_label</span><span class="o">=</span><span class="s2">&quot;Left-out gradient&quot;</span><span class="p">,</span>
 <span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">4</span><span class="o">-</span><span class="mi">4</span><span class="n">bcb8b7f79a7</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">moving_path</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">fixed_label</span><span class="o">=</span><span class="s2">&quot;Predicted&quot;</span><span class="p">,</span>
+<span class="ne">----&gt; </span><span class="mi">7</span>     <span class="n">moving_label</span><span class="o">=</span><span class="s2">&quot;Left-out gradient&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="p">);</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/niworkflows/viz/notebook.py</span> in <span class="ni">display</span><span class="nt">(fixed_image, moving_image, contour, cuts, fixed_label, moving_label)</span>
+<span class="g g-Whitespace">     </span><span class="mi">56</span>                     <span class="n">label</span><span class="o">=</span><span class="n">moving_label</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">57</span>                     <span class="n">contour</span><span class="o">=</span><span class="n">contour</span><span class="p">,</span>
+<span class="ne">---&gt; </span><span class="mi">58</span>                     <span class="n">compress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">59</span>                 <span class="p">),</span>
+<span class="g g-Whitespace">     </span><span class="mi">60</span>             <span class="p">)</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/niworkflows/viz/utils.py</span> in <span class="ni">compose_view</span><span class="nt">(bg_svgs, fg_svgs, ref, out_file)</span>
+<span class="g g-Whitespace">    </span><span class="mi">359</span>     <span class="sd">&quot;&quot;&quot;Compose the input svgs into one standalone svg with CSS flickering animation.&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">360</span>     <span class="n">out_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">out_file</span><span class="p">)</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">361</span>     <span class="n">out_file</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_compose_view</span><span class="p">(</span><span class="n">bg_svgs</span><span class="p">,</span> <span class="n">fg_svgs</span><span class="p">,</span> <span class="n">ref</span><span class="o">=</span><span class="n">ref</span><span class="p">)))</span>
+<span class="g g-Whitespace">    </span><span class="mi">362</span>     <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">out_file</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">363</span> 
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/niworkflows/viz/utils.py</span> in <span class="ni">_compose_view</span><span class="nt">(bg_svgs, fg_svgs, ref)</span>
+<span class="g g-Whitespace">    </span><span class="mi">394</span>     <span class="n">yoffset</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="g g-Whitespace">    </span><span class="mi">395</span>     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">roots</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">396</span>         <span class="n">r</span><span class="o">.</span><span class="n">moveto</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">yoffset</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">scales</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="g g-Whitespace">    </span><span class="mi">397</span>         <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="p">(</span><span class="n">nsvgs</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">398</span>             <span class="n">yoffset</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="ne">TypeError</span>: moveto() got an unexpected keyword argument &#39;scale&#39;
 </pre></div>
 </div>
 </div>
@@ -488,7 +508,7 @@ Please notice the subtle <em>nodding</em> of the head, perhaps more apparent whe
 </div>
 </div>
 </div>
-<p>If everything worked out, we can now retrieve the aligned file with the output <code class="docutils literal notranslate"><span class="pre">result.outputs.warped_image</span></code>:
+<p>If everything worked out, we can now retrieve the aligned file with the output <code class="docutils literal notranslate"><span class="pre">result.outputs.warped_image</span></code>.
 We can now visualize how close (or far) the two images are:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">

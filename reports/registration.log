@@ -17,30 +17,45 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-from pathlib import Path
-from tempfile import mkdtemp
-from eddymotion.estimator import _to_nifti
+from niworkflows.viz.notebook import display
 
-tempdir = Path(mkdtemp())
-
-# The fixed image is our prediction
-fixed_path = tempdir / "fixed.nii.gz"
-_to_nifti(predicted, dmri_dataset.affine, fixed_path)
-
-# The moving image is the left-out DW map
-moving_path = tempdir / "moving.nii.gz"
-_to_nifti(data_test[0], dmri_dataset.affine, moving_path)
+display(
+    fixed_path,
+    moving_path,
+    fixed_label="Predicted",
+    moving_label="Left-out gradient",
+);
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mImportError[0m                               Traceback (most recent call last)
-[0;32m<ipython-input-3-f9f54fccc673>[0m in [0;36m<module>[0;34m[0m
-[1;32m      1[0m [0;32mfrom[0m [0mpathlib[0m [0;32mimport[0m [0mPath[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      2[0m [0;32mfrom[0m [0mtempfile[0m [0;32mimport[0m [0mmkdtemp[0m[0;34m[0m[0;34m[0m[0m
-[0;32m----> 3[0;31m [0;32mfrom[0m [0meddymotion[0m[0;34m.[0m[0mestimator[0m [0;32mimport[0m [0m_to_nifti[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m      4[0m [0;34m[0m[0m
-[1;32m      5[0m [0mtempdir[0m [0;34m=[0m [0mPath[0m[0;34m([0m[0mmkdtemp[0m[0;34m([0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;31mTypeError[0m                                 Traceback (most recent call last)
+[0;32m<ipython-input-4-4bcb8b7f79a7>[0m in [0;36m<module>[0;34m[0m
+[1;32m      5[0m     [0mmoving_path[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      6[0m     [0mfixed_label[0m[0;34m=[0m[0;34m"Predicted"[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 7[0;31m     [0mmoving_label[0m[0;34m=[0m[0;34m"Left-out gradient"[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      8[0m );
 
-[0;31mImportError[0m: cannot import name '_to_nifti' from 'eddymotion.estimator' (/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/eddymotion/estimator.py)
-ImportError: cannot import name '_to_nifti' from 'eddymotion.estimator' (/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/eddymotion/estimator.py)
+[0;32m/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/niworkflows/viz/notebook.py[0m in [0;36mdisplay[0;34m(fixed_image, moving_image, contour, cuts, fixed_label, moving_label)[0m
+[1;32m     56[0m                     [0mlabel[0m[0;34m=[0m[0mmoving_label[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     57[0m                     [0mcontour[0m[0;34m=[0m[0mcontour[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 58[0;31m                     [0mcompress[0m[0;34m=[0m[0;32mFalse[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     59[0m                 ),
+[1;32m     60[0m             )
+
+[0;32m/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/niworkflows/viz/utils.py[0m in [0;36mcompose_view[0;34m(bg_svgs, fg_svgs, ref, out_file)[0m
+[1;32m    359[0m     [0;34m"""Compose the input svgs into one standalone svg with CSS flickering animation."""[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    360[0m     [0mout_file[0m [0;34m=[0m [0mPath[0m[0;34m([0m[0mout_file[0m[0;34m)[0m[0;34m.[0m[0mabsolute[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 361[0;31m     [0mout_file[0m[0;34m.[0m[0mwrite_text[0m[0;34m([0m[0;34m"\n"[0m[0;34m.[0m[0mjoin[0m[0;34m([0m[0m_compose_view[0m[0;34m([0m[0mbg_svgs[0m[0;34m,[0m [0mfg_svgs[0m[0;34m,[0m [0mref[0m[0;34m=[0m[0mref[0m[0;34m)[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    362[0m     [0;32mreturn[0m [0mstr[0m[0;34m([0m[0mout_file[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    363[0m [0;34m[0m[0m
+
+[0;32m/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/niworkflows/viz/utils.py[0m in [0;36m_compose_view[0;34m(bg_svgs, fg_svgs, ref)[0m
+[1;32m    394[0m     [0myoffset[0m [0;34m=[0m [0;36m0[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    395[0m     [0;32mfor[0m [0mi[0m[0;34m,[0m [0mr[0m [0;32min[0m [0menumerate[0m[0;34m([0m[0mroots[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 396[0;31m         [0mr[0m[0;34m.[0m[0mmoveto[0m[0;34m([0m[0;36m0[0m[0;34m,[0m [0myoffset[0m[0;34m,[0m [0mscale[0m[0;34m=[0m[0mscales[0m[0;34m[[0m[0mi[0m[0;34m][0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    397[0m         [0;32mif[0m [0mi[0m [0;34m==[0m [0;34m([0m[0mnsvgs[0m [0;34m-[0m [0;36m1[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    398[0m             [0myoffset[0m [0;34m=[0m [0;36m0[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mTypeError[0m: moveto() got an unexpected keyword argument 'scale'
+TypeError: moveto() got an unexpected keyword argument 'scale'
 

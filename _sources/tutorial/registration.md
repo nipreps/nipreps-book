@@ -196,8 +196,9 @@ Nipype interfaces can be submitted for execution with the `run()` method:
 result = registration.run(cwd=str(tempdir.absolute()))
 ```
 
-If everything worked out, we can now retrieve the aligned file with the output `result.outputs.warped_image`:
+If everything worked out, we can now retrieve the aligned file with the output `result.outputs.warped_image`.
 We can now visualize how close (or far) the two images are:
+
 ```{code-cell} python
 display(
     fixed_path,
