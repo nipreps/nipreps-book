@@ -297,6 +297,8 @@ plot_dwi(data_test[0], dmri_dataset.affine, gradient=data_test[1]);
 Try printing the shapes of elements in the `data_train` tuple.
 ```
 
+**Solution**
+
 ```{code-cell} python
 :tags: [hide-cell]
 
@@ -307,6 +309,8 @@ print(f"data_train[1] is a gradient table and has {data_train[1].shape} dimensio
 ```{admonition} Exercise
 Likewise for the left-out gradient, try printing the shapes of elements in the `data_test` tuple.
 ```
+
+**Solution**
 
 ```{code-cell} python
 :tags: [hide-cell]
