@@ -13,7 +13,7 @@ kernelspec:
 # Diffusion modeling
 
 ```{code-cell} python
-:tags: [hide-cell]
+:tags: [remove-cell]
 
 import warnings
 

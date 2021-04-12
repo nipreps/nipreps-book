@@ -13,11 +13,27 @@ kernelspec:
 # Image registration (spatial alignment)
 
 ```{code-cell} python
-:tags: [hide-cell]
+:tags: [remove-cell]
 
 import warnings
+import requests
+from tempfile import mkstemp
+from pathlib import Path
+
+from eddymotion.dmri import DWI
+from eddymotion.viz import plot_dwi
 
 warnings.filterwarnings("ignore")
+
+url = "https://files.osf.io/v1/resources/8k95s/providers/osfstorage/6070b4c2f6585f03fb6123a2"
+datapath = Path(mkstemp(suffix=".h5")[1])
+if datapath.stat().st_size == 0:
+    datapath.write_bytes(
+        requests.get(url, allow_redirects=True).content
+    )
+
+dmri_dataset = DWI.from_filename(datapath)
+datapath.unlink()
 ```
 
 At this point of the tutorial we have covered two of the three initial requirements:
@@ -99,7 +115,97 @@ We can *easily* configure registration by creating a `settings-file.json` that m
 
 Yes, configuring image registration is definitely not *straightforward*.
 The most relevant piece of settings to highlight is the `"transforms"` key, where we can observe we will be using a `"Rigid"` transform model.
-It is beyond the scope of this tutorial to understand ANTs and/or image registration altogether.
+
+## Example registration
+It is beyond the scope of this tutorial to understand ANTs and/or image registration altogether, but let's have a look at how registration is integrated.
+First, we'll need to generate one target gradient prediction following all the steps learned previously.
+For this example, we have selected the 8<sup>th</sup> DW map (`index=7`) because it contains a sudden motion spike, resembling a nodding movement.
+
+```{code-cell} python
+from eddymotion.model import ModelFactory
+
+data_train, data_test = dmri_dataset.logo_split(7, with_b0=True)
+
+model = ModelFactory.init(
+    gtab=data_train[1],
+    model="DTI",
+    S0=dmri_dataset.bzero,
+)
+model.fit(data_train[0])
+predicted = model.predict(data_test[1])
+```
+
+Since we are using the command-line interface of ANTs, the software must be installed in the computer and the input data is provided via files in the filesystem.
+Let's write out two NIfTI files in a temporary folder:
+```{code-cell} python
+from pathlib import Path
+from tempfile import mkdtemp
+from eddymotion.estimator import _to_nifti
+
+tempdir = Path(mkdtemp())
+
+# The fixed image is our prediction
+fixed_path = tempdir / "fixed.nii.gz"
+_to_nifti(predicted, dmri_dataset.affine, fixed_path)
+
+# The moving image is the left-out DW map
+moving_path = tempdir / "moving.nii.gz"
+_to_nifti(data_test[0], dmri_dataset.affine, moving_path)
+```
+
+We can now visualize our reference (the prediction) and the actual DW map.
+Please notice the subtle *nodding* of the head, perhaps more apparent when looking at the corpus callosum in the sagittal views:
+```{code-cell} python
+from niworkflows.viz.notebook import display
+
+display(
+    fixed_path,
+    moving_path,
+    fixed_label="Predicted",
+    moving_label="Left-out gradient",
+);
+```
+
+Let's configure ANTs via NiPype:
+
+```{code-cell} python
+from os import cpu_count
+from pkg_resources import resource_filename as pkg_fn
+from nipype.interfaces.ants.registration import Registration
+
+registration = Registration(
+    terminal_output="file",
+    from_file=pkg_fn(
+        "eddymotion",
+        f"config/dwi-to-dwi_level1.json",
+    ),
+    fixed_image=str(fixed_path.absolute()),
+    moving_image=str(moving_path.absolute()),
+)
+registration.inputs.output_warped_image = True
+registration.inputs.num_threads = cpu_count()
+```
+
+which will run the following command-line:
+```{code-cell} python
+registration.cmdline
+```
+
+Nipype interfaces can be submitted for execution with the `run()` method:
+```{code-cell} python
+result = registration.run(cwd=str(tempdir.absolute()))
+```
+
+If everything worked out, we can now retrieve the aligned file with the output `result.outputs.warped_image`:
+We can now visualize how close (or far) the two images are:
+```{code-cell} python
+display(
+    fixed_path,
+    result.outputs.warped_image,
+    fixed_label="Predicted",
+    moving_label="Aligned",
+);
+```
 
 ## Resampling an image
 
@@ -114,15 +220,40 @@ We will be using *NiTransforms* to *apply* these transforms we estimate with ANT
 
 To read a transform produced by ANTs with *NiTransforms*, we use the following piece of code:
 
-```python
+```{code-cell} python
 import nitransforms as nt
 
-xform = nt.io.itk.ITKLinearTransform.from_filename("ants-generated-rigid-xform.mat")
+itk_xform = nt.io.itk.ITKLinearTransform.from_filename(result.outputs.forward_transforms[0])
+matrix = itk_xform.to_ras(reference=fixed_path, moving=moving_path)
+matrix
 ```
 
 Resampling an image requires two pieces of information: the *reference* image (which provides the new grid where we want to have the data) and the *moving* image which contains the actual data we are interested in:
 
-```python
-xform.reference = "reference-image.nii.gz"
-resampled = xform.apply("moving-image.nii.gz")
+```{code-cell} python
+xfm = nt.linear.Affine(matrix)
+xfm.reference = fixed_path
+resampled = xfm.apply(moving_path)
+resampled.to_filename(tempdir / "resampled-nitransforms.nii.gz")
+display(
+    fixed_path,
+    tempdir / "resampled-nitransforms.nii.gz",
+    fixed_label="Predicted",
+    moving_label="Aligned (nitransforms)",
+);
+```
+
+**Exercise**
+Use the `display()` function to visualize the image aligned as generated by ANTs vs. that generated by *NiTransforms* -- they should be aligned!.
+
+**Solution**
+```{code-cell} python
+:tags: [hide-cell]
+
+display(
+    result.outputs.warped_image,
+    tempdir / "resampled-nitransforms.nii.gz",
+    fixed_label="Aligned (ANTs)",
+    moving_label="Aligned (nitransforms)",
+);
 ```

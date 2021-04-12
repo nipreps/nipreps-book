@@ -336,15 +336,6 @@
                 
   <div class="section" id="diffusion-modeling">
 <h1>Diffusion modeling<a class="headerlink" href="#diffusion-modeling" title="Permalink to this headline">¶</a></h1>
-<div class="cell tag_hide-cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
-
-<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
 <p>The proposed method requires inferring a motion-less, reference DW map for a given diffusion orientation for which we want to estimate the misalignment.
 Inference of the reference map is achieved by first fitting some diffusion model (which we will draw from <a class="reference external" href="https://dipy.org">DIPY</a>) using all data, except the particular DW map that is to be aligned.
 This data splitting scheme was introduced in <a class="reference internal" href="data.html"><span class="doc">the LOGO splitter section in Introduction to dMRI data</span></a>.</p>
