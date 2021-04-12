@@ -42,6 +42,10 @@ Once we have finalized the main components of the solution, it is time for integ
 We now want to iterate over all the *LOGO* partitions of the dataset, generate a synthetic reference through the model of choice, and finally estimate the misalignment between the left-out gradient and the synthetic reference.
 This solution, must also abide by the API we have envisioned.
 
+```{admonition} Exercise
+Complete the code snipet below to integrate the different components into the final solution to the dMRI head-motion problem.
+```
+
 ```python
 class EddyMotionEstimator:
     """Estimates rigid-body head-motion and distortions derived from eddy-currents."""
@@ -221,8 +225,10 @@ estimated_affines = EddyMotionEstimator.fit(dmri_dataset, model="b0")
 
 Once we have our first implementation functional, we should think of some unit-tests for our code.
 
-**Exercise**: write a unit test for the `TrivialB0Model`.
+```{admonition} Exercise
+Write a unit test for the `TrivialB0Model`.
 This test would just make sure that, regardless of the particular partition of the input dataset, a *b=0* map is always returned.
+```
 
 **Solution**: in this solution, we are using `pytest` to integrate the test into a higher-level test suite.
 
