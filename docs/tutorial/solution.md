@@ -13,7 +13,7 @@ kernelspec:
 # Putting everything together
 
 ```{code-cell} python
-:tags: [hide-cell]
+:tags: [remove-cell]
 
 import warnings
 
