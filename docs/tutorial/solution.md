@@ -55,7 +55,7 @@ class EddyMotionEstimator:
         model="b0",
         **kwargs,
     ):
-        r"""
+        """
         Estimate head-motion and Eddy currents.
 
         <please write a descriptive documentation of the function here>
@@ -129,7 +129,7 @@ class EddyMotionEstimator:
         model="b0",
         **kwargs,
     ):
-        r"""
+        """
         Estimate head-motion and Eddy currents.
 
         Parameters
