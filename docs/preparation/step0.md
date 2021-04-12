@@ -58,7 +58,7 @@ If you have a working Docker installation and would like to use the workshop's D
 
 ```bash
 
-docker run --rm -p 9999:8888 -e JUPYTER_ENABLE=yes nipreps/nipreps-book:latest
+docker run --rm -p 9999:8888 -e JUPYTER_ENABLE_LAB=yes josephmje/nipreps-book:latest
 
 ```
 
