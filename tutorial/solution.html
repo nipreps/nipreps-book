@@ -349,6 +349,10 @@
 <p>Once we have finalized the main components of the solution, it is time for integration.
 We now want to iterate over all the <em>LOGO</em> partitions of the dataset, generate a synthetic reference through the model of choice, and finally estimate the misalignment between the left-out gradient and the synthetic reference.
 This solution, must also abide by the API we have envisioned.</p>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Complete the code snipet below to integrate the different components into the final solution to the dMRI head-motion problem.</p>
+</div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">EddyMotionEstimator</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Estimates rigid-body head-motion and distortions derived from eddy-currents.&quot;&quot;&quot;</span>
 
@@ -524,8 +528,11 @@ This solution, must also abide by the API we have envisioned.</p>
 <div class="section" id="what-s-next-testing">
 <h2>What’s next? - Testing!<a class="headerlink" href="#what-s-next-testing" title="Permalink to this headline">¶</a></h2>
 <p>Once we have our first implementation functional, we should think of some unit-tests for our code.</p>
-<p><strong>Exercise</strong>: write a unit test for the <code class="docutils literal notranslate"><span class="pre">TrivialB0Model</span></code>.
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Write a unit test for the <code class="docutils literal notranslate"><span class="pre">TrivialB0Model</span></code>.
 This test would just make sure that, regardless of the particular partition of the input dataset, a <em>b=0</em> map is always returned.</p>
+</div>
 <p><strong>Solution</strong>: in this solution, we are using <code class="docutils literal notranslate"><span class="pre">pytest</span></code> to integrate the test into a higher-level test suite.</p>
 <div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
