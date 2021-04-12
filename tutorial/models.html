@@ -294,18 +294,6 @@
    </em>
    model
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exercise">
-     Exercise
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
-     Exercise
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#investigating-the-tensor-model">
@@ -334,11 +322,6 @@
      API
     </a>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     Exercise
-    </a>
-   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -360,6 +343,15 @@
                 
   <div class="section" id="diffusion-modeling">
 <h1>Diffusion modeling<a class="headerlink" href="#diffusion-modeling" title="Permalink to this headline">¶</a></h1>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 <p>The proposed method requires inferring a motion-less, reference DW map for a given diffusion orientation for which we want to estimate the misalignment.
 Inference of the reference map is achieved by first fitting some diffusion model (which we will draw from <a class="reference external" href="https://dipy.org">DIPY</a>) using all data, except the particular DW map that is to be aligned.
 This data splitting scheme was introduced in the previous section, in <a class="reference external" href="data.md#the-logo-leave-one-gradient-out-splitter"></a>.</p>
@@ -370,7 +362,12 @@ This data splitting scheme was introduced in the previous section, in <a class="
 <li><p>A <code class="docutils literal notranslate"><span class="pre">predict(gradient_table)</span></code> method, which only requires a <code class="docutils literal notranslate"><span class="pre">GradientTable</span></code> as input.
 This method produces a prediction of the signal for every voxel in every direction represented in the input <code class="docutils literal notranslate"><span class="pre">gradient_table</span></code>.</p></li>
 </ol>
-<div class="cell tag_hide-cell docutils container">
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>By default, the code running in each Jupyter notebook is its own process.
+We must reload the dataset again to use it in this notebook.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eddymotion.dmri</span> <span class="kn">import</span> <span class="n">DWI</span>
 <span class="kn">from</span> <span class="nn">eddymotion.viz</span> <span class="kn">import</span> <span class="n">plot_dwi</span>
@@ -424,8 +421,8 @@ Also, this model will allow a very straightforward implementation of registratio
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">TrivialB0Model</span><span class="p">(</span>
-	<span class="n">dmri_dataset</span><span class="o">.</span><span class="n">gradients</span><span class="p">,</span>
-	<span class="n">S0</span><span class="o">=</span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">bzero</span><span class="p">,</span>
+    <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">gradients</span><span class="p">,</span>
+    <span class="n">S0</span><span class="o">=</span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">bzero</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -449,11 +446,7 @@ Also, this model will allow a very straightforward implementation of registratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/nilearn/datasets/__init__.py:90: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
-  &quot;Numpy arrays.&quot;, FutureWarning)
-</pre></div>
-</div>
-<img alt="../_images/models_9_1.png" src="../_images/models_9_1.png" />
+<img alt="../_images/models_11_0.png" src="../_images/models_11_0.png" />
 </div>
 </div>
 <p>As expected, the <em>b=0</em> doesn’t look very much like the particular left-out direction, but it is a start!</p>
@@ -464,15 +457,16 @@ Also, this model will allow a very straightforward implementation of registratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/models_11_0.png" src="../_images/models_11_0.png" />
+<img alt="../_images/models_13_0.png" src="../_images/models_13_0.png" />
 </div>
 </div>
 </div>
 <div class="section" id="implementing-a-regression-to-the-mean-model">
 <h2>Implementing a <em>regression to the mean</em> model<a class="headerlink" href="#implementing-a-regression-to-the-mean-model" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="exercise">
-<h3>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h3>
-<p><strong>Exercise</strong>: Extend the <code class="docutils literal notranslate"><span class="pre">TrivialB0Model</span></code> to produce an average of <em>all other</em> diffusion directions, instead of the <em>b=0</em>.</p>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Extend the <code class="docutils literal notranslate"><span class="pre">TrivialB0Model</span></code> to produce an average of <em>all other</em> diffusion directions, instead of the <em>b=0</em>.</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AverageDWModel</span><span class="p">:</span>
@@ -518,11 +512,11 @@ Also, this model will allow a very straightforward implementation of registratio
 </div>
 </div>
 </div>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Use the new <code class="docutils literal notranslate"><span class="pre">AverageDWModel</span></code> you just created.</p>
 </div>
-<div class="section" id="id1">
-<h3>Exercise<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<p><strong>Exercise</strong>: Use the new <code class="docutils literal notranslate"><span class="pre">AverageDWModel</span></code> you just created.
-<strong>Solution</strong></p>
+<p><strong>Solution</strong></p>
 <div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">AverageDWModel</span><span class="p">(</span>
@@ -536,9 +530,8 @@ Also, this model will allow a very straightforward implementation of registratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/models_17_0.png" src="../_images/models_17_0.png" />
-<img alt="../_images/models_17_1.png" src="../_images/models_17_1.png" />
-</div>
+<img alt="../_images/models_19_0.png" src="../_images/models_19_0.png" />
+<img alt="../_images/models_19_1.png" src="../_images/models_19_1.png" />
 </div>
 </div>
 </div>
@@ -585,7 +578,7 @@ This means that <code class="docutils literal notranslate"><span class="pre">Mod
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/models_25_0.png" src="../_images/models_25_0.png" />
+<img alt="../_images/models_27_0.png" src="../_images/models_27_0.png" />
 </div>
 </div>
 <p>Here’s the original DW map, for reference:</p>
@@ -596,13 +589,14 @@ This means that <code class="docutils literal notranslate"><span class="pre">Mod
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/models_27_0.png" src="../_images/models_27_0.png" />
+<img alt="../_images/models_29_0.png" src="../_images/models_29_0.png" />
 </div>
 </div>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">ModelFactory</span></code> to initialize a <code class="docutils literal notranslate"><span class="pre">&quot;DKI&quot;</span></code> (diffusion Kurtosis imaging) model.</p>
 </div>
-<div class="section" id="id2">
-<h3>Exercise<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
-<p><strong>Exercise</strong>: Use the <code class="docutils literal notranslate"><span class="pre">ModelFactory</span></code> to initialize a <code class="docutils literal notranslate"><span class="pre">&quot;DKI&quot;</span></code> (diffusion Kurtosis imaging) model</p>
+<p><strong>Solution</strong></p>
 <div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">ModelFactory</span><span class="o">.</span><span class="n">init</span><span class="p">(</span>
@@ -625,8 +619,8 @@ This means that <code class="docutils literal notranslate"><span class="pre">Mod
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/models_31_0.png" src="../_images/models_31_0.png" />
-<img alt="../_images/models_31_1.png" src="../_images/models_31_1.png" />
+<img alt="../_images/models_33_0.png" src="../_images/models_33_0.png" />
+<img alt="../_images/models_33_1.png" src="../_images/models_33_1.png" />
 </div>
 </div>
 </div>

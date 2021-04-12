@@ -474,15 +474,12 @@ This pretty-printing of the object informs us about the data and metadata that, 
 The fully-fledged <code class="docutils literal notranslate"><span class="pre">DWI</span></code> object has a convenience function to plot the dataset:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">plot_mosaic</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">plot_mosaic</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f8ef0695910&gt;
-</pre></div>
-</div>
-<img alt="../_images/data_11_1.png" src="../_images/data_11_1.png" />
+<img alt="../_images/data_11_0.png" src="../_images/data_11_0.png" />
 </div>
 </div>
 <p>When calling <code class="docutils literal notranslate"><span class="pre">plot_mosaic()</span></code> without any arguments, the <em>b=0</em> reference is plotted.
@@ -496,29 +493,22 @@ The <em>b=0</em> map can be used by diffusion modeling as the reference to quant
 <p><strong>Solution</strong></p>
 <div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">plot_mosaic</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">plot_mosaic</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">5000</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f8ee82e3810&gt;
-</pre></div>
-</div>
-<img alt="../_images/data_13_1.png" src="../_images/data_13_1.png" />
+<img alt="../_images/data_13_0.png" src="../_images/data_13_0.png" />
 </div>
 </div>
-<p>or:</p>
 <div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">plot_mosaic</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">plot_mosaic</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">5000</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f8ee86a1190&gt;
-</pre></div>
-</div>
-<img alt="../_images/data_15_1.png" src="../_images/data_15_1.png" />
+<img alt="../_images/data_14_0.png" src="../_images/data_14_0.png" />
 </div>
 </div>
 <p>Diffusion that exhibits directionality in the same direction as the gradient results in a loss of signal.
@@ -532,7 +522,7 @@ Stronger gradients yield diffusion maps with substantially lower SNR (signal-to-
 <p>Our <code class="docutils literal notranslate"><span class="pre">DWI</span></code> object stores the gradient information in the <code class="docutils literal notranslate"><span class="pre">gradients</span></code> attribute.</p>
 <div class="admonition-exercise admonition">
 <p class="admonition-title">Exercise</p>
-<p>Let’s see the shape of the gradient information</p>
+<p>Let’s see the shape of the gradient information.</p>
 </div>
 <p><strong>Solution</strong></p>
 <div class="cell tag_hide-cell docutils container">
@@ -681,7 +671,7 @@ For more information on this, refer to <a class="reference internal" href="../ex
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/data_21_0.png" src="../_images/data_21_0.png" />
+<img alt="../_images/data_20_0.png" src="../_images/data_20_0.png" />
 </div>
 </div>
 <p>We’ve projected all of the gradient directions onto the surface of a sphere, with each unique gradient strength colour-coded.
@@ -752,15 +742,12 @@ Because one “<em>datapoint</em>” in our DWI dataset corresponds to one gradi
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eddymotion.viz</span> <span class="kn">import</span> <span class="n">plot_dwi</span>
 
 <span class="n">data_train</span><span class="p">,</span> <span class="n">data_test</span> <span class="o">=</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">logo_split</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">plot_dwi</span><span class="p">(</span><span class="n">data_test</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span> <span class="n">gradient</span><span class="o">=</span><span class="n">data_test</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plot_dwi</span><span class="p">(</span><span class="n">data_test</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span> <span class="n">gradient</span><span class="o">=</span><span class="n">data_test</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays.OrthoSlicer at 0x7f8ee829cb90&gt;
-</pre></div>
-</div>
-<img alt="../_images/data_25_1.png" src="../_images/data_25_1.png" />
+<img alt="../_images/data_24_0.png" src="../_images/data_24_0.png" />
 </div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">data_train</span></code> is a tuple containing all diffusion-weighted volumes and the corresponding gradient table, excluding the left-out, which is stored in <code class="docutils literal notranslate"><span class="pre">data_test</span></code> (the 11<sup>th</sup> gradient indexed by <code class="docutils literal notranslate"><span class="pre">10</span></code>, in this example).
@@ -769,6 +756,7 @@ Because one “<em>datapoint</em>” in our DWI dataset corresponds to one gradi
 <p class="admonition-title">Exercise</p>
 <p>Try printing the shapes of elements in the <code class="docutils literal notranslate"><span class="pre">data_train</span></code> tuple.</p>
 </div>
+<p><strong>Solution</strong></p>
 <div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;data_train[0] is the DW maps dataset and has </span><span class="si">{</span><span class="n">data_train</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> dimensions&quot;</span><span class="p">)</span>
@@ -787,6 +775,7 @@ data_train[1] is a gradient table and has (4, 101) dimensions
 <p class="admonition-title">Exercise</p>
 <p>Likewise for the left-out gradient, try printing the shapes of elements in the <code class="docutils literal notranslate"><span class="pre">data_test</span></code> tuple.</p>
 </div>
+<p><strong>Solution</strong></p>
 <div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;data_test[0] is left-out DW map and has </span><span class="si">{</span><span class="n">data_test</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> dimensions&quot;</span><span class="p">)</span>

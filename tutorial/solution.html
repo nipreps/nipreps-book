@@ -305,10 +305,51 @@
                 
   <div class="section" id="putting-everything-together">
 <h1>Putting everything together<a class="headerlink" href="#putting-everything-together" title="Permalink to this headline">¶</a></h1>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">mkstemp</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="k">if</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">_filepath</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">_filepath</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://files.osf.io/v1/resources/8k95s/providers/osfstorage/6070b4c2f6585f03fb6123a2&quot;</span>
+<span class="n">datapath</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">mkstemp</span><span class="p">(</span><span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;.h5&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">if</span> <span class="n">datapath</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">datapath</span><span class="o">.</span><span class="n">write_bytes</span><span class="p">(</span>
+        <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">allow_redirects</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">content</span>
+    <span class="p">)</span>
+
+<span class="n">dmri_dataset</span> <span class="o">=</span> <span class="n">DWI</span><span class="o">.</span><span class="n">from_filename</span><span class="p">(</span><span class="n">datapath</span><span class="p">)</span>
+<span class="n">dmri_dataset</span><span class="o">.</span><span class="n">dataobj</span> <span class="o">=</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">dataobj</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="p">:</span><span class="mi">32</span><span class="p">]</span>
+<span class="n">dmri_dataset</span><span class="o">.</span><span class="n">gradients</span> <span class="o">=</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">gradients</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="p">:</span><span class="mi">32</span><span class="p">]</span>
+<span class="n">datapath</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">a662488204c5</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">import</span> <span class="nn">requests</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> 
+<span class="ne">----&gt; </span><span class="mi">9</span> <span class="k">if</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">_filepath</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">_filepath</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://files.osf.io/v1/resources/8k95s/providers/osfstorage/6070b4c2f6585f03fb6123a2&quot;</span>
+
+<span class="ne">NameError</span>: name &#39;dmri_dataset&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
 <p>Once we have finalized the main components of the solution, it is time for integration.
 We now want to iterate over all the <em>LOGO</em> partitions of the dataset, generate a synthetic reference through the model of choice, and finally estimate the misalignment between the left-out gradient and the synthetic reference.
 This solution, must also abide by the API we have envisioned.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">EddyMotionEstimator</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">EddyMotionEstimator</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Estimates rigid-body head-motion and distortions derived from eddy-currents.&quot;&quot;&quot;</span>
 
     <span class="nd">@staticmethod</span>
@@ -322,9 +363,9 @@ This solution, must also abide by the API we have envisioned.</p>
     <span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Estimate head-motion and Eddy currents.</span>
-<span class="sd">        </span>
+
 <span class="sd">        &lt;please write a descriptive documentation of the function here&gt;</span>
-<span class="sd">        </span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">align_kwargs</span> <span class="o">=</span> <span class="n">align_kwargs</span> <span class="ow">or</span> <span class="p">{}</span>
 
@@ -344,7 +385,7 @@ This solution, must also abide by the API we have envisioned.</p>
                     <span class="n">dwmodel</span> <span class="o">=</span> <span class="o">...</span>
 
                     <span class="c1"># fit the model</span>
-                    
+
 
                     <span class="c1"># generate a synthetic dw volume for the test gradient</span>
                     <span class="n">predicted</span> <span class="o">=</span> <span class="o">...</span>
@@ -394,7 +435,7 @@ This solution, must also abide by the API we have envisioned.</p>
     <span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Estimate head-motion and Eddy currents.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        dwdata : :obj:`~eddymotion.dmri.DWI`</span>
@@ -411,13 +452,13 @@ This solution, must also abide by the API we have envisioned.</p>
 <span class="sd">            corresponding to each gradient map.</span>
 <span class="sd">            See :obj:`~eddymotion.model.ModelFactory` for allowed models (and corresponding</span>
 <span class="sd">            keywords).</span>
-<span class="sd">        </span>
+
 <span class="sd">        Return</span>
 <span class="sd">        ------</span>
 <span class="sd">        affines : :obj:`list` of :obj:`numpy.ndarray`</span>
 <span class="sd">            A list of :math:`4 \times 4` affine matrices encoding the estimated</span>
 <span class="sd">            parameters of the deformations caused by head-motion and eddy-currents.</span>
-<span class="sd">        </span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">align_kwargs</span> <span class="o">=</span> <span class="n">align_kwargs</span> <span class="ow">or</span> <span class="p">{}</span>
 
@@ -475,7 +516,7 @@ This solution, must also abide by the API we have envisioned.</p>
 </div>
 </div>
 <p>The above code allows us to use our estimator as follows:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eddymotion.estimator</span> <span class="kn">import</span> <span class="n">EddyMotionEstimator</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eddymotion.estimator</span> <span class="kn">import</span> <span class="n">EddyMotionEstimator</span>
 
 <span class="n">estimated_affines</span> <span class="o">=</span> <span class="n">EddyMotionEstimator</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">dmri_dataset</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;b0&quot;</span><span class="p">)</span>
 </pre></div>
@@ -493,15 +534,15 @@ This test would just make sure that, regardless of the particular partition of t
 
 <span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;split_index&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">)))</span>
 <span class="k">def</span> <span class="nf">test_TrivialB0Model</span><span class="p">(</span><span class="n">split_index</span><span class="p">,</span> <span class="n">dmri_dataset</span><span class="p">):</span>
-	<span class="n">model</span> <span class="o">=</span> <span class="n">TrivialB0Model</span><span class="p">(</span>
-		<span class="n">dmri_dataset</span><span class="o">.</span><span class="n">gradients</span><span class="p">,</span>
-		<span class="n">S0</span><span class="o">=</span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">bzero</span><span class="p">,</span>
-	<span class="p">)</span>
-	<span class="n">data_train</span><span class="p">,</span> <span class="n">data_test</span> <span class="o">=</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">logo_split</span><span class="p">(</span><span class="n">split_index</span><span class="p">)</span>
-	<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data_train</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-	<span class="n">predicted</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data_test</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">TrivialB0Model</span><span class="p">(</span>
+        <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">gradients</span><span class="p">,</span>
+        <span class="n">S0</span><span class="o">=</span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">bzero</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">data_train</span><span class="p">,</span> <span class="n">data_test</span> <span class="o">=</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">logo_split</span><span class="p">(</span><span class="n">split_index</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data_train</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">predicted</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data_test</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
-	<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">bzero</span> <span class="o">==</span> <span class="n">predicted</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">bzero</span> <span class="o">==</span> <span class="n">predicted</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

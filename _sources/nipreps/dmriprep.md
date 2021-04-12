@@ -42,4 +42,6 @@ Proposed dMRI pre-processing workflow
 Current list of contributors to dMRIPrep
 ```
 
+### References
+
 [^veraart2019]: Image Processing: Possible Guidelines for Standardization & Clinical Applications. https://www.ismrm.org/19/program_files/MIS15.htm

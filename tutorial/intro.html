@@ -303,7 +303,7 @@ Even the vibration of the scanner itself can introduce motion!</p>
 <div class="section" id="objective-implement-a-head-motion-estimation-code">
 <h2>Objective: Implement a head-motion estimation code<a class="headerlink" href="#objective-implement-a-head-motion-estimation-code" title="Permalink to this headline">¶</a></h2>
 <p>This tutorial focuses on the misalignment problem.
-We will build from existing software (Dipy for diffusion modeling and ANTs for image registration), as well as commonplace Python libraries (NumPy), a software framework for head-motion estimation in diffusion MRI data.</p>
+We will build from existing software (DIPY for diffusion modeling and ANTs for image registration), as well as commonplace Python libraries (NumPy), a software framework for head-motion estimation in diffusion MRI data.</p>
 <p>The algorithmic and theoretical foundations of the method are based on an idea first proposed by <a class="reference external" href="https://pubmed.ncbi.nlm.nih.gov/22183784/">Ben-Amitay et al.</a> and later implemented in <em>QSIPREP</em> (see this <a class="reference external" href="https://github.com/mattcieslak/ohbm_shoreline/blob/master/cieslakOHBM2019.pdf">OHBM 2019 poster</a>).
 The idea works as follows:</p>
 <ol class="simple">
@@ -348,7 +348,7 @@ Assuming our DWI data is encapsulated in an object (holding not just the data ar
 pointed at by the variable <code class="docutils literal notranslate"><span class="pre">data</span></code>, and assuming we have a list of rigid-body transform matrices to initialize the algorithm (<code class="docutils literal notranslate"><span class="pre">mats</span></code>),
 a potential API would have a <code class="docutils literal notranslate"><span class="pre">.fit()</span></code> and <code class="docutils literal notranslate"><span class="pre">.predict()</span></code> members which run the algorithm (the former) and generate an EM-corrected
 DWI (the latter):</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">emc</span> <span class="kn">import</span> <span class="n">EddyMotionEstimator</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eddymotion</span> <span class="kn">import</span> <span class="n">EddyMotionEstimator</span>
 
 <span class="n">estimator</span> <span class="o">=</span> <span class="n">EddyMotionEstimator</span><span class="p">()</span>
 <span class="n">estimator</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;DTI&quot;</span><span class="p">)</span>

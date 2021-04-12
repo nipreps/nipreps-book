@@ -18,7 +18,6 @@ kernelspec:
 import warnings
 
 warnings.filterwarnings("ignore")
-
 ```
 
 Diffusion imaging probes the random, microscopic movement of water molecules by using MRI sequences that are sensitive to the geometry and environmental organization surrounding these protons.
@@ -55,7 +54,6 @@ In the example code below, we've created a class with the name `DWI`.
 To simplify class creation, we've also used the magic of a Python library called [`attrs`](https://www.attrs.org/en/stable/).
 
 ```{code-cell} python
-
 """Representing data in hard-disk and memory."""
 import attr
 
@@ -86,7 +84,6 @@ class DWI:
     def __len__(self):
         """Obtain the number of high-*b* orientations."""
         return self.gradients.shape[-1]
-
 ```
 
 This code implements several *attributes* as well as a *behavior* - the `__len__` *method*.
@@ -95,7 +92,6 @@ The `__len__` method is special in Python, as it will be executed when we call t
 Let's test out the `DWI` data structure with some *simulated* data:
 
 ```{code-cell} python
-
 # NumPy is a fundamental Python library for working with arrays
 import numpy as np
 
@@ -104,7 +100,6 @@ dmri_dataset = DWI(gradients=np.random.normal(size=(4, 64)))
 
 # call Python's built-in len() function
 print(len(dmri_dataset))
-
 ```
 
 The output of this `print()` statement is telling us that this (simulated) dataset has 64 diffusion-weighted samples.
@@ -118,14 +113,12 @@ Please note that the file has been minimized by zeroing all but two diffusion-we
 Let's get some insights from it:
 
 ```{code-cell} python
-
 # import the class from the library
 from eddymotion.dmri import DWI
 
 # load the sample file
 dmri_dataset = DWI.from_filename("../../data/dwi.h5")
 print(len(dmri_dataset))
-
 ```
 
 In this case, the dataset is reporting to have 102 diffusion-weighted samples.
@@ -134,9 +127,7 @@ Python will automatically generate a summary of this object if we just type the 
 This pretty-printing of the object informs us about the data and metadata that, together, compose this particular DWI dataset:
 
 ```{code-cell} python
-
 dmri_dataset
-
 ```
 
 We'll go over some of the components of `dmri_dataset` through this lesson.
@@ -147,9 +138,7 @@ Let's start out by seeing what the data looks like.
 The fully-fledged `DWI` object has a convenience function to plot the dataset:
 
 ```{code-cell} python
-
-dmri_dataset.plot_mosaic()
-
+dmri_dataset.plot_mosaic();
 ```
 
 When calling `plot_mosaic()` without any arguments, the *b=0* reference is plotted.
@@ -167,17 +156,13 @@ Try calling `plot_mosaic` with an index of 10 or 100.
 ```{code-cell} python
 :tags: [hide-cell]
 
-dmri_dataset.plot_mosaic(index=10, vmax=5000)
-
+dmri_dataset.plot_mosaic(index=10, vmax=5000);
 ```
-
-or:
 
 ```{code-cell} python
 :tags: [hide-cell]
 
-dmri_dataset.plot_mosaic(index=100, vmax=5000)
-
+dmri_dataset.plot_mosaic(index=100, vmax=5000);
 ```
 
 Diffusion that exhibits directionality in the same direction as the gradient results in a loss of signal.
@@ -192,7 +177,7 @@ Stronger gradients yield diffusion maps with substantially lower SNR (signal-to-
 Our `DWI` object stores the gradient information in the `gradients` attribute.
 
 ```{admonition} Exercise
-Let's see the shape of the gradient information
+Let's see the shape of the gradient information.
 ```
 
 **Solution**
@@ -201,7 +186,6 @@ Let's see the shape of the gradient information
 :tags: [hide-cell]
 
 dmri_dataset.gradients.shape
-
 ```
 
 We get a $4\times102$ -- three spatial coordinates ($b_x$, $b_y$, $b_z$) of the unit-norm "*b-vector*", plus the gradient sensitization magnitude (the "*b-value*"), with a total of 102 different orientations for the case at hand.
@@ -217,7 +201,6 @@ Remember to transpose (`.T`) the array.
 :tags: [hide-cell]
 
 print(dmri_dataset.gradients.T)
-
 ```
 
 Later, we'll refer to this array as the gradient table.
@@ -249,7 +232,6 @@ In this case, the splitting strategy is a simple leave-one-out.
 Because one "*datapoint*" in our DWI dataset corresponds to one gradient, we will refer to this partitioning of the dataset as *leave-one-gradient-out (LOGO)*:
 
 ```{code-cell} python
-
 def logo_split(self, index, with_b0=False):
     """
     Produce one fold of LOGO (leave-one-gradient-out).
@@ -297,18 +279,15 @@ def logo_split(self, index, with_b0=False):
         (train_data, train_gradients),
         (dwframe, bframe),
     )
-
 ```
 
 This function is contained in the `DWI` class shown earlier and will allow us to easily partition the dataset as follows:
 
 ```{code-cell} python
-
 from eddymotion.viz import plot_dwi
 
 data_train, data_test = dmri_dataset.logo_split(10)
-plot_dwi(data_test[0], dmri_dataset.affine, gradient=data_test[1])
-
+plot_dwi(data_test[0], dmri_dataset.affine, gradient=data_test[1]);
 ```
 
 `data_train` is a tuple containing all diffusion-weighted volumes and the corresponding gradient table, excluding the left-out, which is stored in `data_test` (the 11<sup>th</sup> gradient indexed by `10`, in this example).
@@ -317,6 +296,8 @@ plot_dwi(data_test[0], dmri_dataset.affine, gradient=data_test[1])
 ```{admonition} Exercise
 Try printing the shapes of elements in the `data_train` tuple.
 ```
+
+**Solution**
 
 ```{code-cell} python
 :tags: [hide-cell]
@@ -328,6 +309,8 @@ print(f"data_train[1] is a gradient table and has {data_train[1].shape} dimensio
 ```{admonition} Exercise
 Likewise for the left-out gradient, try printing the shapes of elements in the `data_test` tuple.
 ```
+
+**Solution**
 
 ```{code-cell} python
 :tags: [hide-cell]
