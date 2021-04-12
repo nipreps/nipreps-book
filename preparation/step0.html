@@ -291,23 +291,16 @@
 <h1>Before we start: How to follow this tutorial<a class="headerlink" href="#before-we-start-how-to-follow-this-tutorial" title="Permalink to this headline">¶</a></h1>
 <p>This tutorial contains a mix of lecture-based and interactive components.
 The interactive components can be executed in your personal computer locally or using the <a class="reference external" href="https://jupyter.org/binder">Binder</a> service.
-You are welcome to follow along however you like, whether you just want to listen or code along with us.
-Each of the chapters involving code are actually Jupyter notebooks!</p>
+You are welcome to follow along however you like, whether you just want to listen or code along with us.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Regardless of which setup method you choose, all of the Jupyter notebooks can be found in the <code class="docutils literal notranslate"><span class="pre">docs/notebook</span></code> folder.</p>
+</div>
 <div class="section" id="i-class-fa-fa-rocket-aria-hidden-true-i-using-binder">
 <h2><i class="fa fa-rocket" aria-hidden="true"></i> Using Binder<a class="headerlink" href="#i-class-fa-fa-rocket-aria-hidden-true-i-using-binder" title="Permalink to this headline">¶</a></h2>
-<p>Clicking the Binder icon in the top right corner will launch an interactive computing environment with all of the necessary software packages pre-installed.</p>
+<p>Clicking the Binder button below will launch an interactive computing environment with all of the necessary software packages pre-installed.</p>
+<p><a class="reference external" href="https://mybinder.org/v2/gh/nipreps/nipreps-book/main"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a></p>
 <p>This is the easiest and quickest way to get started.</p>
-<div class="figure align-default" id="binder-link">
-<img alt="../_images/binder_link.png" src="../_images/binder_link.png" />
-</div>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>At first, the lesson may open as a Markdown file.
-You can re-open it as a Jupyter notebook by right-clicking the filename on the right sidebar, clicking “Open With” and finally clicking “Notebook”.</p>
-<div class="figure align-default" id="convert-notebook">
-<img alt="../_images/convert_notebook.png" src="../_images/convert_notebook.png" />
-</div>
-</div>
 <div class="admonition attention">
 <p class="admonition-title">Attention</p>
 <p>If using Binder, please be aware that the state of the computational environment it provides is not permanent.
@@ -339,9 +332,12 @@ Separate instructions can be found for <a class="reference external" href="https
 </div>
 <p>This pulls the latest release of the nipreps/nipreps-book image from Docker Hub.
 It then starts a container running a Jupyter Notebook server and exposes the server on host port 9999.
-The server logs are printed to the terminal.
-Visiting <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:9999/?token=&lt;token&gt;</span></code> in a browser loads JupyterLab, where token is the secret token printed in the terminal.
-Docker destroys the container after notebook server exit.</p>
+The server logs are printed to the terminal.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Visiting <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:9999/?token=&lt;token&gt;</span></code> in a browser loads JupyterLab, where token is the secret token printed in the terminal.</p>
+</div>
+<p>Docker destroys the container after notebook server exit.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>If you’d like to add a folder on your computer to access within the container (for example, your own dMRI dataset), you can do so by adding the <code class="docutils literal notranslate"><span class="pre">-v</span> <span class="pre">&lt;folderpath&gt;:/home/jovyan/work</span></code> flag to the <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code> command.</p>

@@ -3,28 +3,18 @@
 This tutorial contains a mix of lecture-based and interactive components.
 The interactive components can be executed in your personal computer locally or using the [Binder](https://jupyter.org/binder) service.
 You are welcome to follow along however you like, whether you just want to listen or code along with us.
-Each of the chapters involving code are actually Jupyter notebooks!
+
+```{attention}
+Regardless of which setup method you choose, all of the Jupyter notebooks can be found in the `docs/notebook` folder.
+```
 
 ## <i class="fa fa-rocket" aria-hidden="true"></i> Using Binder
 
-Clicking the Binder icon in the top right corner will launch an interactive computing environment with all of the necessary software packages pre-installed.
+Clicking the Binder button below will launch an interactive computing environment with all of the necessary software packages pre-installed.
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/nipreps/nipreps-book/main)
 
 This is the easiest and quickest way to get started.
-
-```{figure} ../images/binder_link.png
-:name: binder_link
-
-```
-
-````{tip}
-At first, the lesson may open as a Markdown file.
-You can re-open it as a Jupyter notebook by right-clicking the filename on the right sidebar, clicking "Open With" and finally clicking "Notebook".
-
-```{figure} ../images/convert_notebook.png
-:name: convert_notebook
-
-```
-````
 
 ```{attention}
 If using Binder, please be aware that the state of the computational environment it provides is not permanent.
@@ -65,7 +55,11 @@ docker run --rm -p 9999:8888 -e JUPYTER_ENABLE_LAB=yes nipreps/nipreps-book:late
 This pulls the latest release of the nipreps/nipreps-book image from Docker Hub.
 It then starts a container running a Jupyter Notebook server and exposes the server on host port 9999.
 The server logs are printed to the terminal.
+
+```{attention}
 Visiting `http://127.0.0.1:9999/?token=<token>` in a browser loads JupyterLab, where token is the secret token printed in the terminal.
+```
+
 Docker destroys the container after notebook server exit.
 
 ```{tip}
