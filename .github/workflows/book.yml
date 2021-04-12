@@ -38,10 +38,17 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
+
+    - name: convert
+      run: |
+          jupytext --set-formats ipynb docs/tutorial/*.md
+          jupytext --sync *.ipynb
+
     # Build the page
     - name: Build the book
       run: |
         jupyter-book build docs
+
     # Push the book's HTML to github-pages
     - name: GitHub Pages action
       uses: peaceiris/actions-gh-pages@v3.6.1
