@@ -342,8 +342,7 @@ free of head-motion and eddy-current spatial distortions.</p></li>
 <li><p>Iterate over the whole dataset until convergence.</p></li>
 </ol>
 <p><strong>Identify an I/O (inputs/outputs) specification</strong>: briefly anticipate what are the inputs to your new algorithm and the expected outcomes.</p>
-<div class="admonition-inputs admonition">
-<p class="admonition-title">Inputs</p>
+<p><strong>Inputs</strong></p>
 <ul class="simple">
 <li><p>A <em>b=0</em> reference - this is a 3D file resulting from a varyingly sophisticated average across the <em>b=0</em> volumes in the dataset.</p></li>
 <li><p>Orientation matrix in “RAS+B” format. This means that b-vectors are given in “scanner” coordinates (as opposed to “voxel” coordinates) and must have unit-norm. An additional column provides the sensitization intensity value (<em>b</em> value) in <em>s/mm^2</em>.</p></li>
@@ -352,9 +351,7 @@ free of head-motion and eddy-current spatial distortions.</p></li>
 <li><p>DWI prediction model specification (model name + parameters)</p></li>
 <li><p>Image registration framework specification (including parameters)</p></li>
 </ul>
-</div>
-<div class="admonition-outputs admonition">
-<p class="admonition-title">Outputs</p>
+<p><strong>Outputs</strong></p>
 <ul class="simple">
 <li><p>List of affine matrices estimated by algorithm, which collapse the distortion from both sources.</p></li>
 <li><p>List of rigid-body transformation matrices decomposed from the latter, representing the estimated head-motion parameters.</p></li>
@@ -362,16 +359,12 @@ free of head-motion and eddy-current spatial distortions.</p></li>
 <li><p>A new DWI file (4D) resampling the data via the estimated affine matrices.</p></li>
 <li><p>New orientation matrix in “RAS+B” format, after rotation by the rigid-body motions estimated.</p></li>
 </ul>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
 <p><strong>What this idea doesn’t cover:</strong></p>
 <ul class="simple">
 <li><p>Conversion into RAS+B format of the gradient matrix.</p></li>
 <li><p>Calculation of Framewise-Displacement or any other data quality estimation.</p></li>
 <li><p>Outlier removal or correcting intensity dropout</p></li>
 </ul>
-</div>
 <p><strong>Nonfunctional requirements</strong>: briefly anticipate further requirements that are important, but do not alter the goal of the project.</p>
 <ul class="simple">
 <li><p>Memory fingerprint: DWIs can be large, and storing them in memory (and subsequent derivatives thereof) can be cumbersome, or even prohibitive.</p></li>

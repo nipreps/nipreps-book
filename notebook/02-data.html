@@ -345,23 +345,19 @@ A typical dMRI scan will acquire multiple volumes (or <em><strong>angular sample
 </div>
 <p><em>Sourced from Dr. A. Rokem, DIPY Workshop 2021</em></p>
 <p>These <em>diffusion directions</em> (or <em><strong>orientations</strong></em>) are a fundamental piece of metadata to interpret dMRI data, as models need to know the exact orientation of each angular sample.</p>
-<div class="admonition-main-elements-of-a-dmri-dataset admonition">
-<p class="admonition-title">Main elements of a dMRI dataset</p>
+<p><strong>Main elements of a dMRI dataset</strong></p>
 <ul class="simple">
 <li><p>A 4D data array, where the last dimension encodes the reconstructed <strong>diffusion direction <em>maps</em></strong>.</p></li>
 <li><p>Tabular data or a 2D array, listing the <strong>diffusion directions</strong> (<code class="docutils literal notranslate"><span class="pre">.bvec</span></code>) and the encoding <strong>gradient strength</strong> (<code class="docutils literal notranslate"><span class="pre">.bval</span></code>).</p></li>
 </ul>
-</div>
 <p>In summary, dMRI involves <em><strong>complex data types</strong></em> that, as programmers, we want to access, query and manipulate with ease.</p>
 <div class="section" id="python-and-object-oriented-programming">
 <h2>Python and object oriented programming<a class="headerlink" href="#python-and-object-oriented-programming" title="Permalink to this headline">¶</a></h2>
 <p>Python is an <a class="reference external" href="https://en.wikipedia.org/wiki/Object-oriented_programming">object oriented programming</a> language.
 It allows us to represent and encapsulate data types and corresponding behaviors into programming structures called <em>objects</em>.</p>
-<div class="admonition-data-structures admonition">
-<p class="admonition-title">Data structures</p>
+<p><strong>Data structures</strong></p>
 <p>How you feed in data into your algorithm will impose constraints that might completely hinder the implementation of nonfunctional requirements down the line.
 Therefore, a careful plan must also be thought out for the data structures we are going to handle.</p>
-</div>
 <p>Therefore, let’s leverage Python to create <em>objects</em> that contain dMRI data.
 In Python, <em>objects</em> can be specified by defining a class.
 In the example code below, we’ve created a class with the name <code class="docutils literal notranslate"><span class="pre">DWI</span></code>.
