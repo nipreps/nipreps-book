@@ -198,7 +198,7 @@ from eddymotion.model import ModelFactory
 
 model = ModelFactory.init(
     gtab=data_train[1],
-    model="Tensor",
+    model="DTI",
     S0=dmri_dataset.bzero,
 )
 ```

@@ -72,7 +72,7 @@ DWI (the latter):
 from emc import EddyMotionEstimator
 
 estimator = EddyMotionEstimator()
-estimator.fit(data, model="Tensor")
+estimator.fit(data, model="DTI")
 
 corrected = estimator.predict(data)
 ```
