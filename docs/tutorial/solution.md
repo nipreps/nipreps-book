@@ -13,7 +13,11 @@ kernelspec:
 # Putting everything together
 
 ```{code-cell} python
-:tags: [remove-cell]
+:tags: [hide-cell]
+
+import warnings
+
+warnings.filterwarnings("ignore")
 
 from tempfile import mkstemp
 from pathlib import Path

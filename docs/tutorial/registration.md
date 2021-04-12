@@ -1,4 +1,24 @@
+---
+jupytext:
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
+kernelspec:
+  display_name: Python 3
+  language: python
+  name: python3
+---
+
 # Image registration (spatial alignment)
+
+```{code-cell} python
+:tags: [hide-cell]
+
+import warnings
+
+warnings.filterwarnings("ignore")
+```
 
 At this point of the tutorial we have covered two of the three initial requirements:
 
