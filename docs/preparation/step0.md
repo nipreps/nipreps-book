@@ -12,7 +12,7 @@ Regardless of which setup method you choose, all of the Jupyter notebooks can be
 
 Clicking the Binder button below will launch an interactive computing environment with all of the necessary software packages pre-installed.
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/nipreps/nipreps-book/main)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/nipreps/nipreps-book/main?urlpath=lab)
 
 This is the easiest and quickest way to get started.
 
