@@ -12,11 +12,11 @@ Different kinds of artifacts can occur during a scan due to:
   - distortions due to *B<sub>0</sub>* and *B<sub>1</sub>* inhomogeneities
   - eddy currents
   - signal drift
-- signal processing
+- image reconstruction
   - Gibbs ringing
 
-These physiological and acquisition artifacts can confound the interpretation of our analysis results.
-Thus, pre-processing is necessary to minimize their influence.
+These physiological and acquisition artifacts can lower the accuracy, precision, and robustness of our analyses, and confound the interpretation of the results.
+Thus, pre-processing is necessary to minimize their influence and to promote more sensitive analyses.
 
 Pre-processing can also help prepare the data for analysis in other ways.
 Some examples include:

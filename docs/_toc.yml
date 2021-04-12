@@ -12,10 +12,6 @@
   - file: nipreps/nipreps
   - file: nipreps/dmriprep
 
-- part: opensource
-  chapters:
-  - file: opensource/community_development
-
 - part: tutorial
   chapters:
   - file: tutorial/intro
@@ -26,3 +22,4 @@
 - part: extra
   chapters:
   - file: extra/nifti
+  - file: extra/community_development
