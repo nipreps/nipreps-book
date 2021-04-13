@@ -435,6 +435,17 @@ Please notice the subtle <em>nodding</em> of the head, perhaps more apparent whe
 <p>Let’s configure ANTs via NiPype:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ensure that NiPype is able to find and execute our ANTs command</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;PATH&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">os</span><span class="o">.</span><span class="n">pathsep</span> <span class="o">+</span> <span class="s2">&quot;/home/jovyan/src/ants&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">cpu_count</span>
 <span class="kn">from</span> <span class="nn">pkg_resources</span> <span class="kn">import</span> <span class="n">resource_filename</span> <span class="k">as</span> <span class="n">pkg_fn</span>
 <span class="kn">from</span> <span class="nn">nipype.interfaces.ants.registration</span> <span class="kn">import</span> <span class="n">Registration</span>
@@ -462,7 +473,7 @@ Please notice the subtle <em>nodding</em> of the head, perhaps more apparent whe
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;antsRegistration --collapse-output-transforms 1 --dimensionality 3 --initialize-transforms-per-stage 0 --interpolation BSpline --output [ transform, transform_Warped.nii.gz ] --transform Rigid[ 0.01 ] --metric GC[ /tmp/tmpr9mbyl9s/fixed.nii.gz, /tmp/tmpr9mbyl9s/moving.nii.gz, 1, 32, Regular, 0.05 ] --convergence [ 100x50x10, 1e-06, 5 ] --smoothing-sigmas 4.0x2.0x2.0vox --shrink-factors 4x2x1 --use-estimate-learning-rate-once 0 --use-histogram-matching 1 --transform Affine[ 0.001 ] --metric GC[ /tmp/tmpr9mbyl9s/fixed.nii.gz, /tmp/tmpr9mbyl9s/moving.nii.gz, 1, 32, Random, 0.1 ] --convergence [ 50, 1e-07, 2 ] --smoothing-sigmas 0.0vox --shrink-factors 1 --use-estimate-learning-rate-once 1 --use-histogram-matching 1 -v --winsorize-image-intensities [ 0.0001, 0.9998 ]  --write-composite-transform 0&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;antsRegistration --collapse-output-transforms 1 --dimensionality 3 --initialize-transforms-per-stage 0 --interpolation BSpline --output [ transform, transform_Warped.nii.gz ] --transform Rigid[ 0.01 ] --metric GC[ /tmp/tmpadev_thh/fixed.nii.gz, /tmp/tmpadev_thh/moving.nii.gz, 1, 32, Regular, 0.05 ] --convergence [ 100x50x10, 1e-06, 5 ] --smoothing-sigmas 4.0x2.0x2.0vox --shrink-factors 4x2x1 --use-estimate-learning-rate-once 0 --use-histogram-matching 1 --transform Affine[ 0.001 ] --metric GC[ /tmp/tmpadev_thh/fixed.nii.gz, /tmp/tmpadev_thh/moving.nii.gz, 1, 32, Random, 0.1 ] --convergence [ 50, 1e-07, 2 ] --smoothing-sigmas 0.0vox --shrink-factors 1 --use-estimate-learning-rate-once 1 --use-histogram-matching 1 -v --winsorize-image-intensities [ 0.0001, 0.9998 ]  --write-composite-transform 0&#39;
 </pre></div>
 </div>
 </div>
@@ -477,7 +488,7 @@ Please notice the subtle <em>nodding</em> of the head, perhaps more apparent whe
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">OSError</span><span class="g g-Whitespace">                                   </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">7</span><span class="o">-</span><span class="mi">73</span><span class="n">beed2b16d8</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">8</span><span class="o">-</span><span class="mi">73</span><span class="n">beed2b16d8</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">result</span> <span class="o">=</span> <span class="n">registration</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">cwd</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">tempdir</span><span class="o">.</span><span class="n">absolute</span><span class="p">()))</span>
 
 <span class="nn">/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/nipype/interfaces/base/core.py</span> in <span class="ni">run</span><span class="nt">(self, cwd, ignore_exception, **inputs)</span>
@@ -501,7 +512,7 @@ Please notice the subtle <em>nodding</em> of the head, perhaps more apparent whe
 <span class="g g-Whitespace">    </span><span class="mi">819</span>             <span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">820</span> 
 
-<span class="ne">OSError</span>: No command &quot;antsRegistration&quot; found on host fv-az209-140. Please check that the corresponding package is installed.
+<span class="ne">OSError</span>: No command &quot;antsRegistration&quot; found on host fv-az186-943. Please check that the corresponding package is installed.
 </pre></div>
 </div>
 </div>

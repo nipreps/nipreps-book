@@ -29,6 +29,8 @@ For instance, although rats are typically acquired with head fixations and under
 Even the vibration of the scanner itself can introduce motion!
 
 ```{code-cell} python
+:tags: [remove-input]
+
 HTML("""<video width="640" height="680" loop="yes" muted="yes" autoplay="yes" controls="yes"><source src="../videos/hm-sagittal.mp4" type="video/mp4"/></video>""")
 ```
 

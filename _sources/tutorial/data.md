@@ -28,6 +28,8 @@ The diffusion within biological structures, such as the brain, are often restric
 A typical dMRI scan will acquire multiple volumes (or ***angular samples***), each sensitive to a particular ***diffusion direction***.
 
 ```{code-cell} python
+:tags: [remove-input]
+
 HTML("""<video loop="yes" muted="yes" autoplay="yes" controls="yes"><source src="../videos/dMRI-signal-movie.mp4" type="video/mp4"/></video>""")
 ```
 

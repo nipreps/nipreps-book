@@ -22,7 +22,7 @@ result = registration.run(cwd=str(tempdir.absolute()))
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mOSError[0m                                   Traceback (most recent call last)
-[0;32m<ipython-input-7-73beed2b16d8>[0m in [0;36m<module>[0;34m[0m
+[0;32m<ipython-input-8-73beed2b16d8>[0m in [0;36m<module>[0;34m[0m
 [0;32m----> 1[0;31m [0mresult[0m [0;34m=[0m [0mregistration[0m[0;34m.[0m[0mrun[0m[0;34m([0m[0mcwd[0m[0;34m=[0m[0mstr[0m[0;34m([0m[0mtempdir[0m[0;34m.[0m[0mabsolute[0m[0;34m([0m[0;34m)[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0m
 [0;32m/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/nipype/interfaces/base/core.py[0m in [0;36mrun[0;34m(self, cwd, ignore_exception, **inputs)[0m
@@ -46,6 +46,6 @@ result = registration.run(cwd=str(tempdir.absolute()))
 [0m[1;32m    819[0m             )
 [1;32m    820[0m [0;34m[0m[0m
 
-[0;31mOSError[0m: No command "antsRegistration" found on host fv-az209-140. Please check that the corresponding package is installed.
-OSError: No command "antsRegistration" found on host fv-az209-140. Please check that the corresponding package is installed.
+[0;31mOSError[0m: No command "antsRegistration" found on host fv-az186-943. Please check that the corresponding package is installed.
+OSError: No command "antsRegistration" found on host fv-az186-943. Please check that the corresponding package is installed.
 
