@@ -23,8 +23,8 @@ from tempfile import mkstemp
 from pathlib import Path
 import requests
 
-if dmri_dataset._filepath.exists():
-    dmri_dataset._filepath.unlink()
+from eddymotion.dmri import DWI
+
 url = "https://files.osf.io/v1/resources/8k95s/providers/osfstorage/6070b4c2f6585f03fb6123a2"
 datapath = Path(mkstemp(suffix=".h5")[1])
 if datapath.stat().st_size == 0:
