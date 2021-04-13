@@ -10,6 +10,8 @@ on:
 jobs:
   deploy-book:
     runs-on: ubuntu-latest
+    env:
+      ANTSPATH: /opt/ants
     steps:
     - uses: actions/cache@v2
       with:
@@ -21,11 +23,27 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y --no-install-recommends \
+                             curl \
+                             bzip2 \
+                             ca-certificates \
                              dvipng \
                              texlive-fonts-recommended \
                              texlive-fonts-extra \
                              texlive-latex-extra \
                              cm-super
+
+    - uses: actions/cache@v2
+      with:
+        path: /opt/ants
+        key: ants-v1
+        restore-keys: |
+          ants-v1
+    - name: Install ANTS
+      run: |
+        if [[ ! -d "${ANTSPATH}" ]]; then
+          sudo mkdir -p $ANTSPATH
+          curl -sSL "https://dl.dropbox.com/s/gwf51ykkk5bifyj/ants-Linux-centos6_x86_64-v2.3.4.tar.gz" | sudo tar -xzC $ANTSPATH --strip-components 1
+        fi
 
     - uses: actions/checkout@v2
 
@@ -42,6 +60,7 @@ jobs:
     # Build the page
     - name: Build the book
       run: |
+        export PATH=$ANTSPATH:$PATH
         jupyter-book build docs
 
     # Push the book's HTML to github-pages
