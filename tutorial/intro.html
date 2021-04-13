@@ -357,9 +357,8 @@ free of head-motion and eddy-current spatial distortions.</p></li>
 <p class="admonition-title">Inputs</p>
 <ul class="simple">
 <li><p>A <em>b=0</em> reference - this is a 3D file resulting from a varyingly sophisticated average across the <em>b=0</em> volumes in the dataset.</p></li>
-<li><p>Orientation matrix in “RAS+B” format. This means that b-vectors are given in “scanner” coordinates (as opposed to “voxel” coordinates) and must have unit-norm. An additional column provides the sensitization intensity value (<em>b</em> value) in <em>s/mm^2</em>.</p></li>
+<li><p>Orientation matrix in “RAS+b” format. This means that b-vectors are given in “scanner” coordinates (as opposed to “voxel” coordinates) and must have unit-norm. An additional column provides the sensitization intensity value (<em>b</em> value) in <em>s/mm<sup>2</sup></em>.</p></li>
 <li><p><em>high-b</em> DWI data (4D file) - in other words, the original DWI dataset after extracting the <em>b=0</em> volumes out.</p></li>
-<li><p>A boolean indicating whether this is single-shell, multi-shell or non-shelled (e.g., Cartesian sampling such as DSI) dataset.</p></li>
 <li><p>DWI prediction model specification (model name + parameters)</p></li>
 <li><p>Image registration framework specification (including parameters)</p></li>
 </ul>
@@ -371,14 +370,14 @@ free of head-motion and eddy-current spatial distortions.</p></li>
 <li><p>List of rigid-body transformation matrices decomposed from the latter, representing the estimated head-motion parameters.</p></li>
 <li><p>List of the residuals of the previous decomposition, representing the affine distortions attributed to eddy-currents.</p></li>
 <li><p>A new DWI file (4D) resampling the data via the estimated affine matrices.</p></li>
-<li><p>New orientation matrix in “RAS+B” format, after rotation by the rigid-body motions estimated.</p></li>
+<li><p>New orientation matrix in “RAS+b” format, after rotation by the rigid-body motions estimated.</p></li>
 </ul>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p><strong>What this idea doesn’t cover:</strong></p>
 <ul class="simple">
-<li><p>Conversion into RAS+B format of the gradient matrix.</p></li>
+<li><p>Conversion into RAS+b format of the gradient matrix.</p></li>
 <li><p>Calculation of Framewise-Displacement or any other data quality estimation.</p></li>
 <li><p>Outlier removal or correcting intensity dropout</p></li>
 </ul>

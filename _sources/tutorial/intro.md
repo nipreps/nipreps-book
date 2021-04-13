@@ -65,9 +65,8 @@ Briefly anticipate what are the inputs to your new algorithm and the expected ou
 
 ```{admonition} Inputs
 - A *b=0* reference - this is a 3D file resulting from a varyingly sophisticated average across the *b=0* volumes in the dataset.
-- Orientation matrix in "RAS+B" format. This means that b-vectors are given in "scanner" coordinates (as opposed to "voxel" coordinates) and must have unit-norm. An additional column provides the sensitization intensity value (*b* value) in *s/mm^2*.
+- Orientation matrix in "RAS+b" format. This means that b-vectors are given in "scanner" coordinates (as opposed to "voxel" coordinates) and must have unit-norm. An additional column provides the sensitization intensity value (*b* value) in *s/mm<sup>2</sup>*.
 - *high-b* DWI data (4D file) - in other words, the original DWI dataset after extracting the *b=0* volumes out.
-- A boolean indicating whether this is single-shell, multi-shell or non-shelled (e.g., Cartesian sampling such as DSI) dataset.
 - DWI prediction model specification (model name + parameters)
 - Image registration framework specification (including parameters)
 ```
@@ -77,13 +76,13 @@ Briefly anticipate what are the inputs to your new algorithm and the expected ou
 - List of rigid-body transformation matrices decomposed from the latter, representing the estimated head-motion parameters.
 - List of the residuals of the previous decomposition, representing the affine distortions attributed to eddy-currents.
 - A new DWI file (4D) resampling the data via the estimated affine matrices.
-- New orientation matrix in "RAS+B" format, after rotation by the rigid-body motions estimated.
+- New orientation matrix in "RAS+b" format, after rotation by the rigid-body motions estimated.
 ```
 
 ```{warning}
 **What this idea doesn't cover:**
 
-- Conversion into RAS+B format of the gradient matrix.
+- Conversion into RAS+b format of the gradient matrix.
 - Calculation of Framewise-Displacement or any other data quality estimation.
 - Outlier removal or correcting intensity dropout
 ```
