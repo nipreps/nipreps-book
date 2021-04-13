@@ -473,7 +473,7 @@ Please notice the subtle <em>nodding</em> of the head, perhaps more apparent whe
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;antsRegistration --collapse-output-transforms 1 --dimensionality 3 --initialize-transforms-per-stage 0 --interpolation BSpline --output [ transform, transform_Warped.nii.gz ] --transform Rigid[ 0.01 ] --metric GC[ /tmp/tmph404x_t6/fixed.nii.gz, /tmp/tmph404x_t6/moving.nii.gz, 1, 32, Regular, 0.05 ] --convergence [ 100x50x10, 1e-06, 5 ] --smoothing-sigmas 4.0x2.0x2.0vox --shrink-factors 4x2x1 --use-estimate-learning-rate-once 0 --use-histogram-matching 1 --transform Affine[ 0.001 ] --metric GC[ /tmp/tmph404x_t6/fixed.nii.gz, /tmp/tmph404x_t6/moving.nii.gz, 1, 32, Random, 0.1 ] --convergence [ 50, 1e-07, 2 ] --smoothing-sigmas 0.0vox --shrink-factors 1 --use-estimate-learning-rate-once 1 --use-histogram-matching 1 -v --winsorize-image-intensities [ 0.0001, 0.9998 ]  --write-composite-transform 0&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;antsRegistration --collapse-output-transforms 1 --dimensionality 3 --initialize-transforms-per-stage 0 --interpolation BSpline --output [ transform, transform_Warped.nii.gz ] --transform Rigid[ 0.01 ] --metric GC[ /tmp/tmpd59gqpga/fixed.nii.gz, /tmp/tmpd59gqpga/moving.nii.gz, 1, 32, Regular, 0.05 ] --convergence [ 100x50x10, 1e-06, 5 ] --smoothing-sigmas 4.0x2.0x2.0vox --shrink-factors 4x2x1 --use-estimate-learning-rate-once 0 --use-histogram-matching 1 --transform Affine[ 0.001 ] --metric GC[ /tmp/tmpd59gqpga/fixed.nii.gz, /tmp/tmpd59gqpga/moving.nii.gz, 1, 32, Random, 0.1 ] --convergence [ 50, 1e-07, 2 ] --smoothing-sigmas 0.0vox --shrink-factors 1 --use-estimate-learning-rate-once 1 --use-histogram-matching 1 -v --winsorize-image-intensities [ 0.0001, 0.9998 ]  --write-composite-transform 0&#39;
 </pre></div>
 </div>
 </div>
@@ -522,12 +522,12 @@ We will be using <em>NiTransforms</em> to <em>apply</em> these transforms we est
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 9.96292909e-01, -4.81739794e-03, -2.96896413e-04,
-         4.94603670e-02],
-       [ 3.35631231e-03,  9.95492104e-01, -1.41444098e-02,
-        -2.25013297e-01],
-       [-2.02196207e-03,  2.43784150e-02,  9.92069615e-01,
-        -9.01848236e-01],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 9.96550487e-01, -5.38373215e-03,  4.38940298e-04,
+         8.83647662e-02],
+       [ 5.00978023e-03,  9.95669126e-01, -1.64147608e-02,
+        -2.96205497e-01],
+       [-2.81830221e-03,  2.60493859e-02,  9.91831543e-01,
+        -8.93533135e-01],
        [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00,
          1.00000000e+00]])
 </pre></div>
