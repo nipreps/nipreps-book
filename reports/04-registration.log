@@ -17,35 +17,43 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-result = registration.run(cwd=str(tempdir.absolute()))
+import nitransforms as nt
+
+itk_xform = nt.io.itk.ITKLinearTransform.from_filename(result.outputs.forward_transforms[0])
+matrix = itk_xform.to_ras(reference=fixed_path, moving=moving_path)
+matrix
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mOSError[0m                                   Traceback (most recent call last)
-[0;32m<ipython-input-8-73beed2b16d8>[0m in [0;36m<module>[0;34m[0m
-[0;32m----> 1[0;31m [0mresult[0m [0;34m=[0m [0mregistration[0m[0;34m.[0m[0mrun[0m[0;34m([0m[0mcwd[0m[0;34m=[0m[0mstr[0m[0;34m([0m[0mtempdir[0m[0;34m.[0m[0mabsolute[0m[0;34m([0m[0;34m)[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m
-[0;32m/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/nipype/interfaces/base/core.py[0m in [0;36mrun[0;34m(self, cwd, ignore_exception, **inputs)[0m
-[1;32m    432[0m         [0;32mtry[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    433[0m             [0mruntime[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0m_pre_run_hook[0m[0;34m([0m[0mruntime[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0;32m--> 434[0;31m             [0mruntime[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0m_run_interface[0m[0;34m([0m[0mruntime[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m    435[0m             [0mruntime[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0m_post_run_hook[0m[0;34m([0m[0mruntime[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    436[0m             [0moutputs[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0maggregate_outputs[0m[0;34m([0m[0mruntime[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;31mKeyError[0m                                  Traceback (most recent call last)
+[0;32m<ipython-input-10-65ec336d6625>[0m in [0;36m<module>[0;34m[0m
+[1;32m      1[0m [0;32mimport[0m [0mnitransforms[0m [0;32mas[0m [0mnt[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      2[0m [0;34m[0m[0m
+[0;32m----> 3[0;31m [0mitk_xform[0m [0;34m=[0m [0mnt[0m[0;34m.[0m[0mio[0m[0;34m.[0m[0mitk[0m[0;34m.[0m[0mITKLinearTransform[0m[0;34m.[0m[0mfrom_filename[0m[0;34m([0m[0mresult[0m[0;34m.[0m[0moutputs[0m[0;34m.[0m[0mforward_transforms[0m[0;34m[[0m[0;36m0[0m[0;34m][0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      4[0m [0mmatrix[0m [0;34m=[0m [0mitk_xform[0m[0;34m.[0m[0mto_ras[0m[0;34m([0m[0mreference[0m[0;34m=[0m[0mfixed_path[0m[0;34m,[0m [0mmoving[0m[0;34m=[0m[0mmoving_path[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      5[0m [0mmatrix[0m[0;34m[0m[0;34m[0m[0m
 
-[0;32m/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/nipype/interfaces/ants/registration.py[0m in [0;36m_run_interface[0;34m(self, runtime, correct_return_codes)[0m
-[1;32m   1010[0m [0;34m[0m[0m
-[1;32m   1011[0m     [0;32mdef[0m [0m_run_interface[0m[0;34m([0m[0mself[0m[0;34m,[0m [0mruntime[0m[0;34m,[0m [0mcorrect_return_codes[0m[0;34m=[0m[0;34m([0m[0;36m0[0m[0;34m,[0m[0;34m)[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[0;32m-> 1012[0;31m         [0mruntime[0m [0;34m=[0m [0msuper[0m[0;34m([0m[0mRegistration[0m[0;34m,[0m [0mself[0m[0;34m)[0m[0;34m.[0m[0m_run_interface[0m[0;34m([0m[0mruntime[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m   1013[0m [0;34m[0m[0m
-[1;32m   1014[0m         [0;31m# Parse some profiling info[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/nitransforms/io/itk.py[0m in [0;36mfrom_filename[0;34m(cls, filename)[0m
+[1;32m    112[0m         [0;32mif[0m [0mstr[0m[0;34m([0m[0mfilename[0m[0;34m)[0m[0;34m.[0m[0mendswith[0m[0;34m([0m[0;34m".mat"[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    113[0m             [0;32mwith[0m [0mopen[0m[0;34m([0m[0mstr[0m[0;34m([0m[0mfilename[0m[0;34m)[0m[0;34m,[0m [0;34m"rb"[0m[0;34m)[0m [0;32mas[0m [0mfileobj[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 114[0;31m                 [0;32mreturn[0m [0mcls[0m[0;34m.[0m[0mfrom_binary[0m[0;34m([0m[0mfileobj[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    115[0m [0;34m[0m[0m
+[1;32m    116[0m         [0;32mwith[0m [0mopen[0m[0;34m([0m[0mstr[0m[0;34m([0m[0mfilename[0m[0;34m)[0m[0;34m)[0m [0;32mas[0m [0mfileobj[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
 
-[0;32m/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/nipype/interfaces/base/core.py[0m in [0;36m_run_interface[0;34m(self, runtime, correct_return_codes)[0m
-[1;32m    816[0m                 [0;34m'No command "%s" found on host %s. Please check that the '[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    817[0m                 [0;34m"corresponding package is installed."[0m[0;34m[0m[0;34m[0m[0m
-[0;32m--> 818[0;31m                 [0;34m%[0m [0;34m([0m[0mexecutable_name[0m[0;34m,[0m [0mruntime[0m[0;34m.[0m[0mhostname[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m    819[0m             )
-[1;32m    820[0m [0;34m[0m[0m
+[0;32m/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/nitransforms/io/itk.py[0m in [0;36mfrom_binary[0;34m(cls, byte_stream, index)[0m
+[1;32m    105[0m         [0;34m"""Read the struct from a matlab binary file."""[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    106[0m         [0mmdict[0m [0;34m=[0m [0m_read_mat[0m[0;34m([0m[0mbyte_stream[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 107[0;31m         [0;32mreturn[0m [0mcls[0m[0;34m.[0m[0mfrom_matlab_dict[0m[0;34m([0m[0mmdict[0m[0;34m,[0m [0mindex[0m[0;34m=[0m[0mindex[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    108[0m [0;34m[0m[0m
+[1;32m    109[0m     [0;34m@[0m[0mclassmethod[0m[0;34m[0m[0;34m[0m[0m
 
-[0;31mOSError[0m: No command "antsRegistration" found on host fv-az183-911. Please check that the corresponding package is installed.
-OSError: No command "antsRegistration" found on host fv-az183-911. Please check that the corresponding package is installed.
+[0;32m/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/nitransforms/io/itk.py[0m in [0;36mfrom_matlab_dict[0;34m(cls, mdict, index)[0m
+[1;32m    132[0m         [0msa[0m[0;34m[[0m[0;34m"index"[0m[0;34m][0m [0;34m=[0m [0mindex[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    133[0m         [0mparameters[0m [0;34m=[0m [0mnp[0m[0;34m.[0m[0meye[0m[0;34m([0m[0;36m4[0m[0;34m,[0m [0mdtype[0m[0;34m=[0m[0;34m"f4"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 134[0;31m         [0mparameters[0m[0;34m[[0m[0;34m:[0m[0;36m3[0m[0;34m,[0m [0;34m:[0m[0;36m3[0m[0;34m][0m [0;34m=[0m [0mmdict[0m[0;34m[[0m[0;34m"AffineTransform_float_3_3"[0m[0;34m][0m[0;34m[[0m[0;34m:[0m[0;34m-[0m[0;36m3[0m[0;34m][0m[0;34m.[0m[0mreshape[0m[0;34m([0m[0;34m([0m[0;36m3[0m[0;34m,[0m [0;36m3[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    135[0m         [0mparameters[0m[0;34m[[0m[0;34m:[0m[0;36m3[0m[0;34m,[0m [0;36m3[0m[0;34m][0m [0;34m=[0m [0mmdict[0m[0;34m[[0m[0;34m"AffineTransform_float_3_3"[0m[0;34m][0m[0;34m[[0m[0;34m-[0m[0;36m3[0m[0;34m:[0m[0;34m][0m[0;34m.[0m[0mflatten[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    136[0m         [0msa[0m[0;34m[[0m[0;34m"parameters"[0m[0;34m][0m [0;34m=[0m [0mparameters[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mKeyError[0m: 'AffineTransform_float_3_3'
+KeyError: 'AffineTransform_float_3_3'
 
