@@ -467,7 +467,7 @@ Please notice the subtle <em>nodding</em> of the head, perhaps more apparent whe
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;antsRegistration --collapse-output-transforms 1 --dimensionality 3 --initialize-transforms-per-stage 0 --interpolation BSpline --output [ transform, transform_Warped.nii.gz ] --transform Rigid[ 0.01 ] --metric GC[ /tmp/tmp2ykq7pa2/fixed.nii.gz, /tmp/tmp2ykq7pa2/moving.nii.gz, 1, 32, Regular, 0.05 ] --convergence [ 100x50x10, 1e-06, 5 ] --smoothing-sigmas 4.0x2.0x2.0vox --shrink-factors 4x2x1 --use-estimate-learning-rate-once 0 --use-histogram-matching 1 --transform Affine[ 0.001 ] --metric GC[ /tmp/tmp2ykq7pa2/fixed.nii.gz, /tmp/tmp2ykq7pa2/moving.nii.gz, 1, 32, Random, 0.1 ] --convergence [ 50, 1e-07, 2 ] --smoothing-sigmas 0.0vox --shrink-factors 1 --use-estimate-learning-rate-once 1 --use-histogram-matching 1 -v --winsorize-image-intensities [ 0.0001, 0.9998 ]  --write-composite-transform 0&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;antsRegistration --collapse-output-transforms 1 --dimensionality 3 --initialize-transforms-per-stage 0 --interpolation BSpline --output [ transform, transform_Warped.nii.gz ] --transform Rigid[ 0.01 ] --metric GC[ /tmp/tmp4r_wjy0_/fixed.nii.gz, /tmp/tmp4r_wjy0_/moving.nii.gz, 1, 32, Regular, 0.05 ] --convergence [ 100x50x10, 1e-06, 5 ] --smoothing-sigmas 4.0x2.0x2.0vox --shrink-factors 4x2x1 --use-estimate-learning-rate-once 0 --use-histogram-matching 1 --transform Affine[ 0.001 ] --metric GC[ /tmp/tmp4r_wjy0_/fixed.nii.gz, /tmp/tmp4r_wjy0_/moving.nii.gz, 1, 32, Random, 0.1 ] --convergence [ 50, 1e-07, 2 ] --smoothing-sigmas 0.0vox --shrink-factors 1 --use-estimate-learning-rate-once 1 --use-histogram-matching 1 -v --winsorize-image-intensities [ 0.0001, 0.9998 ]  --write-composite-transform 0&#39;
 </pre></div>
 </div>
 </div>
@@ -516,37 +516,10 @@ We will be using <em>NiTransforms</em> to <em>apply</em> these transforms we est
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">9</span><span class="o">-</span><span class="mi">65</span><span class="n">ec336d6625</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">nitransforms</span> <span class="k">as</span> <span class="nn">nt</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> 
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">itk_xform</span> <span class="o">=</span> <span class="n">nt</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">itk</span><span class="o">.</span><span class="n">ITKLinearTransform</span><span class="o">.</span><span class="n">from_filename</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">forward_transforms</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">matrix</span> <span class="o">=</span> <span class="n">itk_xform</span><span class="o">.</span><span class="n">to_ras</span><span class="p">(</span><span class="n">reference</span><span class="o">=</span><span class="n">fixed_path</span><span class="p">,</span> <span class="n">moving</span><span class="o">=</span><span class="n">moving_path</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">matrix</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/nitransforms/io/itk.py</span> in <span class="ni">from_filename</span><span class="nt">(cls, filename)</span>
-<span class="g g-Whitespace">    </span><span class="mi">112</span>         <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.mat&quot;</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">113</span>             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">filename</span><span class="p">),</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileobj</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">114</span>                 <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_binary</span><span class="p">(</span><span class="n">fileobj</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">115</span> 
-<span class="g g-Whitespace">    </span><span class="mi">116</span>         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span> <span class="k">as</span> <span class="n">fileobj</span><span class="p">:</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/nitransforms/io/itk.py</span> in <span class="ni">from_binary</span><span class="nt">(cls, byte_stream, index)</span>
-<span class="g g-Whitespace">    </span><span class="mi">105</span>         <span class="sd">&quot;&quot;&quot;Read the struct from a matlab binary file.&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">106</span>         <span class="n">mdict</span> <span class="o">=</span> <span class="n">_read_mat</span><span class="p">(</span><span class="n">byte_stream</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">107</span>         <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_matlab_dict</span><span class="p">(</span><span class="n">mdict</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">108</span> 
-<span class="g g-Whitespace">    </span><span class="mi">109</span>     <span class="nd">@classmethod</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/nitransforms/io/itk.py</span> in <span class="ni">from_matlab_dict</span><span class="nt">(cls, mdict, index)</span>
-<span class="g g-Whitespace">    </span><span class="mi">132</span>         <span class="n">sa</span><span class="p">[</span><span class="s2">&quot;index&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">index</span>
-<span class="g g-Whitespace">    </span><span class="mi">133</span>         <span class="n">parameters</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;f4&quot;</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">134</span>         <span class="n">parameters</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">mdict</span><span class="p">[</span><span class="s2">&quot;AffineTransform_float_3_3&quot;</span><span class="p">][:</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">135</span>         <span class="n">parameters</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">mdict</span><span class="p">[</span><span class="s2">&quot;AffineTransform_float_3_3&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">136</span>         <span class="n">sa</span><span class="p">[</span><span class="s2">&quot;parameters&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">parameters</span>
-
-<span class="ne">KeyError</span>: &#39;AffineTransform_float_3_3&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.99612003, -0.00505712,  0.00118064,  0.1092792 ],
+       [ 0.00525653,  0.99660877, -0.01403211, -0.19272264],
+       [-0.00239665,  0.02477154,  0.99161611, -0.85420183],
+       [ 0.        ,  0.        ,  0.        ,  1.        ]])
 </pre></div>
 </div>
 </div>
@@ -567,6 +540,8 @@ We will be using <em>NiTransforms</em> to <em>apply</em> these transforms we est
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/registration_19_0.svg" src="../_images/registration_19_0.svg" /></div>
 </div>
 <p><strong>Exercise</strong></p>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">display()</span></code> function to visualize the image aligned as generated by ANTs vs. that generated by <em>NiTransforms</em> – they should be aligned!.</p>
@@ -582,6 +557,8 @@ We will be using <em>NiTransforms</em> to <em>apply</em> these transforms we est
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/registration_21_0.svg" src="../_images/registration_21_0.svg" /></div>
 </div>
 </div>
 </div>
