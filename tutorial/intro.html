@@ -283,6 +283,23 @@
   <a class="reference internal nav-link" href="#objective-implement-a-head-motion-estimation-code">
    Objective: Implement a head-motion estimation code
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#step-1-identify-an-i-o-inputs-outputs-specification">
+     Step 1: Identify an I/O (inputs/outputs) specification
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#step-2-sketch-out-an-api-application-programming-interface">
+     Step 2: Sketch out an API (Application Programming Interface)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#step-3-software-architecture">
+     Step 3: Software architecture
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -322,6 +339,8 @@ Even the vibration of the scanner itself can introduce motion!</p>
 We will build from existing software (DIPY for diffusion modeling and ANTs for image registration), as well as commonplace Python libraries (NumPy), a software framework for head-motion estimation in diffusion MRI data.</p>
 <p>The algorithmic and theoretical foundations of the method are based on an idea first proposed by <a class="reference external" href="https://pubmed.ncbi.nlm.nih.gov/22183784/">Ben-Amitay et al.</a> and later implemented in <em>QSIPREP</em> (see this <a class="reference external" href="https://github.com/mattcieslak/ohbm_shoreline/blob/master/cieslakOHBM2019.pdf">OHBM 2019 poster</a>).
 The idea works as follows:</p>
+<div class="admonition-algorithm admonition">
+<p class="admonition-title">Algorithm</p>
 <ol class="simple">
 <li><p>Leave one DWI (diffusion weighted image) orientation out.</p></li>
 <li><p>Using the rest of the dataset, impute the excluded orientation using a diffusion model.
@@ -330,7 +349,10 @@ free of head-motion and eddy-current spatial distortions.</p></li>
 <li><p>Run a volumetric registration algorithm between the imputed volume and the original volume.</p></li>
 <li><p>Iterate over the whole dataset until convergence.</p></li>
 </ol>
-<p><strong>Identify an I/O (inputs/outputs) specification</strong>: briefly anticipate what are the inputs to your new algorithm and the expected outcomes.</p>
+</div>
+<div class="section" id="step-1-identify-an-i-o-inputs-outputs-specification">
+<h3>Step 1: Identify an I/O (inputs/outputs) specification<a class="headerlink" href="#step-1-identify-an-i-o-inputs-outputs-specification" title="Permalink to this headline">¶</a></h3>
+<p>Briefly anticipate what are the inputs to your new algorithm and the expected outcomes.</p>
 <div class="admonition-inputs admonition">
 <p class="admonition-title">Inputs</p>
 <ul class="simple">
@@ -361,12 +383,18 @@ free of head-motion and eddy-current spatial distortions.</p></li>
 <li><p>Outlier removal or correcting intensity dropout</p></li>
 </ul>
 </div>
-<p><strong>Nonfunctional requirements</strong>: briefly anticipate further requirements that are important, but do not alter the goal of the project.</p>
+<div class="admonition-nonfunctional-requirements admonition">
+<p class="admonition-title">Nonfunctional requirements</p>
+<p>Briefly anticipate further requirements that are important, but do not alter the goal of the project.</p>
 <ul class="simple">
 <li><p>Memory fingerprint: DWIs can be large, and storing them in memory (and subsequent derivatives thereof) can be cumbersome, or even prohibitive.</p></li>
 <li><p>Parallelism: simulation and registration are CPU-intensive processes - for the runtime to be in a manageable scale, we’ll need to leverage parallelism.</p></li>
 </ul>
-<p><strong>Sketch out an API (Application Programming Interface)</strong>: Plan how the new software will expose the implementation downstream.
+</div>
+</div>
+<div class="section" id="step-2-sketch-out-an-api-application-programming-interface">
+<h3>Step 2: Sketch out an API (Application Programming Interface)<a class="headerlink" href="#step-2-sketch-out-an-api-application-programming-interface" title="Permalink to this headline">¶</a></h3>
+<p>Plan how the new software will expose the implementation downstream.
 Assuming our DWI data is encapsulated in an object (holding not just the data array, but also metadata such as the gradient table)
 pointed at by the variable <code class="docutils literal notranslate"><span class="pre">data</span></code>, and assuming we have a list of rigid-body transform matrices to initialize the algorithm (<code class="docutils literal notranslate"><span class="pre">mats</span></code>),
 a potential API would have a <code class="docutils literal notranslate"><span class="pre">.fit()</span></code> and <code class="docutils literal notranslate"><span class="pre">.predict()</span></code> members which run the algorithm (the former) and generate an EM-corrected
@@ -378,6 +406,18 @@ DWI (the latter):</p>
 
 <span class="n">corrected</span> <span class="o">=</span> <span class="n">estimator</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+<div class="section" id="step-3-software-architecture">
+<h3>Step 3: Software architecture<a class="headerlink" href="#step-3-software-architecture" title="Permalink to this headline">¶</a></h3>
+<p>Once the problem is well defined, we will leverage object orientation programming to implement the solution.
+In our case, we have four major components that will allow us to meet the requirements above:</p>
+<ul class="simple">
+<li><p>A <em><strong>powerful but resource-lightweight DWI data representation</strong></em>.</p></li>
+<li><p>A uniform interface to interchangeable models of the left out gradient.</p></li>
+<li><p>A reliable registration framework to estimate the misalignment.</p></li>
+<li><p>The integration of the three elements above in an iterable loop.</p></li>
+</ul>
 </div>
 </div>
 </div>

@@ -51,14 +51,17 @@ We will build from existing software (DIPY for diffusion modeling and ANTs for i
 The algorithmic and theoretical foundations of the method are based on an idea first proposed by [Ben-Amitay et al.](https://pubmed.ncbi.nlm.nih.gov/22183784/) and later implemented in *QSIPREP* (see this [OHBM 2019 poster](https://github.com/mattcieslak/ohbm_shoreline/blob/master/cieslakOHBM2019.pdf)).
 The idea works as follows:
 
+```{admonition} Algorithm
   1. Leave one DWI (diffusion weighted image) orientation out.
   2. Using the rest of the dataset, impute the excluded orientation using a diffusion model.
      Because it was generated based on the remainder of the data, the simulated volume will be
      free of head-motion and eddy-current spatial distortions.
   3. Run a volumetric registration algorithm between the imputed volume and the original volume.
   4. Iterate over the whole dataset until convergence.
+```
 
-**Identify an I/O (inputs/outputs) specification**: briefly anticipate what are the inputs to your new algorithm and the expected outcomes.
+### Step 1: Identify an I/O (inputs/outputs) specification
+Briefly anticipate what are the inputs to your new algorithm and the expected outcomes.
 
 ```{admonition} Inputs
 - A *b=0* reference - this is a 3D file resulting from a varyingly sophisticated average across the *b=0* volumes in the dataset.
@@ -85,12 +88,15 @@ The idea works as follows:
 - Outlier removal or correcting intensity dropout
 ```
 
-**Nonfunctional requirements**: briefly anticipate further requirements that are important, but do not alter the goal of the project.
+```{admonition} Nonfunctional requirements
+Briefly anticipate further requirements that are important, but do not alter the goal of the project.
 
 - Memory fingerprint: DWIs can be large, and storing them in memory (and subsequent derivatives thereof) can be cumbersome, or even prohibitive.
 - Parallelism: simulation and registration are CPU-intensive processes - for the runtime to be in a manageable scale, we'll need to leverage parallelism.
+```
 
-**Sketch out an API (Application Programming Interface)**: Plan how the new software will expose the implementation downstream.
+### Step 2: Sketch out an API (Application Programming Interface)
+Plan how the new software will expose the implementation downstream.
 Assuming our DWI data is encapsulated in an object (holding not just the data array, but also metadata such as the gradient table)
 pointed at by the variable `data`, and assuming we have a list of rigid-body transform matrices to initialize the algorithm (`mats`),
 a potential API would have a `.fit()` and `.predict()` members which run the algorithm (the former) and generate an EM-corrected
@@ -104,3 +110,13 @@ estimator.fit(data, model="DTI")
 
 corrected = estimator.predict(data)
 ```
+
+### Step 3: Software architecture
+
+Once the problem is well defined, we will leverage object orientation programming to implement the solution.
+In our case, we have four major components that will allow us to meet the requirements above:
+
+* A ***powerful but resource-lightweight DWI data representation***.
+* A uniform interface to interchangeable models of the left out gradient.
+* A reliable registration framework to estimate the misalignment.
+* The integration of the three elements above in an iterable loop.
