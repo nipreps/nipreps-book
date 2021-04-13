@@ -46,6 +46,6 @@ result = registration.run(cwd=str(tempdir.absolute()))
 [0m[1;32m    819[0m             )
 [1;32m    820[0m [0;34m[0m[0m
 
-[0;31mOSError[0m: No command "antsRegistration" found on host fv-az186-943. Please check that the corresponding package is installed.
-OSError: No command "antsRegistration" found on host fv-az186-943. Please check that the corresponding package is installed.
+[0;31mOSError[0m: No command "antsRegistration" found on host fv-az209-140. Please check that the corresponding package is installed.
+OSError: No command "antsRegistration" found on host fv-az209-140. Please check that the corresponding package is installed.
 
