@@ -10,4 +10,5 @@ nilearn
 nitransforms
 niworkflows >= 1.4.0rc5
 numpy
+pytest
 requests
