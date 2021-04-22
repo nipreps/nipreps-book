@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Image registration (spatial alignment) &#8212; NiPreps</title>
     
-  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
 
     
   <link rel="stylesheet"
@@ -19,14 +20,10 @@
 
     
       
-  <link rel="stylesheet"
-    href="../_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -34,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
 
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -44,7 +41,7 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -56,14 +53,14 @@
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
-
-
-
+    
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
     
 
     <div class="container-xl">
@@ -72,42 +69,42 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="../index.html">
-  
-  
-  <h1 class="site-logo" id="site-title">NiPreps</h1>
-  
-</a>
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      <h1 class="site-logo" id="site-title">NiPreps</h1>
+      
+    </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="nav sidenav_l1">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../welcome.html">
    Welcome!
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   preparation
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../preparation/step0.html">
    Before we start: How to follow this tutorial
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   nipreps
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../nipreps/nipreps.html">
    NeuroImaging PREProcessing toolS (NiPreps)
@@ -119,12 +116,12 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   tutorial
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../tutorial/intro.html">
    The problem of head-motion in dMRI
@@ -151,12 +148,12 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   extra
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../extra/nifti.html">
    The extra mile
@@ -169,6 +166,7 @@
  </li>
 </ul>
 
+    </div>
 </nav> <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
@@ -234,12 +232,12 @@
     </div>
 </div>
 
-
             <!-- Full screen (wrap in <a> to have style consistency -->
-            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                    title="Fullscreen mode"><i
-                        class="fas fa-expand"></i></button></a>
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
 
@@ -265,12 +263,11 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i>
-            Contents
-        </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#ants-advanced-normalization-tools">
    ANTs - Advanced Normalization ToolS
@@ -288,8 +285,7 @@
  </li>
 </ul>
 
-        </nav>
-        
+            </nav>
         </div>
     </div>
 </div>
@@ -379,7 +375,7 @@ First, we’ll need to generate one target gradient prediction following all the
 For this example, we have selected the 8<sup>th</sup> DW map (<code class="docutils literal notranslate"><span class="pre">index=7</span></code>) because it contains a sudden motion spike, resembling a nodding movement.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eddymotion.model</span> <span class="kn">import</span> <span class="n">ModelFactory</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eddymotion.model</span> <span class="kn">import</span> <span class="n">ModelFactory</span>
 
 <span class="n">data_train</span><span class="p">,</span> <span class="n">data_test</span> <span class="o">=</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">logo_split</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="n">with_b0</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
@@ -398,7 +394,7 @@ For this example, we have selected the 8<sup>th</sup> DW map (<code class="docut
 Let’s write out two NIfTI files in a temporary folder:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">mkdtemp</span>
 
 <span class="n">tempdir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">mkdtemp</span><span class="p">())</span>
@@ -418,7 +414,7 @@ Let’s write out two NIfTI files in a temporary folder:</p>
 Please notice the subtle <em>nodding</em> of the head, perhaps more apparent when looking at the corpus callosum in the sagittal views:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">niworkflows.viz.notebook</span> <span class="kn">import</span> <span class="n">display</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">niworkflows.viz.notebook</span> <span class="kn">import</span> <span class="n">display</span>
 
 <span class="n">display</span><span class="p">(</span>
     <span class="n">fixed_path</span><span class="p">,</span>
@@ -429,13 +425,11 @@ Please notice the subtle <em>nodding</em> of the head, perhaps more apparent whe
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/04-registration_7_0.svg" src="../_images/04-registration_7_0.svg" /></div>
 </div>
 <p>Let’s configure ANTs via NiPype:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ensure that NiPype is able to find and execute our ANTs command</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># ensure that NiPype is able to find and execute our ANTs command</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
 
@@ -446,7 +440,7 @@ Please notice the subtle <em>nodding</em> of the head, perhaps more apparent whe
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">cpu_count</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">cpu_count</span>
 <span class="kn">from</span> <span class="nn">pkg_resources</span> <span class="kn">import</span> <span class="n">resource_filename</span> <span class="k">as</span> <span class="n">pkg_fn</span>
 <span class="kn">from</span> <span class="nn">nipype.interfaces.ants.registration</span> <span class="kn">import</span> <span class="n">Registration</span>
 
@@ -468,12 +462,7 @@ Please notice the subtle <em>nodding</em> of the head, perhaps more apparent whe
 <p>which will run the following command-line:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">registration</span><span class="o">.</span><span class="n">cmdline</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;antsRegistration --collapse-output-transforms 1 --dimensionality 3 --initialize-transforms-per-stage 0 --interpolation BSpline --output [ transform, transform_Warped.nii.gz ] --transform Rigid[ 0.01 ] --metric GC[ /tmp/tmpezoadccl/fixed.nii.gz, /tmp/tmpezoadccl/moving.nii.gz, 1, 32, Regular, 0.05 ] --convergence [ 100x50x10, 1e-06, 5 ] --smoothing-sigmas 4.0x2.0x2.0vox --shrink-factors 4x2x1 --use-estimate-learning-rate-once 0 --use-histogram-matching 1 --transform Affine[ 0.001 ] --metric GC[ /tmp/tmpezoadccl/fixed.nii.gz, /tmp/tmpezoadccl/moving.nii.gz, 1, 32, Random, 0.1 ] --convergence [ 50, 1e-07, 2 ] --smoothing-sigmas 0.0vox --shrink-factors 1 --use-estimate-learning-rate-once 1 --use-histogram-matching 1 -v --winsorize-image-intensities [ 0.0001, 0.9998 ]  --write-composite-transform 0&#39;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">registration</span><span class="o">.</span><span class="n">cmdline</span>
 </pre></div>
 </div>
 </div>
@@ -481,7 +470,7 @@ Please notice the subtle <em>nodding</em> of the head, perhaps more apparent whe
 <p>Nipype interfaces can be submitted for execution with the <code class="docutils literal notranslate"><span class="pre">run()</span></code> method:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">registration</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">cwd</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">tempdir</span><span class="o">.</span><span class="n">absolute</span><span class="p">()))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">registration</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">cwd</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">tempdir</span><span class="o">.</span><span class="n">absolute</span><span class="p">()))</span>
 </pre></div>
 </div>
 </div>
@@ -490,7 +479,7 @@ Please notice the subtle <em>nodding</em> of the head, perhaps more apparent whe
 We can now visualize how close (or far) the two images are:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span>
     <span class="n">fixed_path</span><span class="p">,</span>
     <span class="n">result</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">warped_image</span><span class="p">,</span>
     <span class="n">fixed_label</span><span class="o">=</span><span class="s2">&quot;Predicted&quot;</span><span class="p">,</span>
@@ -499,8 +488,6 @@ We can now visualize how close (or far) the two images are:</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/04-registration_16_0.svg" src="../_images/04-registration_16_0.svg" /></div>
 </div>
 </div>
 <div class="section" id="resampling-an-image">
@@ -513,7 +500,7 @@ We will be using <em>NiTransforms</em> to <em>apply</em> these transforms we est
 <p>To read a transform produced by ANTs with <em>NiTransforms</em>, we use the following piece of code:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nitransforms</span> <span class="k">as</span> <span class="nn">nt</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nitransforms</span> <span class="k">as</span> <span class="nn">nt</span>
 
 <span class="n">itk_xform</span> <span class="o">=</span> <span class="n">nt</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">itk</span><span class="o">.</span><span class="n">ITKLinearTransform</span><span class="o">.</span><span class="n">from_filename</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">forward_transforms</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">matrix</span> <span class="o">=</span> <span class="n">itk_xform</span><span class="o">.</span><span class="n">to_ras</span><span class="p">(</span><span class="n">reference</span><span class="o">=</span><span class="n">fixed_path</span><span class="p">,</span> <span class="n">moving</span><span class="o">=</span><span class="n">moving_path</span><span class="p">)</span>
@@ -521,23 +508,11 @@ We will be using <em>NiTransforms</em> to <em>apply</em> these transforms we est
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 9.95588190e-01, -5.08310213e-03, -5.07320927e-04,
-         8.97516286e-02],
-       [ 5.63755891e-03,  9.97088210e-01, -1.44278689e-02,
-        -2.38751665e-01],
-       [-1.31401431e-03,  2.50085479e-02,  9.91100625e-01,
-        -8.54294247e-01],
-       [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00,
-         1.00000000e+00]])
-</pre></div>
-</div>
-</div>
 </div>
 <p>Resampling an image requires two pieces of information: the <em>reference</em> image (which provides the new grid where we want to have the data) and the <em>moving</em> image which contains the actual data we are interested in:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xfm</span> <span class="o">=</span> <span class="n">nt</span><span class="o">.</span><span class="n">linear</span><span class="o">.</span><span class="n">Affine</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xfm</span> <span class="o">=</span> <span class="n">nt</span><span class="o">.</span><span class="n">linear</span><span class="o">.</span><span class="n">Affine</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
 <span class="n">xfm</span><span class="o">.</span><span class="n">reference</span> <span class="o">=</span> <span class="n">fixed_path</span>
 <span class="n">resampled</span> <span class="o">=</span> <span class="n">xfm</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">moving_path</span><span class="p">)</span>
 <span class="n">resampled</span><span class="o">.</span><span class="n">to_filename</span><span class="p">(</span><span class="n">tempdir</span> <span class="o">/</span> <span class="s2">&quot;resampled-nitransforms.nii.gz&quot;</span><span class="p">)</span>
@@ -550,8 +525,6 @@ We will be using <em>NiTransforms</em> to <em>apply</em> these transforms we est
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/04-registration_20_0.svg" src="../_images/04-registration_20_0.svg" /></div>
 </div>
 <p><strong>Exercise</strong></p>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">display()</span></code> function to visualize the image aligned as generated by ANTs vs. that generated by <em>NiTransforms</em> – they should be aligned!.</p>
@@ -604,9 +577,8 @@ We will be using <em>NiTransforms</em> to <em>apply</em> these transforms we est
 
       </div>
     </div>
-
     
-  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
 
     

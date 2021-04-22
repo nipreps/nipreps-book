@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Introduction to dMRI data &#8212; NiPreps</title>
     
-  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
 
     
   <link rel="stylesheet"
@@ -19,14 +20,10 @@
 
     
       
-  <link rel="stylesheet"
-    href="../_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -34,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
 
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -44,7 +41,7 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -56,14 +53,14 @@
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
-
-
-
+    
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
     
 
     <div class="container-xl">
@@ -72,42 +69,42 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="../index.html">
-  
-  
-  <h1 class="site-logo" id="site-title">NiPreps</h1>
-  
-</a>
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      <h1 class="site-logo" id="site-title">NiPreps</h1>
+      
+    </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="nav sidenav_l1">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../welcome.html">
    Welcome!
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   preparation
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../preparation/step0.html">
    Before we start: How to follow this tutorial
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   nipreps
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../nipreps/nipreps.html">
    NeuroImaging PREProcessing toolS (NiPreps)
@@ -119,12 +116,12 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   tutorial
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../tutorial/intro.html">
    The problem of head-motion in dMRI
@@ -151,12 +148,12 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   extra
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../extra/nifti.html">
    The extra mile
@@ -169,6 +166,7 @@
  </li>
 </ul>
 
+    </div>
 </nav> <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
@@ -234,12 +232,12 @@
     </div>
 </div>
 
-
             <!-- Full screen (wrap in <a> to have style consistency -->
-            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                    title="Fullscreen mode"><i
-                        class="fas fa-expand"></i></button></a>
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
 
@@ -265,12 +263,11 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i>
-            Contents
-        </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#python-and-object-oriented-programming">
    Python and object oriented programming
@@ -307,8 +304,7 @@
  </li>
 </ul>
 
-        </nav>
-        
+            </nav>
         </div>
     </div>
 </div>
@@ -321,7 +317,7 @@
 <h1>Introduction to dMRI data<a class="headerlink" href="#introduction-to-dmri-data" title="Permalink to this headline">¶</a></h1>
 <div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 
@@ -336,12 +332,10 @@ The diffusion within biological structures, such as the brain, are often restric
 A typical dMRI scan will acquire multiple volumes (or <em><strong>angular samples</strong></em>), each sensitive to a particular <em><strong>diffusion direction</strong></em>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;&lt;video loop=&quot;yes&quot; muted=&quot;yes&quot; autoplay=&quot;yes&quot; controls=&quot;yes&quot;&gt;&lt;source src=&quot;../assets/videos/dMRI-signal-movie.mp4&quot; type=&quot;video/mp4&quot;/&gt;&lt;/video&gt;&quot;&quot;&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;&lt;video loop=&quot;yes&quot; muted=&quot;yes&quot; autoplay=&quot;yes&quot; controls=&quot;yes&quot;&gt;&lt;source src=&quot;../assets/videos/dMRI-signal-movie.mp4&quot; type=&quot;video/mp4&quot;/&gt;&lt;/video&gt;&quot;&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><video loop="yes" muted="yes" autoplay="yes" controls="yes"><source src="../assets/videos/dMRI-signal-movie.mp4" type="video/mp4"/></video></div></div>
 </div>
 <p><em>Sourced from Dr. A. Rokem, DIPY Workshop 2021</em></p>
 <p>These <em>diffusion directions</em> (or <em><strong>orientations</strong></em>) are a fundamental piece of metadata to interpret dMRI data, as models need to know the exact orientation of each angular sample.</p>
@@ -364,7 +358,7 @@ In the example code below, we’ve created a class with the name <code class="do
 To simplify class creation, we’ve also used the magic of a Python library called <a class="reference external" href="https://www.attrs.org/en/stable/"><code class="docutils literal notranslate"><span class="pre">attrs</span></code></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Representing data in hard-disk and memory.&quot;&quot;&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Representing data in hard-disk and memory.&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">attr</span>
 
 <span class="k">def</span> <span class="nf">_data_repr</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
@@ -403,7 +397,7 @@ The <code class="docutils literal notranslate"><span class="pre">__len__</span><
 <p>Let’s test out the <code class="docutils literal notranslate"><span class="pre">DWI</span></code> data structure with some <em>simulated</em> data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># NumPy is a fundamental Python library for working with arrays</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># NumPy is a fundamental Python library for working with arrays</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="c1"># create a new DWI object, with only gradient information that is random</span>
@@ -411,11 +405,6 @@ The <code class="docutils literal notranslate"><span class="pre">__len__</span><
 
 <span class="c1"># call Python&#39;s built-in len() function</span>
 <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dmri_dataset</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>64
 </pre></div>
 </div>
 </div>
@@ -430,17 +419,12 @@ Please note that the file has been minimized by zeroing all but two diffusion-we
 <p>Let’s get some insights from it:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import the class from the library</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># import the class from the library</span>
 <span class="kn">from</span> <span class="nn">eddymotion.dmri</span> <span class="kn">import</span> <span class="n">DWI</span>
 
 <span class="c1"># load the sample file</span>
 <span class="n">dmri_dataset</span> <span class="o">=</span> <span class="n">DWI</span><span class="o">.</span><span class="n">from_filename</span><span class="p">(</span><span class="s2">&quot;../../data/dwi.h5&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dmri_dataset</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>102
 </pre></div>
 </div>
 </div>
@@ -450,12 +434,7 @@ Please note that the file has been minimized by zeroing all but two diffusion-we
 This pretty-printing of the object informs us about the data and metadata that, together, compose this particular DWI dataset:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dmri_dataset</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DWI(dataobj=&lt;118x118x78x102 (int16)&gt;, affine=&lt;4x4 (float64)&gt;, brainmask=None, bzero=&lt;118x118x78 (int16)&gt;, gradients=&lt;4x102 (float32)&gt;, em_affines=None, fieldmap=None)
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dmri_dataset</span>
 </pre></div>
 </div>
 </div>
@@ -471,15 +450,7 @@ The fully-fledged <code class="docutils literal notranslate"><span class="pre">D
 <p><strong>Solution</strong></p>
 <div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dmri_dataset</span><span class="o">.</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">  File</span><span class="nn"> &quot;&lt;ipython-input-7-f531a4f6d96b&gt;&quot;</span><span class="gt">, line </span><span class="mi">1</span>
-    <span class="n">dmri_dataset</span><span class="o">.</span>
-                 <span class="o">^</span>
-<span class="ne">SyntaxError</span>: invalid syntax
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dmri_dataset</span><span class="o">.</span>
 </pre></div>
 </div>
 </div>
@@ -528,7 +499,7 @@ In this case, the splitting strategy is a simple leave-one-out.
 Because one “<em>datapoint</em>” in our DWI dataset corresponds to one gradient, we will refer to this partitioning of the dataset as <em>leave-one-gradient-out (LOGO)</em>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">logo_split</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">with_b0</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">logo_split</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">with_b0</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Produce one fold of LOGO (leave-one-gradient-out).</span>
 
@@ -582,7 +553,7 @@ Because one “<em>datapoint</em>” in our DWI dataset corresponds to one gradi
 <p>This function is contained in the <code class="docutils literal notranslate"><span class="pre">DWI</span></code> class shown earlier and will allow us to easily partition the dataset as follows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eddymotion.viz</span> <span class="kn">import</span> <span class="n">plot_dwi</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eddymotion.viz</span> <span class="kn">import</span> <span class="n">plot_dwi</span>
 
 <span class="n">data_train</span><span class="p">,</span> <span class="n">data_test</span> <span class="o">=</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">logo_split</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">plot_dwi</span><span class="p">(</span><span class="n">data_test</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span> <span class="n">gradient</span><span class="o">=</span><span class="n">data_test</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
@@ -650,9 +621,8 @@ Because one “<em>datapoint</em>” in our DWI dataset corresponds to one gradi
 
       </div>
     </div>
-
     
-  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
 
     
