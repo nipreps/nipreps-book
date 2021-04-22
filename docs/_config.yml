@@ -12,6 +12,8 @@ sphinx:
 # Execution settings
 execute:
   timeout: 3000
+  exclude_patterns:
+    - 0*ipynb
   execute_notebooks: auto
 
 # HTML-specific settings
