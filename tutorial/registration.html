@@ -421,7 +421,7 @@ Let’s write out two NIfTI files in a temporary folder:</p>
 </div>
 <p>We can now visualize our reference (the prediction) and the actual DW map.
 Please notice the subtle <em>nodding</em> of the head, perhaps more apparent when looking at the corpus callosum in the sagittal views:</p>
-<div class="cell docutils container">
+<div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">niworkflows.viz.notebook</span> <span class="kn">import</span> <span class="n">display</span>
 
@@ -434,8 +434,10 @@ Please notice the subtle <em>nodding</em> of the head, perhaps more apparent whe
 </pre></div>
 </div>
 </div>
+</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/registration_7_0.svg" src="../_images/registration_7_0.svg" /></div>
+<div class="output text_html"><object alt="../_images/registration_7_0.svg" type="image/svg+xml" data="../_images/registration_7_0.svg"></object></div></div>
 </div>
 <p>Let’s configure ANTs via NiPype:</p>
 <div class="cell docutils container">
@@ -467,7 +469,7 @@ Please notice the subtle <em>nodding</em> of the head, perhaps more apparent whe
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;antsRegistration --collapse-output-transforms 1 --dimensionality 3 --initialize-transforms-per-stage 0 --interpolation BSpline --output [ transform, transform_Warped.nii.gz ] --transform Rigid[ 0.01 ] --metric GC[ /tmp/tmpi6y7c9s_/fixed.nii.gz, /tmp/tmpi6y7c9s_/moving.nii.gz, 1, 32, Regular, 0.05 ] --convergence [ 100x50x10, 1e-06, 5 ] --smoothing-sigmas 4.0x2.0x2.0vox --shrink-factors 4x2x1 --use-estimate-learning-rate-once 0 --use-histogram-matching 1 --transform Affine[ 0.001 ] --metric GC[ /tmp/tmpi6y7c9s_/fixed.nii.gz, /tmp/tmpi6y7c9s_/moving.nii.gz, 1, 32, Random, 0.1 ] --convergence [ 50, 1e-07, 2 ] --smoothing-sigmas 0.0vox --shrink-factors 1 --use-estimate-learning-rate-once 1 --use-histogram-matching 1 -v --winsorize-image-intensities [ 0.0001, 0.9998 ]  --write-composite-transform 0&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;antsRegistration --collapse-output-transforms 1 --dimensionality 3 --initialize-transforms-per-stage 0 --interpolation BSpline --output [ transform, transform_Warped.nii.gz ] --transform Rigid[ 0.01 ] --metric GC[ /tmp/tmp2wnz6kmd/fixed.nii.gz, /tmp/tmp2wnz6kmd/moving.nii.gz, 1, 32, Regular, 0.05 ] --convergence [ 100x50x10, 1e-06, 5 ] --smoothing-sigmas 4.0x2.0x2.0vox --shrink-factors 4x2x1 --use-estimate-learning-rate-once 0 --use-histogram-matching 1 --transform Affine[ 0.001 ] --metric GC[ /tmp/tmp2wnz6kmd/fixed.nii.gz, /tmp/tmp2wnz6kmd/moving.nii.gz, 1, 32, Random, 0.1 ] --convergence [ 50, 1e-07, 2 ] --smoothing-sigmas 0.0vox --shrink-factors 1 --use-estimate-learning-rate-once 1 --use-histogram-matching 1 -v --winsorize-image-intensities [ 0.0001, 0.9998 ]  --write-composite-transform 0&#39;
 </pre></div>
 </div>
 </div>
@@ -482,7 +484,7 @@ Please notice the subtle <em>nodding</em> of the head, perhaps more apparent whe
 </div>
 <p>If everything worked out, we can now retrieve the aligned file with the output <code class="docutils literal notranslate"><span class="pre">result.outputs.warped_image</span></code>.
 We can now visualize how close (or far) the two images are:</p>
-<div class="cell docutils container">
+<div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span>
     <span class="n">fixed_path</span><span class="p">,</span>
@@ -493,8 +495,10 @@ We can now visualize how close (or far) the two images are:</p>
 </pre></div>
 </div>
 </div>
+</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/registration_15_0.svg" src="../_images/registration_15_0.svg" /></div>
+<div class="output text_html"><object alt="../_images/registration_15_0.svg" type="image/svg+xml" data="../_images/registration_15_0.svg"></object></div></div>
 </div>
 </div>
 <div class="section" id="resampling-an-image">
@@ -516,12 +520,12 @@ We will be using <em>NiTransforms</em> to <em>apply</em> these transforms we est
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 9.95732883e-01, -5.01440769e-03,  2.78267870e-04,
-         1.36354254e-02],
-       [ 3.53777029e-03,  9.95886760e-01, -1.53713996e-02,
-        -3.76192902e-01],
-       [-1.13799044e-03,  2.39278225e-02,  9.93516004e-01,
-        -8.83709232e-01],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 9.95906243e-01, -5.80783979e-03,  2.64885368e-05,
+         7.38988323e-02],
+       [ 4.63444785e-03,  9.97223400e-01, -1.71256777e-02,
+        -2.59063230e-01],
+       [-1.04569272e-03,  2.49882987e-02,  9.92979186e-01,
+        -8.51396245e-01],
        [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00,
          1.00000000e+00]])
 </pre></div>
@@ -529,12 +533,13 @@ We will be using <em>NiTransforms</em> to <em>apply</em> these transforms we est
 </div>
 </div>
 <p>Resampling an image requires two pieces of information: the <em>reference</em> image (which provides the new grid where we want to have the data) and the <em>moving</em> image which contains the actual data we are interested in:</p>
-<div class="cell docutils container">
+<div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xfm</span> <span class="o">=</span> <span class="n">nt</span><span class="o">.</span><span class="n">linear</span><span class="o">.</span><span class="n">Affine</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
 <span class="n">xfm</span><span class="o">.</span><span class="n">reference</span> <span class="o">=</span> <span class="n">fixed_path</span>
 <span class="n">resampled</span> <span class="o">=</span> <span class="n">xfm</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">moving_path</span><span class="p">)</span>
 <span class="n">resampled</span><span class="o">.</span><span class="n">to_filename</span><span class="p">(</span><span class="n">tempdir</span> <span class="o">/</span> <span class="s2">&quot;resampled-nitransforms.nii.gz&quot;</span><span class="p">)</span>
+
 <span class="n">display</span><span class="p">(</span>
     <span class="n">fixed_path</span><span class="p">,</span>
     <span class="n">tempdir</span> <span class="o">/</span> <span class="s2">&quot;resampled-nitransforms.nii.gz&quot;</span><span class="p">,</span>
@@ -544,8 +549,10 @@ We will be using <em>NiTransforms</em> to <em>apply</em> these transforms we est
 </pre></div>
 </div>
 </div>
+</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/registration_19_0.svg" src="../_images/registration_19_0.svg" /></div>
+<div class="output text_html"><object alt="../_images/registration_19_0.svg" type="image/svg+xml" data="../_images/registration_19_0.svg"></object></div></div>
 </div>
 <p><strong>Exercise</strong></p>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">display()</span></code> function to visualize the image aligned as generated by ANTs vs. that generated by <em>NiTransforms</em> – they should be aligned!.</p>
@@ -562,7 +569,7 @@ We will be using <em>NiTransforms</em> to <em>apply</em> these transforms we est
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/registration_21_0.svg" src="../_images/registration_21_0.svg" /></div>
+<img alt="../_images/registration_24_0.svg" src="../_images/registration_24_0.svg" /></div>
 </div>
 </div>
 </div>

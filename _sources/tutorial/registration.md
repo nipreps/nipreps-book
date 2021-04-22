@@ -16,6 +16,7 @@ kernelspec:
 :tags: [remove-cell]
 
 import warnings
+from IPython.display import HTML
 import requests
 from tempfile import mkstemp
 from pathlib import Path
@@ -175,6 +176,8 @@ We can now visualize our reference (the prediction) and the actual DW map.
 Please notice the subtle *nodding* of the head, perhaps more apparent when looking at the corpus callosum in the sagittal views:
 
 ```{code-cell} python
+:tags: [remove-output]
+
 from niworkflows.viz.notebook import display
 
 display(
@@ -183,6 +186,12 @@ display(
     fixed_label="Predicted",
     moving_label="Left-out gradient",
 );
+```
+
+```{code-cell} python
+:tags: [remove-input]
+
+HTML("""<object alt="../_images/registration_7_0.svg" type="image/svg+xml" data="../_images/registration_7_0.svg"></object>""")
 ```
 
 Let's configure ANTs via NiPype:
@@ -221,12 +230,20 @@ If everything worked out, we can now retrieve the aligned file with the output `
 We can now visualize how close (or far) the two images are:
 
 ```{code-cell} python
+:tags: [remove-output]
+
 display(
     fixed_path,
     result.outputs.warped_image,
     fixed_label="Predicted",
     moving_label="Aligned",
 );
+```
+
+```{code-cell} python
+:tags: [remove-input]
+
+HTML("""<object alt="../_images/registration_15_0.svg" type="image/svg+xml" data="../_images/registration_15_0.svg"></object>""")
 ```
 
 ## Resampling an image
@@ -253,10 +270,13 @@ matrix
 Resampling an image requires two pieces of information: the *reference* image (which provides the new grid where we want to have the data) and the *moving* image which contains the actual data we are interested in:
 
 ```{code-cell} python
+:tags: [remove-output]
+
 xfm = nt.linear.Affine(matrix)
 xfm.reference = fixed_path
 resampled = xfm.apply(moving_path)
 resampled.to_filename(tempdir / "resampled-nitransforms.nii.gz")
+
 display(
     fixed_path,
     tempdir / "resampled-nitransforms.nii.gz",
@@ -264,6 +284,13 @@ display(
     moving_label="Aligned (nitransforms)",
 );
 ```
+
+```{code-cell} python
+:tags: [remove-input]
+
+HTML("""<object alt="../_images/registration_19_0.svg" type="image/svg+xml" data="../_images/registration_19_0.svg"></object>""")
+```
+
 
 **Exercise**
 
