@@ -120,7 +120,7 @@ Let's get some insights from it:
 
 ```{code-cell} python
 # import the class from the library
-from eddymotion.dmri import DWI
+from eddymotion.data.dmri import DWI
 
 # load the sample file
 dmri_dataset = DWI.from_filename("../../data/dwi.h5")
@@ -301,10 +301,11 @@ def logo_split(self, index, with_b0=False):
 This function is contained in the `DWI` class shown earlier and will allow us to easily partition the dataset as follows:
 
 ```{code-cell} python
+from eddymotion.data.splitting import lovo_split as logo_split
 from eddymotion.viz import plot_dwi
 
-data_train, data_test = dmri_dataset.logo_split(10)
-plot_dwi(data_test[0], dmri_dataset.affine, gradient=data_test[1]);
+data_train, data_test = logo_split(dmri_dataset, 10)
+plot_dwi(np.squeeze(data_test[0]), dmri_dataset.affine, gradient=data_test[1]);
 ```
 
 `data_train` is a tuple containing all diffusion-weighted volumes and the corresponding gradient table, excluding the left-out, which is stored in `data_test` (the 11<sup>th</sup> gradient indexed by `10`, in this example).

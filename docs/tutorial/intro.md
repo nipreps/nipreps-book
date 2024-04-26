@@ -94,6 +94,8 @@ Briefly anticipate further requirements that are important, but do not alter the
 - Parallelism: simulation and registration are CPU-intensive processes - for the runtime to be in a manageable scale, we'll need to leverage parallelism.
 ```
 
+![eddymotion](https://raw.githubusercontent.com/nipreps/eddymotion/507fc9bab86696d5330fd6a86c3870968243aea8/docs/_static/eddymotion-flowchart.svg)
+
 ### Step 2: Sketch out an API (Application Programming Interface)
 Plan how the new software will expose the implementation downstream.
 Assuming our DWI data is encapsulated in an object (holding not just the data array, but also metadata such as the gradient table)

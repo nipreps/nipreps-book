@@ -23,7 +23,8 @@ from pathlib import Path
 import numpy as np
 import nibabel as nb
 
-from eddymotion.dmri import DWI
+from eddymotion.data.dmri import DWI
+from eddymotion.data.splitting import lovo_split as logo_split
 from eddymotion.viz import plot_dwi
 from eddymotion.estimator import _advanced_clip
 
@@ -143,7 +144,7 @@ For this example, we have selected the 8<sup>th</sup> DW map (`index=7`) because
 ```{code-cell} python
 from eddymotion.model import ModelFactory
 
-data_train, data_test = dmri_dataset.logo_split(7, with_b0=True)
+data_train, data_test = logo_split(dmri_dataset, 7, with_b0=True)
 
 model = ModelFactory.init(
     gtab=data_train[1],
@@ -178,7 +179,7 @@ Please notice the subtle *nodding* of the head, perhaps more apparent when looki
 ```{code-cell} python
 :tags: [remove-output]
 
-from niworkflows.viz.notebook import display
+from nireports.reportlets.notebook import display
 
 display(
     fixed_path,
