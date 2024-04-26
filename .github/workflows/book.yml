@@ -13,7 +13,7 @@ jobs:
     env:
       ANTSPATH: /opt/ants
     steps:
-    - uses: actions/cache@v2
+    - uses: actions/cache@v4
       with:
         path: /var/lib/apt
         key: apt-cache-v2
@@ -32,7 +32,7 @@ jobs:
                              texlive-latex-extra \
                              cm-super
 
-    - uses: actions/cache@v2
+    - uses: actions/cache@v4
       with:
         path: /opt/ants
         key: ants-v1
@@ -45,13 +45,13 @@ jobs:
           curl -sSL "https://dl.dropbox.com/s/gwf51ykkk5bifyj/ants-Linux-centos6_x86_64-v2.3.4.tar.gz" | sudo tar -xzC $ANTSPATH --strip-components 1
         fi
 
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
     # Install dependencies
-    - name: Set up Python 3.7
-      uses: actions/setup-python@v1
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v5
       with:
-        python-version: 3.7
+        python-version: 3.11
 
     - name: Install dependencies
       run: |
@@ -65,7 +65,7 @@ jobs:
 
     # Push the book's HTML to github-pages
     - name: GitHub Pages action
-      uses: peaceiris/actions-gh-pages@v3.6.1
+      uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./docs/_build/html

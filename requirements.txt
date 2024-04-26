@@ -8,7 +8,7 @@ jupyterlab
 matplotlib
 nibabel
 nilearn
-git+https://github.com/poldracklab/nitransforms.git@master
+nitransforms
 niworkflows >= 1.4.0rc5
 numpy
 pytest
