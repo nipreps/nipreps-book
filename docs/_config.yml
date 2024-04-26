@@ -26,6 +26,7 @@ html:
 # Launch button settings
 launch_buttons:
   notebook_interface: jupyterlab
+  binderhub_url: "https://mybinder.org"
 
 repository:
   url: https://github.com/nipreps/nipreps-book
