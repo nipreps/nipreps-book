@@ -1,25 +1,21 @@
-# Table of content
-# Learn more at https://jupyterbook.org/customize/toc.html
-
-- file: welcome
-
-- part: preparation
+format: jb-book
+root: welcome
+parts:
+- caption: preparation
   chapters:
   - file: preparation/step0
-
-- part: nipreps
+- caption: nipreps
   chapters:
   - file: nipreps/nipreps
   - file: nipreps/dmriprep
-
-- part: tutorial
+- caption: tutorial
   chapters:
   - file: tutorial/intro
   - file: tutorial/data
   - file: tutorial/models
   - file: tutorial/registration
   - file: tutorial/solution
-- part: extra
+- caption: extra
   chapters:
   - file: extra/nifti
   - file: extra/community_development
