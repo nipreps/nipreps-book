@@ -1,306 +1,413 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="../" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>NeuroImaging PREProcessing toolS (NiPreps) &#8212; NiPreps</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet" />
-  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    
-      
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
-
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'nipreps/nipreps';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="About dMRIPrep" href="dmriprep.html" />
     <link rel="prev" title="Before we start: How to follow this tutorial" href="../preparation/step0.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
     
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
-      
-      
-      <h1 class="site-logo" id="site-title">NiPreps</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../welcome.html">
-   Welcome!
-  </a>
- </li>
-</ul>
-<p class="caption">
- <span class="caption-text">
-  preparation
- </span>
-</p>
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../welcome.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">NiPreps</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../welcome.html">
+                    Welcome!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">preparation</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../preparation/step0.html">
-   Before we start: How to follow this tutorial
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../preparation/step0.html">Before we start: How to follow this tutorial</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  nipreps
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">nipreps</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   NeuroImaging PREProcessing toolS (NiPreps)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="dmriprep.html">
-   About dMRIPrep
-  </a>
- </li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">NeuroImaging PREProcessing toolS (NiPreps)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmriprep.html">About dMRIPrep</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  tutorial
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">tutorial</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../tutorial/intro.html">
-   The problem of head-motion in dMRI
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tutorial/data.html">
-   Introduction to dMRI data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tutorial/models.html">
-   Diffusion modeling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tutorial/registration.html">
-   Image registration (spatial alignment)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tutorial/solution.html">
-   Putting everything together
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/intro.html">The problem of head-motion in dMRI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/data.html">Introduction to dMRI data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/models.html">Diffusion modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/registration.html">Image registration (spatial alignment)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/solution.html">Putting everything together</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  extra
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">extra</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../extra/nifti.html">
-   The extra mile
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../extra/community_development.html">
-   Community development
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../extra/nifti.html">The extra mile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../extra/community_development.html">Community development</a></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/nipreps/nipreps.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+</nav></div>
     </div>
-</div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
-            <!-- Source interaction buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/nipreps/nipreps-book"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/nipreps/nipreps-book/issues/new?title=Issue%20on%20page%20%2Fnipreps/nipreps.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+      </div>
+      
+      <main id="main-content" class="bd-main">
         
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
     </div>
-</div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
+<div class="article-header-buttons">
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
 
-            <!-- Launch buttons -->
 
-        </div>
 
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-problem-of-methodological-variability">
-   The problem of methodological variability
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#augmenting-the-scanner-to-produce-analysis-grade-data">
-   Augmenting the scanner to produce “analysis grade” data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#nipreps-driving-principles">
-   NiPreps driving principles
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#robust-with-very-diverse-data">
-     1. Robust with very diverse data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#easy-to-use">
-     2. Easy to use
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#glass-box-philosophy">
-     3. “Glass box” philosophy
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#references">
-     References
-    </a>
-   </li>
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/nipreps/nipreps-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/nipreps/nipreps-book/issues/new?title=Issue%20on%20page%20%2Fnipreps/nipreps.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
   </ul>
- </li>
-</ul>
+</div>
 
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/nipreps/nipreps.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>NeuroImaging PREProcessing toolS (NiPreps)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem-of-methodological-variability">The problem of methodological variability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#augmenting-the-scanner-to-produce-analysis-grade-data">Augmenting the scanner to produce “analysis grade” data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nipreps-driving-principles">NiPreps driving principles</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#robust-with-very-diverse-data">1. Robust with very diverse data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#easy-to-use">2. Easy to use</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#glass-box-philosophy">3. “Glass box” philosophy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
-              <div>
+
+              
                 
-  <div class="section" id="neuroimaging-preprocessing-tools-nipreps">
-<h1>NeuroImaging PREProcessing toolS (NiPreps)<a class="headerlink" href="#neuroimaging-preprocessing-tools-nipreps" title="Permalink to this headline">¶</a></h1>
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="neuroimaging-preprocessing-tools-nipreps">
+<h1>NeuroImaging PREProcessing toolS (NiPreps)<a class="headerlink" href="#neuroimaging-preprocessing-tools-nipreps" title="Link to this heading">#</a></h1>
 <p>Pre-processing MRI data is a necessary task before doing any kind of data analysis.</p>
 <p>Different kinds of artifacts can occur during a scan due to:</p>
 <ul class="simple">
@@ -334,21 +441,21 @@ Some examples include:</p>
 <li><p>identifying spurious sources of signal</p></li>
 <li><p>automated segmentation (e.g., brain masking, tissue classification)</p></li>
 </ul>
-<div class="section" id="the-problem-of-methodological-variability">
-<h2>The problem of methodological variability<a class="headerlink" href="#the-problem-of-methodological-variability" title="Permalink to this headline">¶</a></h2>
+<section id="the-problem-of-methodological-variability">
+<h2>The problem of methodological variability<a class="headerlink" href="#the-problem-of-methodological-variability" title="Link to this heading">#</a></h2>
 <p>Generally, researchers create ad-hoc pre-processing workflows for each dataset, building upon a large inventory of available tools.
 The complexity of these workflows has snowballed with rapid advances in acquisition parameters and processing steps.</p>
-<p>In Botvinik et al., 2020 <a class="footnote-reference brackets" href="#botvinik2020" id="id1">1</a>, 70 independent teams were tasked with analyzing the same fMRI dataset and testing 9 hypotheses.
+<p>In Botvinik et al., 2020 <a class="footnote-reference brackets" href="#botvinik2020" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, 70 independent teams were tasked with analyzing the same fMRI dataset and testing 9 hypotheses.
 The study demonstrated the huge amount of variability in analytic approaches as <em>no two teams</em> chose identical workflows.
-One encouraging finding was that 48% of teams chose to pre-process the data using <em>fMRIPrep</em> <a class="footnote-reference brackets" href="#esteban2019" id="id2">2</a>, a standardized pipeline for fMRI data.</p>
+One encouraging finding was that 48% of teams chose to pre-process the data using <em>fMRIPrep</em> <a class="footnote-reference brackets" href="#esteban2019" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>, a standardized pipeline for fMRI data.</p>
 <p>A similar predicament exists in the field of dMRI analysis.
-There has been a lot of effort in recent years to compare the influence of various pre-processing steps on tractography and structural connectivity <a class="footnote-reference brackets" href="#oldham2020" id="id3">3</a> <a class="footnote-reference brackets" href="#schilling2019" id="id4">4</a> and harmonize different datasets <a class="footnote-reference brackets" href="#tax2019" id="id5">5</a>.</p>
-<p>Differences in methods or parameters chosen <a class="footnote-reference brackets" href="#carp2012" id="id6">6</a> <a class="footnote-reference brackets" href="#bowring2019" id="id7">7</a>, implementations across software <a class="footnote-reference brackets" href="#dickie2017" id="id8">8</a>, and even operating systems or software versions <a class="footnote-reference brackets" href="#gronenschild2012" id="id9">9</a> <a class="footnote-reference brackets" href="#glatard2015" id="id10">10</a> all contribute to variability.</p>
+There has been a lot of effort in recent years to compare the influence of various pre-processing steps on tractography and structural connectivity <a class="footnote-reference brackets" href="#oldham2020" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#schilling2019" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> and harmonize different datasets <a class="footnote-reference brackets" href="#tax2019" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a>.</p>
+<p>Differences in methods or parameters chosen <a class="footnote-reference brackets" href="#carp2012" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#bowring2019" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a>, implementations across software <a class="footnote-reference brackets" href="#dickie2017" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a>, and even operating systems or software versions <a class="footnote-reference brackets" href="#gronenschild2012" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#glatard2015" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a> all contribute to variability.</p>
 <p>Doing reproducible neuroimaging research is hard.
 All of this points to a need for creating standardized pipelines for pre-processing MRI data that will reduce methodological variability and enable comparisons between different datasets and downstream analysis decisions.</p>
-</div>
-<div class="section" id="augmenting-the-scanner-to-produce-analysis-grade-data">
-<h2>Augmenting the scanner to produce “analysis grade” data<a class="headerlink" href="#augmenting-the-scanner-to-produce-analysis-grade-data" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="augmenting-the-scanner-to-produce-analysis-grade-data">
+<h2>Augmenting the scanner to produce “analysis grade” data<a class="headerlink" href="#augmenting-the-scanner-to-produce-analysis-grade-data" title="Link to this heading">#</a></h2>
 <a class="reference internal image-reference" href="../_images/sashimi.jpg" id="sashimi"><img alt="../_images/sashimi.jpg" class="align-right" id="sashimi" src="../_images/sashimi.jpg" style="width: 200px;" /></a>
 <p><em>NiPreps</em> are a collection of tools that work as an extension of the scanner produce “<em>analysis-grade</em>” data.
 By <em>analysis-grade</em> we mean something like <em>sushi-grade fish</em>:
@@ -364,18 +471,18 @@ These tools arose out of the need to extend <em>fMRIPrep</em> to new imaging mod
 <li><p>Middleware: contain functions that generalize across the end-user tools</p></li>
 <li><p>End-user tools: perform pre-processing or quality control</p></li>
 </ul>
-<div class="figure align-default" id="nipreps-chart">
+<figure class="align-default" id="nipreps-chart">
 <img alt="../_images/nipreps-chart.png" src="../_images/nipreps-chart.png" />
-</div>
-</div>
-<div class="section" id="nipreps-driving-principles">
-<h2>NiPreps driving principles<a class="headerlink" href="#nipreps-driving-principles" title="Permalink to this headline">¶</a></h2>
+</figure>
+</section>
+<section id="nipreps-driving-principles">
+<h2>NiPreps driving principles<a class="headerlink" href="#nipreps-driving-principles" title="Link to this heading">#</a></h2>
 <p><em>NiPreps</em> are driven by three main principles, which are summarized below.
 These principles distill some design and organizational foundations.</p>
-<div class="section" id="robust-with-very-diverse-data">
-<h3>1. Robust with very diverse data<a class="headerlink" href="#robust-with-very-diverse-data" title="Permalink to this headline">¶</a></h3>
+<section id="robust-with-very-diverse-data">
+<h3>1. Robust with very diverse data<a class="headerlink" href="#robust-with-very-diverse-data" title="Link to this heading">#</a></h3>
 <p><em>NiPreps</em> are meant to be robust to different datasets and attempt to provide the best possible results independent of scanner manufacturer, acquisition parameters, or the presence of additional correction scans (such as field maps).
-The end-user tools only impose a single constraint on the input dataset - being compliant with BIDS (Brain Imaging Data Structure) <a class="footnote-reference brackets" href="#gorgolewski2016" id="id11">11</a>.
+The end-user tools only impose a single constraint on the input dataset - being compliant with BIDS (Brain Imaging Data Structure) <a class="footnote-reference brackets" href="#gorgolewski2016" id="id11" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a>.
 BIDS enables consistency in how neuroimaging data is structured and ensures that the necessary metadata is complete.
 This minimizes human intervention in running the pipelines as they are able to adapt to the unique features of the input data and make decisions about whether a particular processing step is appropriate or not.</p>
 <p>The scope of these tools is strictly limited to pre-processing tasks.
@@ -384,97 +491,81 @@ This eases the burden of maintaining these tools but also helps focus on standar
 <p><em>NiPreps</em> also aim to be robust in their codebase.
 The pipelines are modular and rely on widely-used tools such as AFNI, ANTs, FreeSurfer, FSL, Nilearn, or DIPY and are extensible via plug-ins.
 This modularity in the code allows each step to be thoroughly tested. Some examples of tests performed on different parts of the pipeline are shown below:</p>
-<div class="tabbed-set docutils">
-<input checked="checked" id="bdf0ab5d-bc31-416d-a3c6-6fe6c053a76c" name="b0ecb71a-b79e-4b71-ad24-b2809ff345a1" type="radio">
-</input><label class="tabbed-label" for="bdf0ab5d-bc31-416d-a3c6-6fe6c053a76c">
-unittest</label><div class="tabbed-content docutils">
-<p>Checks whether a function or class method behaves as expected.</p>
-<p><img alt="unittest" src="../_images/unittest.png" /></p>
-</div>
-<input id="68969f94-5a70-46cb-a32d-8cd416b96ffd" name="b0ecb71a-b79e-4b71-ad24-b2809ff345a1" type="radio">
-</input><label class="tabbed-label" for="68969f94-5a70-46cb-a32d-8cd416b96ffd">
-doctest</label><div class="tabbed-content docutils">
-<p>Also checks whether code behaves as expected and serves as an example for how to use the code.</p>
-<p><img alt="doctest1" src="../_images/doctest1.png" /></p>
-<p><img alt="doctest2" src="../_images/doctest2.png" /></p>
-</div>
-<input id="54a3b8ed-6079-4d23-a7de-4247870b0ad9" name="b0ecb71a-b79e-4b71-ad24-b2809ff345a1" type="radio">
-</input><label class="tabbed-label" for="54a3b8ed-6079-4d23-a7de-4247870b0ad9">
-integration test</label><div class="tabbed-content docutils">
-<p>Checks the behaviour of a system (multiple pieces of code).
-Can also be used to determine whether the system is behaving suboptimally.</p>
-<p><img alt="integration_test" src="../_images/integration_test.png" /></p>
-</div>
-<input id="8abb7954-82cc-4219-8b61-2ce3dc7f398c" name="b0ecb71a-b79e-4b71-ad24-b2809ff345a1" type="radio">
-</input><label class="tabbed-label" for="8abb7954-82cc-4219-8b61-2ce3dc7f398c">
-build test</label><div class="tabbed-content docutils">
-<p>Checks that code or software environment can be compiled and deployed.</p>
-<p><img alt="build_test" src="../_images/build_test.png" /></p>
-</div>
-</div>
-</div>
-<div class="section" id="easy-to-use">
-<h3>2. Easy to use<a class="headerlink" href="#easy-to-use" title="Permalink to this headline">¶</a></h3>
-<p><em>NiPreps</em> are packaged as a fully-compliant BIDS-Apps <a class="footnote-reference brackets" href="#gorgolewski2017" id="id12">12</a>.
+</section>
+<section id="easy-to-use">
+<h3>2. Easy to use<a class="headerlink" href="#easy-to-use" title="Link to this heading">#</a></h3>
+<p><em>NiPreps</em> are packaged as a fully-compliant BIDS-Apps <a class="footnote-reference brackets" href="#gorgolewski2017" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a>.
 All of the software is containerized and the pipelines all share a common command-line interface:</p>
 <p><code class="docutils literal notranslate"><span class="pre">&lt;pipelines_name&gt;</span> <span class="pre">&lt;bids_dir&gt;</span> <span class="pre">&lt;output_dir&gt;</span> <span class="pre">&lt;participant&gt;</span> <span class="pre">[--options]</span></code></p>
 <p>Thanks to limiting the input dataset to BIDS, manual parameter input is reduced to a minimum, allowing the pipelines to run in an automated fashion.</p>
-</div>
-<div class="section" id="glass-box-philosophy">
-<h3>3. “Glass box” philosophy<a class="headerlink" href="#glass-box-philosophy" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="glass-box-philosophy">
+<h3>3. “Glass box” philosophy<a class="headerlink" href="#glass-box-philosophy" title="Link to this heading">#</a></h3>
 <p><em>NiPreps</em> are thoroughly and transparently documented (including the generation of individual subject-level visual reports with a consistent format that serve as scaffolds for understanding the quality of each pre-processing step and any design decisions). Below is an example report:</p>
-<div class="figure align-default" id="reportlet">
+<figure class="align-default" id="reportlet">
 <img alt="../_images/dwi_reportlet.gif" src="../_images/dwi_reportlet.gif" />
-</div>
+</figure>
 <p><em>NiPreps</em> are also community-driven.
 The success of these tools has largely been driven by their strong uptake in the neuroimaging community.
 This has allowed them to be exercised on diverse datasets and has brought the interest of a variety of domain experts to contribute their knowledge towards improving the tools.
 The tools are “open source” and all of the code and ideas are visible on GitHub.</p>
-</div>
-<div class="section" id="references">
-<h3>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h3>
 <hr class="footnotes docutils" />
-<dl class="footnote brackets">
-<dt class="label" id="botvinik2020"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p>Botvinik-Nezer, R., Holzmeister, F., Camerer, C.F. et al. Variability in the analysis of a single neuroimaging dataset by many teams. Nature 582, 84–88 (2020). doi: 10.1038/s41586-020-2314-9</p>
-</dd>
-<dt class="label" id="esteban2019"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
-<dd><p>Esteban, O., Markiewicz, C.J., Blair, R.W. et al. fMRIPrep: a robust preprocessing pipeline for functional MRI. Nat Methods 16, 111–116 (2019). doi: 10.1038/s41592-018-0235-4</p>
-</dd>
-<dt class="label" id="oldham2020"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
-<dd><p>Oldham, S., Arnatkevic̆iūtė, A., Smith, R.W., et al. The efficacy of different preprocessing steps in reducing motion-related confounds in diffusion MRI connectomics. NeuroImage 222 117252 (2020). doi: 10.1016/j.neuroimage.2020.117252</p>
-</dd>
-<dt class="label" id="schilling2019"><span class="brackets"><a class="fn-backref" href="#id4">4</a></span></dt>
-<dd><p>Schilling, K. G., Daducci, A., Maier-Hein, K., Poupon, C., Houde, J. C., Nath, V., Anderson, A. W., Landman, B. A., &amp; Descoteaux, M. (2019). Challenges in diffusion MRI tractography - Lessons learned from international benchmark competitions. Magnetic resonance imaging, 57, 194–209. doi: 10.1016/j.mri.2018.11.014</p>
-</dd>
-<dt class="label" id="tax2019"><span class="brackets"><a class="fn-backref" href="#id5">5</a></span></dt>
-<dd><p>Tax, C. M., Grussu, F., Kaden, E., Ning, L., Rudrapatna, U., John Evans, C., St-Jean, S., Leemans, A., Koppers, S., Merhof, D., Ghosh, A., Tanno, R., Alexander, D. C., Zappalà, S., Charron, C., Kusmia, S., Linden, D. E., Jones, D. K., &amp; Veraart, J. (2019). Cross-scanner and cross-protocol diffusion MRI data harmonisation: A benchmark database and evaluation of algorithms. NeuroImage, 195, 285–299. doi: 10.1016/j.neuroimage.2019.01.077</p>
-</dd>
-<dt class="label" id="carp2012"><span class="brackets"><a class="fn-backref" href="#id6">6</a></span></dt>
-<dd><p>Carp J. On the plurality of (methodological) worlds: estimating the analytic flexibility of FMRI experiments. Front Neurosci. 2012 Oct 11;6:149. doi: 10.3389/fnins.2012.00149</p>
-</dd>
-<dt class="label" id="bowring2019"><span class="brackets"><a class="fn-backref" href="#id7">7</a></span></dt>
-<dd><p>Bowring, A, Maumet, C, Nichols, TE. Exploring the impact of analysis software on task fMRI results. Hum Brain Mapp. 2019; 40: 3362– 3384. doi: 10.1002/hbm.24603</p>
-</dd>
-<dt class="label" id="dickie2017"><span class="brackets"><a class="fn-backref" href="#id8">8</a></span></dt>
-<dd><p>Dickie E, Hodge S, Craddock R, Poline J, Kennedy D (2017) Tools Matter: Comparison of Two Surface Analysis Tools Applied to the ABIDE Dataset. Research Ideas and Outcomes 3: e13726. doi: 10.3897/rio.3.e13726</p>
-</dd>
-<dt class="label" id="gronenschild2012"><span class="brackets"><a class="fn-backref" href="#id9">9</a></span></dt>
-<dd><p>Gronenschild EH, Habets P, Jacobs HI, Mengelers R, Rozendaal N, van Os J, Marcelis M. The effects of FreeSurfer version, workstation type, and Macintosh operating system version on anatomical volume and cortical thickness measurements. PLoS One. 2012;7(6):e38234. doi: 10.1371/journal.pone.0038234</p>
-</dd>
-<dt class="label" id="glatard2015"><span class="brackets"><a class="fn-backref" href="#id10">10</a></span></dt>
-<dd><p>Glatard T, Lewis LB, Ferreira da Silva R, Adalat R, Beck N, Lepage C, Rioux P, Rousseau M-E, Sherif T, Deelman E, Khalili-Mahani N and Evans AC (2015) Reproducibility of neuroimaging analyses across operating systems. Front. Neuroinform. 9:12. doi: 10.3389/fninf.2015.00012</p>
-</dd>
-<dt class="label" id="gorgolewski2016"><span class="brackets"><a class="fn-backref" href="#id11">11</a></span></dt>
-<dd><p>Gorgolewski, K., Auer, T., Calhoun, V. et al. The brain imaging data structure, a format for organizing and describing outputs of neuroimaging experiments. Sci Data 3, 160044 (2016). doi: 10.1038/sdata.2016.44</p>
-</dd>
-<dt class="label" id="gorgolewski2017"><span class="brackets"><a class="fn-backref" href="#id12">12</a></span></dt>
-<dd><p>Gorgolewski KJ, Alfaro-Almagro F, Auer T, Bellec P, Capotă M, Chakravarty MM, Churchill NW, Cohen AL, Craddock RC, Devenyi GA, Eklund A, Esteban O, Flandin G, Ghosh SS, Guntupalli JS, Jenkinson M, Keshavan A, Kiar G, Liem F, Raamana PR, Raffelt D, Steele CJ, Quirion PO, Smith RE, Strother SC, Varoquaux G, Wang Y, Yarkoni T, Poldrack RA. BIDS apps: Improving ease of use, accessibility, and reproducibility of neuroimaging data analysis methods. PLoS Comput Biol. 2017 Mar 9;13(3):e1005209. doi: 10.1371/journal.pcbi.1005209</p>
-</dd>
-</dl>
-</div>
-</div>
-</div>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="botvinik2020" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Botvinik-Nezer, R., Holzmeister, F., Camerer, C.F. et al. Variability in the analysis of a single neuroimaging dataset by many teams. Nature 582, 84–88 (2020). doi: 10.1038/s41586-020-2314-9</p>
+</aside>
+<aside class="footnote brackets" id="esteban2019" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>Esteban, O., Markiewicz, C.J., Blair, R.W. et al. fMRIPrep: a robust preprocessing pipeline for functional MRI. Nat Methods 16, 111–116 (2019). doi: 10.1038/s41592-018-0235-4</p>
+</aside>
+<aside class="footnote brackets" id="oldham2020" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
+<p>Oldham, S., Arnatkevic̆iūtė, A., Smith, R.W., et al. The efficacy of different preprocessing steps in reducing motion-related confounds in diffusion MRI connectomics. NeuroImage 222 117252 (2020). doi: 10.1016/j.neuroimage.2020.117252</p>
+</aside>
+<aside class="footnote brackets" id="schilling2019" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">4</a><span class="fn-bracket">]</span></span>
+<p>Schilling, K. G., Daducci, A., Maier-Hein, K., Poupon, C., Houde, J. C., Nath, V., Anderson, A. W., Landman, B. A., &amp; Descoteaux, M. (2019). Challenges in diffusion MRI tractography - Lessons learned from international benchmark competitions. Magnetic resonance imaging, 57, 194–209. doi: 10.1016/j.mri.2018.11.014</p>
+</aside>
+<aside class="footnote brackets" id="tax2019" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">5</a><span class="fn-bracket">]</span></span>
+<p>Tax, C. M., Grussu, F., Kaden, E., Ning, L., Rudrapatna, U., John Evans, C., St-Jean, S., Leemans, A., Koppers, S., Merhof, D., Ghosh, A., Tanno, R., Alexander, D. C., Zappalà, S., Charron, C., Kusmia, S., Linden, D. E., Jones, D. K., &amp; Veraart, J. (2019). Cross-scanner and cross-protocol diffusion MRI data harmonisation: A benchmark database and evaluation of algorithms. NeuroImage, 195, 285–299. doi: 10.1016/j.neuroimage.2019.01.077</p>
+</aside>
+<aside class="footnote brackets" id="carp2012" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">6</a><span class="fn-bracket">]</span></span>
+<p>Carp J. On the plurality of (methodological) worlds: estimating the analytic flexibility of FMRI experiments. Front Neurosci. 2012 Oct 11;6:149. doi: 10.3389/fnins.2012.00149</p>
+</aside>
+<aside class="footnote brackets" id="bowring2019" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">7</a><span class="fn-bracket">]</span></span>
+<p>Bowring, A, Maumet, C, Nichols, TE. Exploring the impact of analysis software on task fMRI results. Hum Brain Mapp. 2019; 40: 3362– 3384. doi: 10.1002/hbm.24603</p>
+</aside>
+<aside class="footnote brackets" id="dickie2017" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">8</a><span class="fn-bracket">]</span></span>
+<p>Dickie E, Hodge S, Craddock R, Poline J, Kennedy D (2017) Tools Matter: Comparison of Two Surface Analysis Tools Applied to the ABIDE Dataset. Research Ideas and Outcomes 3: e13726. doi: 10.3897/rio.3.e13726</p>
+</aside>
+<aside class="footnote brackets" id="gronenschild2012" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">9</a><span class="fn-bracket">]</span></span>
+<p>Gronenschild EH, Habets P, Jacobs HI, Mengelers R, Rozendaal N, van Os J, Marcelis M. The effects of FreeSurfer version, workstation type, and Macintosh operating system version on anatomical volume and cortical thickness measurements. PLoS One. 2012;7(6):e38234. doi: 10.1371/journal.pone.0038234</p>
+</aside>
+<aside class="footnote brackets" id="glatard2015" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">10</a><span class="fn-bracket">]</span></span>
+<p>Glatard T, Lewis LB, Ferreira da Silva R, Adalat R, Beck N, Lepage C, Rioux P, Rousseau M-E, Sherif T, Deelman E, Khalili-Mahani N and Evans AC (2015) Reproducibility of neuroimaging analyses across operating systems. Front. Neuroinform. 9:12. doi: 10.3389/fninf.2015.00012</p>
+</aside>
+<aside class="footnote brackets" id="gorgolewski2016" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id11">11</a><span class="fn-bracket">]</span></span>
+<p>Gorgolewski, K., Auer, T., Calhoun, V. et al. The brain imaging data structure, a format for organizing and describing outputs of neuroimaging experiments. Sci Data 3, 160044 (2016). doi: 10.1038/sdata.2016.44</p>
+</aside>
+<aside class="footnote brackets" id="gorgolewski2017" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id12">12</a><span class="fn-bracket">]</span></span>
+<p>Gorgolewski KJ, Alfaro-Almagro F, Auer T, Bellec P, Capotă M, Chakravarty MM, Churchill NW, Cohen AL, Craddock RC, Devenyi GA, Eklund A, Esteban O, Flandin G, Ghosh SS, Guntupalli JS, Jenkinson M, Keshavan A, Kiar G, Liem F, Raamana PR, Raffelt D, Steele CJ, Quirion PO, Smith RE, Strother SC, Varoquaux G, Wang Y, Yarkoni T, Poldrack RA. BIDS apps: Improving ease of use, accessibility, and reproducibility of neuroimaging data analysis methods. PLoS Comput Biol. 2017 Mar 9;13(3):e1005209. doi: 10.1371/journal.pcbi.1005209</p>
+</aside>
+</aside>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -488,7 +579,7 @@ The tools are “open source” and all of the code and ideas are visible on Git
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./nipreps"
         },
         predefinedOutput: true
@@ -496,37 +587,111 @@ The tools are “open source” and all of the code and ideas are visible on Git
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-        
-        <div class='prev-next-bottom'>
-            
-    <a class='left-prev' id="prev-link" href="../preparation/step0.html" title="previous page">Before we start: How to follow this tutorial</a>
-    <a class='right-next' id="next-link" href="dmriprep.html" title="next page">About dMRIPrep</a>
 
-        </div>
-        
-        </div>
-    </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By The NiPreps developers<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
-</main>
-
-
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../preparation/step0.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Before we start: How to follow this tutorial</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="dmriprep.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">About dMRIPrep</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem-of-methodological-variability">The problem of methodological variability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#augmenting-the-scanner-to-produce-analysis-grade-data">Augmenting the scanner to produce “analysis grade” data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nipreps-driving-principles">NiPreps driving principles</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#robust-with-very-diverse-data">1. Robust with very diverse data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#easy-to-use">2. Easy to use</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#glass-box-philosophy">3. “Glass box” philosophy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The NiPreps developers
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
     </div>
-    
-  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
-
-    
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
