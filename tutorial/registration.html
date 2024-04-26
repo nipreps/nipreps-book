@@ -485,7 +485,7 @@ For this example, we have selected the 8<sup>th</sup> DW map (<code class="docut
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eddymotion.model</span> <span class="kn">import</span> <span class="n">ModelFactory</span>
 
-<span class="n">data_train</span><span class="p">,</span> <span class="n">data_test</span> <span class="o">=</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">logo_split</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="n">with_b0</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">data_train</span><span class="p">,</span> <span class="n">data_test</span> <span class="o">=</span> <span class="n">logo_split</span><span class="p">(</span><span class="n">dmri_dataset</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">with_b0</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">ModelFactory</span><span class="o">.</span><span class="n">init</span><span class="p">(</span>
     <span class="n">gtab</span><span class="o">=</span><span class="n">data_train</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -522,7 +522,7 @@ Let’s write out two NIfTI files in a temporary folder:</p>
 Please notice the subtle <em>nodding</em> of the head, perhaps more apparent when looking at the corpus callosum in the sagittal views:</p>
 <div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">niworkflows.viz.notebook</span> <span class="kn">import</span> <span class="n">display</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nireports.reportlets.notebook</span> <span class="kn">import</span> <span class="n">display</span>
 
 <span class="n">display</span><span class="p">(</span>
     <span class="n">fixed_path</span><span class="p">,</span>
@@ -535,6 +535,8 @@ Please notice the subtle <em>nodding</em> of the head, perhaps more apparent whe
 </div>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><object alt="../images/registration_7_0.svg" type="image/svg+xml" data="../images/registration_7_0.svg"></object></div></div>
 </div>
 <p>Let’s configure ANTs via NiPype:</p>
 <div class="cell docutils container">
@@ -565,6 +567,11 @@ Please notice the subtle <em>nodding</em> of the head, perhaps more apparent whe
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;antsRegistration --collapse-output-transforms 1 --dimensionality 3 --initialize-transforms-per-stage 0 --interpolation Linear --output [ transform, transform_Warped.nii.gz ] --transform Affine[ 0.01 ] --metric Mattes[ /tmp/tmprxbygtcb/fixed.nii.gz, /tmp/tmprxbygtcb/moving.nii.gz, 1, 32, Regular, 0.2 ] --convergence [ 100, 1e-06, 15 ] --smoothing-sigmas 2.0vox --shrink-factors 1 --use-histogram-matching 1 --transform Affine[ 0.001 ] --metric GC[ /tmp/tmprxbygtcb/fixed.nii.gz, /tmp/tmprxbygtcb/moving.nii.gz, 1, 5, Random, 0.1 ] --convergence [ 50, 1e-07, 5 ] --smoothing-sigmas 0.0vox --shrink-factors 1 --use-histogram-matching 1 --winsorize-image-intensities [ 0.0001, 0.9998 ]  --write-composite-transform 0&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <p>Nipype interfaces can be submitted for execution with the <code class="docutils literal notranslate"><span class="pre">run()</span></code> method:</p>
 <div class="cell docutils container">
@@ -589,6 +596,8 @@ We can now visualize how close (or far) the two images are:</p>
 </div>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><object alt="../images/registration_15_0.svg" type="image/svg+xml" data="../images/registration_15_0.svg"></object></div></div>
 </div>
 </section>
 <section id="resampling-an-image">
@@ -606,6 +615,18 @@ We will be using <em>NiTransforms</em> to <em>apply</em> these transforms we est
 <span class="n">itk_xform</span> <span class="o">=</span> <span class="n">nt</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">itk</span><span class="o">.</span><span class="n">ITKLinearTransform</span><span class="o">.</span><span class="n">from_filename</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">forward_transforms</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">matrix</span> <span class="o">=</span> <span class="n">itk_xform</span><span class="o">.</span><span class="n">to_ras</span><span class="p">(</span><span class="n">reference</span><span class="o">=</span><span class="n">fixed_path</span><span class="p">,</span> <span class="n">moving</span><span class="o">=</span><span class="n">moving_path</span><span class="p">)</span>
 <span class="n">matrix</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 9.95961328e-01, -4.11835057e-03, -6.30936087e-04,
+         8.03217513e-02],
+       [ 3.71423770e-03,  9.96977865e-01, -1.66952058e-02,
+        -2.31156911e-01],
+       [-1.89529771e-03,  2.73982307e-02,  9.91098497e-01,
+        -9.24907250e-01],
+       [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00,
+         1.00000000e+00]])
 </pre></div>
 </div>
 </div>
@@ -629,6 +650,8 @@ We will be using <em>NiTransforms</em> to <em>apply</em> these transforms we est
 </div>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><object alt="../images/registration_19_0.svg" type="image/svg+xml" data="../images/registration_19_0.svg"></object></div></div>
 </div>
 <p><strong>Exercise</strong></p>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">display()</span></code> function to visualize the image aligned as generated by ANTs vs. that generated by <em>NiTransforms</em> – they should be aligned!.</p>
@@ -652,6 +675,14 @@ We will be using <em>NiTransforms</em> to <em>apply</em> these transforms we est
 </details>
 </div>
 <div class="cell tag_hide-cell tag_remove-input docutils container">
+<details class="hide above-output">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell outputs</span>
+<span class="expanded">Hide code cell outputs</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output text_html"><object alt="../images/registration_21_0.svg" type="image/svg+xml" data="../images/registration_21_0.svg"></object></div></div>
+</details>
 </div>
 </section>
 </section>

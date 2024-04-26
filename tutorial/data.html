@@ -507,7 +507,7 @@ Please note that the file has been minimized by zeroing all but two diffusion-we
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import the class from the library</span>
-<span class="kn">from</span> <span class="nn">eddymotion.dmri</span> <span class="kn">import</span> <span class="n">DWI</span>
+<span class="kn">from</span> <span class="nn">eddymotion.data.dmri</span> <span class="kn">import</span> <span class="n">DWI</span>
 
 <span class="c1"># load the sample file</span>
 <span class="n">dmri_dataset</span> <span class="o">=</span> <span class="n">DWI</span><span class="o">.</span><span class="n">from_filename</span><span class="p">(</span><span class="s2">&quot;../../data/dwi.h5&quot;</span><span class="p">)</span>
@@ -516,15 +516,7 @@ Please note that the file has been minimized by zeroing all but two diffusion-we
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># import the class from the library</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">eddymotion.dmri</span> <span class="kn">import</span> <span class="n">DWI</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># load the sample file</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">dmri_dataset</span> <span class="o">=</span> <span class="n">DWI</span><span class="o">.</span><span class="n">from_filename</span><span class="p">(</span><span class="s2">&quot;../../data/dwi.h5&quot;</span><span class="p">)</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;eddymotion.dmri&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>102
 </pre></div>
 </div>
 </div>
@@ -535,6 +527,11 @@ This pretty-printing of the object informs us about the data and metadata that, 
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dmri_dataset</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DWI(dataobj=&lt;118x118x78x102 (int16)&gt;, affine=&lt;4x4 (float64)&gt;, brainmask=None, bzero=&lt;118x118x78 (int16)&gt;, gradients=&lt;4x102 (float32)&gt;, em_affines=None, fieldmap=None)
 </pre></div>
 </div>
 </div>
@@ -564,6 +561,9 @@ The fully-fledged <code class="docutils literal notranslate"><span class="pre">D
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/399c5ec60f7735d3b8113b93a1685264a382990c0567f5293eb05934c28a1663.png" src="../_images/399c5ec60f7735d3b8113b93a1685264a382990c0567f5293eb05934c28a1663.png" />
+</div>
 </details>
 </div>
 <p>When calling <code class="docutils literal notranslate"><span class="pre">plot_mosaic()</span></code> without any arguments, the <em>b=0</em> reference is plotted.
@@ -586,6 +586,9 @@ The <em>b=0</em> map can be used by diffusion modeling as the reference to quant
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/e0a96d6f52575f61a54293618c4e5d2e021210d1b3ecb4e43d19d429af2c09fd.png" src="../_images/e0a96d6f52575f61a54293618c4e5d2e021210d1b3ecb4e43d19d429af2c09fd.png" />
+</div>
 </details>
 </div>
 <div class="cell tag_hide-cell docutils container">
@@ -598,6 +601,9 @@ The <em>b=0</em> map can be used by diffusion modeling as the reference to quant
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">plot_mosaic</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">5000</span><span class="p">);</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/998b77b9a08ee47c07fdca877148d71b21c097fe428b9d273a5df1f6699512d0.png" src="../_images/998b77b9a08ee47c07fdca877148d71b21c097fe428b9d273a5df1f6699512d0.png" />
 </div>
 </details>
 </div>
@@ -626,6 +632,11 @@ Stronger gradients yield diffusion maps with substantially lower SNR (signal-to-
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(4, 102)
+</pre></div>
+</div>
+</div>
 </details>
 </div>
 <p>We get a <span class="math notranslate nohighlight">\(4\times102\)</span> – three spatial coordinates (<span class="math notranslate nohighlight">\(b_x\)</span>, <span class="math notranslate nohighlight">\(b_y\)</span>, <span class="math notranslate nohighlight">\(b_z\)</span>) of the unit-norm “<em>b-vector</em>”, plus the gradient sensitization magnitude (the “<em>b-value</em>”), with a total of 102 different orientations for the case at hand.</p>
@@ -646,6 +657,112 @@ Remember to transpose (<code class="docutils literal notranslate"><span class="p
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-6.04914188e-01 -6.79875135e-01 -4.14546251e-01  3.00000000e+02]
+ [ 7.51762651e-03  9.17056799e-01 -3.98685753e-01  3.00000000e+02]
+ [-8.86579394e-01  3.21218759e-01 -3.32859576e-01  3.00000000e+02]
+ [ 8.16364467e-01  2.68300444e-01 -5.11433184e-01  3.00000000e+02]
+ [ 4.34362024e-01 -7.33946085e-01 -5.22161603e-01  3.00000000e+02]
+ [ 9.60559174e-02 -7.31587410e-02  9.92683768e-01  3.05000000e+02]
+ [ 5.85605621e-01  7.62755051e-02  8.06999445e-01  1.00500000e+03]
+ [ 1.32749856e-01  3.81094962e-01 -9.14955795e-01  9.95000000e+02]
+ [-9.10080016e-01  3.49084914e-01  2.23369867e-01  1.00000000e+03]
+ [-1.42672375e-01 -9.87846315e-01 -6.16788231e-02  1.00000000e+03]
+ [-3.14908028e-01  4.70339447e-01  8.24386895e-01  1.00500000e+03]
+ [ 9.26234543e-01  3.46899480e-01 -1.47479758e-01  1.00000000e+03]
+ [ 6.95218086e-01  6.17206156e-01 -3.68413389e-01  9.95000000e+02]
+ [ 1.79834515e-01 -9.48279917e-01  2.61581242e-01  1.00000000e+03]
+ [-5.72267652e-01  8.19448650e-01 -3.18384580e-02  1.00000000e+03]
+ [ 6.62053525e-01 -3.44300926e-01  6.65689111e-01  1.00500000e+03]
+ [-1.81866080e-01  7.04759300e-01 -6.85739756e-01  9.95000000e+02]
+ [-6.36256397e-01 -7.67920136e-01 -7.40036741e-02  1.00000000e+03]
+ [-2.50486493e-01 -7.25317061e-01  6.41226709e-01  1.00500000e+03]
+ [-1.81372240e-01 -5.50868332e-01 -8.14646065e-01  9.95000000e+02]
+ [ 2.51025885e-01 -9.41051543e-01 -2.26733208e-01  1.00000000e+03]
+ [ 8.59194577e-01  4.16565776e-01  2.97081828e-01  1.00000000e+03]
+ [-5.87923348e-01 -4.98144925e-01 -6.37336493e-01  9.95000000e+02]
+ [-2.08524555e-01  6.58749491e-02  9.75796103e-01  1.00500000e+03]
+ [-8.81649256e-01 -4.38893167e-03 -4.71884906e-01  9.95000000e+02]
+ [-6.17551386e-01  6.92788363e-01  3.72390330e-01  1.00000000e+03]
+ [-2.11339086e-01 -1.57031611e-01 -9.64715958e-01  9.95000000e+02]
+ [ 5.63584268e-01  3.84537101e-01 -7.31097817e-01  9.95000000e+02]
+ [-1.04902856e-01  7.80609608e-01  6.16152585e-01  1.00500000e+03]
+ [-3.27980161e-01 -8.34259689e-01 -4.43215251e-01  1.00000000e+03]
+ [ 9.97081280e-01 -3.60786468e-02  6.72850981e-02  1.00000000e+03]
+ [-3.64686340e-01 -8.92125309e-01  2.66676456e-01  1.00000000e+03]
+ [ 2.97879040e-01 -3.06824297e-01  9.03950751e-01  1.00500000e+03]
+ [ 7.01884270e-01 -3.75511825e-01 -6.05267942e-01  9.95000000e+02]
+ [ 5.85624397e-01 -2.57630497e-02 -8.10173035e-01  9.95000000e+02]
+ [ 8.74492407e-01  2.43720673e-02 -4.84426469e-01  9.95000000e+02]
+ [ 5.51209927e-01 -7.06570625e-01  4.43762958e-01  1.00500000e+03]
+ [ 8.55460048e-01 -4.86520320e-01  1.77443221e-01  1.00000000e+03]
+ [-6.43364310e-01 -2.89421439e-01 -7.08743691e-01  1.99500000e+03]
+ [ 1.21839322e-01  3.67268413e-01  9.22100365e-01  2.01000000e+03]
+ [ 8.67053568e-01 -2.20949143e-01 -4.46541786e-01  1.99500000e+03]
+ [-7.46472776e-01  8.38321110e-04 -6.65415406e-01  1.99500000e+03]
+ [ 3.49373311e-01  4.06477451e-01 -8.44224155e-01  1.99000000e+03]
+ [-5.60097814e-01  1.76819220e-01 -8.09336364e-01  1.99500000e+03]
+ [-4.30994742e-02  9.74978864e-01  2.18079522e-01  2.00000000e+03]
+ [-2.40879446e-01  8.55759144e-01  4.57879245e-01  2.00500000e+03]
+ [-7.79660225e-01 -6.15284383e-01  1.16426118e-01  2.00000000e+03]
+ [ 4.48004901e-01 -8.49978268e-01  2.77179599e-01  2.00500000e+03]
+ [ 3.74817163e-01 -9.27097678e-01 -1.41696935e-03  2.00000000e+03]
+ [ 6.10155761e-01 -5.36033213e-01  5.83419502e-01  2.00500000e+03]
+ [ 9.50321257e-01 -1.07752405e-01  2.92025506e-01  2.00000000e+03]
+ [-8.09516788e-01  2.45182857e-01 -5.33449113e-01  1.99500000e+03]
+ [ 9.56617057e-01 -2.84275055e-01  6.38084337e-02  2.00000000e+03]
+ [ 4.44206297e-01  6.86384022e-01  5.75810552e-01  2.00500000e+03]
+ [ 9.54805911e-01  1.77383393e-01  2.38497064e-01  2.00000000e+03]
+ [ 6.78448856e-01  4.65783864e-01 -5.68113148e-01  1.99500000e+03]
+ [-1.22661926e-01 -5.87784886e-01  7.99664319e-01  2.00500000e+03]
+ [ 4.10763621e-01 -1.32623598e-01 -9.02044475e-01  1.99000000e+03]
+ [-9.28761899e-01 -1.47203013e-01  3.40195030e-01  2.00500000e+03]
+ [-4.32663143e-01  4.41911817e-01 -7.85822213e-01  1.99500000e+03]
+ [-1.73938900e-01 -7.22244203e-01 -6.69409096e-01  1.99500000e+03]
+ [ 3.93927962e-01  4.76803184e-01  7.85798609e-01  2.00500000e+03]
+ [ 2.16246262e-01 -8.66339266e-01  4.50215280e-01  2.00500000e+03]
+ [ 5.89937627e-01 -5.72140634e-01 -5.69761992e-01  1.99500000e+03]
+ [ 3.72014821e-01  9.28178847e-01 -9.43302456e-03  2.00000000e+03]
+ [ 8.53485584e-01 -5.17996848e-01 -5.69352657e-02  2.00000000e+03]
+ [ 2.51451343e-01  9.32365298e-01  2.59744376e-01  2.00000000e+03]
+ [ 6.35405779e-02 -5.95680475e-01 -8.00704300e-01  1.99500000e+03]
+ [-7.51151621e-01 -6.28546119e-01 -2.01744899e-01  2.00000000e+03]
+ [-1.09398387e-01  9.92227495e-01 -5.93008772e-02  2.00000000e+03]
+ [-5.18000782e-01  3.63550693e-01  7.74277806e-01  2.00500000e+03]
+ [-8.37094843e-01 -4.31998879e-01  3.35632533e-01  2.00500000e+03]
+ [ 7.27129698e-01  1.49743423e-01 -6.69969618e-01  1.99500000e+03]
+ [-5.17419696e-01 -7.40754366e-01  4.28438783e-01  2.00500000e+03]
+ [ 7.27875590e-01  4.97373462e-01  4.72034663e-01  2.00500000e+03]
+ [-3.26542199e-01  7.36291781e-02 -9.42310452e-01  1.99000000e+03]
+ [-6.14776909e-02 -8.78977180e-01 -4.72884387e-01  1.99500000e+03]
+ [-7.73990631e-01  5.15239596e-01 -3.68057936e-01  1.99500000e+03]
+ [-3.58383171e-03  1.07271522e-01  9.94223297e-01  2.01000000e+03]
+ [-1.60011083e-01  5.34122169e-01 -8.30126464e-01  1.99000000e+03]
+ [ 9.88182724e-01  1.43299058e-01 -5.44080175e-02  2.00000000e+03]
+ [-9.05943990e-01 -4.18793827e-01 -6.22674413e-02  2.00000000e+03]
+ [ 2.03286484e-01  1.53597519e-01 -9.66996610e-01  1.99000000e+03]
+ [ 4.36532289e-01  6.08863235e-01 -6.62363291e-01  1.99500000e+03]
+ [ 6.82894647e-01 -7.17134774e-01 -1.39185578e-01  2.00000000e+03]
+ [ 7.86479354e-01 -4.98139858e-01 -3.65112156e-01  1.99500000e+03]
+ [-4.65987802e-01  8.39519799e-01  2.79395491e-01  2.00000000e+03]
+ [ 7.21606970e-01 -1.46813065e-01 -6.76556945e-01  1.99500000e+03]
+ [ 5.12317955e-01  8.17944586e-01  2.61719227e-01  2.00000000e+03]
+ [ 3.80590975e-01 -6.98121727e-01  6.06445849e-01  2.00500000e+03]
+ [ 3.18718821e-01 -6.50580406e-01 -6.89320982e-01  1.99500000e+03]
+ [ 4.12478864e-01  2.02624902e-01  8.88146579e-01  2.00500000e+03]
+ [ 1.32435739e-01  9.71343756e-01 -1.97362855e-01  1.99500000e+03]
+ [-9.72415447e-01  1.24751076e-01  1.97092354e-01  2.00000000e+03]
+ [-2.45995522e-01 -8.56899619e-01  4.53000307e-01  2.00500000e+03]
+ [ 1.21794799e-02  7.88615406e-01 -6.14766181e-01  1.99500000e+03]
+ [-8.40300739e-01 -2.33427882e-01 -4.89291459e-01  1.99500000e+03]
+ [ 4.91548866e-01  1.66130796e-01 -8.54856849e-01  1.99000000e+03]
+ [ 6.91248178e-01 -6.99574709e-01  1.81028187e-01  2.00000000e+03]
+ [-5.76671958e-01 -8.02036345e-01  1.55522212e-01  2.00000000e+03]
+ [-7.08378106e-02  2.88473666e-01 -9.54863846e-01  1.99000000e+03]
+ [-1.85595229e-01  3.32799673e-01  9.24553275e-01  2.01000000e+03]]
+</pre></div>
+</div>
+</div>
 </details>
 </div>
 <p>Later, we’ll refer to this array as the gradient table.</p>
@@ -660,6 +777,9 @@ For more information on this, refer to <a class="reference internal" href="../ex
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">plot_gradients</span><span class="p">();</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/8d6b247e26b2bfebc80d5b824813532419103e3785c59f168b7768873b2ee18e.png" src="../_images/8d6b247e26b2bfebc80d5b824813532419103e3785c59f168b7768873b2ee18e.png" />
 </div>
 </div>
 <p>We’ve projected all of the gradient directions onto the surface of a sphere, with each unique gradient strength colour-coded.
@@ -727,12 +847,16 @@ Because one “<em>datapoint</em>” in our DWI dataset corresponds to one gradi
 <p>This function is contained in the <code class="docutils literal notranslate"><span class="pre">DWI</span></code> class shown earlier and will allow us to easily partition the dataset as follows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eddymotion.viz</span> <span class="kn">import</span> <span class="n">plot_dwi</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eddymotion.data.splitting</span> <span class="kn">import</span> <span class="n">lovo_split</span> <span class="k">as</span> <span class="n">logo_split</span>
+<span class="kn">from</span> <span class="nn">eddymotion.viz</span> <span class="kn">import</span> <span class="n">plot_dwi</span>
 
-<span class="n">data_train</span><span class="p">,</span> <span class="n">data_test</span> <span class="o">=</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">logo_split</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">plot_dwi</span><span class="p">(</span><span class="n">data_test</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span> <span class="n">gradient</span><span class="o">=</span><span class="n">data_test</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="n">data_train</span><span class="p">,</span> <span class="n">data_test</span> <span class="o">=</span> <span class="n">logo_split</span><span class="p">(</span><span class="n">dmri_dataset</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">plot_dwi</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">data_test</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span> <span class="n">gradient</span><span class="o">=</span><span class="n">data_test</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/9ab3f12b0129d7fc6ffbaada7ea931a1b0bb41fc89a09e65519a04e1548397aa.png" src="../_images/9ab3f12b0129d7fc6ffbaada7ea931a1b0bb41fc89a09e65519a04e1548397aa.png" />
 </div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">data_train</span></code> is a tuple containing all diffusion-weighted volumes and the corresponding gradient table, excluding the left-out, which is stored in <code class="docutils literal notranslate"><span class="pre">data_test</span></code> (the 11<sup>th</sup> gradient indexed by <code class="docutils literal notranslate"><span class="pre">10</span></code>, in this example).
@@ -754,6 +878,12 @@ Because one “<em>datapoint</em>” in our DWI dataset corresponds to one gradi
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>data_train[0] is the DW maps dataset and has (118, 118, 78, 101) dimensions
+data_train[1] is a gradient table and has (4, 101) dimensions
+</pre></div>
+</div>
+</div>
 </details>
 </div>
 <div class="admonition-exercise admonition">
@@ -770,6 +900,12 @@ Because one “<em>datapoint</em>” in our DWI dataset corresponds to one gradi
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;data_test[0] is left-out DW map and has </span><span class="si">{</span><span class="n">data_test</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> dimensions&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;data_test[1] is the corresponding DW gradient and has </span><span class="si">{</span><span class="n">data_test</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> dimensions&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>data_test[0] is left-out DW map and has (118, 118, 78, 1) dimensions
+data_test[1] is the corresponding DW gradient and has (4, 1) dimensions
 </pre></div>
 </div>
 </div>

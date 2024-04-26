@@ -16,6 +16,7 @@ kernelspec:
 :tags: [remove-cell]
 
 import warnings
+import numpy as np
 
 warnings.filterwarnings("ignore")
 ```
@@ -37,7 +38,8 @@ We must reload the dataset again to use it in this notebook.
 ```
 
 ```{code-cell} python
-from eddymotion.dmri import DWI
+from eddymotion.data.dmri import DWI
+from eddymotion.data.splitting import lovo_split as logo_split
 from eddymotion.viz import plot_dwi
 dmri_dataset = DWI.from_filename("../../data/dwi.h5")
 ```
@@ -94,8 +96,8 @@ model = TrivialB0Model(
 Then, at each iteration of our estimation strategy, we will fit this model to the data, after holding one particular direction (`data_test`) out, using the `logo_split` method of the dataset. In every iteration, this finds the b=0 volumes in the data and averages their values in every voxel:
 
 ```{code-cell} python
-data_train, data_test = dmri_dataset.logo_split(10)
-model.fit(data_train[0])
+data_train, data_test = logo_split(dmri_dataset, 10)
+model.fit(np.squeeze(data_train[0]))
 ```
 
 Finally, we can generate our registration reference with the `predict()` method:
@@ -108,7 +110,7 @@ plot_dwi(predicted, dmri_dataset.affine, gradient=data_test[1]);
 As expected, the *b=0* doesn't look very much like the particular left-out direction, but it is a start!
 
 ```{code-cell} python
-plot_dwi(data_test[0], dmri_dataset.affine, gradient=data_test[1]);
+plot_dwi(np.squeeze(data_test[0]), dmri_dataset.affine, gradient=data_test[1]);
 ```
 
 ## Implementing a *regression to the mean* model
@@ -174,7 +176,7 @@ model = AverageDWModel(
 model.fit(data_train[0])
 predicted = model.predict(data_test[1])
 plot_dwi(predicted, dmri_dataset.affine, gradient=data_test[1]);
-plot_dwi(data_test[0], dmri_dataset.affine, gradient=data_test[1]);
+plot_dwi(np.squeeze(data_test[0]), dmri_dataset.affine, gradient=data_test[1]);
 ```
 
 ## Investigating the tensor model
@@ -200,7 +202,7 @@ if datapath.stat().st_size == 0:
 
 dmri_dataset = DWI.from_filename(datapath)
 datapath.unlink()
-data_train, data_test = dmri_dataset.logo_split(88, with_b0=True)
+data_train, data_test = logo_split(dmri_dataset, 88, with_b0=True)
 ```
 
 ### The model factory
@@ -238,7 +240,7 @@ plot_dwi(predicted, dmri_dataset.affine, gradient=data_test[1], black_bg=True);
 Here's the original DW map, for reference:
 
 ```{code-cell} python
-plot_dwi(data_test[0], dmri_dataset.affine, gradient=data_test[1]);
+plot_dwi(np.squeeze(data_test[0]), dmri_dataset.affine, gradient=data_test[1]);
 ```
 
 ```{admonition} Exercise
@@ -263,7 +265,7 @@ Once the model has been initialized, we can easily generate a new prediction.
 model.fit(data_train[0])
 predicted = model.predict(data_test[1])
 plot_dwi(predicted, dmri_dataset.affine, gradient=data_test[1], black_bg=True);
-plot_dwi(data_test[0], dmri_dataset.affine, gradient=data_test[1]);
+plot_dwi(np.squeeze(data_test[0]), dmri_dataset.affine, gradient=data_test[1]);
 ```
 
 ## Next steps: image registration

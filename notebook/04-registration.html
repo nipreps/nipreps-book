@@ -483,9 +483,9 @@ First, we’ll need to generate one target gradient prediction following all the
 For this example, we have selected the 8<sup>th</sup> DW map (<code class="docutils literal notranslate"><span class="pre">index=7</span></code>) because it contains a sudden motion spike, resembling a nodding movement.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eddymotion.model</span> <span class="kn">import</span> <span class="n">ModelFactory</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eddymotion.model</span> <span class="kn">import</span> <span class="n">ModelFactory</span>
 
-<span class="n">data_train</span><span class="p">,</span> <span class="n">data_test</span> <span class="o">=</span> <span class="n">dmri_dataset</span><span class="o">.</span><span class="n">logo_split</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="n">with_b0</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">data_train</span><span class="p">,</span> <span class="n">data_test</span> <span class="o">=</span> <span class="n">logo_split</span><span class="p">(</span><span class="n">dmri_dataset</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">with_b0</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">ModelFactory</span><span class="o">.</span><span class="n">init</span><span class="p">(</span>
     <span class="n">gtab</span><span class="o">=</span><span class="n">data_train</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
@@ -502,7 +502,7 @@ For this example, we have selected the 8<sup>th</sup> DW map (<code class="docut
 Let’s write out two NIfTI files in a temporary folder:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">mkdtemp</span>
 
 <span class="n">tempdir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">mkdtemp</span><span class="p">())</span>
@@ -522,7 +522,7 @@ Let’s write out two NIfTI files in a temporary folder:</p>
 Please notice the subtle <em>nodding</em> of the head, perhaps more apparent when looking at the corpus callosum in the sagittal views:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">niworkflows.viz.notebook</span> <span class="kn">import</span> <span class="n">display</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nireports.reportlets.notebook</span> <span class="kn">import</span> <span class="n">display</span>
 
 <span class="n">display</span><span class="p">(</span>
     <span class="n">fixed_path</span><span class="p">,</span>
@@ -537,7 +537,7 @@ Please notice the subtle <em>nodding</em> of the head, perhaps more apparent whe
 <p>Let’s configure ANTs via NiPype:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ensure that NiPype is able to find and execute our ANTs command</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ensure that NiPype is able to find and execute our ANTs command</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
 
@@ -548,7 +548,7 @@ Please notice the subtle <em>nodding</em> of the head, perhaps more apparent whe
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">cpu_count</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">cpu_count</span>
 <span class="kn">from</span> <span class="nn">pkg_resources</span> <span class="kn">import</span> <span class="n">resource_filename</span> <span class="k">as</span> <span class="n">pkg_fn</span>
 <span class="kn">from</span> <span class="nn">nipype.interfaces.ants.registration</span> <span class="kn">import</span> <span class="n">Registration</span>
 
@@ -570,7 +570,7 @@ Please notice the subtle <em>nodding</em> of the head, perhaps more apparent whe
 <p>which will run the following command-line:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">registration</span><span class="o">.</span><span class="n">cmdline</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">registration</span><span class="o">.</span><span class="n">cmdline</span>
 </pre></div>
 </div>
 </div>
@@ -578,7 +578,7 @@ Please notice the subtle <em>nodding</em> of the head, perhaps more apparent whe
 <p>Nipype interfaces can be submitted for execution with the <code class="docutils literal notranslate"><span class="pre">run()</span></code> method:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">registration</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">cwd</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">tempdir</span><span class="o">.</span><span class="n">absolute</span><span class="p">()))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">registration</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">cwd</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">tempdir</span><span class="o">.</span><span class="n">absolute</span><span class="p">()))</span>
 </pre></div>
 </div>
 </div>
@@ -587,7 +587,7 @@ Please notice the subtle <em>nodding</em> of the head, perhaps more apparent whe
 We can now visualize how close (or far) the two images are:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span>
     <span class="n">fixed_path</span><span class="p">,</span>
     <span class="n">result</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">warped_image</span><span class="p">,</span>
     <span class="n">fixed_label</span><span class="o">=</span><span class="s2">&quot;Predicted&quot;</span><span class="p">,</span>
@@ -608,7 +608,7 @@ We will be using <em>NiTransforms</em> to <em>apply</em> these transforms we est
 <p>To read a transform produced by ANTs with <em>NiTransforms</em>, we use the following piece of code:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nitransforms</span> <span class="k">as</span> <span class="nn">nt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nitransforms</span> <span class="k">as</span> <span class="nn">nt</span>
 
 <span class="n">itk_xform</span> <span class="o">=</span> <span class="n">nt</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">itk</span><span class="o">.</span><span class="n">ITKLinearTransform</span><span class="o">.</span><span class="n">from_filename</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">forward_transforms</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">matrix</span> <span class="o">=</span> <span class="n">itk_xform</span><span class="o">.</span><span class="n">to_ras</span><span class="p">(</span><span class="n">reference</span><span class="o">=</span><span class="n">fixed_path</span><span class="p">,</span> <span class="n">moving</span><span class="o">=</span><span class="n">moving_path</span><span class="p">)</span>
@@ -620,7 +620,7 @@ We will be using <em>NiTransforms</em> to <em>apply</em> these transforms we est
 <p>Resampling an image requires two pieces of information: the <em>reference</em> image (which provides the new grid where we want to have the data) and the <em>moving</em> image which contains the actual data we are interested in:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">xfm</span> <span class="o">=</span> <span class="n">nt</span><span class="o">.</span><span class="n">linear</span><span class="o">.</span><span class="n">Affine</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xfm</span> <span class="o">=</span> <span class="n">nt</span><span class="o">.</span><span class="n">linear</span><span class="o">.</span><span class="n">Affine</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
 <span class="n">xfm</span><span class="o">.</span><span class="n">reference</span> <span class="o">=</span> <span class="n">fixed_path</span>
 <span class="n">resampled</span> <span class="o">=</span> <span class="n">xfm</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">moving_path</span><span class="p">)</span>
 <span class="n">resampled</span><span class="o">.</span><span class="n">to_filename</span><span class="p">(</span><span class="n">tempdir</span> <span class="o">/</span> <span class="s2">&quot;resampled-nitransforms.nii.gz&quot;</span><span class="p">)</span>
