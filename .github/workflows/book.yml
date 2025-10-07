@@ -10,8 +10,6 @@ on:
 jobs:
   deploy-book:
     runs-on: ubuntu-latest
-    env:
-      ANTSPATH: /opt/ants
     steps:
     - uses: actions/cache@v4
       with:
@@ -31,37 +29,24 @@ jobs:
                              texlive-fonts-extra \
                              texlive-latex-extra \
                              cm-super
-
-    - uses: actions/cache@v4
+    - name: Checkout repository
+      uses: actions/checkout@v5
       with:
-        path: /opt/ants
-        key: ants-v1
-        restore-keys: |
-          ants-v1
-    - name: Install ANTS
-      run: |
-        if [[ ! -d "${ANTSPATH}" ]]; then
-          sudo mkdir -p $ANTSPATH
-          curl -sSL "https://dl.dropbox.com/s/gwf51ykkk5bifyj/ants-Linux-centos6_x86_64-v2.3.4.tar.gz" | sudo tar -xzC $ANTSPATH --strip-components 1
-        fi
-
-    - uses: actions/checkout@v4
-
-    # Install dependencies
-    - name: Set up Python 3.11
-      uses: actions/setup-python@v5
+        fetch-depth: 200
+        fetch-tags: true
+        ref: ${{ github.ref }}
+    - uses: prefix-dev/setup-pixi@v0.9.1
       with:
-        python-version: 3.11
+        pixi-version: v0.55.0
+        run-install: false
+    - run: pixi lock --check
 
-    - name: Install dependencies
-      run: |
-        pip install -r requirements.txt
+    - name: Install project environment
+      run: pixi install --locked
 
     # Build the page
     - name: Build the book
-      run: |
-        export PATH=$ANTSPATH:$PATH
-        jupyter-book build docs
+      run: pixi run build-book
 
     # Push the book's HTML to github-pages
     - name: GitHub Pages action
