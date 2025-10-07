@@ -16,3 +16,4 @@ _build/
 # pixi environments
 .pixi/*
 !.pixi/config.toml
+report.svg

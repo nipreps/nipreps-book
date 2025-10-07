@@ -1,0 +1,37 @@
+[workspace]
+authors = ["Oscar Esteban <code@oscaresteban.es>"]
+channels = ["conda-forge"]
+name = "nipreps-book"
+platforms = ["linux-64", "osx-arm64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+python = "==3.11"
+dipy = ">=1.11.0,<2"
+numpy = "<2"
+
+[pypi-dependencies]
+attr = "*"
+ghp-import = "*"
+jupyter-book = "*"
+jupytext = "*"
+jupyterlab = "*"
+matplotlib = "*"
+nibabel = "*"
+nilearn = "*"
+nifreeze = { git = "https://github.com/nipreps/nifreeze.git", rev = "main" }
+nitransforms = "<24"
+niworkflows = ">=1.4.0rc5"
+pytest = "*"
+requests = "*"
+
+[tasks.build-book]
+cmd = "jupyter-book build docs"
+
+[tasks.test]
+cmd = "pytest"
+
+[tasks.serve]
+cmd = "jupyter lab"
