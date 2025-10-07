@@ -38,11 +38,11 @@ We must reload the dataset again to use it in this notebook.
 ```
 
 ```{code-cell} python
-from nifreeze.data.dmri import DWI
 from nifreeze.data.splitting import lovo_split
 from nireports.reportlets.modality.dwi import plot_dwi
+from tutorial_data import load_tutorial_dmri_dataset
 
-dmri_dataset = DWI.from_filename("../../data/dwi.h5")
+dmri_dataset = load_tutorial_dmri_dataset()
 ```
 
 ## Implementing a trivial model
@@ -190,21 +190,9 @@ We will use the wrap around DIPY's implementation that we distribute with `nifre
 ```{code-cell} python
 :tags: [remove-cell]
 
-from tempfile import mkstemp
-from pathlib import Path
-import requests
+from tutorial_data import load_tutorial_dmri_dataset
 
-if dmri_dataset._filepath.exists():
-    dmri_dataset._filepath.unlink()
-url = "https://files.osf.io/v1/resources/8k95s/providers/osfstorage/68e5464a451cf9cf1fc51a53"
-datapath = Path(mkstemp(suffix=".h5")[1])
-if datapath.stat().st_size == 0:
-    datapath.write_bytes(
-        requests.get(url, allow_redirects=True).content
-    )
-
-dmri_dataset = DWI.from_filename(datapath)
-datapath.unlink()
+dmri_dataset = load_tutorial_dmri_dataset()
 
 # Let's generate index 88 of the dataset:
 test_data, _, test_b = dmri_dataset[88]

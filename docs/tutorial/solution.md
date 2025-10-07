@@ -16,27 +16,16 @@ kernelspec:
 :tags: [remove-cell]
 
 import warnings
+from pathlib import Path
 
 warnings.filterwarnings("ignore")
 
-from tempfile import mkstemp
-from pathlib import Path
-import requests
-
-from nifreeze.data.dmri import DWI
 from nifreeze.utils.iterators import random_iterator
+from tutorial_data import load_tutorial_dmri_dataset
 
-url = "https://files.osf.io/v1/resources/8k95s/providers/osfstorage/68e5464a451cf9cf1fc51a53"
-datapath = Path(mkstemp(suffix=".h5")[1])
-if datapath.stat().st_size == 0:
-    datapath.write_bytes(
-        requests.get(url, allow_redirects=True).content
-    )
-
-dmri_dataset = DWI.from_filename(datapath)
+dmri_dataset = load_tutorial_dmri_dataset()
 dmri_dataset.dataobj = dmri_dataset.dataobj[..., :32]
 dmri_dataset.gradients = dmri_dataset.gradients[..., :32]
-datapath.unlink()
 ```
 
 Once we have finalized the main components of the solution, it is time for integration.

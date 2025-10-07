@@ -47,6 +47,18 @@ jobs:
     - name: Install project environment
       run: pixi install --locked
 
+    - name: Prepare tutorial data
+      run: |
+        set -xeuo pipefail
+        data_dir="${{ github.workspace }}/data"
+        data_file="$data_dir/dwi_full_brainmask.h5"
+        mkdir -p "$data_dir"
+        curl -L \
+          https://files.osf.io/v1/resources/8k95s/providers/osfstorage/68e5464a451cf9cf1fc51a53 \
+          --output "$data_file"
+        test -s "$data_file"
+        echo "NIPREPS_TUTORIAL_DATA=$data_file" >> "$GITHUB_ENV"
+
     # Build the page
     - name: Build the book
       run: pixi run build-book

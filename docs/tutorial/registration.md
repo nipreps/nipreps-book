@@ -17,27 +17,18 @@ kernelspec:
 
 import warnings
 from IPython.display import HTML
-import requests
-from tempfile import mkstemp
 from pathlib import Path
-import numpy as np
-import nibabel as nb
 
-from nifreeze.data.dmri import DWI
+import nibabel as nb
+import numpy as np
+
 from nifreeze.data.filtering import advanced_clip
 from nireports.reportlets.modality.dwi import plot_dwi
+from tutorial_data import load_tutorial_dmri_dataset
 
 warnings.filterwarnings("ignore")
 
-url = "https://files.osf.io/v1/resources/8k95s/providers/osfstorage/68e5464a451cf9cf1fc51a53"
-datapath = Path(mkstemp(suffix=".h5")[1])
-if datapath.stat().st_size == 0:
-    datapath.write_bytes(
-        requests.get(url, allow_redirects=True).content
-    )
-
-dmri_dataset = DWI.from_filename(datapath)
-datapath.unlink()
+dmri_dataset = load_tutorial_dmri_dataset()
 
 
 def _to_nifti(
