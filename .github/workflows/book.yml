@@ -5,6 +5,9 @@ on:
   push:
     branches:
     - main
+  pull_request:
+    branches:
+    - main
 
 # This job installs dependencies, build the book, and pushes it to `gh-pages`
 jobs:
@@ -50,6 +53,7 @@ jobs:
 
     # Push the book's HTML to github-pages
     - name: GitHub Pages action
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
