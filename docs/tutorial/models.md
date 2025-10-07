@@ -38,9 +38,10 @@ We must reload the dataset again to use it in this notebook.
 ```
 
 ```{code-cell} python
-from eddymotion.data.dmri import DWI
-from eddymotion.data.splitting import lovo_split as logo_split
-from eddymotion.viz import plot_dwi
+from nifreeze.data.dmri import DWI
+from nifreeze.data.splitting import lovo_split as logo_split
+from nireports.reportlets.modality.dmri import plot_dwi
+
 dmri_dataset = DWI.from_filename("../../data/dwi.h5")
 ```
 
@@ -182,7 +183,7 @@ plot_dwi(np.squeeze(data_test[0]), dmri_dataset.affine, gradient=data_test[1]);
 ## Investigating the tensor model
 
 Now, we are ready to use the diffusion tensor model.
-We will use the wrap around DIPY's implementation that we distribute with `eddymotion`.
+We will use the wrap around DIPY's implementation that we distribute with `nifreeze`.
 
 ```{code-cell} python
 :tags: [remove-cell]
@@ -207,11 +208,11 @@ data_train, data_test = logo_split(dmri_dataset, 88, with_b0=True)
 
 ### The model factory
 
-To permit flexibility in selecting models, the `eddymotion` package offers a `ModelFactory` that implements the *facade design pattern*.
+To permit flexibility in selecting models, the `nifreeze` package offers a `ModelFactory` that implements the *facade design pattern*.
 This means that `ModelFactory` makes it easier for the user to switch between models:
 
 ```{code-cell} python
-from eddymotion.model import ModelFactory
+from nifreeze.model import ModelFactory
 
 # We are using now a full dataset, we need to split the data again
 

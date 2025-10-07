@@ -23,10 +23,10 @@ from pathlib import Path
 import numpy as np
 import nibabel as nb
 
-from eddymotion.data.dmri import DWI
-from eddymotion.data.splitting import lovo_split as logo_split
-from eddymotion.viz import plot_dwi
-from eddymotion.estimator import _advanced_clip
+from nifreeze.data.dmri import DWI
+from nifreeze.data.splitting import lovo_split as logo_split
+from nifreeze.estimator import _advanced_clip
+from nireports.reportlets.modality.dmri import plot_dwi
 
 warnings.filterwarnings("ignore")
 
@@ -142,7 +142,7 @@ First, we'll need to generate one target gradient prediction following all the s
 For this example, we have selected the 8<sup>th</sup> DW map (`index=7`) because it contains a sudden motion spike, resembling a nodding movement.
 
 ```{code-cell} python
-from eddymotion.model import ModelFactory
+from nifreeze.model import ModelFactory
 
 data_train, data_test = logo_split(dmri_dataset, 7, with_b0=True)
 
@@ -205,7 +205,7 @@ from nipype.interfaces.ants.registration import Registration
 registration = Registration(
     terminal_output="file",
     from_file=pkg_fn(
-        "eddymotion",
+        "nifreeze",
         f"config/dwi-to-dwi_level1.json",
     ),
     fixed_image=str(fixed_path.absolute()),
