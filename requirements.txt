@@ -6,8 +6,10 @@ jupytext
 jupyterlab
 matplotlib
 nibabel
+git+https://github.com/nipreps/nifreeze.git@main
 nilearn
 nitransforms
+nireports
 niworkflows >= 1.4.0rc5
 numpy
 pytest
