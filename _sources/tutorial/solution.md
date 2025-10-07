@@ -23,9 +23,10 @@ from tempfile import mkstemp
 from pathlib import Path
 import requests
 
-from eddymotion.dmri import DWI
+from nifreeze.data.dmri import DWI
+from nifreeze.utils.iterators import random_iterator
 
-url = "https://files.osf.io/v1/resources/8k95s/providers/osfstorage/6070b4c2f6585f03fb6123a2"
+url = "https://files.osf.io/v1/resources/8k95s/providers/osfstorage/68e5464a451cf9cf1fc51a53"
 datapath = Path(mkstemp(suffix=".h5")[1])
 if datapath.stat().st_size == 0:
     datapath.write_bytes(
@@ -47,7 +48,7 @@ Complete the code snipet below to integrate the different components into the fi
 ```
 
 ```python
-class EddyMotionEstimator:
+class Estimator:
     """Estimates rigid-body head-motion and distortions derived from eddy-currents."""
 
     @staticmethod
@@ -67,26 +68,15 @@ class EddyMotionEstimator:
         """
         align_kwargs = align_kwargs or {}
 
-        if dwdata.brainmask is not None:
-            kwargs["mask"] = dwdata.brainmask
-
-        kwargs["S0"] = dwdata.bzero
-
         for i_iter in range(1, n_iter + 1):
-            for i in np.arange(len(dwdata)):
+            for i in random_iterator(len(dwdata)):
                 # run a original-to-synthetic affine registration
                 with TemporaryDirectory() as tmpdir:
-                    # Invoke `dwdata.logo_split()` on an index.
-                    data_train, data_test = ...
-
                     # Factory creates the appropriate model and pipes arguments
                     dwmodel = ...
 
-                    # fit the model
-
-
                     # generate a synthetic dw volume for the test gradient
-                    predicted = ...
+                    predicted = dwmodel.fit_predict(i)
 
                     # Write arrays in memory to harddisk as NIfTI files
                     tmpdir = Path(tmpdir)
@@ -138,7 +128,7 @@ class EddyMotionEstimator:
 
         Parameters
         ----------
-        dwdata : :obj:`~eddymotion.dmri.DWI`
+        dwdata : :obj:`~nifreeze.data.dmri.DWI`
             The target DWI dataset, represented by this tool's internal
             type. The object is used in-place, and will contain the estimated
             parameters in its ``em_affines`` property, as well as the rotated
@@ -150,7 +140,7 @@ class EddyMotionEstimator:
         model : :obj:`str`
             Selects the diffusion model that will generate the registration target
             corresponding to each gradient map.
-            See :obj:`~eddymotion.model.ModelFactory` for allowed models (and corresponding
+            See :obj:`~nifreeze.model.base.ModelFactory` for allowed models (and corresponding
             keywords).
 
         Return
@@ -162,28 +152,17 @@ class EddyMotionEstimator:
         """
         align_kwargs = align_kwargs or {}
 
-        if dwdata.brainmask is not None:
-            kwargs["mask"] = dwdata.brainmask
-
-        kwargs["S0"] = dwdata.bzero
-
         for i_iter in range(1, n_iter + 1):
-            for i in np.arange(len(dwdata)):
+            for i in random_iterator(len(dwdata)):
                 # run a original-to-synthetic affine registration
                 with TemporaryDirectory() as tmpdir:
-                    # Invoke `dwdata.logo_split()` on an index.
-                    data_train, data_test = dwdata.logo_split(i, with_b0=True)
-
                     # Factory creates the appropriate model and pipes arguments
                     dwmodel = ModelFactory.init(
-                        gtab=data_train[1], model=model, **kwargs
+                        dataset=dwdata, model=model, **kwargs
                     )
 
-                    # fit the model
-                    dwmodel.fit(data_train[0])
-
                     # generate a synthetic dw volume for the test gradient
-                    predicted = dwmodel.predict(data_test[1])
+                    dwmodel.fit_predict(i)
 
                     # Write arrays in memory to harddisk as NIfTI files
                     tmpdir = Path(tmpdir)
@@ -216,9 +195,7 @@ class EddyMotionEstimator:
 The above code allows us to use our estimator as follows:
 
 ```python
-from eddymotion.estimator import EddyMotionEstimator
-
-estimated_affines = EddyMotionEstimator.fit(dmri_dataset, model="b0")
+estimated_affines = Estimator.fit(dmri_dataset, model="b0")
 ```
 
 ## What's next? - Testing!
@@ -238,13 +215,15 @@ This test would just make sure that, regardless of the particular partition of t
 import numpy as np
 import pytest
 
+from nifreeze.data.splitting import lovo_split
+
 @pytest.mark.parametrize("split_index", list(range(30)))
 def test_TrivialB0Model(split_index, dmri_dataset):
     model = TrivialB0Model(
         dmri_dataset.gradients,
         S0=dmri_dataset.bzero,
     )
-    data_train, data_test = dmri_dataset.logo_split(split_index)
+    data_train, data_test = lovo_split(split_index)
     model.fit(data_train[0])
     predicted = model.predict(data_test[1])
 

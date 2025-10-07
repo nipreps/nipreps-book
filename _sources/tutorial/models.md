@@ -23,7 +23,7 @@ warnings.filterwarnings("ignore")
 
 The proposed method requires inferring a motion-less, reference DW map for a given diffusion orientation for which we want to estimate the misalignment.
 Inference of the reference map is achieved by first fitting some diffusion model (which we will draw from [DIPY](https://dipy.org)) using all data, except the particular DW map that is to be aligned.
-This data splitting scheme was introduced in {doc}`the LOGO splitter section in Introduction to dMRI data <data>`.
+We will be using the `nifreeze.data.splitting.lovo_split` utility (LOVO = leave one volume out), that basically leverages the indexing feature of our data structure to partition the dataset into test and train.
 
 All models are required to offer the same API (application programmer interface):
 
@@ -38,9 +38,10 @@ We must reload the dataset again to use it in this notebook.
 ```
 
 ```{code-cell} python
-from eddymotion.data.dmri import DWI
-from eddymotion.data.splitting import lovo_split as logo_split
-from eddymotion.viz import plot_dwi
+from nifreeze.data.dmri import DWI
+from nifreeze.data.splitting import lovo_split
+from nireports.reportlets.modality.dwi import plot_dwi
+
 dmri_dataset = DWI.from_filename("../../data/dwi.h5")
 ```
 
@@ -93,24 +94,26 @@ model = TrivialB0Model(
 )
 ```
 
-Then, at each iteration of our estimation strategy, we will fit this model to the data, after holding one particular direction (`data_test`) out, using the `logo_split` method of the dataset. In every iteration, this finds the b=0 volumes in the data and averages their values in every voxel:
+Then, at each iteration of our estimation strategy, we will fit this model to the data, after holding one particular direction (`data_test`) out, using the `lovo_split` utility.
+In every iteration, this finds the b=0 volumes in the data and averages their values in every voxel:
 
 ```{code-cell} python
-data_train, data_test = logo_split(dmri_dataset, 10)
+data_train, data_test = lovo_split(dmri_dataset, 10)
 model.fit(np.squeeze(data_train[0]))
 ```
 
 Finally, we can generate our registration reference with the `predict()` method:
 
 ```{code-cell} python
-predicted = model.predict(data_test[1])
-plot_dwi(predicted, dmri_dataset.affine, gradient=data_test[1]);
+predict_b = np.squeeze(data_test[2])
+predicted = model.predict(predict_b)
+plot_dwi(predicted, dmri_dataset.affine, gradient=predict_b);
 ```
 
 As expected, the *b=0* doesn't look very much like the particular left-out direction, but it is a start!
 
 ```{code-cell} python
-plot_dwi(np.squeeze(data_test[0]), dmri_dataset.affine, gradient=data_test[1]);
+plot_dwi(np.squeeze(data_test[0]), dmri_dataset.affine, gradient=predict_b);
 ```
 
 ## Implementing a *regression to the mean* model
@@ -175,14 +178,14 @@ model = AverageDWModel(
 )
 model.fit(data_train[0])
 predicted = model.predict(data_test[1])
-plot_dwi(predicted, dmri_dataset.affine, gradient=data_test[1]);
-plot_dwi(np.squeeze(data_test[0]), dmri_dataset.affine, gradient=data_test[1]);
+plot_dwi(predicted, dmri_dataset.affine, gradient=predict_b);
+plot_dwi(np.squeeze(data_test[0]), dmri_dataset.affine, gradient=predict_b);
 ```
 
 ## Investigating the tensor model
 
 Now, we are ready to use the diffusion tensor model.
-We will use the wrap around DIPY's implementation that we distribute with `eddymotion`.
+We will use the wrap around DIPY's implementation that we distribute with `nifreeze`.
 
 ```{code-cell} python
 :tags: [remove-cell]
@@ -193,7 +196,7 @@ import requests
 
 if dmri_dataset._filepath.exists():
     dmri_dataset._filepath.unlink()
-url = "https://files.osf.io/v1/resources/8k95s/providers/osfstorage/6070b4c2f6585f03fb6123a2"
+url = "https://files.osf.io/v1/resources/8k95s/providers/osfstorage/68e5464a451cf9cf1fc51a53"
 datapath = Path(mkstemp(suffix=".h5")[1])
 if datapath.stat().st_size == 0:
     datapath.write_bytes(
@@ -202,23 +205,25 @@ if datapath.stat().st_size == 0:
 
 dmri_dataset = DWI.from_filename(datapath)
 datapath.unlink()
-data_train, data_test = logo_split(dmri_dataset, 88, with_b0=True)
+
+# Let's generate index 88 of the dataset:
+test_data, _, test_b = dmri_dataset[88]
+
+test_data = np.squeeze(test_data)
+test_b = np.squeeze(test_b)
 ```
 
 ### The model factory
 
-To permit flexibility in selecting models, the `eddymotion` package offers a `ModelFactory` that implements the *facade design pattern*.
+To permit flexibility in selecting models, the `nifreeze` package offers a `ModelFactory` that implements the *facade design pattern*.
 This means that `ModelFactory` makes it easier for the user to switch between models:
 
 ```{code-cell} python
-from eddymotion.model import ModelFactory
-
-# We are using now a full dataset, we need to split the data again
+from nifreeze.model import ModelFactory
 
 model = ModelFactory.init(
-    gtab=data_train[1],
+    dataset=dmri_dataset,
     model="DTI",
-    S0=dmri_dataset.bzero,
 )
 ```
 
@@ -227,20 +232,19 @@ model = ModelFactory.init(
 The `ModelFactory` returns a model object that is compliant with the interface sketched above:
 
 ```{code-cell} python
-model.fit(data_train[0])
-predicted = model.predict(data_test[1])
+predicted = model.fit_predict(88, n_jobs=16)
 ```
 
 Now, the predicted map for the particular ***b*** gradient looks much closer to the original:
 
 ```{code-cell} python
-plot_dwi(predicted, dmri_dataset.affine, gradient=data_test[1], black_bg=True);
+plot_dwi(predicted, dmri_dataset.affine, gradient=test_b, black_bg=True);
 ```
 
 Here's the original DW map, for reference:
 
 ```{code-cell} python
-plot_dwi(np.squeeze(data_test[0]), dmri_dataset.affine, gradient=data_test[1]);
+plot_dwi(test_data, dmri_dataset.affine, gradient=test_b);
 ```
 
 ```{admonition} Exercise
@@ -253,19 +257,17 @@ Use the `ModelFactory` to initialize a `"DKI"` (diffusion Kurtosis imaging) mode
 :tags: [hide-cell]
 
 model = ModelFactory.init(
-    gtab=data_train[1],
+    dataset=dmri_dataset,
     model="DKI",
-    S0=dmri_dataset.bzero,
 )
 ```
 
 Once the model has been initialized, we can easily generate a new prediction.
 
 ```{code-cell} python
-model.fit(data_train[0])
-predicted = model.predict(data_test[1])
-plot_dwi(predicted, dmri_dataset.affine, gradient=data_test[1], black_bg=True);
-plot_dwi(np.squeeze(data_test[0]), dmri_dataset.affine, gradient=data_test[1]);
+predicted = model.fit_predict(88, n_jobs=16)
+plot_dwi(predicted, dmri_dataset.affine, gradient=test_b, black_bg=True);
+plot_dwi(test_data, dmri_dataset.affine, gradient=test_b);
 ```
 
 ## Next steps: image registration
