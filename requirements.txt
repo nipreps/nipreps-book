@@ -1,6 +1,5 @@
 attr
 dipy
-git+https://github.com/nipreps/eddymotion.git@main
 ghp-import
 jupyter-book
 jupytext
