@@ -112,7 +112,7 @@ The output of this `print()` statement is telling us that this (simulated) datas
 
 ## Using the new data representation object
 
-The code shown above was just a snippet of the `DWI` class. For simplicity, we will be using the full implementation of this class from our [`eddymotion` package](https://github.com/nipreps/EddyMotionCorrection/blob/main/eddymotion/dmri.py)
+The code shown above was just a snippet of the `DWI` class. For simplicity, we will be using the full implementation of this class from our [`nifreeze` package](https://github.com/nipreps/nifreeze/blob/main/src/nifreeze/data/dmri.py)
 Under the `data/` folder of this book's distribution, we have stored a sample DWI dataset with filename `dwi.h5`.
 Please note that the file has been minimized by zeroing all but two diffusion-weighted orientation maps.
 
@@ -120,7 +120,7 @@ Let's get some insights from it:
 
 ```{code-cell} python
 # import the class from the library
-from eddymotion.data.dmri import DWI
+from nifreeze.data.dmri import DWI
 
 # load the sample file
 dmri_dataset = DWI.from_filename("../../data/dwi.h5")
@@ -136,16 +136,24 @@ This pretty-printing of the object informs us about the data and metadata that, 
 dmri_dataset
 ```
 
-We'll go over some of the components of `dmri_dataset` through this lesson.
+Perhaps, the most interesting aspect of our DWI data structure is that it allows indexed access.
+That way, we can select data, affine (if initialized), and gradient orientation (b-vector, b-value), for any of the orientations in the data structure:
+
+```{code-cell} python
+
+data, xfm, gradient = dmri_dataset[10]
+
+print(f"shape={data.shape}, gradient={gradient}")
+```
 
 ## Visualizing the data
 
 ````{admonition} Exercise
-Let's start out by seeing what the data looks like.
-The fully-fledged `DWI` object has a convenience function to plot the dataset.
+Let's start by examining the data.
+We can generate mosaics of DWI data by using the sister tool *NiReports*:
 
 ```{hint}
-To see all of the instances and behaviors available to an object, try typing the object name, followed by `.` and <kbd>Tab</kbd>
+We will need to import `plot_dwi` from *NiReports* first.
 ```
 
 ````
@@ -155,17 +163,20 @@ To see all of the instances and behaviors available to an object, try typing the
 ```{code-cell} python
 :tags: [hide-cell]
 
-dmri_dataset.plot_mosaic();
+from nireports.reportlets.modality.dwi import plot_dwi
+
+plot_dwi(dmri_dataset.bzero, affine=dmri_dataset.affine);
 ```
 
-When calling `plot_mosaic()` without any arguments, the *b=0* reference is plotted.
+When calling `plot_dwi()`, we will be required a 3D data object, and optionally, an `affine` orientation matrix and a `gradient` or b-vector.
+We can access the *b=0* reference of the dataset with `dmri_dataset.bzero`.
 This *b=0* reference is a map of the signal measured ***without gradient sensitization***, or in other words, when we are not measuring diffusion in any direction.
 The *b=0* map can be used by diffusion modeling as the reference to quantify the signal drop at every voxel and given a particular orientation gradient.
 
 We can also get some insight into how a particular diffusion-weighted orientation looks like by selecting them with the argument `index`.
 
 ```{admonition} Exercise
-Try calling `plot_mosaic` with an index of 10 or 100.
+Try calling `plot_dwi` with an index of 10 or 100.
 ```
 
 **Solution**
@@ -173,19 +184,21 @@ Try calling `plot_mosaic` with an index of 10 or 100.
 ```{code-cell} python
 :tags: [hide-cell]
 
-dmri_dataset.plot_mosaic(index=10, vmax=5000);
+data, _, bvec = dmri_dataset[10]
+plot_dwi(data, affine=dmri_dataset.affine, gradient=bvec, vmax=5000);
 ```
 
 ```{code-cell} python
 :tags: [hide-cell]
 
-dmri_dataset.plot_mosaic(index=100, vmax=5000);
+data, _, bvec = dmri_dataset[100]
+plot_dwi(data, affine=dmri_dataset.affine, gradient=bvec, vmax=5000);
 ```
 
 Diffusion that exhibits directionality in the same direction as the gradient results in a loss of signal.
 As we can see, ***diffusion-weighted*** images consistently drop almost all signal in voxels filled with cerebrospinal fluid because there, water diffusion is free (isotropic) regardless of the direction that is being measured.
 
-We can also see that the images at `index=10` and `index=100` have different gradient strength ("*b-value*").
+We can also see that the images at indexes 10 and 100 have different gradient strength ("*b-value*").
 The higher the magnitude of the gradient, the more diffusion that is allowed to occur, indicated by the overall decrease in signal intensity.
 Stronger gradients yield diffusion maps with substantially lower SNR (signal-to-noise ratio), as well as larger distortions derived from the so-called "*Eddy-currents*".
 
@@ -234,108 +247,14 @@ To get a better sense of which gradient directions were sampled, let's plot them
 
 ```{code-cell} python
 
-dmri_dataset.plot_gradients();
+from nireports.reportlets.modality.dwi import plot_gradients
+
+plot_gradients(dmri_dataset.gradients.T);
 
 ```
 
 We've projected all of the gradient directions onto the surface of a sphere, with each unique gradient strength colour-coded.
 Darkest hues correspond to the lowest *b*-values and brighter to the highest.
-
-## The *LOGO* (leave-one-gradient-out) splitter
-
-One final behavior that will make our endeavor easier in the long run is a convenience method for data splitting.
-In particular, we are implementing some sort of cross-validation scheme where we will iterate over different data splits.
-In this case, the splitting strategy is a simple leave-one-out.
-Because one "*datapoint*" in our DWI dataset corresponds to one gradient, we will refer to this partitioning of the dataset as *leave-one-gradient-out (LOGO)*:
-
-```{code-cell} python
-def logo_split(self, index, with_b0=False):
-    """
-    Produce one fold of LOGO (leave-one-gradient-out).
-
-    Parameters
-    ----------
-    index : :obj:`int`
-        Index of the DWI orientation to be left out in this fold.
-    with_b0 : :obj:`bool`
-        Insert the *b=0* reference at the beginning of the training dataset.
-
-    Return
-    ------
-    (train_data, train_gradients) : :obj:`tuple`
-        Training DWI and corresponding gradients.
-        Training data/gradients come **from the updated dataset**.
-    (test_data, test_gradients) :obj:`tuple`
-        Test 3D map (one DWI orientation) and corresponding b-vector/value.
-        The test data/gradient come **from the original dataset**.
-
-    """
-    dwframe = self.dataobj[..., index]
-    bframe = self.gradients[..., index]
-
-    # if the size of the mask does not match data, cache is stale
-    mask = np.zeros(len(self), dtype=bool)
-    mask[index] = True
-
-    train_data = self.dataobj[..., ~mask]
-    train_gradients = self.gradients[..., ~mask]
-
-    if with_b0:
-        train_data = np.concatenate(
-            (np.asanyarray(self.bzero)[..., np.newaxis], train_data),
-            axis=-1,
-        )
-        b0vec = np.zeros((4, 1))
-        b0vec[0, 0] = 1
-        train_gradients = np.concatenate(
-            (b0vec, train_gradients),
-            axis=-1,
-        )
-
-    return (
-        (train_data, train_gradients),
-        (dwframe, bframe),
-    )
-```
-
-This function is contained in the `DWI` class shown earlier and will allow us to easily partition the dataset as follows:
-
-```{code-cell} python
-from eddymotion.data.splitting import lovo_split as logo_split
-from eddymotion.viz import plot_dwi
-
-data_train, data_test = logo_split(dmri_dataset, 10)
-plot_dwi(np.squeeze(data_test[0]), dmri_dataset.affine, gradient=data_test[1]);
-```
-
-`data_train` is a tuple containing all diffusion-weighted volumes and the corresponding gradient table, excluding the left-out, which is stored in `data_test` (the 11<sup>th</sup> gradient indexed by `10`, in this example).
-`data_test[0]` contains the held-out diffusion-weighted volume and `data_test[1]`, the corresponding gradient table.
-
-```{admonition} Exercise
-Try printing the shapes of elements in the `data_train` tuple.
-```
-
-**Solution**
-
-```{code-cell} python
-:tags: [hide-cell]
-
-print(f"data_train[0] is the DW maps dataset and has {data_train[0].shape} dimensions")
-print(f"data_train[1] is a gradient table and has {data_train[1].shape} dimensions")
-```
-
-```{admonition} Exercise
-Likewise for the left-out gradient, try printing the shapes of elements in the `data_test` tuple.
-```
-
-**Solution**
-
-```{code-cell} python
-:tags: [hide-cell]
-
-print(f"data_test[0] is left-out DW map and has {data_test[0].shape} dimensions")
-print(f"data_test[1] is the corresponding DW gradient and has {data_test[1].shape} dimensions")
-```
 
 ## Next steps: diffusion modeling
 

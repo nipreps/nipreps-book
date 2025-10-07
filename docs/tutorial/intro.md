@@ -94,7 +94,7 @@ Briefly anticipate further requirements that are important, but do not alter the
 - Parallelism: simulation and registration are CPU-intensive processes - for the runtime to be in a manageable scale, we'll need to leverage parallelism.
 ```
 
-![eddymotion](https://raw.githubusercontent.com/nipreps/eddymotion/507fc9bab86696d5330fd6a86c3870968243aea8/docs/_static/eddymotion-flowchart.svg)
+![nifreeze schematic](https://www.nipreps.org/nifreeze/main/_static/nifreeze-flowchart.svg)
 
 ### Step 2: Sketch out an API (Application Programming Interface)
 Plan how the new software will expose the implementation downstream.
@@ -104,9 +104,9 @@ a potential API would have a `.fit()` and `.predict()` members which run the alg
 DWI (the latter):
 
 ```python
-from eddymotion import EddyMotionEstimator
+from nifreeze import Estimator
 
-estimator = EddyMotionEstimator()
+estimator = Estimator()
 estimator.fit(data, model="DTI")
 
 corrected = estimator.predict(data)
