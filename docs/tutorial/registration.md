@@ -24,13 +24,12 @@ import numpy as np
 import nibabel as nb
 
 from nifreeze.data.dmri import DWI
-from nifreeze.data.splitting import lovo_split as logo_split
-from nifreeze.estimator import _advanced_clip
-from nireports.reportlets.modality.dmri import plot_dwi
+from nifreeze.data.filtering import advanced_clip
+from nireports.reportlets.modality.dwi import plot_dwi
 
 warnings.filterwarnings("ignore")
 
-url = "https://files.osf.io/v1/resources/8k95s/providers/osfstorage/6070b4c2f6585f03fb6123a2"
+url = "https://files.osf.io/v1/resources/8k95s/providers/osfstorage/68e5464a451cf9cf1fc51a53"
 datapath = Path(mkstemp(suffix=".h5")[1])
 if datapath.stat().st_size == 0:
     datapath.write_bytes(
@@ -46,7 +45,7 @@ def _to_nifti(
 ):
     data = np.squeeze(data)
     if clip:
-        data = _advanced_clip(data)
+        data = advanced_clip(data)
     nb.Nifti1Image(
         data,
         affine,
@@ -144,15 +143,11 @@ For this example, we have selected the 8<sup>th</sup> DW map (`index=7`) because
 ```{code-cell} python
 from nifreeze.model import ModelFactory
 
-data_train, data_test = logo_split(dmri_dataset, 7, with_b0=True)
-
 model = ModelFactory.init(
-    gtab=data_train[1],
+    dataset=dmri_dataset,
     model="DTI",
-    S0=dmri_dataset.bzero,
 )
-model.fit(data_train[0])
-predicted = model.predict(data_test[1])
+predicted = model.fit_predict(7)
 ```
 
 Since we are using the command-line interface of ANTs, the software must be installed in the computer and the input data is provided via files in the filesystem.
@@ -170,7 +165,7 @@ _to_nifti(predicted, dmri_dataset.affine, fixed_path)
 
 # The moving image is the left-out DW map
 moving_path = tempdir / "moving.nii.gz"
-_to_nifti(data_test[0], dmri_dataset.affine, moving_path)
+_to_nifti(dmri_dataset[7][0], dmri_dataset.affine, moving_path)
 ```
 
 We can now visualize our reference (the prediction) and the actual DW map.
@@ -205,7 +200,7 @@ from nipype.interfaces.ants.registration import Registration
 registration = Registration(
     terminal_output="file",
     from_file=pkg_fn(
-        "nifreeze",
+        "nifreeze.registration",
         f"config/dwi-to-dwi_level1.json",
     ),
     fixed_image=str(fixed_path.absolute()),
