@@ -40,7 +40,7 @@ RUN conda install -y -c anaconda -c conda-forge \
 
 # Install remaining python packages
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir eddymotion nitransforms niworkflows
+    pip install --no-cache-dir nifreeze nitransforms niworkflows
 
 # Installing nipreps-book
 COPY . $HOME/nipreps-book
