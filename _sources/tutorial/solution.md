@@ -15,33 +15,40 @@ kernelspec:
 ```{code-cell} python
 :tags: [remove-cell]
 
+import sys
 import warnings
+from pathlib import Path
 
 warnings.filterwarnings("ignore")
 
-from tempfile import mkstemp
-from pathlib import Path
-import requests
+repo_root = next(
+    (
+        directory
+        for directory in (Path.cwd().resolve(), *Path.cwd().resolve().parents)
+        if (directory / "pixi.toml").exists() or (directory / ".git").exists()
+    ),
+    Path.cwd().resolve(),
+)
+if str(repo_root) not in sys.path:
+    sys.path.insert(0, str(repo_root))
 
-from nifreeze.data.dmri import DWI
 from nifreeze.utils.iterators import random_iterator
+from tutorial_data import load_tutorial_dmri_dataset
 
-url = "https://files.osf.io/v1/resources/8k95s/providers/osfstorage/68e5464a451cf9cf1fc51a53"
-datapath = Path(mkstemp(suffix=".h5")[1])
-if datapath.stat().st_size == 0:
-    datapath.write_bytes(
-        requests.get(url, allow_redirects=True).content
-    )
-
-dmri_dataset = DWI.from_filename(datapath)
-dmri_dataset.dataobj = dmri_dataset.dataobj[..., :32]
-dmri_dataset.gradients = dmri_dataset.gradients[..., :32]
-datapath.unlink()
+DATA_PATH = load_tutorial_dmri_dataset()
 ```
 
 Once we have finalized the main components of the solution, it is time for integration.
 We now want to iterate over all the *LOGO* partitions of the dataset, generate a synthetic reference through the model of choice, and finally estimate the misalignment between the left-out gradient and the synthetic reference.
 This solution, must also abide by the API we have envisioned.
+
+```{code-cell} python
+from nifreeze.data.dmri import DWI
+
+dmri_dataset = DWI.from_filename(DATA_PATH)
+dmri_dataset.dataobj = dmri_dataset.dataobj[..., :32]
+dmri_dataset.gradients = dmri_dataset.gradients[..., :32]
+```
 
 ```{admonition} Exercise
 Complete the code snipet below to integrate the different components into the final solution to the dMRI head-motion problem.

@@ -4,40 +4,46 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.17.3
 kernelspec:
-  display_name: Python 3
-  language: python
   name: python3
+  display_name: Python 3 (ipykernel)
+  language: python
 ---
 
 # Image registration (spatial alignment)
 
-```{code-cell} python
+```{code-cell} ipython3
 :tags: [remove-cell]
 
+import sys
 import warnings
 from IPython.display import HTML
-import requests
-from tempfile import mkstemp
 from pathlib import Path
-import numpy as np
-import nibabel as nb
 
-from nifreeze.data.dmri import DWI
+import nibabel as nb
+import numpy as np
+
 from nifreeze.data.filtering import advanced_clip
 from nireports.reportlets.modality.dwi import plot_dwi
 
+repo_root = next(
+    (
+        directory
+        for directory in (Path.cwd().resolve(), *Path.cwd().resolve().parents)
+        if (directory / "pixi.toml").exists() or (directory / ".git").exists()
+    ),
+    Path.cwd().resolve(),
+)
+if str(repo_root) not in sys.path:
+    sys.path.insert(0, str(repo_root))
+
+from tutorial_data import load_tutorial_dmri_dataset
+
 warnings.filterwarnings("ignore")
 
-url = "https://files.osf.io/v1/resources/8k95s/providers/osfstorage/68e5464a451cf9cf1fc51a53"
-datapath = Path(mkstemp(suffix=".h5")[1])
-if datapath.stat().st_size == 0:
-    datapath.write_bytes(
-        requests.get(url, allow_redirects=True).content
-    )
-
-dmri_dataset = DWI.from_filename(datapath)
-datapath.unlink()
+DATA_PATH = load_tutorial_dmri_dataset()
 
 
 def _to_nifti(
@@ -51,7 +57,6 @@ def _to_nifti(
         affine,
         None,
     ).to_filename(filename)
-
 ```
 
 At this point of the tutorial we have covered two of the three initial requirements:
@@ -140,7 +145,13 @@ It is beyond the scope of this tutorial to understand ANTs and/or image registra
 First, we'll need to generate one target gradient prediction following all the steps learned previously.
 For this example, we have selected the 8<sup>th</sup> DW map (`index=7`) because it contains a sudden motion spike, resembling a nodding movement.
 
-```{code-cell} python
+```{code-cell} ipython3
+from nifreeze.data.dmri import DWI
+
+dmri_dataset = DWI.from_filename(DATA_PATH)
+```
+
+```{code-cell} ipython3
 from nifreeze.model import ModelFactory
 
 model = ModelFactory.init(
@@ -153,7 +164,7 @@ predicted = model.fit_predict(7)
 Since we are using the command-line interface of ANTs, the software must be installed in the computer and the input data is provided via files in the filesystem.
 Let's write out two NIfTI files in a temporary folder:
 
-```{code-cell} python
+```{code-cell} ipython3
 from pathlib import Path
 from tempfile import mkdtemp
 
@@ -171,7 +182,7 @@ _to_nifti(dmri_dataset[7][0], dmri_dataset.affine, moving_path)
 We can now visualize our reference (the prediction) and the actual DW map.
 Please notice the subtle *nodding* of the head, perhaps more apparent when looking at the corpus callosum in the sagittal views:
 
-```{code-cell} python
+```{code-cell} ipython3
 :tags: [remove-output]
 
 from nireports.reportlets.notebook import display
@@ -184,7 +195,7 @@ display(
 );
 ```
 
-```{code-cell} python
+```{code-cell} ipython3
 :tags: [remove-input]
 
 HTML("""<object alt="../images/registration_7_0.svg" type="image/svg+xml" data="../images/registration_7_0.svg"></object>""")
@@ -192,7 +203,7 @@ HTML("""<object alt="../images/registration_7_0.svg" type="image/svg+xml" data="
 
 Let's configure ANTs via NiPype:
 
-```{code-cell} python
+```{code-cell} ipython3
 from os import cpu_count
 from pkg_resources import resource_filename as pkg_fn
 from nipype.interfaces.ants.registration import Registration
@@ -212,20 +223,20 @@ registration.inputs.num_threads = cpu_count()
 
 which will run the following command-line:
 
-```{code-cell} python
+```{code-cell} ipython3
 registration.cmdline
 ```
 
 Nipype interfaces can be submitted for execution with the `run()` method:
 
-```{code-cell} python
+```{code-cell} ipython3
 result = registration.run(cwd=str(tempdir.absolute()))
 ```
 
 If everything worked out, we can now retrieve the aligned file with the output `result.outputs.warped_image`.
 We can now visualize how close (or far) the two images are:
 
-```{code-cell} python
+```{code-cell} ipython3
 :tags: [remove-output]
 
 display(
@@ -236,7 +247,7 @@ display(
 );
 ```
 
-```{code-cell} python
+```{code-cell} ipython3
 :tags: [remove-input]
 
 HTML("""<object alt="../images/registration_15_0.svg" type="image/svg+xml" data="../images/registration_15_0.svg"></object>""")
@@ -255,7 +266,7 @@ We will be using *NiTransforms* to *apply* these transforms we estimate with ANT
 
 To read a transform produced by ANTs with *NiTransforms*, we use the following piece of code:
 
-```{code-cell} python
+```{code-cell} ipython3
 import nitransforms as nt
 
 itk_xform = nt.io.itk.ITKLinearTransform.from_filename(result.outputs.forward_transforms[0])
@@ -265,7 +276,7 @@ matrix
 
 Resampling an image requires two pieces of information: the *reference* image (which provides the new grid where we want to have the data) and the *moving* image which contains the actual data we are interested in:
 
-```{code-cell} python
+```{code-cell} ipython3
 :tags: [remove-output]
 
 xfm = nt.linear.Affine(matrix)
@@ -281,12 +292,11 @@ display(
 );
 ```
 
-```{code-cell} python
+```{code-cell} ipython3
 :tags: [remove-input]
 
 HTML("""<object alt="../images/registration_19_0.svg" type="image/svg+xml" data="../images/registration_19_0.svg"></object>""")
 ```
-
 
 **Exercise**
 
@@ -294,7 +304,7 @@ Use the `display()` function to visualize the image aligned as generated by ANTs
 
 **Solution**
 
-```{code-cell} python
+```{code-cell} ipython3
 :tags: [hide-cell, remove-output]
 
 display(
@@ -305,7 +315,7 @@ display(
 );
 ```
 
-```{code-cell} python
+```{code-cell} ipython3
 :tags: [hide-cell, remove-input]
 
 HTML("""<object alt="../images/registration_21_0.svg" type="image/svg+xml" data="../images/registration_21_0.svg"></object>""")

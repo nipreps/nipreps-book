@@ -534,6 +534,15 @@ First, we’ll need to generate one target gradient prediction following all the
 For this example, we have selected the 8<sup>th</sup> DW map (<code class="docutils literal notranslate"><span class="pre">index=7</span></code>) because it contains a sudden motion spike, resembling a nodding movement.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">nifreeze.data.dmri</span><span class="w"> </span><span class="kn">import</span> <span class="n">DWI</span>
+
+<span class="n">dmri_dataset</span> <span class="o">=</span> <span class="n">DWI</span><span class="o">.</span><span class="n">from_filename</span><span class="p">(</span><span class="n">DATA_PATH</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">nifreeze.model</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModelFactory</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">ModelFactory</span><span class="o">.</span><span class="n">init</span><span class="p">(</span>
@@ -615,7 +624,7 @@ Please notice the subtle <em>nodding</em> of the head, perhaps more apparent whe
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;antsRegistration --collapse-output-transforms 1 --dimensionality 3 --initialize-transforms-per-stage 0 --interpolation Linear --output [ transform, transform_Warped.nii.gz ] --transform Affine[ 0.01 ] --metric Mattes[ /tmp/tmpr2op6krw/fixed.nii.gz, /tmp/tmpr2op6krw/moving.nii.gz, 1, 32, Regular, 0.2 ] --convergence [ 100, 1e-06, 15 ] --smoothing-sigmas 2.0vox --shrink-factors 1 --use-histogram-matching 1 --transform Affine[ 0.001 ] --metric GC[ /tmp/tmpr2op6krw/fixed.nii.gz, /tmp/tmpr2op6krw/moving.nii.gz, 1, 5, Random, 0.1 ] --convergence [ 50, 1e-07, 5 ] --smoothing-sigmas 0.0vox --shrink-factors 1 --use-histogram-matching 1 --winsorize-image-intensities [ 0.0001, 0.9998 ]  --write-composite-transform 0&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;antsRegistration --collapse-output-transforms 1 --dimensionality 3 --initialize-transforms-per-stage 0 --interpolation Linear --output [ transform, transform_Warped.nii.gz ] --transform Affine[ 0.01 ] --metric Mattes[ /tmp/tmpbyb9ewu5/fixed.nii.gz, /tmp/tmpbyb9ewu5/moving.nii.gz, 1, 32, Regular, 0.2 ] --convergence [ 100, 1e-06, 15 ] --smoothing-sigmas 2.0vox --shrink-factors 1 --use-histogram-matching 1 --transform Affine[ 0.001 ] --metric GC[ /tmp/tmpbyb9ewu5/fixed.nii.gz, /tmp/tmpbyb9ewu5/moving.nii.gz, 1, 5, Random, 0.1 ] --convergence [ 50, 1e-07, 5 ] --smoothing-sigmas 0.0vox --shrink-factors 1 --use-histogram-matching 1 --winsorize-image-intensities [ 0.0001, 0.9998 ]  --write-composite-transform 0&#39;
 </pre></div>
 </div>
 </div>
@@ -666,12 +675,12 @@ We will be using <em>NiTransforms</em> to <em>apply</em> these transforms we est
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 9.97490256e-01, -5.29693646e-03, -2.96503672e-04,
-         3.20072234e-02],
-       [ 4.61499470e-03,  9.95934487e-01, -9.12053374e-03,
-        -1.69420652e-01],
-       [-3.01699748e-04,  2.25417779e-02,  9.94853200e-01,
-        -8.76729923e-01],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 9.97811734e-01, -5.75688824e-03,  8.41890355e-04,
+         9.64332429e-02],
+       [ 5.79518274e-03,  9.95892464e-01, -1.26187425e-02,
+        -2.10173139e-01],
+       [-7.90418171e-04,  2.43280270e-02,  9.94952462e-01,
+        -8.69603039e-01],
        [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00,
          1.00000000e+00]])
 </pre></div>

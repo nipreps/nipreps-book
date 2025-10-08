@@ -471,7 +471,7 @@ In the example code below, we’ve created a class with the name <code class="do
 To simplify class creation, we’ve also used the magic of a Python library called <a class="reference external" href="https://www.attrs.org/en/stable/"><code class="docutils literal notranslate"><span class="pre">attrs</span></code></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Representing data in hard-disk and memory.&quot;&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Representing data in hard-disk and memory.&quot;&quot;&quot;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">attr</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_data_repr</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
@@ -510,7 +510,7 @@ The <code class="docutils literal notranslate"><span class="pre">__len__</span><
 <p>Let’s test out the <code class="docutils literal notranslate"><span class="pre">DWI</span></code> data structure with some <em>simulated</em> data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># NumPy is a fundamental Python library for working with arrays</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># NumPy is a fundamental Python library for working with arrays</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="c1"># create a new DWI object, with only gradient information that is random</span>
@@ -532,7 +532,7 @@ Please note that the file has been minimized by zeroing all but two diffusion-we
 <p>Let’s get some insights from it:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import the class from the library</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># import the class from the library</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">nifreeze.data.dmri</span><span class="w"> </span><span class="kn">import</span> <span class="n">DWI</span>
 
 <span class="c1"># load the sample file</span>
@@ -547,7 +547,7 @@ Please note that the file has been minimized by zeroing all but two diffusion-we
 This pretty-printing of the object informs us about the data and metadata that, together, compose this particular DWI dataset:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dmri_dataset</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dmri_dataset</span>
 </pre></div>
 </div>
 </div>
@@ -556,7 +556,7 @@ This pretty-printing of the object informs us about the data and metadata that, 
 That way, we can select data, affine (if initialized), and gradient orientation (b-vector, b-value), for any of the orientations in the data structure:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">,</span> <span class="n">xfm</span><span class="p">,</span> <span class="n">gradient</span> <span class="o">=</span> <span class="n">dmri_dataset</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">,</span> <span class="n">xfm</span><span class="p">,</span> <span class="n">gradient</span> <span class="o">=</span> <span class="n">dmri_dataset</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;shape=</span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">, gradient=</span><span class="si">{</span><span class="n">gradient</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
@@ -583,7 +583,7 @@ We can generate mosaics of DWI data by using the sister tool <em>NiReports</em>:
 <p class="expanded admonition-title">Hide code cell content</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">nireports.reportlets.modality.dwi</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_dwi</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">nireports.reportlets.modality.dwi</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_dwi</span>
 
 <span class="n">plot_dwi</span><span class="p">(</span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">bzero</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">affine</span><span class="p">);</span>
 </pre></div>
@@ -608,7 +608,7 @@ The <em>b=0</em> map can be used by diffusion modeling as the reference to quant
 <p class="expanded admonition-title">Hide code cell content</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">bvec</span> <span class="o">=</span> <span class="n">dmri_dataset</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">bvec</span> <span class="o">=</span> <span class="n">dmri_dataset</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
 <span class="n">plot_dwi</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span> <span class="n">gradient</span><span class="o">=</span><span class="n">bvec</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">5000</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -622,7 +622,7 @@ The <em>b=0</em> map can be used by diffusion modeling as the reference to quant
 <p class="expanded admonition-title">Hide code cell content</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">bvec</span> <span class="o">=</span> <span class="n">dmri_dataset</span><span class="p">[</span><span class="mi">100</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">bvec</span> <span class="o">=</span> <span class="n">dmri_dataset</span><span class="p">[</span><span class="mi">100</span><span class="p">]</span>
 <span class="n">plot_dwi</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span> <span class="n">gradient</span><span class="o">=</span><span class="n">bvec</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">5000</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -650,7 +650,7 @@ Stronger gradients yield diffusion maps with substantially lower SNR (signal-to-
 <p class="expanded admonition-title">Hide code cell content</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">gradients</span><span class="o">.</span><span class="n">shape</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">gradients</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
@@ -670,7 +670,7 @@ Remember to transpose (<code class="docutils literal notranslate"><span class="p
 <p class="expanded admonition-title">Hide code cell content</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">gradients</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">gradients</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -685,7 +685,7 @@ For more information on this, refer to <a class="reference internal" href="../ex
 <p>To get a better sense of which gradient directions were sampled, let’s plot them!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">nireports.reportlets.modality.dwi</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_gradients</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">nireports.reportlets.modality.dwi</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_gradients</span>
 
 <span class="n">plot_gradients</span><span class="p">(</span><span class="n">dmri_dataset</span><span class="o">.</span><span class="n">gradients</span><span class="o">.</span><span class="n">T</span><span class="p">);</span>
 </pre></div>
