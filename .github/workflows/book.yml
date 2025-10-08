@@ -73,6 +73,7 @@ jobs:
 
     - name: Generate tutorial notebooks
       run: |
+        git pull
         pixi run python -m jupytext docs/tutorial/intro.md --to ipynb -o docs/notebook/01-intro.ipynb
         pixi run python -m jupytext docs/tutorial/data.md --to ipynb -o docs/notebook/02-data.ipynb
         pixi run python -m jupytext docs/tutorial/models.md --to ipynb -o docs/notebook/03-models.ipynb
