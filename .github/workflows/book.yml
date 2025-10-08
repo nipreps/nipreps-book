@@ -47,6 +47,14 @@ jobs:
     - name: Install project environment
       run: pixi install --locked
 
+    - name: Generate tutorial notebooks
+      run: |
+        pixi run python -m jupytext docs/tutorial/intro.md --to ipynb -o docs/notebook/01-intro.ipynb
+        pixi run python -m jupytext docs/tutorial/data.md --to ipynb -o docs/notebook/02-data.ipynb
+        pixi run python -m jupytext docs/tutorial/models.md --to ipynb -o docs/notebook/03-models.ipynb
+        pixi run python -m jupytext docs/tutorial/registration.md --to ipynb -o docs/notebook/04-registration.ipynb
+        pixi run python -m jupytext docs/tutorial/solution.md --to ipynb -o docs/notebook/05-solution.ipynb
+
     # Build the page
     - name: Build the book
       run: pixi run build-book
@@ -58,3 +66,14 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./docs/_build/html
+
+    - name: Commit updated notebooks
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      run: |
+        if [[ -n "$(git status --porcelain docs/notebook/*.ipynb)" ]]; then
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/notebook/*.ipynb
+          git commit -m "Update tutorial notebooks"
+          git push
+        fi
