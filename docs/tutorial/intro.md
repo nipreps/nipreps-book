@@ -4,15 +4,17 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.17.3
 kernelspec:
-  display_name: Python 3
-  language: python
   name: python3
+  display_name: Python 3 (ipykernel)
+  language: python
 ---
 
 # The problem of head-motion in dMRI
 
-```{code-cell} python
+```{code-cell} ipython3
 :tags: [remove-cell]
 
 import warnings
@@ -28,7 +30,7 @@ This effect is exacerbated by the length of the acquisition (longer acquisitions
 For instance, although rats are typically acquired with head fixations and under sedation, their breathing (especially when assisted) generally causes motion.
 Even the vibration of the scanner itself can introduce motion!
 
-```{code-cell} python
+```{code-cell} ipython3
 :tags: [remove-input]
 
 HTML("""<video width="640" height="680" loop="yes" muted="yes" autoplay="yes" controls="yes"><source src="../videos/hm-sagittal.mp4" type="video/mp4"/></video>""")

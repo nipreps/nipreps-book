@@ -4,15 +4,17 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.17.3
 kernelspec:
-  display_name: Python 3
-  language: python
   name: python3
+  display_name: Python 3 (ipykernel)
+  language: python
 ---
 
 # Diffusion modeling
 
-```{code-cell} python
+```{code-cell} ipython3
 :tags: [remove-cell]
 
 import sys
@@ -39,6 +41,10 @@ from tutorial_data import load_tutorial_dmri_dataset
 DATA_PATH = load_tutorial_dmri_dataset()
 ```
 
+```{code-cell} ipython3
+DATA_PATH
+```
+
 The proposed method requires inferring a motion-less, reference DW map for a given diffusion orientation for which we want to estimate the misalignment.
 Inference of the reference map is achieved by first fitting some diffusion model (which we will draw from [DIPY](https://dipy.org)) using all data, except the particular DW map that is to be aligned.
 We will be using the `nifreeze.data.splitting.lovo_split` utility (LOVO = leave one volume out), that basically leverages the indexing feature of our data structure to partition the dataset into test and train.
@@ -55,7 +61,7 @@ By default, the code running in each Jupyter notebook is its own process.
 We must reload the dataset again to use it in this notebook.
 ```
 
-```{code-cell} python
+```{code-cell} ipython3
 from nifreeze.data.dmri import DWI
 from nifreeze.data.splitting import lovo_split
 from nireports.reportlets.modality.dwi import plot_dwi
@@ -74,7 +80,7 @@ First, when coding it is very important to build up iteratively in complexity.
 This model will allow to easily test the overall integration of the different components of our head-motion estimation algorithm.
 Also, this model will allow a very straightforward implementation of registration to the *b=0* reference, which is commonly used to initialize the head-motion estimation parameters.
 
-```{code-cell} python
+```{code-cell} ipython3
 class TrivialB0Model:
     """
     A trivial model that returns a *b=0* map always.
@@ -105,7 +111,7 @@ class TrivialB0Model:
 
 The model can easily be initialized as follows (assuming we still have our dataset loaded):
 
-```{code-cell} python
+```{code-cell} ipython3
 model = TrivialB0Model(
     dmri_dataset.gradients,
     S0=dmri_dataset.bzero,
@@ -115,14 +121,14 @@ model = TrivialB0Model(
 Then, at each iteration of our estimation strategy, we will fit this model to the data, after holding one particular direction (`data_test`) out, using the `lovo_split` utility.
 In every iteration, this finds the b=0 volumes in the data and averages their values in every voxel:
 
-```{code-cell} python
-data_train, data_test = lovo_split(dmri_dataset, 10)
+```{code-cell} ipython3
+data_train, data_test = lovo_split(dmri_dataset, 5)
 model.fit(np.squeeze(data_train[0]))
 ```
 
 Finally, we can generate our registration reference with the `predict()` method:
 
-```{code-cell} python
+```{code-cell} ipython3
 predict_b = np.squeeze(data_test[2])
 predicted = model.predict(predict_b)
 plot_dwi(predicted, dmri_dataset.affine, gradient=predict_b);
@@ -130,7 +136,7 @@ plot_dwi(predicted, dmri_dataset.affine, gradient=predict_b);
 
 As expected, the *b=0* doesn't look very much like the particular left-out direction, but it is a start!
 
-```{code-cell} python
+```{code-cell} ipython3
 plot_dwi(np.squeeze(data_test[0]), dmri_dataset.affine, gradient=predict_b);
 ```
 
@@ -140,7 +146,7 @@ plot_dwi(np.squeeze(data_test[0]), dmri_dataset.affine, gradient=predict_b);
 Extend the `TrivialB0Model` to produce an average of *all other* diffusion directions, instead of the *b=0*.
 ```
 
-```{code-cell} python
+```{code-cell} ipython3
 class AverageDWModel:
     """A trivial model that returns an average map."""
 
@@ -161,7 +167,7 @@ class AverageDWModel:
 
 **Solution**
 
-```{code-cell} python
+```{code-cell} ipython3
 :tags: [hide-cell]
 
 class AverageDWModel:
@@ -188,7 +194,7 @@ class AverageDWModel:
 
 **Solution**
 
-```{code-cell} python
+```{code-cell} ipython3
 :tags: [hide-cell]
 
 model = AverageDWModel(
@@ -205,7 +211,7 @@ plot_dwi(np.squeeze(data_test[0]), dmri_dataset.affine, gradient=predict_b);
 Now, we are ready to use the diffusion tensor model.
 We will use the wrap around DIPY's implementation that we distribute with `nifreeze`.
 
-```{code-cell} python
+```{code-cell} ipython3
 :tags: [remove-cell]
 
 # Let's generate index 88 of the dataset:
@@ -220,7 +226,7 @@ test_b = np.squeeze(test_b)
 To permit flexibility in selecting models, the `nifreeze` package offers a `ModelFactory` that implements the *facade design pattern*.
 This means that `ModelFactory` makes it easier for the user to switch between models:
 
-```{code-cell} python
+```{code-cell} ipython3
 from nifreeze.model import ModelFactory
 
 model = ModelFactory.init(
@@ -233,19 +239,19 @@ model = ModelFactory.init(
 
 The `ModelFactory` returns a model object that is compliant with the interface sketched above:
 
-```{code-cell} python
+```{code-cell} ipython3
 predicted = model.fit_predict(88, n_jobs=16)
 ```
 
 Now, the predicted map for the particular ***b*** gradient looks much closer to the original:
 
-```{code-cell} python
+```{code-cell} ipython3
 plot_dwi(predicted, dmri_dataset.affine, gradient=test_b, black_bg=True);
 ```
 
 Here's the original DW map, for reference:
 
-```{code-cell} python
+```{code-cell} ipython3
 plot_dwi(test_data, dmri_dataset.affine, gradient=test_b);
 ```
 
@@ -255,7 +261,7 @@ Use the `ModelFactory` to initialize a `"DKI"` (diffusion Kurtosis imaging) mode
 
 **Solution**
 
-```{code-cell} python
+```{code-cell} ipython3
 :tags: [hide-cell]
 
 model = ModelFactory.init(
@@ -266,7 +272,7 @@ model = ModelFactory.init(
 
 Once the model has been initialized, we can easily generate a new prediction.
 
-```{code-cell} python
+```{code-cell} ipython3
 predicted = model.fit_predict(88, n_jobs=16)
 plot_dwi(predicted, dmri_dataset.affine, gradient=test_b, black_bg=True);
 plot_dwi(test_data, dmri_dataset.affine, gradient=test_b);
