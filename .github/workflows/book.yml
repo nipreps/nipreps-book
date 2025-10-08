@@ -14,12 +14,17 @@ jobs:
   deploy-book:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/cache@v4
+    - name: Prepare apt cache directories
+      run: |
+        sudo mkdir -p /var/lib/apt/lists/partial /var/cache/apt/archives/partial
+        sudo chown -R "$USER" /var/lib/apt/lists /var/cache/apt/archives
+    - name: Cache apt packages
+      uses: actions/cache@v4
       with:
-        path: /var/lib/apt
-        key: apt-cache-v2
-        restore-keys: |
-          apt-cache-v2
+        path: |
+          /var/lib/apt/lists
+          /var/cache/apt/archives
+        key: ${{ runner.os }}-apt-v1
     - name: Install dependencies
       run: |
         sudo apt-get update
@@ -32,6 +37,9 @@ jobs:
                              texlive-fonts-extra \
                              texlive-latex-extra \
                              cm-super
+    - name: Restore apt cache permissions
+      if: always()
+      run: sudo chown -R "$USER" /var/lib/apt/lists /var/cache/apt/archives
     - name: Checkout repository
       uses: actions/checkout@v5
       with:
@@ -47,7 +55,15 @@ jobs:
     - name: Install project environment
       run: pixi install --locked
 
-    - name: Prepare tutorial data
+    - name: Cache tutorial data
+      id: cache-tutorial-data
+      uses: actions/cache@v4
+      with:
+        path: data/dwi_full_brainmask.h5
+        key: ${{ runner.os }}-tutorial-data-v1
+
+    - name: Download tutorial data
+      if: steps.cache-tutorial-data.outputs.cache-hit != 'true'
       run: |
         set -xeuo pipefail
         data_dir="${{ github.workspace }}/data"
@@ -56,6 +72,11 @@ jobs:
         curl -L \
           https://files.osf.io/v1/resources/8k95s/providers/osfstorage/68e5464a451cf9cf1fc51a53 \
           --output "$data_file"
+        test -s "$data_file"
+
+    - name: Configure tutorial data
+      run: |
+        data_file="${{ github.workspace }}/data/dwi_full_brainmask.h5"
         test -s "$data_file"
         echo "NIPREPS_TUTORIAL_DATA=$data_file" >> "$GITHUB_ENV"
 
