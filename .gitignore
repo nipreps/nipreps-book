@@ -17,3 +17,5 @@ _build/
 .pixi/*
 !.pixi/config.toml
 report.svg
+data/dwi_full_brainmask.h5
+__pycache__
