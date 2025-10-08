@@ -5,6 +5,7 @@ curl -fsSL https://pixi.sh/install.sh | bash
 export PATH="$HOME/.pixi/bin:$PATH"
 
 pixi install --locked
+pixi run python -m ipykernel install --user --name nipreps-book --display-name "Pixi (nipreps-book)"
 pixi shell-hook -e default -s bash
 
 echo 'eval "$(pixi shell-hook)"' >> $HOME/.bashrc
