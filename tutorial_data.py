@@ -20,7 +20,15 @@ _ENV_VAR: Final[str] = "NIPREPS_TUTORIAL_DATA"
 
 def _resolve_data_path(filename: str = _DEFAULT_FILENAME) -> Path:
     env_path = os.environ.get(_ENV_VAR)
-    return Path(env_path) if env_path else Path("data") / filename
+    if env_path:
+        return Path(env_path)
+
+    cwd = Path.cwd().resolve()
+    for directory in (cwd, *cwd.parents):
+        if (directory / "pixi.toml").exists() or (directory / ".git").exists():
+            return directory / "data" / filename
+
+    return cwd / "data" / filename
 
 
 def ensure_tutorial_dwi_path(filename: str = _DEFAULT_FILENAME) -> Path:

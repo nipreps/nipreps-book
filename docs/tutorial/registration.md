@@ -15,6 +15,7 @@ kernelspec:
 ```{code-cell} python
 :tags: [remove-cell]
 
+import sys
 import warnings
 from IPython.display import HTML
 from pathlib import Path
@@ -24,6 +25,18 @@ import numpy as np
 
 from nifreeze.data.filtering import advanced_clip
 from nireports.reportlets.modality.dwi import plot_dwi
+
+repo_root = next(
+    (
+        directory
+        for directory in (Path.cwd().resolve(), *Path.cwd().resolve().parents)
+        if (directory / "pixi.toml").exists() or (directory / ".git").exists()
+    ),
+    Path.cwd().resolve(),
+)
+if str(repo_root) not in sys.path:
+    sys.path.insert(0, str(repo_root))
+
 from tutorial_data import load_tutorial_dmri_dataset
 
 warnings.filterwarnings("ignore")

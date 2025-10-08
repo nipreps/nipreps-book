@@ -16,9 +16,21 @@ kernelspec:
 :tags: [remove-cell]
 
 import warnings
+import sys
 from pathlib import Path
 
 warnings.filterwarnings("ignore")
+
+repo_root = next(
+    (
+        directory
+        for directory in (Path.cwd().resolve(), *Path.cwd().resolve().parents)
+        if (directory / "pixi.toml").exists() or (directory / ".git").exists()
+    ),
+    Path.cwd().resolve(),
+)
+if str(repo_root) not in sys.path:
+    sys.path.insert(0, str(repo_root))
 
 from nifreeze.utils.iterators import random_iterator
 from tutorial_data import load_tutorial_dmri_dataset

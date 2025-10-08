@@ -38,6 +38,20 @@ We must reload the dataset again to use it in this notebook.
 ```
 
 ```{code-cell} python
+import sys
+from pathlib import Path
+
+repo_root = next(
+    (
+        directory
+        for directory in (Path.cwd().resolve(), *Path.cwd().resolve().parents)
+        if (directory / "pixi.toml").exists() or (directory / ".git").exists()
+    ),
+    Path.cwd().resolve(),
+)
+if str(repo_root) not in sys.path:
+    sys.path.insert(0, str(repo_root))
+
 from nifreeze.data.splitting import lovo_split
 from nireports.reportlets.modality.dwi import plot_dwi
 from tutorial_data import load_tutorial_dmri_dataset
@@ -189,6 +203,21 @@ We will use the wrap around DIPY's implementation that we distribute with `nifre
 
 ```{code-cell} python
 :tags: [remove-cell]
+
+if "repo_root" not in globals():
+    import sys
+    from pathlib import Path
+
+    repo_root = next(
+        (
+            directory
+            for directory in (Path.cwd().resolve(), *Path.cwd().resolve().parents)
+            if (directory / "pixi.toml").exists() or (directory / ".git").exists()
+        ),
+        Path.cwd().resolve(),
+    )
+    if str(repo_root) not in sys.path:
+        sys.path.insert(0, str(repo_root))
 
 from tutorial_data import load_tutorial_dmri_dataset
 
