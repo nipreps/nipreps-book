@@ -6,3 +6,5 @@ export PATH="$HOME/.pixi/bin:$PATH"
 
 pixi install --locked
 pixi shell-hook -e default -s bash
+
+echo 'eval "$(pixi shell-hook)"' >> $HOME/.bashrc
