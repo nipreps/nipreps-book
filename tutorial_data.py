@@ -7,8 +7,6 @@ from typing import Final
 
 import requests
 
-from nifreeze.data.dmri import DWI
-
 __all__ = ["ensure_tutorial_dwi_path", "load_tutorial_dmri_dataset"]
 
 _DATA_URL: Final[str] = (
@@ -42,6 +40,6 @@ def ensure_tutorial_dwi_path(filename: str = _DEFAULT_FILENAME) -> Path:
     return datapath
 
 
-def load_tutorial_dmri_dataset(filename: str = _DEFAULT_FILENAME) -> DWI:
-    """Load the tutorial DWI dataset from disk, ensuring it is available."""
-    return DWI.from_filename(ensure_tutorial_dwi_path(filename))
+def load_tutorial_dmri_dataset(filename: str = _DEFAULT_FILENAME) -> Path:
+    """Return the path to the cached tutorial DWI dataset."""
+    return ensure_tutorial_dwi_path(filename)

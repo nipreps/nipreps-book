@@ -41,7 +41,7 @@ from tutorial_data import load_tutorial_dmri_dataset
 
 warnings.filterwarnings("ignore")
 
-dmri_dataset = load_tutorial_dmri_dataset()
+DATA_PATH = load_tutorial_dmri_dataset()
 
 
 def _to_nifti(
@@ -143,6 +143,12 @@ The most relevant piece of settings to highlight is the `"transforms"` key, wher
 It is beyond the scope of this tutorial to understand ANTs and/or image registration altogether, but let's have a look at how registration is integrated.
 First, we'll need to generate one target gradient prediction following all the steps learned previously.
 For this example, we have selected the 8<sup>th</sup> DW map (`index=7`) because it contains a sudden motion spike, resembling a nodding movement.
+
+```{code-cell} python
+from nifreeze.data.dmri import DWI
+
+dmri_dataset = DWI.from_filename(DATA_PATH)
+```
 
 ```{code-cell} python
 from nifreeze.model import ModelFactory

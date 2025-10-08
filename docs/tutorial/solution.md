@@ -15,8 +15,8 @@ kernelspec:
 ```{code-cell} python
 :tags: [remove-cell]
 
-import warnings
 import sys
+import warnings
 from pathlib import Path
 
 warnings.filterwarnings("ignore")
@@ -35,14 +35,20 @@ if str(repo_root) not in sys.path:
 from nifreeze.utils.iterators import random_iterator
 from tutorial_data import load_tutorial_dmri_dataset
 
-dmri_dataset = load_tutorial_dmri_dataset()
-dmri_dataset.dataobj = dmri_dataset.dataobj[..., :32]
-dmri_dataset.gradients = dmri_dataset.gradients[..., :32]
+DATA_PATH = load_tutorial_dmri_dataset()
 ```
 
 Once we have finalized the main components of the solution, it is time for integration.
 We now want to iterate over all the *LOGO* partitions of the dataset, generate a synthetic reference through the model of choice, and finally estimate the misalignment between the left-out gradient and the synthetic reference.
 This solution, must also abide by the API we have envisioned.
+
+```{code-cell} python
+from nifreeze.data.dmri import DWI
+
+dmri_dataset = DWI.from_filename(DATA_PATH)
+dmri_dataset.dataobj = dmri_dataset.dataobj[..., :32]
+dmri_dataset.gradients = dmri_dataset.gradients[..., :32]
+```
 
 ```{admonition} Exercise
 Complete the code snipet below to integrate the different components into the final solution to the dMRI head-motion problem.

@@ -15,10 +15,28 @@ kernelspec:
 ```{code-cell} python
 :tags: [remove-cell]
 
+import sys
 import warnings
+from pathlib import Path
+
 import numpy as np
 
 warnings.filterwarnings("ignore")
+
+repo_root = next(
+    (
+        directory
+        for directory in (Path.cwd().resolve(), *Path.cwd().resolve().parents)
+        if (directory / "pixi.toml").exists() or (directory / ".git").exists()
+    ),
+    Path.cwd().resolve(),
+)
+if str(repo_root) not in sys.path:
+    sys.path.insert(0, str(repo_root))
+
+from tutorial_data import load_tutorial_dmri_dataset
+
+DATA_PATH = load_tutorial_dmri_dataset()
 ```
 
 The proposed method requires inferring a motion-less, reference DW map for a given diffusion orientation for which we want to estimate the misalignment.
@@ -38,25 +56,11 @@ We must reload the dataset again to use it in this notebook.
 ```
 
 ```{code-cell} python
-import sys
-from pathlib import Path
-
-repo_root = next(
-    (
-        directory
-        for directory in (Path.cwd().resolve(), *Path.cwd().resolve().parents)
-        if (directory / "pixi.toml").exists() or (directory / ".git").exists()
-    ),
-    Path.cwd().resolve(),
-)
-if str(repo_root) not in sys.path:
-    sys.path.insert(0, str(repo_root))
-
+from nifreeze.data.dmri import DWI
 from nifreeze.data.splitting import lovo_split
 from nireports.reportlets.modality.dwi import plot_dwi
-from tutorial_data import load_tutorial_dmri_dataset
 
-dmri_dataset = load_tutorial_dmri_dataset()
+dmri_dataset = DWI.from_filename(DATA_PATH)
 ```
 
 ## Implementing a trivial model
@@ -203,25 +207,6 @@ We will use the wrap around DIPY's implementation that we distribute with `nifre
 
 ```{code-cell} python
 :tags: [remove-cell]
-
-if "repo_root" not in globals():
-    import sys
-    from pathlib import Path
-
-    repo_root = next(
-        (
-            directory
-            for directory in (Path.cwd().resolve(), *Path.cwd().resolve().parents)
-            if (directory / "pixi.toml").exists() or (directory / ".git").exists()
-        ),
-        Path.cwd().resolve(),
-    )
-    if str(repo_root) not in sys.path:
-        sys.path.insert(0, str(repo_root))
-
-from tutorial_data import load_tutorial_dmri_dataset
-
-dmri_dataset = load_tutorial_dmri_dataset()
 
 # Let's generate index 88 of the dataset:
 test_data, _, test_b = dmri_dataset[88]
