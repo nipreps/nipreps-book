@@ -1,0 +1,53 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: Digital book & tutorial
+message: >-
+  An interactive tutorial describing the steps to develop a
+  head-motion estimation algorithm
+type: software
+authors:
+  - family-names: Joseph
+    given-names: Michael
+    affiliation: The Centre for Addiction and Mental Health
+    orcid: 'https://orcid.org/0000-0002-0068-230X'
+    email: josephmje.22@gmail.com
+  - given-names: Céline
+    family-names: Provins
+    affiliation: >-
+      Department of Radiology, Lausanne University Hospital
+      and University of Lausanne
+    orcid: 'https://orcid.org/0000-0002-1668-9629'
+  - given-names: Ariel
+    family-names: Rokem
+    affiliation: The University of Washington eScience Institute
+    orcid: 'https://orcid.org/0000-0003-0679-1985'
+  - family-names: Esteban
+    given-names: Oscar
+    email: code@oscaresteban.es
+    affiliation: >-
+      School of Engineering, HES-SO University of Applied
+      Sciences and Arts Western Switzerland
+    orcid: 'https://orcid.org/0000-0001-8435-6191'
+  - name: The NiPreps Developers
+    website: 'https://www.nipreps.org'
+    email: nipreps@gmail.com
+repository-code: 'https://github.com/nipreps/nipreps-book'
+url: 'https://www.nipreps.org/nipreps-book'
+repository-artifact: 'https://zenodo.org'
+abstract: >-
+  This interactive tutorial introduces the NiPreps framework
+  for neuroimaging preprocessing by walking readers through
+  the implementation of a head-motion correction workflow
+  for diffusion MRI data using DIPY, NiTransforms, and
+  related open-source tools.
+keywords:
+  - neuroimaging
+  - diffusion MRI
+  - head-motion correction
+  - NiPreps
+  - tutorial
+license: Apache-2.0
+version: 1.0.0
+date-released: '2025-10-09'
