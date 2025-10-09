@@ -63,8 +63,7 @@ open issues on GitHub and let us know how the material can be improved. When
 submitting changes, follow the standard GitHub workflow and ensure the book
 builds locally (`pixi run build-book`) before opening a pull request.
 
-## License and citation
+## Citation
 
-NiPreps Book is distributed under the terms of the [3-Clause BSD
-License](LICENSE). If you use the material in your own work, please cite the
+If you use the material in your own work, please cite the
 project as described in [CITATION.cff](CITATION.cff).
