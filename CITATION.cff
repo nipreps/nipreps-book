@@ -2,7 +2,7 @@
 # Visit https://bit.ly/cffinit to generate yours today!
 
 cff-version: 1.2.0
-title: Digital book & tutorial
+title: 'NiPreps'' digital book & tutorial: creating NiFreeze'
 message: >-
   An interactive tutorial describing the steps to develop a
   head-motion estimation algorithm
@@ -33,6 +33,10 @@ authors:
   - name: The NiPreps Developers
     website: 'https://www.nipreps.org'
     email: nipreps@gmail.com
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.17307263
+    description: Zenodo
 repository-code: 'https://github.com/nipreps/nipreps-book'
 url: 'https://www.nipreps.org/nipreps-book'
 repository-artifact: 'https://zenodo.org'
