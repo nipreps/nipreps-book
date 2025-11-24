@@ -3,7 +3,7 @@
 NiPreps Book is a [Jupyter Book](https://jupyterbook.org) that accompanies the NiPreps
 community workshops. The material walks readers through implementing a
 head-motion–correction workflow for diffusion MRI (dMRI) data using tools from
-[DIPY](https://dipy.org), [NiTransforms](https://nipy.org/nitransforms), and the
+[DIPY](https://dipy.org), [NiTransforms](https://nitransforms.readthedocs.io/en/latest/), and the
 broader NiPreps ecosystem. Besides explaining the motivation behind the
 "analysis-grade" data philosophy, the book provides hands-on notebooks that show
 how to assemble reproducible preprocessing components.
@@ -21,7 +21,7 @@ Binder sessions can take a few minutes to start and reset after inactivity.
 
 ### Build the book locally
 
-This repository is configured with [pixi](https://prefix.dev/pixi) for
+This repository is configured with [pixi](https://pixi.sh/latest/) for
 reproducible environments:
 
 1. [Install pixi](https://pixi.sh/latest/installation/).
