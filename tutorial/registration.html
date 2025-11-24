@@ -624,7 +624,7 @@ Please notice the subtle <em>nodding</em> of the head, perhaps more apparent whe
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;antsRegistration --collapse-output-transforms 1 --dimensionality 3 --initialize-transforms-per-stage 0 --interpolation Linear --output [ transform, transform_Warped.nii.gz ] --transform Affine[ 0.01 ] --metric Mattes[ /tmp/tmphoiz918r/fixed.nii.gz, /tmp/tmphoiz918r/moving.nii.gz, 1, 32, Regular, 0.2 ] --convergence [ 100, 1e-06, 15 ] --smoothing-sigmas 2.0vox --shrink-factors 1 --use-histogram-matching 1 --transform Affine[ 0.001 ] --metric GC[ /tmp/tmphoiz918r/fixed.nii.gz, /tmp/tmphoiz918r/moving.nii.gz, 1, 5, Random, 0.1 ] --convergence [ 50, 1e-07, 5 ] --smoothing-sigmas 0.0vox --shrink-factors 1 --use-histogram-matching 1 --winsorize-image-intensities [ 0.0001, 0.9998 ]  --write-composite-transform 0&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;antsRegistration --collapse-output-transforms 1 --dimensionality 3 --initialize-transforms-per-stage 0 --interpolation Linear --output [ transform, transform_Warped.nii.gz ] --transform Affine[ 0.01 ] --metric Mattes[ /tmp/tmpuk31llt0/fixed.nii.gz, /tmp/tmpuk31llt0/moving.nii.gz, 1, 32, Regular, 0.2 ] --convergence [ 100, 1e-06, 15 ] --smoothing-sigmas 2.0vox --shrink-factors 1 --use-histogram-matching 1 --transform Affine[ 0.001 ] --metric GC[ /tmp/tmpuk31llt0/fixed.nii.gz, /tmp/tmpuk31llt0/moving.nii.gz, 1, 5, Random, 0.1 ] --convergence [ 50, 1e-07, 5 ] --smoothing-sigmas 0.0vox --shrink-factors 1 --use-histogram-matching 1 --winsorize-image-intensities [ 0.0001, 0.9998 ]  --write-composite-transform 0&#39;
 </pre></div>
 </div>
 </div>
@@ -675,14 +675,10 @@ We will be using <em>NiTransforms</em> to <em>apply</em> these transforms we est
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 9.99623082e-01, -5.30566424e-03, -6.65158658e-04,
-         7.74112038e-02],
-       [ 4.32172828e-03,  9.95041505e-01, -1.02503370e-02,
-        -1.77983732e-01],
-       [-3.48765243e-04,  2.46858587e-02,  9.93563400e-01,
-        -9.05100040e-01],
-       [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00,
-         1.00000000e+00]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.9974625 , -0.00625172,  0.00114571,  0.07182863],
+       [ 0.00605242,  0.99567397, -0.00871013, -0.10887415],
+       [-0.00233421,  0.02094301,  0.99652648, -0.85758593],
+       [ 0.        ,  0.        ,  0.        ,  1.        ]])
 </pre></div>
 </div>
 </div>
