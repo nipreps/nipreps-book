@@ -24,12 +24,13 @@ Binder sessions can take a few minutes to start and reset after inactivity.
 This repository is configured with [pixi](https://prefix.dev/pixi) for
 reproducible environments:
 
-1. [Install pixi](https://prefix.dev/docs/pixi/installation).
+1. [Install pixi](https://pixi.sh/latest/installation/).
 2. Create the environment and install the dependencies:
 
    ```bash
    pixi install
    ```
+
 3. Build the static HTML version of the book:
 
    ```bash
